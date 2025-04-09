@@ -10,6 +10,7 @@ CodeMaster is a comprehensive web application for learning Data Structures, Algo
 - **Extensible Architecture**: Designed to easily add new courses for different programming languages
 - **Modern UI**: Clean, responsive interface built with Next.js and Tailwind CSS
 - **Local Data**: Course content stored locally in TypeScript files for easy editing
+- **Authentication**: Secure access with Google Sign-In integration
 
 ## Current Courses
 
@@ -28,6 +29,7 @@ CodeMaster is a comprehensive web application for learning Data Structures, Algo
 - **Frontend**: Next.js with TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: React Context API
+- **Authentication**: NextAuth.js with Google provider
 - **Hosting**: Vercel (recommended)
 
 ## Getting Started
@@ -36,6 +38,7 @@ CodeMaster is a comprehensive web application for learning Data Structures, Algo
 
 - Node.js 14.x or higher
 - npm or yarn
+- A Google OAuth client ID and secret (for authentication)
 
 ### Installation
 
@@ -58,16 +61,34 @@ yarn install
 ```
 NEXT_PUBLIC_APP_NAME=CodeMaster
 NEXT_PUBLIC_APP_VERSION=1.0.0
+
+# NextAuth Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-nextauth-secret-key-change-this-in-production
+
+# Google OAuth
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
-4. Run the development server
+4. Set up Google OAuth:
+   - Go to the [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select an existing one
+   - Navigate to "APIs & Services" > "Credentials"
+   - Click "Create Credentials" > "OAuth client ID"
+   - Select "Web application" as the application type
+   - Add "http://localhost:3000" to the "Authorized JavaScript origins"
+   - Add "http://localhost:3000/api/auth/callback/google" to the "Authorized redirect URIs"
+   - Copy the Client ID and Client Secret to your `.env.local` file
+
+5. Run the development server
 ```bash
 npm run dev
 # or
 yarn dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
 ## Data Structure
 
@@ -88,17 +109,36 @@ The application uses local TypeScript files to store course content:
 ```
 /src
   /app                  # Next.js app router pages
+    /api                # API routes
+      /auth             # Authentication API routes
     /courses            # Course pages
       /dsa              # DSA course
+    /login              # Login page
     /resources          # Resources page
     /about              # About page
   /components           # Reusable UI components
+    /AuthProvider.tsx   # NextAuth context provider
   /data                 # Data files for courses and content
     /courseContent      # Daily content stored as TypeScript files
     /dsaCourse.ts       # Course structure definition
   /services             # Service layer for content retrieval
   /types                # TypeScript type definitions
+  /middleware.ts        # NextAuth middleware for route protection
 ```
+
+## Authentication
+
+The application uses NextAuth.js with Google OAuth for authentication. The authentication flow is as follows:
+
+1. Users navigate to the application
+2. Unauthenticated users are redirected to the login page
+3. Users click "Sign in with Google" and are redirected to Google's OAuth consent screen
+4. After successful authentication, users are redirected back to the application
+5. Authenticated users can access all content and features
+
+### Protected Routes
+
+All routes except for the login page and authentication API routes are protected and require authentication. This is implemented using NextAuth.js middleware.
 
 ## Adding New Content
 

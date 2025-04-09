@@ -203,8 +203,34 @@ export async function fetchDayProblems(courseId: string, dayId: string): Promise
  * Fetches a course by ID with all related data (days and their content)
  */
 export async function fetchFullCourse(courseId: string): Promise<Course> {
-  const course = await fetchCourse(courseId);
-  return course;
+  try {
+    const course = await fetchCourse(courseId);
+    
+    // We need to ensure days are properly typed as CourseDay[]
+    if (!course.days || course.days.length === 0) {
+      const days = getLocalDays();
+      return {
+        ...course,
+        days
+      };
+    }
+    
+    // Otherwise, if days exist, make sure they match the CourseDay type
+    return {
+      ...course,
+      days: course.days.map(day => ({
+        id: day.id,
+        dayNumber: day.dayNumber,
+        title: day.title,
+        description: day.description || '',
+        topics: day.topics || [],
+        estimatedHours: day.estimatedHours || 2
+      }))
+    };
+  } catch (error) {
+    console.error('Error fetching full course:', error);
+    throw error;
+  }
 }
 
 /**

@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { signOut, useSession, signIn } from 'next-auth/react';
+import Image from 'next/image';
 
 const Navbar = () => {
+  const { data: session, status } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +19,19 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleSignOut = async () => {
+    await signOut({ callbackUrl: '/login' });
+  };
+
+  const handleSignIn = async () => {
+    console.log('Sign In button clicked');
+    try {
+      await signIn('google', { callbackUrl: '/' });
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -41,12 +58,59 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <button className="btn-outline">
-              Sign In
-            </button>
-            <button className="btn-primary">
-              Get Started
-            </button>
+            {status === 'loading' ? (
+              <div className="h-9 w-9 rounded-full bg-gray-200 animate-pulse"></div>
+            ) : session ? (
+              <div className="relative">
+                <button 
+                  onClick={() => setDropdownOpen(!dropdownOpen)} 
+                  className="flex items-center space-x-2 focus:outline-none"
+                >
+                  <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+                    {session.user?.image ? (
+                      <Image 
+                        src={session.user.image} 
+                        alt="Profile" 
+                        width={36} 
+                        height={36} 
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <span className="text-gray-700 font-medium">
+                        {session.user?.name?.charAt(0) || 'U'}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-gray-700 dark:text-gray-200 font-medium hidden lg:block">
+                    {session.user?.name?.split(' ')[0] || 'User'}
+                  </span>
+                </button>
+                
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-dark-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
+                    <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{session.user?.name}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{session.user?.email}</p>
+                    </div>
+                    <button
+                      onClick={handleSignOut}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
+                      Sign out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <button onClick={handleSignIn} className="btn-outline">
+                  Sign In
+                </button>
+                <button onClick={handleSignIn} className="btn-primary">
+                  Get Started
+                </button>
+              </>
+            )}
           </div>
           <div className="md:hidden">
             <button
@@ -98,12 +162,47 @@ const Navbar = () => {
               About
             </Link>
             <div className="pt-2 flex flex-col gap-2">
-              <button className="btn-outline w-full">
-                Sign In
-              </button>
-              <button className="btn-primary w-full">
-                Get Started
-              </button>
+              {status === 'loading' ? (
+                <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+              ) : session ? (
+                <>
+                  <div className="flex items-center space-x-3 px-3 py-2">
+                    <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+                      {session.user?.image ? (
+                        <Image 
+                          src={session.user.image} 
+                          alt="Profile" 
+                          width={32} 
+                          height={32} 
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <span className="text-gray-700 font-medium">
+                          {session.user?.name?.charAt(0) || 'U'}
+                        </span>
+                      )}
+                    </div>
+                    <span className="font-medium text-gray-700 dark:text-gray-200">
+                      {session.user?.name || 'User'}
+                    </span>
+                  </div>
+                  <button 
+                    onClick={handleSignOut}
+                    className="btn-outline w-full"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={handleSignIn} className="btn-outline w-full">
+                    Sign In
+                  </button>
+                  <button onClick={handleSignIn} className="btn-primary w-full">
+                    Get Started
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
