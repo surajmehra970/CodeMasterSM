@@ -24,9 +24,10 @@ export default function Home() {
                 className="btn-primary text-lg px-8 py-3">
                 Start DSA Course
               </Link>
-              <button className="px-8 py-3 bg-white/10 text-white backdrop-blur-sm rounded-lg border border-white/30 hover:bg-white/20 transition-all duration-300 text-lg">
+              <Link href="/resources" 
+                className="px-8 py-3 bg-white/10 text-white backdrop-blur-sm rounded-lg border border-white/30 hover:bg-white/20 transition-all duration-300 text-lg">
                 Explore Resources
-              </button>
+              </Link>
             </div>
           </div>
         </div>
