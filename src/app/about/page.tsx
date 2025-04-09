@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 const AboutPage = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 pt-20 pb-12">
       <header className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">About CodeMaster</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">About CodeMaster</h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
           Your structured learning path to master data structures, algorithms, and programming languages
         </p>
@@ -15,7 +15,10 @@ const AboutPage = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div>
-          <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
+          <h2 className="text-2xl font-bold mb-4 relative">
+            <span className="relative z-10">Our Mission</span>
+            <span className="absolute bottom-0 left-0 w-12 h-1 bg-primary"></span>
+          </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-6">
             CodeMaster was created with a simple mission: to provide a structured, comprehensive
             learning path for mastering data structures, algorithms, and programming languages.
@@ -28,7 +31,10 @@ const AboutPage = () => {
             simply want to become a better programmer, we've got you covered.
           </p>
 
-          <h2 className="text-2xl font-bold mt-10 mb-4">What Makes Us Different</h2>
+          <h2 className="text-2xl font-bold mt-10 mb-4 relative">
+            <span className="relative z-10">What Makes Us Different</span>
+            <span className="absolute bottom-0 left-0 w-12 h-1 bg-primary"></span>
+          </h2>
           <ul className="space-y-3 text-gray-700 dark:text-gray-300">
             <li className="flex">
               <span className="text-primary mr-2">✓</span>
@@ -49,12 +55,12 @@ const AboutPage = () => {
           </ul>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold mb-6">How to Get Started</h2>
+        <div className="bg-white dark:bg-dark rounded-xl shadow-card p-6">
+          <h2 className="text-2xl font-bold mb-6 text-center">How to Get Started</h2>
           
           <div className="space-y-6">
             <div className="flex">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
                 1
               </div>
               <div>
@@ -67,7 +73,7 @@ const AboutPage = () => {
             </div>
 
             <div className="flex">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
                 2
               </div>
               <div>
@@ -80,7 +86,7 @@ const AboutPage = () => {
             </div>
 
             <div className="flex">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
                 3
               </div>
               <div>
@@ -93,7 +99,7 @@ const AboutPage = () => {
             </div>
 
             <div className="flex">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
                 4
               </div>
               <div>
@@ -114,13 +120,13 @@ const AboutPage = () => {
         </div>
       </div>
 
-      <div className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center">
-        <h2 className="text-3xl font-bold mb-6">Ready to Master DSA?</h2>
+      <div className="mt-16 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8 text-center shadow-lg border border-primary/20">
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Ready to Master DSA?</h2>
         <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-8">
           Join thousands of learners who have used our structured approach to ace technical interviews
           and become better programmers. Start your journey today!
         </p>
-        <Link href="/courses/dsa" className="btn-primary inline-block px-8 py-3 text-lg">
+        <Link href="/courses/dsa" className="btn-primary inline-block px-8 py-3 text-lg hover:-translate-y-1 transition-transform duration-300">
           Begin Your DSA Journey
         </Link>
       </div>

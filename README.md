@@ -9,7 +9,7 @@ CodeMaster is a comprehensive web application for learning Data Structures, Algo
 - **Problem-Based Learning**: Each topic includes hand-picked practice problems from platforms like LeetCode
 - **Extensible Architecture**: Designed to easily add new courses for different programming languages
 - **Modern UI**: Clean, responsive interface built with Next.js and Tailwind CSS
-- **Firebase Integration**: Dynamic content management with Firestore database
+- **Local Data**: Course content stored locally in TypeScript files for easy editing
 
 ## Current Courses
 
@@ -28,7 +28,6 @@ CodeMaster is a comprehensive web application for learning Data Structures, Algo
 - **Frontend**: Next.js with TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: React Context API
-- **Database**: Firebase Firestore
 - **Hosting**: Vercel (recommended)
 
 ## Getting Started
@@ -37,7 +36,6 @@ CodeMaster is a comprehensive web application for learning Data Structures, Algo
 
 - Node.js 14.x or higher
 - npm or yarn
-- Firebase account (for database)
 
 ### Installation
 
@@ -54,51 +52,36 @@ npm install
 yarn install
 ```
 
-3. Set up Firebase:
-   - Create a new Firebase project at [Firebase Console](https://console.firebase.google.com/)
-   - Enable Firestore Database
-   - Go to Project Settings > General > Your apps > Web app
-   - Click "Add app" if you don't have one already
-   - Register your app and get the configuration
-   - Copy the configuration values to `.env.local` file:
+3. Set up environment variables:
+   - Create a `.env.local` file with the following variables:
 
 ```
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+NEXT_PUBLIC_APP_NAME=CodeMaster
+NEXT_PUBLIC_APP_VERSION=1.0.0
 ```
 
-4. Migrate course data to Firebase:
-```bash
-npm run migrate:course
-```
-
-5. Run the development server
+4. Run the development server
 ```bash
 npm run dev
 # or
 yarn dev
 ```
 
-6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application
 
-## Firebase Data Structure
+## Data Structure
 
-The application uses Firebase Firestore with the following structure:
+The application uses local TypeScript files to store course content:
 
-- `courses/` - Collection of all courses
-  - `dsa-course/` - Document for the DSA course
-    - `days/` - Sub-collection for course days content
-      - `day-1/` - Document containing content for Day 1
-      - `day-2/` - Document containing content for Day 2
-      - ...
-    - `problems/` - Sub-collection for LeetCode problems
-      - `day-1/` - Document containing problems for Day 1
-      - `day-2/` - Document containing problems for Day 2
-      - ...
+- `src/data/courseContent/` - Directory containing all course content
+  - `index.ts` - Main file that exports all course content and provides helper functions
+  - `day1.ts` through `day51.ts` - Individual day content files
+  - Each day content includes:
+    - Introduction
+    - Learning objectives
+    - Sections with explanations and code examples
+    - Homework problems
+    - Quiz questions
 
 ## Project Structure
 
@@ -111,22 +94,24 @@ The application uses Firebase Firestore with the following structure:
     /about              # About page
   /components           # Reusable UI components
   /data                 # Data files for courses and content
-  /services             # Services for interacting with Firebase
+    /courseContent      # Daily content stored as TypeScript files
+    /dsaCourse.ts       # Course structure definition
+  /services             # Service layer for content retrieval
   /types                # TypeScript type definitions
-/scripts                # Scripts for data migration
 ```
 
 ## Adding New Content
 
-You can add new content in two ways:
+You can add new content by:
 
-1. **Using the Firebase Console:**
-   - Navigate to your Firestore Database
-   - Add documents to the appropriate collections
+1. **Creating a new day content file:**
+   - Create a new TypeScript file in `src/data/courseContent/` following the existing pattern
+   - Export the content with the appropriate type
+   - Import and add it to the `courseContentMap` in `src/data/courseContent/index.ts`
 
-2. **Updating the source code:**
-   - Modify `src/data/dsaCourse.ts` with new content
-   - Run `npm run migrate:course` to upload to Firebase
+2. **Updating existing content:**
+   - Modify the appropriate day file in `src/data/courseContent/`
+   - Your changes will be available immediately after refreshing
 
 ## Contributing
 

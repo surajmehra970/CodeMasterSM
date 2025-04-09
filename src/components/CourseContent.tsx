@@ -12,10 +12,10 @@ interface CourseContentProps {
 const CodeBlock = ({ codeExample }: { codeExample: CodeExample }) => {
   return (
     <div className="my-4">
-      <div className="bg-gray-800 text-white p-4 rounded-t-md">
+      <div className="bg-gray-800 text-white p-3 rounded-t-lg flex items-center justify-between">
         <span className="text-xs font-mono">{codeExample.language}</span>
       </div>
-      <pre className="bg-gray-900 text-white p-4 overflow-x-auto rounded-b-md">
+      <pre className="bg-gray-900 text-white p-4 overflow-x-auto rounded-b-lg text-sm">
         <code>{codeExample.code}</code>
       </pre>
       {codeExample.explanation && (
@@ -343,7 +343,7 @@ export default function CourseContent({ content, problems = [] }: CourseContentP
       </div>
       
       {/* Content Area */}
-      <div className="p-4">
+      <div className="p-6 min-h-[500px]">
         {activeTab === 'content' && (
           <div>
             {/* Introduction */}
@@ -393,7 +393,7 @@ export default function CourseContent({ content, problems = [] }: CourseContentP
         )}
         
         {activeTab === 'homework' && content.homework && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             {content.homework.map((problem, index) => (
               <div key={problem.id} className="border-b pb-6 last:border-b-0 last:pb-0">
                 <h3 className="text-lg font-bold mb-2">Problem {index + 1}: {problem.question}</h3>

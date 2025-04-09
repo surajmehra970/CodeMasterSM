@@ -1,7 +1,7 @@
 export interface CodeExample {
   language: string;
   code: string;
-  explanation: string;
+  explanation?: string;
 }
 
 export interface Section {
@@ -68,7 +68,7 @@ export interface Month {
   weeks: Week[];
 }
 
-// New Firebase structure
+// Course day structure
 export interface CourseDay {
   id: string;
   dayNumber: number;
@@ -78,7 +78,7 @@ export interface CourseDay {
   estimatedHours: number;
 }
 
-// Updated Course interface for Firebase integration
+// Course interface
 export interface Course {
   id: string;
   title: string;

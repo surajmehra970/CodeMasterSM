@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: 15, 23, 42;
   --background-start-rgb: 248, 250, 252;
   --background-end-rgb: 241, 245, 249;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
+    --foreground-rgb: 241, 245, 249;
     --background-start-rgb: 15, 23, 42;
     --background-end-rgb: 30, 41, 59;
   }
@@ -28,14 +28,34 @@ body {
 
 @layer components {
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300;
+    @apply bg-white dark:bg-dark rounded-xl shadow-card p-6 hover:shadow-card-hover transition-all duration-300;
   }
   
   .btn-primary {
-    @apply px-4 py-2 bg-primary text-white rounded-md hover:bg-indigo-700 transition-colors;
+    @apply px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 duration-300 font-medium;
   }
   
   .btn-secondary {
-    @apply px-4 py-2 bg-secondary text-white rounded-md hover:bg-emerald-700 transition-colors;
+    @apply px-4 py-2 bg-secondary text-white rounded-lg hover:bg-teal-600 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 duration-300 font-medium;
   }
+  
+  .btn-outline {
+    @apply px-4 py-2 border-2 border-primary text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 font-medium;
+  }
+  
+  .section-title {
+    @apply text-3xl font-bold mb-6 text-center relative after:content-[''] after:block after:w-24 after:h-1 after:bg-primary after:mx-auto after:mt-4;
+  }
+  
+  .container {
+    @apply px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
+  }
+}
+
+html {
+  overflow-y: scroll;
+}
+
+.course-content {
+  transition: min-height 0.3s ease;
 } 

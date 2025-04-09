@@ -6,29 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "migrate:course": "ts-node scripts/migrateCourseData.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@types/uuid": "^10.0.0",
-    "firebase": "^11.6.0",
+    "dotenv": "^16.4.7",
     "next": "^14.2.26",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^4.12.0",
-    "uuid": "^11.1.0"
+    "react-icons": "^4.12.0"
   },
   "devDependencies": {
     "@types/node": "^20.17.30",
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
+    "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.26",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "uuid": "^11.1.0"
   }
 }

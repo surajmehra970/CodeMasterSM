@@ -8,12 +8,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#4f46e5',
-        secondary: '#10b981',
-        dark: '#1f2937',
-        light: '#f3f4f6',
+        primary: '#6366f1',
+        secondary: '#14b8a6',
+        dark: '#0f172a',
+        light: '#f8fafc',
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'],
+      },
+      borderRadius: {
+        'xl': '1rem',
+        '2xl': '1.5rem',
+      },
+      boxShadow: {
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
       },
     },
   },
+  darkMode: 'class',
   plugins: [],
 } 

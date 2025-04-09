@@ -100,9 +100,9 @@ const ResourcesPage = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 pt-20 pb-12">
       <header className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">Learning Resources</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Learning Resources</h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
           Curated resources to help you on your journey to master DSA and programming
         </p>
@@ -110,12 +110,12 @@ const ResourcesPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {resources.map((category, index) => (
-          <div key={index} className="card">
+          <div key={index} className="card group hover:-translate-y-1 transition-all duration-300">
             <h2 className="text-2xl font-bold mb-4 text-primary">{category.title}</h2>
             <div className="space-y-4">
               {category.items.map((item, itemIndex) => (
                 <div key={itemIndex} className="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-0">
-                  <h3 className="font-semibold text-lg">{item.name}</h3>
+                  <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">{item.name}</h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400">By {item.author}</p>
                   <p className="mt-1 text-gray-700 dark:text-gray-300">{item.description}</p>
                   {item.link && (
@@ -123,9 +123,12 @@ const ResourcesPage = () => {
                       href={item.link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-block mt-2 text-primary hover:underline text-sm"
+                      className="inline-flex items-center mt-2 text-primary hover:text-indigo-600 text-sm group-hover:translate-x-1 transition-all duration-300"
                     >
-                      Visit Resource →
+                      Visit Resource 
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
                     </a>
                   )}
                 </div>
@@ -135,11 +138,11 @@ const ResourcesPage = () => {
         ))}
       </div>
 
-      <div className="mt-12 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold mb-4">Recommended Learning Path</h2>
-        <div className="space-y-6">
+      <div className="mt-12 bg-white dark:bg-dark rounded-xl shadow-card p-6">
+        <h2 className="text-2xl font-bold mb-4 text-center">Recommended Learning Path</h2>
+        <div className="space-y-6 mt-8">
           <div className="flex">
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
               1
             </div>
             <div>
@@ -152,7 +155,7 @@ const ResourcesPage = () => {
           </div>
 
           <div className="flex">
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
               2
             </div>
             <div>
@@ -165,7 +168,7 @@ const ResourcesPage = () => {
           </div>
 
           <div className="flex">
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
               3
             </div>
             <div>
@@ -178,7 +181,7 @@ const ResourcesPage = () => {
           </div>
 
           <div className="flex">
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-4 shadow-md">
               4
             </div>
             <div>
