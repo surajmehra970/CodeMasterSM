@@ -41,9 +41,6 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* DSA Course Card */}
             <div className="group card hover:-translate-y-2 transition-all duration-300">
-              <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
-                Popular
-              </div>
               <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">Data Structures & Algorithms</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Master DSA concepts with a structured 4-month roadmap
@@ -51,15 +48,15 @@ export default function Home() {
               <ul className="mb-6 space-y-2">
                 <li className="flex items-center">
                   <CheckCircleIcon className="h-5 w-5 text-green-500 mr-2" />
-                  Foundations & Problem-Solving
+                  <span className="dark:text-gray-300">Foundations & Problem-Solving</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircleIcon className="h-5 w-5 text-green-500 mr-2" />
-                  Trees, Graphs & Dynamic Programming
+                  <span className="dark:text-gray-300">Trees, Graphs & Dynamic Programming</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircleIcon className="h-5 w-5 text-green-500 mr-2" />
-                  Advanced Algorithms & Interview Prep
+                  <span className="dark:text-gray-300">Advanced Algorithms & Interview Prep</span>
                 </li>
               </ul>
               <Link href="/courses/dsa" 
@@ -77,8 +74,8 @@ export default function Home() {
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 From basics to advanced Python concepts
               </p>
-              <div className="mb-6 bg-gray-100 dark:bg-gray-700/50 p-4 rounded-lg text-center backdrop-blur-sm">
-                <span className="text-lg font-medium">Coming Soon</span>
+              <div className="mb-6 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center backdrop-blur-sm">
+                <span className="text-lg font-medium dark:text-gray-200">Coming Soon</span>
               </div>
               <button disabled className="btn-primary block w-full opacity-50 cursor-not-allowed">
                 Coming Soon
@@ -93,8 +90,8 @@ export default function Home() {
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Complete JavaScript and web development course
               </p>
-              <div className="mb-6 bg-gray-100 dark:bg-gray-700/50 p-4 rounded-lg text-center backdrop-blur-sm">
-                <span className="text-lg font-medium">Coming Soon</span>
+              <div className="mb-6 bg-gray-100 dark:bg-gray-700 p-4 rounded-lg text-center backdrop-blur-sm">
+                <span className="text-lg font-medium dark:text-gray-200">Coming Soon</span>
               </div>
               <button disabled className="btn-primary block w-full opacity-50 cursor-not-allowed">
                 Coming Soon
@@ -114,7 +111,7 @@ export default function Home() {
               <div className="w-16 h-16 mb-6 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 📚
               </div>
-              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Structured Learning Path</h3>
+              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors dark:text-gray-100">Structured Learning Path</h3>
               <p className="text-gray-600 dark:text-gray-300">
                 Carefully designed roadmaps to guide your learning journey step by step
               </p>
@@ -123,7 +120,7 @@ export default function Home() {
               <div className="w-16 h-16 mb-6 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 💻
               </div>
-              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Practical Problems</h3>
+              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors dark:text-gray-100">Practical Problems</h3>
               <p className="text-gray-600 dark:text-gray-300">
                 Hand-picked problems from LeetCode and other platforms with detailed solutions
               </p>
@@ -132,7 +129,7 @@ export default function Home() {
               <div className="w-16 h-16 mb-6 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-2xl group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 🎯
               </div>
-              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Interview Preparation</h3>
+              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors dark:text-gray-100">Interview Preparation</h3>
               <p className="text-gray-600 dark:text-gray-300">
                 Mock interviews and system design challenges to prepare you for tech interviews
               </p>

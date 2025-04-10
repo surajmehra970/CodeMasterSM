@@ -8,12 +8,10 @@
   --background-end-rgb: 241, 245, 249;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 241, 245, 249;
-    --background-start-rgb: 15, 23, 42;
-    --background-end-rgb: 30, 41, 59;
-  }
+html.dark {
+  --foreground-rgb: 241, 245, 249;
+  --background-start-rgb: 15, 23, 42;
+  --background-end-rgb: 30, 41, 59;
 }
 
 body {
@@ -28,7 +26,7 @@ body {
 
 @layer components {
   .card {
-    @apply bg-white dark:bg-dark rounded-xl shadow-card p-6 hover:shadow-card-hover transition-all duration-300;
+    @apply bg-white dark:bg-dark dark:text-gray-200 rounded-xl shadow-card p-6 hover:shadow-card-hover transition-all duration-300;
   }
   
   .btn-primary {
@@ -40,11 +38,11 @@ body {
   }
   
   .btn-outline {
-    @apply px-4 py-2 border-2 border-primary text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 font-medium;
+    @apply px-4 py-2 border-2 border-primary text-primary dark:text-blue-300 hover:bg-primary/10 rounded-lg transition-all duration-300 font-medium;
   }
   
   .section-title {
-    @apply text-3xl font-bold mb-6 text-center relative after:content-[''] after:block after:w-24 after:h-1 after:bg-primary after:mx-auto after:mt-4;
+    @apply text-3xl font-bold mb-6 text-center relative text-gray-800 dark:text-gray-100 after:content-[''] after:block after:w-24 after:h-1 after:bg-primary after:mx-auto after:mt-4;
   }
   
   .container {
