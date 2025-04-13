@@ -316,7 +316,7 @@ const DynamicRoadmap: React.FC = () => {
                               <input
                                 type="checkbox"
                                 checked={task.completed}
-                                onChange={() => toggleTaskCompletion(activeWeek, day.id, task.id)}
+                                onChange={() => activeWeek !== null && toggleTaskCompletion(activeWeek, day.id, task.id)}
                                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                               />
                               <div className="ml-3 flex-grow">

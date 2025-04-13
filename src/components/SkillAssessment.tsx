@@ -242,12 +242,11 @@ const SkillAssessment: React.FC = () => {
               <h4 className="font-medium text-gray-800 dark:text-white mb-3">Question Review</h4>
               <div className="space-y-6">
                 {selectedQuiz.questions.map((question, qIndex) => {
-                  const isCorrect = selectedAnswers[qIndex] === question.correctAnswer;
                   return (
                     <div key={question.id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm">
                       <p className="font-medium text-gray-800 dark:text-white mb-3">{qIndex + 1}. {question.question}</p>
                       <div className="space-y-2 mb-3">
-                        {question.options.map((option, oIndex) => (
+                        {question.options.map((option: string, oIndex: number) => (
                           <div 
                             key={oIndex}
                             className={`p-2 rounded ${
@@ -315,7 +314,7 @@ const SkillAssessment: React.FC = () => {
               </p>
               
               <div className="space-y-3">
-                {selectedQuiz.questions[currentQuestionIndex].options.map((option, index) => (
+                {selectedQuiz.questions[currentQuestionIndex].options.map((option: string, index: number) => (
                   <div
                     key={index}
                     onClick={() => handleAnswerSelect(currentQuestionIndex, index)}
