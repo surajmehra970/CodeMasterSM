@@ -47,7 +47,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider defaultTheme="system">
           <CourseProvider>
             <CareerProvider>
               <AuthProvider>
