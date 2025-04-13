@@ -84,6 +84,14 @@ export interface Quiz {
   timeLimit?: number; // in minutes
 }
 
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+}
+
 export interface CodingProblem {
   id: string;
   title: string;

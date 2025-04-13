@@ -94,7 +94,7 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     if (storedProfile) {
       try {
         setUserProfile(JSON.parse(storedProfile));
-      } catch (e) {
+      } catch (_) {
         console.error('Failed to parse stored user profile');
       }
     }
