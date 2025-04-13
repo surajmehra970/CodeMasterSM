@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="650" height="500" viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: Arial, sans-serif; }
+    .title { font-size: 20px; font-weight: bold; }
+    .subtitle { font-size: 16px; }
+    .annotation { font-size: 14px; fill: #555; }
+    .small { font-size: 12px; }
+    .value { font-size: 16px; font-weight: bold; }
+    rect { stroke: #000; stroke-width: 1; }
+    .scanning { fill: #ffcc00; }
+    .current-min { fill: #ff5722; }
+    .swapping { fill: #9c27b0; }
+    .sorted { fill: #4caf50; }
+    .unsorted { fill: #f0f0f0; }
+    .legend-item { font-size: 12px; }
+    
+    @media (prefers-color-scheme: dark) {
+      text { fill: #fff; }
+      .annotation { fill: #ccc; }
+      rect { stroke: #fff; }
+      .unsorted { fill: #333; }
+    }
+  </style>
+
+  <!-- Title and Description -->
+  <text x="325" y="30" text-anchor="middle" class="title">Selection Sort Animation</text>
+  <text x="325" y="55" text-anchor="middle" class="subtitle">Finding and Selecting the Minimum Element in Each Pass</text>
+
+  <!-- Original array -->
+  <text x="325" y="90" text-anchor="middle" class="annotation">Original Array: [7, 4, 10, 2, 5, 8]</text>
+
+  <!-- Legend -->
+  <rect x="80" y="460" width="15" height="15" class="scanning" />
+  <text x="105" y="472" class="legend-item">Scanning</text>
+  
+  <rect x="180" y="460" width="15" height="15" class="current-min" />
+  <text x="210" y="472" class="legend-item">Current Minimum</text>
+  
+  <rect x="290" y="460" width="15" height="15" class="swapping" />
+  <text x="320" y="472" class="legend-item">Swapping</text>
+  
+  <rect x="400" y="460" width="15" height="15" class="sorted" />
+  <text x="425" y="472" class="legend-item">Sorted Section</text>
+  
+  <rect x="510" y="460" width="15" height="15" class="unsorted" />
+  <text x="535" y="472" class="legend-item">Unsorted Section</text>
+
+  <!-- Pass 1 -->
+  <text x="75" y="130" class="annotation">Pass 1: Finding the minimum element in the entire array</text>
+  
+  <!-- Initial state -->
+  <g id="initial-array" transform="translate(150, 150)">
+    <!-- Element 0 (value 7) - First position -->
+    <rect x="0" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate attributeName="fill" begin="0.5s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="0.8s" dur="0.2s" from="#ffcc00" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="current-min-1.begin" dur="0.2s" from="#ff5722" to="#unsorted" fill="freeze" />
+      <animate attributeName="fill" begin="swap1.begin" dur="0.5s" from="#f0f0f0" to="#9c27b0" fill="freeze" />
+      <animate attributeName="fill" begin="swap1.end" dur="0.3s" from="#9c27b0" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="25" y="30" text-anchor="middle" class="value">7</text>
+    
+    <!-- Element 1 (value 4) -->
+    <rect x="60" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan1-1" attributeName="fill" begin="1.0s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan1-1.end+0.2s" dur="0.2s" from="#ffcc00" to="#ff5722" fill="freeze" />
+      <animate id="current-min-1" attributeName="fill" begin="scan1-2.end+0.2s" dur="0.2s" from="#ff5722" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="85" y="30" text-anchor="middle" class="value">4</text>
+    
+    <!-- Element 2 (value 10) -->
+    <rect x="120" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan1-2" attributeName="fill" begin="scan1-1.end+0.4s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan1-2.end+0.2s" dur="0.2s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="145" y="30" text-anchor="middle" class="value">10</text>
+    
+    <!-- Element 3 (value 2) -->
+    <rect x="180" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan1-3" attributeName="fill" begin="scan1-2.end+0.4s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan1-3.end+0.2s" dur="0.2s" from="#ffcc00" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="swap1.begin" dur="0.5s" from="#ff5722" to="#9c27b0" fill="freeze" />
+      <animate attributeName="fill" begin="swap1.end" dur="0.3s" from="#9c27b0" to="#4caf50" fill="freeze" />
+    </rect>
+    <text x="205" y="30" text-anchor="middle" class="value">2</text>
+    
+    <!-- Element 4 (value 5) -->
+    <rect x="240" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan1-4" attributeName="fill" begin="scan1-3.end+0.5s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan1-4.end+0.2s" dur="0.2s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="265" y="30" text-anchor="middle" class="value">5</text>
+    
+    <!-- Element 5 (value 8) -->
+    <rect x="300" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan1-5" attributeName="fill" begin="scan1-4.end+0.4s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan1-5.end+0.2s" dur="0.2s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="325" y="30" text-anchor="middle" class="value">8</text>
+  </g>
+
+  <!-- Swapping animations for Pass 1 -->
+  <!-- Swap 7 and 2 -->
+  <g transform="translate(150, 150)">
+    <text x="25" y="30" text-anchor="middle" class="value">
+      <animate id="swap1" attributeName="textContent" begin="scan1-5.end+1s" dur="0.5s" from="7" to="2" fill="freeze" />
+    </text>
+    <text x="205" y="30" text-anchor="middle" class="value">
+      <animate attributeName="textContent" begin="scan1-5.end+1s" dur="0.5s" from="2" to="7" fill="freeze" />
+    </text>
+  </g>
+
+  <!-- Result after pass 1 -->
+  <text x="75" y="220" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="swap1.end+0.5s" dur="0.5s" from="0" to="1" fill="freeze" />
+    After Pass 1: [2, 4, 10, 7, 5, 8] - Smallest element (2) is now at the beginning
+  </text>
+
+  <!-- Pass 2 -->
+  <text x="75" y="250" class="annotation" opacity="0">
+    <animate id="pass2-start" attributeName="opacity" begin="swap1.end+1s" dur="0.5s" from="0" to="1" fill="freeze" />
+    Pass 2: Finding the minimum in the remaining unsorted array (starting from index 1)
+  </text>
+  
+  <!-- Array after pass 1 -->
+  <g transform="translate(150, 270)" opacity="0">
+    <animate attributeName="opacity" begin="pass2-start.end" dur="0.5s" from="0" to="1" fill="freeze" />
+    
+    <!-- Element 0 (now value 2) - Sorted -->
+    <rect x="0" y="0" width="50" height="50" rx="5" class="sorted" />
+    <text x="25" y="30" text-anchor="middle" class="value">2</text>
+    
+    <!-- Element 1 (value 4) - First position in unsorted section -->
+    <rect x="60" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate attributeName="fill" begin="pass2-start.end+0.5s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="pass2-start.end+0.8s" dur="0.2s" from="#ffcc00" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="pass2-end" dur="0.3s" from="#ff5722" to="#4caf50" fill="freeze" />
+    </rect>
+    <text x="85" y="30" text-anchor="middle" class="value">4</text>
+    
+    <!-- Element 2 (value 10) -->
+    <rect x="120" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan2-1" attributeName="fill" begin="pass2-start.end+1.0s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan2-1.end+0.2s" dur="0.2s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="145" y="30" text-anchor="middle" class="value">10</text>
+    
+    <!-- Element 3 (value 7) -->
+    <rect x="180" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan2-2" attributeName="fill" begin="scan2-1.end+0.4s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan2-2.end+0.2s" dur="0.2s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="205" y="30" text-anchor="middle" class="value">7</text>
+    
+    <!-- Element 4 (value 5) -->
+    <rect x="240" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan2-3" attributeName="fill" begin="scan2-2.end+0.4s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="scan2-3.end+0.2s" dur="0.2s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="265" y="30" text-anchor="middle" class="value">5</text>
+    
+    <!-- Element 5 (value 8) -->
+    <rect x="300" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="scan2-4" attributeName="fill" begin="scan2-3.end+0.4s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate id="pass2-end" attributeName="fill" begin="scan2-4.end+0.2s" dur="0.2s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="325" y="30" text-anchor="middle" class="value">8</text>
+  </g>
+
+  <!-- Result after pass 2 -->
+  <text x="75" y="340" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="pass2-end.end+0.5s" dur="0.5s" from="0" to="1" fill="freeze" />
+    After Pass 2: [2, 4, 10, 7, 5, 8] - Second smallest element (4) is now at the second position
+  </text>
+
+  <!-- Pass 3 indication -->
+  <text x="75" y="370" class="annotation" opacity="0">
+    <animate id="pass3-start" attributeName="opacity" begin="pass2-end.end+1s" dur="0.5s" from="0" to="1" fill="freeze" />
+    Process continues: Find minimum in remaining array, place it at the front of unsorted section...
+  </text>
+
+  <!-- Final Sorted Array -->
+  <text x="325" y="420" text-anchor="middle" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="pass3-start.end+1s" dur="0.5s" from="0" to="1" fill="freeze" />
+    Final Sorted Array: [2, 4, 5, 7, 8, 10]
+  </text>
+
+  <!-- Restart button -->
+  <g cursor="pointer" onclick="document.getElementById('svg').setCurrentTime(0)">
+    <rect x="550" y="30" width="80" height="30" rx="5" fill="#4CAF50" />
+    <text x="590" y="50" text-anchor="middle" fill="white">Restart</text>
+  </g>
+</svg> 

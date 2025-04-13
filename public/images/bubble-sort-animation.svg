@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="650" height="500" viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg" id="bubble-sort-svg">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #111; }
+    .title { font-size: 20px; font-weight: bold; }
+    .subtitle { font-size: 16px; }
+    .annotation { font-size: 14px; fill: #444; }
+    .small { font-size: 12px; }
+    .value { font-size: 16px; font-weight: bold; }
+    rect { stroke: #333; stroke-width: 1.5; }
+    .comparing { fill: #ffcc00; }
+    .swapping { fill: #ff5722; }
+    .sorted { fill: #4caf50; }
+    .unsorted { fill: #f0f0f0; }
+    .legend-item { font-size: 12px; }
+    .restart-btn { cursor: pointer; }
+    .restart-btn:hover rect { fill: #45a049; }
+    
+    @media (prefers-color-scheme: dark) {
+      text { fill: #fff; }
+      .annotation { fill: #ccc; }
+      rect { stroke: #fff; }
+      .unsorted { fill: #333; }
+    }
+  </style>
+
+  <!-- Title and Description -->
+  <text x="325" y="30" text-anchor="middle" class="title">Bubble Sort Animation</text>
+  <text x="325" y="55" text-anchor="middle" class="subtitle">Adjacent Element Comparison and Swapping</text>
+
+  <!-- Original array -->
+  <text x="325" y="90" text-anchor="middle" class="annotation">Original Array: [5, 3, 8, 4, 2]</text>
+
+  <!-- Legend -->
+  <rect x="100" y="450" width="15" height="15" class="comparing" />
+  <text x="125" y="462" class="legend-item">Comparing</text>
+  
+  <rect x="200" y="450" width="15" height="15" class="swapping" />
+  <text x="225" y="462" class="legend-item">Swapping</text>
+  
+  <rect x="300" y="450" width="15" height="15" class="sorted" />
+  <text x="325" y="462" class="legend-item">Sorted Position</text>
+
+  <rect x="400" y="450" width="15" height="15" class="unsorted" />
+  <text x="425" y="462" class="legend-item">Unsorted</text>
+
+  <!-- Pass 1 -->
+  <text x="100" y="130" class="annotation">Pass 1: Compare adjacent elements and bubble the largest to the end</text>
+  
+  <!-- Initial state -->
+  <g id="initial-array" transform="translate(175, 150)">
+    <rect x="0" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare1-1" attributeName="fill" begin="0.5s;restart.click" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="compare1-1.end+0.3s" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="25" y="30" text-anchor="middle" class="value">5</text>
+    
+    <rect x="60" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare1-2" attributeName="fill" begin="0.5s;restart.click" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="swap1-1.end" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="85" y="30" text-anchor="middle" class="value">3</text>
+    
+    <rect x="120" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare1-3" attributeName="fill" begin="compare1-2.end+0.6s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="compare1-3.end+0.3s" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="145" y="30" text-anchor="middle" class="value">8</text>
+    
+    <rect x="180" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare1-4" attributeName="fill" begin="compare1-3.end+0.3s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="swap1-2.end" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="205" y="30" text-anchor="middle" class="value">4</text>
+    
+    <rect x="240" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare1-5" attributeName="fill" begin="compare1-4.end+0.6s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="compare1-5.end+0.3s" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+      <animate attributeName="fill" begin="swap1-2.end+0.6s" dur="0.5s" from="#f0f0f0" to="#4caf50" fill="freeze" />
+    </rect>
+    <text x="265" y="30" text-anchor="middle" class="value">2</text>
+  </g>
+
+  <!-- Swapping animations for Pass 1 -->
+  <!-- Swap 5 and 3 -->
+  <g transform="translate(175, 150)">
+    <text x="25" y="30" text-anchor="middle" class="value">
+      <animate id="swap1-1" attributeName="textContent" begin="compare1-2.end+0.3s" dur="0.3s" from="5" to="3" fill="freeze" />
+      <set attributeName="textContent" to="5" begin="restart.click" />
+    </text>
+    <text x="85" y="30" text-anchor="middle" class="value">
+      <animate attributeName="textContent" begin="compare1-2.end+0.3s" dur="0.3s" from="3" to="5" fill="freeze" />
+      <set attributeName="textContent" to="3" begin="restart.click" />
+    </text>
+    
+    <!-- Highlight swapping -->
+    <rect x="0" y="0" width="50" height="50" rx="5" fill-opacity="0">
+      <animate attributeName="fill" begin="compare1-2.end+0.3s" dur="0.3s" from="#f0f0f0" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="swap1-1.end" dur="0.3s" from="#ff5722" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <rect x="60" y="0" width="50" height="50" rx="5" fill-opacity="0">
+      <animate attributeName="fill" begin="compare1-2.end+0.3s" dur="0.3s" from="#f0f0f0" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="swap1-1.end" dur="0.3s" from="#ff5722" to="#f0f0f0" fill="freeze" />
+    </rect>
+  </g>
+
+  <!-- Swap 8 and 4 -->
+  <g transform="translate(175, 150)">
+    <text x="145" y="30" text-anchor="middle" class="value">
+      <animate id="swap1-2" attributeName="textContent" begin="compare1-4.end+0.3s" dur="0.3s" from="8" to="4" fill="freeze" />
+      <set attributeName="textContent" to="8" begin="restart.click" />
+    </text>
+    <text x="205" y="30" text-anchor="middle" class="value">
+      <animate attributeName="textContent" begin="compare1-4.end+0.3s" dur="0.3s" from="4" to="8" fill="freeze" />
+      <set attributeName="textContent" to="4" begin="restart.click" />
+    </text>
+    
+    <!-- Highlight swapping -->
+    <rect x="120" y="0" width="50" height="50" rx="5" fill-opacity="0">
+      <animate attributeName="fill" begin="compare1-4.end+0.3s" dur="0.3s" from="#f0f0f0" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="swap1-2.end" dur="0.3s" from="#ff5722" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <rect x="180" y="0" width="50" height="50" rx="5" fill-opacity="0">
+      <animate attributeName="fill" begin="compare1-4.end+0.3s" dur="0.3s" from="#f0f0f0" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="swap1-2.end" dur="0.3s" from="#ff5722" to="#f0f0f0" fill="freeze" />
+    </rect>
+  </g>
+
+  <!-- Result after pass 1 -->
+  <text x="175" y="220" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="compare1-5.end+0.9s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    After Pass 1: [3, 5, 4, 2, 8]
+  </text>
+
+  <!-- Pass 2 -->
+  <text x="100" y="250" class="annotation" opacity="0">
+    <animate id="pass2-start" attributeName="opacity" begin="compare1-5.end+1.2s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    Pass 2: Second largest element bubbles to second-last position
+  </text>
+  
+  <!-- Array after pass 1 -->
+  <g transform="translate(175, 270)" opacity="0">
+    <animate attributeName="opacity" begin="pass2-start.end" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    
+    <rect x="0" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare2-1" attributeName="fill" begin="pass2-start.end+0.5s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="compare2-1.end+0.3s" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="25" y="30" text-anchor="middle" class="value">3</text>
+    
+    <rect x="60" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare2-2" attributeName="fill" begin="pass2-start.end+0.5s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="compare2-2.end+0.3s" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="85" y="30" text-anchor="middle" class="value">5</text>
+    
+    <rect x="120" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare2-3" attributeName="fill" begin="compare2-2.end+0.6s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="swap2-1.end" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <text x="145" y="30" text-anchor="middle" class="value">4</text>
+    
+    <rect x="180" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="compare2-4" attributeName="fill" begin="compare2-3.end+0.6s" dur="0.3s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <animate attributeName="fill" begin="compare2-4.end+0.6s" dur="0.3s" from="#ffcc00" to="#f0f0f0" fill="freeze" />
+      <animate attributeName="fill" begin="pass3-start.end" dur="0.5s" from="#f0f0f0" to="#4caf50" fill="freeze" />
+    </rect>
+    <text x="205" y="30" text-anchor="middle" class="value">2</text>
+    
+    <rect x="240" y="0" width="50" height="50" rx="5" class="sorted">
+      <animate attributeName="fill" begin="pass2-start.end" dur="0.1s" from="#f0f0f0" to="#4caf50" fill="freeze" />
+    </rect>
+    <text x="265" y="30" text-anchor="middle" class="value">8</text>
+  </g>
+
+  <!-- Swapping animations for Pass 2 -->
+  <!-- Swap 5 and 4 -->
+  <g transform="translate(175, 270)" opacity="0">
+    <animate attributeName="opacity" begin="pass2-start.end" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    
+    <text x="85" y="30" text-anchor="middle" class="value">
+      <animate id="swap2-1" attributeName="textContent" begin="compare2-3.end+0.3s" dur="0.3s" from="5" to="4" fill="freeze" />
+    </text>
+    <text x="145" y="30" text-anchor="middle" class="value">
+      <animate attributeName="textContent" begin="compare2-3.end+0.3s" dur="0.3s" from="4" to="5" fill="freeze" />
+    </text>
+    
+    <!-- Highlight swapping -->
+    <rect x="60" y="0" width="50" height="50" rx="5" fill-opacity="0">
+      <animate attributeName="fill" begin="compare2-3.end+0.3s" dur="0.3s" from="#f0f0f0" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="swap2-1.end" dur="0.3s" from="#ff5722" to="#f0f0f0" fill="freeze" />
+    </rect>
+    <rect x="120" y="0" width="50" height="50" rx="5" fill-opacity="0">
+      <animate attributeName="fill" begin="compare2-3.end+0.3s" dur="0.3s" from="#f0f0f0" to="#ff5722" fill="freeze" />
+      <animate attributeName="fill" begin="swap2-1.end" dur="0.3s" from="#ff5722" to="#f0f0f0" fill="freeze" />
+    </rect>
+  </g>
+
+  <!-- Result after pass 2 -->
+  <text x="175" y="340" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="compare2-4.end+0.9s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    After Pass 2: [3, 4, 5, 2, 8]
+  </text>
+
+  <!-- Pass 3 -->
+  <text x="100" y="370" class="annotation" opacity="0">
+    <animate id="pass3-start" attributeName="opacity" begin="compare2-4.end+1.2s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    Continuing passes until array is sorted...
+  </text>
+
+  <!-- Final Sorted Array -->
+  <text x="325" y="420" text-anchor="middle" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="pass3-start.end+1.5s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    Final Sorted Array: [2, 3, 4, 5, 8]
+  </text>
+
+  <!-- Restart button -->
+  <g id="restart" class="restart-btn">
+    <rect x="550" y="30" width="80" height="30" rx="5" fill="#4CAF50" stroke="#333" />
+    <text x="590" y="50" text-anchor="middle" fill="white">Restart</text>
+  </g>
+</svg> 

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="650" height="500" viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg" id="insertion-sort-svg">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #111; }
+    .title { font-size: 20px; font-weight: bold; }
+    .subtitle { font-size: 16px; }
+    .annotation { font-size: 14px; fill: #444; }
+    .small { font-size: 12px; }
+    .value { font-size: 16px; font-weight: bold; }
+    rect { stroke: #333; stroke-width: 1.5; }
+    .current { fill: #ffcc00; }
+    .inserting { fill: #ff5722; }
+    .sorted { fill: #4caf50; }
+    .unsorted { fill: #f0f0f0; }
+    .legend-item { font-size: 12px; }
+    .arrow { stroke: #333; stroke-width: 2; }
+    .restart-btn { cursor: pointer; }
+    .restart-btn:hover rect { fill: #45a049; }
+    
+    @media (prefers-color-scheme: dark) {
+      text { fill: #fff; }
+      .annotation { fill: #ccc; }
+      rect { stroke: #fff; }
+      .unsorted { fill: #333; }
+      .arrow { stroke: #fff; }
+    }
+  </style>
+
+  <!-- Title and Description -->
+  <text x="325" y="30" text-anchor="middle" class="title">Insertion Sort Animation</text>
+  <text x="325" y="55" text-anchor="middle" class="subtitle">Building Sorted Array One Element at a Time</text>
+
+  <!-- Original array -->
+  <text x="325" y="90" text-anchor="middle" class="annotation">Original Array: [5, 2, 8, 3, 1, 7]</text>
+
+  <!-- Legend -->
+  <rect x="80" y="450" width="15" height="15" class="current" />
+  <text x="105" y="462" class="legend-item">Current Element</text>
+  
+  <rect x="210" y="450" width="15" height="15" class="inserting" />
+  <text x="240" y="462" class="legend-item">Inserting Element</text>
+  
+  <rect x="340" y="450" width="15" height="15" class="sorted" />
+  <text x="370" y="462" class="legend-item">Sorted Section</text>
+
+  <rect x="470" y="450" width="15" height="15" class="unsorted" />
+  <text x="500" y="462" class="legend-item">Unsorted Section</text>
+
+  <!-- Initial Array (First element is considered sorted) -->
+  <text x="80" y="130" class="annotation">Step 1: Starting with the first element (5), which is considered sorted</text>
+  
+  <g id="initial-array" transform="translate(150, 150)">
+    <!-- Element 0 (value 5) - Start as sorted -->
+    <rect x="0" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate attributeName="fill" begin="0.5s;restart.click" dur="0.5s" from="#f0f0f0" to="#4caf50" fill="freeze" />
+      <set attributeName="fill" to="#f0f0f0" begin="restart.click" />
+    </rect>
+    <text x="25" y="30" text-anchor="middle" class="value">5</text>
+    
+    <!-- Element 1 (value 2) - First element to insert -->
+    <rect x="60" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="highlight-2" attributeName="fill" begin="1.5s;restart.click+1.5s" dur="0.5s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+      <set attributeName="fill" to="#f0f0f0" begin="restart.click" />
+    </rect>
+    <text x="85" y="30" text-anchor="middle" class="value">2</text>
+    
+    <!-- Element 2 (value 8) -->
+    <rect x="120" y="0" width="50" height="50" rx="5" class="unsorted">
+      <set attributeName="fill" to="#f0f0f0" begin="restart.click" />
+    </rect>
+    <text x="145" y="30" text-anchor="middle" class="value">8</text>
+    
+    <!-- Element 3 (value 3) -->
+    <rect x="180" y="0" width="50" height="50" rx="5" class="unsorted">
+      <set attributeName="fill" to="#f0f0f0" begin="restart.click" />
+    </rect>
+    <text x="205" y="30" text-anchor="middle" class="value">3</text>
+    
+    <!-- Element 4 (value 1) -->
+    <rect x="240" y="0" width="50" height="50" rx="5" class="unsorted">
+      <set attributeName="fill" to="#f0f0f0" begin="restart.click" />
+    </rect>
+    <text x="265" y="30" text-anchor="middle" class="value">1</text>
+    
+    <!-- Element 5 (value 7) -->
+    <rect x="300" y="0" width="50" height="50" rx="5" class="unsorted">
+      <set attributeName="fill" to="#f0f0f0" begin="restart.click" />
+    </rect>
+    <text x="325" y="30" text-anchor="middle" class="value">7</text>
+  </g>
+
+  <!-- Step 2: Insert second element -->
+  <text x="80" y="220" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="highlight-2.end" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    Step 2: Insert 2 into the sorted section (Compare with 5 and shift as needed)
+  </text>
+  
+  <g transform="translate(150, 240)" opacity="0">
+    <animate id="show-step2" attributeName="opacity" begin="highlight-2.end+0.5s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    
+    <!-- Element 0 (now value 2) -->
+    <rect x="0" y="0" width="50" height="50" rx="5" class="sorted" />
+    <text x="25" y="30" text-anchor="middle" class="value">2</text>
+    
+    <!-- Element 1 (now value 5) -->
+    <rect x="60" y="0" width="50" height="50" rx="5" class="sorted" />
+    <text x="85" y="30" text-anchor="middle" class="value">5</text>
+    
+    <!-- Insert animation -->
+    <g opacity="0">
+      <animate attributeName="opacity" begin="show-step2.begin" dur="0.1s" from="0" to="1" fill="freeze" />
+      <animate attributeName="opacity" begin="show-step2.begin+2s" dur="0.1s" from="1" to="0" fill="freeze" />
+      <set attributeName="opacity" to="0" begin="restart.click" />
+      
+      <!-- Arrow showing the movement -->
+      <path d="M85,60 L25,90" class="arrow" fill="none" marker-end="url(#arrowhead)" />
+      
+      <!-- Moving element -->
+      <rect x="60" y="0" width="50" height="50" rx="5" class="inserting" opacity="0.7" />
+      <text x="85" y="30" text-anchor="middle" class="value" fill="white">2</text>
+    </g>
+    
+    <!-- Element 2 (value 8) -->
+    <rect x="120" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="highlight-8" attributeName="fill" begin="show-step2.end+0.5s" dur="0.5s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+    </rect>
+    <text x="145" y="30" text-anchor="middle" class="value">8</text>
+    
+    <!-- Remaining unsorted elements -->
+    <rect x="180" y="0" width="50" height="50" rx="5" class="unsorted" />
+    <text x="205" y="30" text-anchor="middle" class="value">3</text>
+    
+    <rect x="240" y="0" width="50" height="50" rx="5" class="unsorted" />
+    <text x="265" y="30" text-anchor="middle" class="value">1</text>
+    
+    <rect x="300" y="0" width="50" height="50" rx="5" class="unsorted" />
+    <text x="325" y="30" text-anchor="middle" class="value">7</text>
+  </g>
+
+  <!-- Step 3: Insert third element -->
+  <text x="80" y="310" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="highlight-8.end" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    Step 3: Insert 8 into the sorted section (8 > 5, so it stays at the end)
+  </text>
+  
+  <g transform="translate(150, 330)" opacity="0">
+    <animate id="show-step3" attributeName="opacity" begin="highlight-8.end+0.5s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    
+    <!-- Sorted elements -->
+    <rect x="0" y="0" width="50" height="50" rx="5" class="sorted" />
+    <text x="25" y="30" text-anchor="middle" class="value">2</text>
+    
+    <rect x="60" y="0" width="50" height="50" rx="5" class="sorted" />
+    <text x="85" y="30" text-anchor="middle" class="value">5</text>
+    
+    <rect x="120" y="0" width="50" height="50" rx="5" class="sorted" />
+    <text x="145" y="30" text-anchor="middle" class="value">8</text>
+    
+    <!-- Element 3 (value 3) -->
+    <rect x="180" y="0" width="50" height="50" rx="5" class="unsorted">
+      <animate id="highlight-3" attributeName="fill" begin="show-step3.end+0.5s" dur="0.5s" from="#f0f0f0" to="#ffcc00" fill="freeze" />
+    </rect>
+    <text x="205" y="30" text-anchor="middle" class="value">3</text>
+    
+    <!-- Remaining unsorted elements -->
+    <rect x="240" y="0" width="50" height="50" rx="5" class="unsorted" />
+    <text x="265" y="30" text-anchor="middle" class="value">1</text>
+    
+    <rect x="300" y="0" width="50" height="50" rx="5" class="unsorted" />
+    <text x="325" y="30" text-anchor="middle" class="value">7</text>
+  </g>
+
+  <!-- Final step animation -->
+  <text x="325" y="400" text-anchor="middle" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="highlight-3.end+0.5s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    The process continues until all elements are inserted in their correct positions...
+  </text>
+  
+  <text x="325" y="420" text-anchor="middle" class="annotation" opacity="0">
+    <animate attributeName="opacity" begin="highlight-3.end+1.5s" dur="0.5s" from="0" to="1" fill="freeze" />
+    <set attributeName="opacity" to="0" begin="restart.click" />
+    Final Sorted Array: [1, 2, 3, 5, 7, 8]
+  </text>
+
+  <!-- Arrowhead marker for animation -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff5722" />
+    </marker>
+  </defs>
+
+  <!-- Restart button -->
+  <g id="restart" class="restart-btn">
+    <rect x="550" y="30" width="80" height="30" rx="5" fill="#4CAF50" stroke="#333" />
+    <text x="590" y="50" text-anchor="middle" fill="white">Restart</text>
+  </g>
+</svg> 

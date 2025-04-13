@@ -7,6 +7,7 @@ CodeMaster is a comprehensive web application for learning Data Structures, Algo
 - **Structured Learning Path**: Follow a day-by-day roadmap that guides you from basics to advanced topics
 - **DSA Course**: A 4-month curriculum covering all essential data structures and algorithms
 - **Problem-Based Learning**: Each topic includes hand-picked practice problems from platforms like LeetCode
+- **AI Career Mentor**: Personalized guidance powered by lightweight models for efficient processing
 - **Extensible Architecture**: Designed to easily add new courses for different programming languages
 - **Modern UI**: Clean, responsive interface built with Next.js and Tailwind CSS
 - **Local Data**: Course content stored locally in TypeScript files for easy editing
@@ -69,6 +70,9 @@ NEXTAUTH_SECRET=your-nextauth-secret-key-change-this-in-production
 # Google OAuth
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# Hugging Face API for AI Mentor
+HUGGINGFACE_API_KEY=your-huggingface-api-key
 ```
 
 4. Set up Google OAuth:
@@ -139,6 +143,35 @@ The application uses NextAuth.js with Google OAuth for authentication. The authe
 ### Protected Routes
 
 All routes except for the login page and authentication API routes are protected and require authentication. This is implemented using NextAuth.js middleware.
+
+## AI Career Mentor
+
+The platform includes an AI Career Mentor powered by lightweight models for efficient processing:
+
+- **Personalized Career Guidance**: Get advice tailored to your skills, experience, and career goals
+- **Learning Path Recommendations**: Receive suggestions for courses and resources based on your profile
+- **Interview Preparation**: Get tips and practice questions for technical interviews
+- **Resource Curation**: Discover curated learning materials for your desired skills
+
+The mentor uses DistilGPT2, a lightweight version of GPT-2 that offers:
+- Faster response times
+- Lower computational requirements
+- Efficient natural language understanding
+- Similar capabilities to larger models but optimized for performance
+
+### Setting up the AI Mentor
+
+To use the AI Mentor:
+
+1. Sign up for a free Hugging Face account at [huggingface.co](https://huggingface.co)
+2. Get your API key from your Hugging Face account settings
+3. Add the API key to your `.env.local` file:
+   ```
+   HUGGINGFACE_API_KEY=your-huggingface-api-key
+   ```
+4. Ensure the `USE_REAL_MODEL` constant is set to `true` in `src/app/api/ai-mentor/route.ts`
+
+Note: The AI Mentor will fall back to rule-based responses if the Hugging Face API is unavailable or rate-limited.
 
 ## Adding New Content
 

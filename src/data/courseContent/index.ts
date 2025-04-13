@@ -50,6 +50,7 @@ import loadBalancingCachingContent from './day48';
 import capTheoremContent from './day49';
 import microservicesDatabasesContent from './day50';
 import systemDesignPatternsContent from './day51';
+import sortingVisualizationsContent from './sortingVisualizations';
 
 // Map of day numbers to their topics
 export const dayToTopicMap: { [key: number]: string } = {
@@ -121,7 +122,10 @@ export const dayToTopicMap: { [key: number]: string } = {
   48: "Load Balancing, Caching",
   49: "CAP Theorem",
   50: "Microservices & Databases",
-  51: "Mock System Design Interviews"
+  51: "Mock System Design Interviews",
+  
+  // Special Content
+  52: "Sorting Algorithm Visualizations"
 };
 
 // Map day numbers to their content
@@ -176,7 +180,8 @@ const courseContentMap: Record<number, Content> = {
   48: loadBalancingCachingContent,
   49: capTheoremContent,
   50: microservicesDatabasesContent,
-  51: systemDesignPatternsContent
+  51: systemDesignPatternsContent,
+  52: sortingVisualizationsContent
 };
 
 // Function to get content by day number

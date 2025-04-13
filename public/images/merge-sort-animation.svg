@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="650" height="500" viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: Arial, sans-serif; }
+    .title { font-size: 20px; font-weight: bold; }
+    .subtitle { font-size: 16px; }
+    .small { font-size: 12px; }
+    .annotation { font-size: 14px; fill: #555; }
+    rect { stroke: #000; stroke-width: 1; }
+    .highlight { fill: #ffcc00; }
+    .left { fill: #8dd3c7; }
+    .right { fill: #fb8072; }
+    .merged { fill: #80b1d3; }
+    .current { stroke: #ff5722; stroke-width: 2; }
+    .legend-item { font-size: 12px; }
+    
+    @media (prefers-color-scheme: dark) {
+      text { fill: #fff; }
+      .annotation { fill: #ccc; }
+      rect { stroke: #fff; }
+    }
+  </style>
+
+  <!-- Title -->
+  <text x="325" y="30" text-anchor="middle" class="title">Merge Sort Animation</text>
+  <text x="325" y="55" text-anchor="middle" class="subtitle">Divide and Conquer Algorithm</text>
+
+  <!-- Original array -->
+  <text x="325" y="90" text-anchor="middle" class="annotation">Original Array: [8, 4, 7, 1, 3, 5, 6, 2]</text>
+
+  <!-- Annotations -->
+  <text x="80" y="120" class="annotation">Step 1: Divide the array into halves until single elements</text>
+  <text x="80" y="270" class="annotation">Step 2: Merge sorted subarrays back together</text>
+
+  <!-- Legend -->
+  <rect x="500" y="400" width="15" height="15" class="left" />
+  <text x="520" y="412" class="legend-item">Left subarray</text>
+  
+  <rect x="500" y="425" width="15" height="15" class="right" />
+  <text x="520" y="437" class="legend-item">Right subarray</text>
+  
+  <rect x="500" y="450" width="15" height="15" class="merged" />
+  <text x="520" y="462" class="legend-item">Merged result</text>
+
+  <!-- Animation definitions -->
+  <defs>
+    <!-- Divide animation -->
+    <g id="division-step-1">
+      <!-- Level 1: First division -->
+      <g transform="translate(150, 150)">
+        <rect x="0" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#8dd3c7" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="20" y="20" text-anchor="middle">8</text>
+        
+        <rect x="50" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#8dd3c7" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="70" y="20" text-anchor="middle">4</text>
+        
+        <rect x="100" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#8dd3c7" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="120" y="20" text-anchor="middle">7</text>
+        
+        <rect x="150" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#8dd3c7" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="170" y="20" text-anchor="middle">1</text>
+        
+        <rect x="200" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#fb8072" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="220" y="20" text-anchor="middle">3</text>
+        
+        <rect x="250" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#fb8072" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="270" y="20" text-anchor="middle">5</text>
+        
+        <rect x="300" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#fb8072" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="320" y="20" text-anchor="middle">6</text>
+        
+        <rect x="350" y="0" width="40" height="30" rx="5" fill="#f0f0f0">
+          <animate attributeName="fill" from="#f0f0f0" to="#fb8072" begin="0.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="370" y="20" text-anchor="middle">2</text>
+      </g>
+      
+      <!-- Division line -->
+      <line x1="325" y1="150" x2="325" y2="180" stroke-dasharray="5,5" stroke="#555" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="0.5s" dur="0.3s" fill="freeze" />
+      </line>
+      
+      <!-- Annotations for first split -->
+      <text x="250" y="140" text-anchor="middle" class="small" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.3s" fill="freeze" />
+        Left half [8,4,7,1]
+      </text>
+      
+      <text x="400" y="140" text-anchor="middle" class="small" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.3s" fill="freeze" />
+        Right half [3,5,6,2]
+      </text>
+    </g>
+
+    <!-- Second level division -->
+    <g id="division-step-2">
+      <!-- Level 2: Left subdivision -->
+      <g transform="translate(150, 190)">
+        <rect x="0" y="0" width="40" height="30" rx="5" fill="#8dd3c7">
+          <animate attributeName="fill" from="#8dd3c7" to="#99e699" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="20" y="20" text-anchor="middle">8</text>
+        
+        <rect x="50" y="0" width="40" height="30" rx="5" fill="#8dd3c7">
+          <animate attributeName="fill" from="#8dd3c7" to="#99e699" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="70" y="20" text-anchor="middle">4</text>
+        
+        <rect x="100" y="0" width="40" height="30" rx="5" fill="#8dd3c7">
+          <animate attributeName="fill" from="#8dd3c7" to="#c2a5cf" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="120" y="20" text-anchor="middle">7</text>
+        
+        <rect x="150" y="0" width="40" height="30" rx="5" fill="#8dd3c7">
+          <animate attributeName="fill" from="#8dd3c7" to="#c2a5cf" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="170" y="20" text-anchor="middle">1</text>
+      </g>
+      
+      <!-- Level 2: Right subdivision -->
+      <g transform="translate(350, 190)">
+        <rect x="0" y="0" width="40" height="30" rx="5" fill="#fb8072">
+          <animate attributeName="fill" from="#fb8072" to="#99e699" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="20" y="20" text-anchor="middle">3</text>
+        
+        <rect x="50" y="0" width="40" height="30" rx="5" fill="#fb8072">
+          <animate attributeName="fill" from="#fb8072" to="#99e699" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="70" y="20" text-anchor="middle">5</text>
+        
+        <rect x="100" y="0" width="40" height="30" rx="5" fill="#fb8072">
+          <animate attributeName="fill" from="#fb8072" to="#c2a5cf" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="120" y="20" text-anchor="middle">6</text>
+        
+        <rect x="150" y="0" width="40" height="30" rx="5" fill="#fb8072">
+          <animate attributeName="fill" from="#fb8072" to="#c2a5cf" begin="1.2s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="170" y="20" text-anchor="middle">2</text>
+      </g>
+      
+      <!-- Division lines level 2 -->
+      <line x1="225" y1="190" x2="225" y2="220" stroke-dasharray="5,5" stroke="#555" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur="0.3s" fill="freeze" />
+      </line>
+      
+      <line x1="425" y1="190" x2="425" y2="220" stroke-dasharray="5,5" stroke="#555" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="1.2s" dur="0.3s" fill="freeze" />
+      </line>
+    </g>
+
+    <!-- Merge animations -->
+    <g id="merge-step-1">
+      <!-- Final sorted elements (level 0) -->
+      <g transform="translate(150, 340)">
+        <rect x="0" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="3.5s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="20" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="0.3s" fill="freeze" />
+          1
+        </text>
+        
+        <rect x="50" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="3.8s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="3.8s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="70" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="3.8s" dur="0.3s" fill="freeze" />
+          2
+        </text>
+        
+        <rect x="100" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="4.1s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="4.1s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="120" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="4.1s" dur="0.3s" fill="freeze" />
+          3
+        </text>
+        
+        <rect x="150" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="4.4s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="4.4s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="170" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="4.4s" dur="0.3s" fill="freeze" />
+          4
+        </text>
+        
+        <rect x="200" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="4.7s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="4.7s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="220" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="4.7s" dur="0.3s" fill="freeze" />
+          5
+        </text>
+        
+        <rect x="250" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="5.0s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="5.0s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="270" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="5.0s" dur="0.3s" fill="freeze" />
+          6
+        </text>
+        
+        <rect x="300" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="5.3s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="5.3s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="320" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="5.3s" dur="0.3s" fill="freeze" />
+          7
+        </text>
+        
+        <rect x="350" y="0" width="40" height="30" rx="5" fill="#f0f0f0" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="5.6s" dur="0.3s" fill="freeze" />
+          <animate attributeName="fill" from="#f0f0f0" to="#80b1d3" begin="5.6s" dur="0.5s" fill="freeze" />
+        </rect>
+        <text x="370" y="20" text-anchor="middle" opacity="0">
+          <animate attributeName="opacity" from="0" to="1" begin="5.6s" dur="0.3s" fill="freeze" />
+          8
+        </text>
+      </g>
+      
+      <!-- Final merge annotation -->
+      <text x="325" y="400" text-anchor="middle" class="annotation" opacity="0">
+        <animate attributeName="opacity" from="0" to="1" begin="6.0s" dur="0.5s" fill="freeze" />
+        Final sorted array: [1, 2, 3, 4, 5, 6, 7, 8]
+      </text>
+    </g>
+  </defs>
+
+  <!-- Elements with use -->
+  <use href="#division-step-1" />
+  <use href="#division-step-2" />
+  <use href="#merge-step-1" />
+
+  <!-- Restart button -->
+  <g id="restart" cursor="pointer" onclick="document.getElementById('svg').setCurrentTime(0)">
+    <rect x="550" y="30" width="80" height="30" rx="5" fill="#4CAF50" />
+    <text x="590" y="50" text-anchor="middle" fill="white">Restart</text>
+  </g>
+</svg> 

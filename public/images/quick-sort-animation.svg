@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="650" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text { font-family: Arial, sans-serif; }
+    .title { font-size: 24px; font-weight: bold; }
+    .subtitle { font-size: 16px; }
+    .array-value { font-size: 18px; font-weight: bold; }
+    .annotation { font-size: 14px; }
+    .small-annotation { font-size: 12px; }
+    .partition { font-size: 12px; fill: #666; }
+    
+    @media (prefers-color-scheme: dark) {
+      svg { background-color: #121212; }
+      .title, .subtitle, .array-value, .annotation, .small-annotation { fill: #ffffff; }
+      .partition { fill: #aaa; }
+    }
+  </style>
+
+  <!-- Title -->
+  <text x="325" y="30" class="title" text-anchor="middle">Quick Sort Animation</text>
+  <text x="325" y="55" class="subtitle" text-anchor="middle">Sorting [8, 4, 7, 1, 3, 5, 6, 2]</text>
+
+  <!-- Controls and Legend -->
+  <rect x="480" y="80" width="150" height="80" rx="5" fill="#f0f0f0" stroke="#999" />
+  <text x="505" y="100" class="annotation">Legend:</text>
+  <rect x="505" y="110" width="20" height="20" fill="#ffcc00" />
+  <text x="530" y="125" class="small-annotation">Pivot</text>
+  <rect x="505" y="135" width="20" height="20" fill="#aaddff" />
+  <text x="530" y="150" class="small-annotation">Current partition</text>
+
+  <!-- Original Array -->
+  <g id="original-array">
+    <text x="50" y="100" class="annotation">Original array:</text>
+    
+    <!-- Array elements -->
+    <g transform="translate(50, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">8</text>
+    </g>
+    <g transform="translate(95, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">4</text>
+    </g>
+    <g transform="translate(140, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">7</text>
+    </g>
+    <g transform="translate(185, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">1</text>
+    </g>
+    <g transform="translate(230, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">3</text>
+    </g>
+    <g transform="translate(275, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">5</text>
+    </g>
+    <g transform="translate(320, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">6</text>
+    </g>
+    <g transform="translate(365, 120)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">2</text>
+    </g>
+  </g>
+
+  <!-- First Partition Step -->
+  <g id="first-partition">
+    <text x="50" y="200" class="annotation">First partition (pivot = 2):</text>
+    
+    <!-- Step 1: Choosing rightmost element as pivot -->
+    <g transform="translate(50, 220)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">8</text>
+    </g>
+    <g transform="translate(95, 220)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">4</text>
+    </g>
+    <g transform="translate(140, 220)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">7</text>
+    </g>
+    <g transform="translate(185, 220)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">1</text>
+    </g>
+    <g transform="translate(230, 220)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">3</text>
+    </g>
+    <g transform="translate(275, 220)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">5</text>
+    </g>
+    <g transform="translate(320, 220)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">6</text>
+    </g>
+    <g transform="translate(365, 220)">
+      <rect width="40" height="40" fill="#ffcc00" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">2</text>
+    </g>
+
+    <text x="50" y="275" class="small-annotation">After partitioning:</text>
+    
+    <!-- Step 2: After partitioning (elements <= pivot on left, > pivot on right) -->
+    <g transform="translate(50, 290)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">1</text>
+    </g>
+    <g transform="translate(95, 290)">
+      <rect width="40" height="40" fill="#ffcc00" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">2</text>
+    </g>
+    <g transform="translate(140, 290)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">7</text>
+    </g>
+    <g transform="translate(185, 290)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">8</text>
+    </g>
+    <g transform="translate(230, 290)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">3</text>
+    </g>
+    <g transform="translate(275, 290)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">5</text>
+    </g>
+    <g transform="translate(320, 290)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">6</text>
+    </g>
+    <g transform="translate(365, 290)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">4</text>
+    </g>
+  </g>
+
+  <!-- Recursive Partitioning (Left Side) -->
+  <g id="left-partition">
+    <text x="50" y="360" class="annotation">Left partition [1] (pivot = 1):</text>
+    
+    <g transform="translate(50, 380)">
+      <rect width="40" height="40" fill="#aaddff" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">1</text>
+    </g>
+    
+    <text x="100" y="395" class="small-annotation">Already sorted</text>
+  </g>
+
+  <!-- Recursive Partitioning (Right Side) -->
+  <g id="right-partition">
+    <text x="230" y="360" class="annotation">Right partition [7, 8, 3, 5, 6, 4] (pivot = 4):</text>
+    
+    <!-- Step 3: Right side partitioning -->
+    <g transform="translate(230, 380)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">7</text>
+    </g>
+    <g transform="translate(275, 380)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">8</text>
+    </g>
+    <g transform="translate(320, 380)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">3</text>
+    </g>
+    <g transform="translate(365, 380)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">5</text>
+    </g>
+    <g transform="translate(410, 380)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">6</text>
+    </g>
+    <g transform="translate(455, 380)">
+      <rect width="40" height="40" fill="#ffcc00" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">4</text>
+    </g>
+  </g>
+
+  <!-- Final Sorted Array -->
+  <g id="final-array">
+    <text x="50" y="440" class="annotation">Final sorted array:</text>
+    
+    <g transform="translate(50, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">1</text>
+    </g>
+    <g transform="translate(95, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">2</text>
+    </g>
+    <g transform="translate(140, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">3</text>
+    </g>
+    <g transform="translate(185, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">4</text>
+    </g>
+    <g transform="translate(230, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">5</text>
+    </g>
+    <g transform="translate(275, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">6</text>
+    </g>
+    <g transform="translate(320, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">7</text>
+    </g>
+    <g transform="translate(365, 460)">
+      <rect width="40" height="40" fill="#e0e0e0" stroke="#999" />
+      <text x="20" y="25" class="array-value" text-anchor="middle">8</text>
+    </g>
+  </g>
+
+  <!-- Annotations for algorithm steps -->
+  <text x="500" y="220" class="annotation" text-anchor="start">1. Choose pivot (rightmost element)</text>
+  <text x="500" y="245" class="annotation" text-anchor="start">2. Partition around pivot</text>
+  <text x="500" y="270" class="annotation" text-anchor="start">3. Recursively sort left part</text>
+  <text x="500" y="295" class="annotation" text-anchor="start">4. Recursively sort right part</text>
+  <text x="500" y="320" class="annotation" text-anchor="start">5. Combine the sorted parts</text>
+</svg> 

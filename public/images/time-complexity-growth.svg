@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <style>
+    .title { font-size: 18px; font-weight: bold; text-anchor: middle; font-family: sans-serif; }
+    .axis { stroke: #333; stroke-width: 2; }
+    .axis-label { font-size: 14px; font-family: sans-serif; text-anchor: middle; }
+    .grid { stroke: #ddd; stroke-width: 1; stroke-dasharray: 5,5; }
+    .line { fill: none; stroke-width: 3; }
+    .legend-item { font-size: 12px; font-family: sans-serif; }
+    .legend-box { fill: white; fill-opacity: 0.9; stroke: #ccc; }
+    .annotation { font-size: 12px; font-family: sans-serif; font-style: italic; }
+    @media (prefers-color-scheme: dark) {
+      .title { fill: #eee; }
+      .axis { stroke: #eee; }
+      .axis-label { fill: #eee; }
+      .grid { stroke: #444; }
+      .legend-item { fill: #eee; }
+      .legend-box { fill: #222; fill-opacity: 0.9; stroke: #555; }
+      .annotation { fill: #eee; }
+    }
+  </style>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="transparent" />
+  
+  <!-- Title -->
+  <text x="300" y="30" class="title">Algorithm Growth Rates</text>
+  
+  <!-- Axes -->
+  <line x1="50" y1="350" x2="550" y2="350" class="axis" />
+  <line x1="50" y1="350" x2="50" y2="50" class="axis" />
+  
+  <!-- X-axis label -->
+  <text x="300" y="380" class="axis-label">Input Size (n)</text>
+  
+  <!-- Y-axis label -->
+  <text x="20" y="200" class="axis-label" transform="rotate(-90, 20, 200)">Operations</text>
+  
+  <!-- Grid lines -->
+  <line x1="50" y1="50" x2="550" y2="50" class="grid" />
+  <line x1="50" y1="150" x2="550" y2="150" class="grid" />
+  <line x1="50" y1="250" x2="550" y2="250" class="grid" />
+  <line x1="150" y1="50" x2="150" y2="350" class="grid" />
+  <line x1="250" y1="50" x2="250" y2="350" class="grid" />
+  <line x1="350" y1="50" x2="350" y2="350" class="grid" />
+  <line x1="450" y1="50" x2="450" y2="350" class="grid" />
+  
+  <!-- Curves -->
+  <!-- O(1) -->
+  <path d="M50,350 L550,350" class="line" stroke="#4ade80" stroke-width="3" />
+  
+  <!-- O(log n) -->
+  <path d="M50,350 Q300,310 550,290" class="line" stroke="#60a5fa" stroke-width="3" />
+  
+  <!-- O(n) -->
+  <path d="M50,350 L550,50" class="line" stroke="#a78bfa" stroke-width="3" />
+  
+  <!-- O(n log n) -->
+  <path d="M50,350 Q200,250 550,30" class="line" stroke="#818cf8" stroke-width="3" />
+  
+  <!-- O(n²) -->
+  <path d="M50,350 Q150,150 250,50 Q300,30 310,30 Q320,30 350,30" class="line" stroke="#facc15" stroke-width="3" />
+  
+  <!-- O(2^n) -->
+  <path d="M50,350 Q100,300 130,250 Q150,200 160,150 Q165,100 170,50 Q172,30 175,30" class="line" stroke="#f87171" stroke-width="3" />
+  
+  <!-- Legend -->
+  <rect x="400" y="80" width="140" height="130" rx="5" class="legend-box" />
+  
+  <circle cx="410" cy="95" r="5" fill="#4ade80" />
+  <text x="425" y="100" class="legend-item">O(1)</text>
+  
+  <circle cx="410" cy="115" r="5" fill="#60a5fa" />
+  <text x="425" y="120" class="legend-item">O(log n)</text>
+  
+  <circle cx="410" cy="135" r="5" fill="#a78bfa" />
+  <text x="425" y="140" class="legend-item">O(n)</text>
+  
+  <circle cx="410" cy="155" r="5" fill="#818cf8" />
+  <text x="425" y="160" class="legend-item">O(n log n)</text>
+  
+  <circle cx="410" cy="175" r="5" fill="#facc15" />
+  <text x="425" y="180" class="legend-item">O(n²)</text>
+  
+  <circle cx="410" cy="195" r="5" fill="#f87171" />
+  <text x="425" y="200" class="legend-item">O(2ⁿ)</text>
+  
+  <!-- Annotations -->
+  <text x="120" y="320" class="annotation">Efficient algorithms</text>
+  <path d="M120,315 L120,280" stroke="#666" stroke-width="1" />
+  
+  <text x="400" y="240" class="annotation">Inefficient for large inputs</text>
+  <path d="M400,235 L350,180" stroke="#666" stroke-width="1" />
+  
+  <!-- X-axis markers -->
+  <text x="50" y="365" class="axis-label" style="font-size: 12px;">0</text>
+  <text x="150" y="365" class="axis-label" style="font-size: 12px;">25</text>
+  <text x="250" y="365" class="axis-label" style="font-size: 12px;">50</text>
+  <text x="350" y="365" class="axis-label" style="font-size: 12px;">75</text>
+  <text x="450" y="365" class="axis-label" style="font-size: 12px;">100</text>
+  
+  <!-- Animation for teaching effect -->
+  <circle cx="50" cy="350" r="5" fill="#f87171">
+    <animate 
+      attributeName="cx" 
+      from="50" 
+      to="170" 
+      dur="3s" 
+      begin="0s" 
+      fill="freeze" 
+      repeatCount="indefinite" />
+    <animate 
+      attributeName="cy" 
+      from="350" 
+      to="50" 
+      dur="3s" 
+      begin="0s" 
+      fill="freeze" 
+      repeatCount="indefinite" />
+  </circle>
+</svg> 

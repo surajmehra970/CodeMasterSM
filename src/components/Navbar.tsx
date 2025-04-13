@@ -51,6 +51,9 @@ const Navbar = () => {
                 <Link href="/courses/dsa" className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary px-2 py-1 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:transition-all after:duration-300">
                   DSA
                 </Link>
+                <Link href="/career-mapper" className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary px-2 py-1 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:transition-all after:duration-300">
+                  Career Mapper
+                </Link>
                 <Link href="/resources" className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary px-2 py-1 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:transition-all after:duration-300">
                   Resources
                 </Link>
@@ -97,6 +100,12 @@ const Navbar = () => {
                       <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{session.user?.name}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{session.user?.email}</p>
                     </div>
+                    <Link
+                      href="/profile"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      My Profile
+                    </Link>
                     <button
                       onClick={handleSignOut}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -162,6 +171,12 @@ const Navbar = () => {
               DSA
             </Link>
             <Link 
+              href="/career-mapper" 
+              className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              Career Mapper
+            </Link>
+            <Link 
               href="/resources" 
               className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
             >
@@ -193,22 +208,32 @@ const Navbar = () => {
                         className="rounded-full"
                       />
                     ) : (
-                      <div className="h-9 w-9 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                        <span className="text-gray-700 dark:text-gray-300 font-medium">
+                      <div className="h-9 w-9 rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center">
+                        <span className="text-gray-600 dark:text-gray-300 font-medium">
                           {session.user?.name?.charAt(0) || 'U'}
                         </span>
                       </div>
                     )}
                   </div>
                   <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800 dark:text-gray-200">{session.user?.name}</div>
-                    <div className="text-sm font-medium text-gray-500 dark:text-gray-400">{session.user?.email}</div>
+                    <div className="text-base font-medium text-gray-800 dark:text-white">
+                      {session.user?.name}
+                    </div>
+                    <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                      {session.user?.email}
+                    </div>
                   </div>
                 </div>
                 <div className="mt-3 px-2 space-y-1">
+                  <Link
+                    href="/profile"
+                    className="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  >
+                    My Profile
+                  </Link>
                   <button
                     onClick={handleSignOut}
-                    className="block w-full text-left px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary"
+                    className="block w-full text-left px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
                   >
                     Sign out
                   </button>

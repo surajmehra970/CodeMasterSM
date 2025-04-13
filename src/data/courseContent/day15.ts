@@ -14,7 +14,17 @@ const mergeSortContent: Content = {
   sections: [
     {
       title: "Merge Sort Fundamentals",
-      content: "Merge Sort follows the divide-and-conquer paradigm. It breaks the problem down into smaller, manageable subproblems, solves each subproblem, and then combines the solutions to create a solution to the original problem. For sorting, this means dividing the array until we have individual elements (which are sorted by definition), then merging them back together in a sorted manner.",
+      content: `Merge Sort follows the divide-and-conquer paradigm. It breaks the problem down into smaller, manageable subproblems, solves each subproblem, and then combines the solutions to create a solution to the original problem. For sorting, this means dividing the array until we have individual elements (which are sorted by definition), then merging them back together in a sorted manner.
+
+<div class="my-6 flex justify-center">
+  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800 p-2 w-full max-w-3xl">
+    <h4 class="text-center font-bold mb-2 text-gray-800 dark:text-gray-200">Merge Sort Visualization</h4>
+    <div class="flex justify-center">
+      <img src="/images/merge-sort-animation.svg" alt="Merge Sort Animation" class="w-full h-auto" loading="eager" />
+    </div>
+    <p class="text-sm text-center mt-2 text-gray-600 dark:text-gray-400">This animation demonstrates how Merge Sort divides the array recursively and merges sorted subarrays</p>
+  </div>
+</div>`,
       codeExamples: [
         {
           language: "java",

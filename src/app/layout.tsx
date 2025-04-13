@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import AuthProvider from '@/components/AuthProvider'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { CourseProvider } from './CourseContext'
+import { CareerProvider } from './CareerContext'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,8 +13,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'DSA Learning Platform',
-  description: 'Learn Data Structures, Algorithms and Programming Languages',
+  title: 'Learning Platform',
+  description: 'A platform for learning and career development',
 }
 
 export default function RootLayout({
@@ -45,32 +47,24 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} font-sans`}>
-        <ThemeProvider>
-          <AuthProvider>
-            <Navbar />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <footer className="bg-dark text-white py-8 dark:bg-gray-900">
-              <div className="container">
-                <div className="flex flex-col md:flex-row justify-between items-center">
-                  <div className="mb-4 md:mb-0">
-                    <span className="text-2xl font-bold">CodeMaster</span>
-                    <p className="text-gray-400 mt-2">Learn. Practice. Master.</p>
-                  </div>
-                  <div className="flex space-x-4">
-                    <a href="#" className="hover:text-primary transition-colors">Home</a>
-                    <a href="#" className="hover:text-primary transition-colors">Courses</a>
-                    <a href="#" className="hover:text-primary transition-colors">Resources</a>
-                    <a href="#" className="hover:text-primary transition-colors">About</a>
-                  </div>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <CourseProvider>
+            <CareerProvider>
+              <AuthProvider>
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-grow">{children}</main>
+                  <footer className="bg-white dark:bg-gray-900 py-6 border-t border-gray-200 dark:border-gray-800">
+                    <div className="container mx-auto px-4">
+                      <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+                        &copy; {new Date().getFullYear()} Learning Platform. All rights reserved.
+                      </p>
+                    </div>
+                  </footer>
                 </div>
-                <div className="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400">
-                  © {new Date().getFullYear()} CodeMaster. All rights reserved.
-                </div>
-              </div>
-            </footer>
-          </AuthProvider>
+              </AuthProvider>
+            </CareerProvider>
+          </CourseProvider>
         </ThemeProvider>
       </body>
     </html>

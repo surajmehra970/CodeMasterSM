@@ -14,7 +14,17 @@ const quickSortContent: Content = {
   sections: [
     {
       title: "Quick Sort Fundamentals",
-      content: "Quick Sort is based on the divide-and-conquer strategy. It selects a pivot element, partitions the array around the pivot, and then recursively sorts the sub-arrays. The key to its performance is the partitioning process, which rearranges elements efficiently.",
+      content: `Quick Sort is based on the divide-and-conquer strategy. It selects a pivot element, partitions the array around the pivot, and then recursively sorts the sub-arrays. The key to its performance is the partitioning process, which rearranges elements efficiently.
+
+<div class="my-6 flex justify-center">
+  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800 p-2 w-full max-w-3xl">
+    <h4 class="text-center font-bold mb-2 text-gray-800 dark:text-gray-200">Quick Sort Visualization</h4>
+    <div class="flex justify-center">
+      <img src="/images/quick-sort-animation.svg" alt="Quick Sort Animation" class="w-full h-auto" loading="eager" />
+    </div>
+    <p class="text-sm text-center mt-2 text-gray-600 dark:text-gray-400">This animation demonstrates the pivot selection and partitioning process of Quick Sort</p>
+  </div>
+</div>`,
       codeExamples: [
         {
           language: "java",
