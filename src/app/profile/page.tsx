@@ -13,6 +13,11 @@ import {
   Certification 
 } from '@/types/career';
 
+// Helper function to safely get the length of possibly undefined arrays
+const safeArrayLength = (arr: any[] | undefined | null): number => {
+  return arr?.length ?? 0;
+};
+
 const ProfilePage = () => {
   const { userProfile, setUserProfile } = useCareerContext();
   const { data: session } = useSession();
@@ -47,32 +52,7 @@ const ProfilePage = () => {
   
   // Education data and management
   const [isAddingEducation, setIsAddingEducation] = useState(false);
-  const [educationEntries, setEducationEntries] = useState([
-    {
-      id: '1',
-      degree: 'B.Tech E.E. (Electronics/Telecommunication)',
-      institution: 'National Institute of Technology, Patna',
-      startYear: '2019',
-      endYear: '2023',
-      isFullTime: true
-    },
-    {
-      id: '2',
-      degree: 'Class XII',
-      institution: 'Methodica',
-      startYear: '2017',
-      endYear: '2017',
-      isFullTime: true
-    },
-    {
-      id: '3',
-      degree: 'Class X',
-      institution: 'Methodica',
-      startYear: '2015',
-      endYear: '2015',
-      isFullTime: true
-    }
-  ]);
+  const [educationEntries, setEducationEntries] = useState<EducationEntry[]>([]);
   
   const [educationForm, setEducationForm] = useState({
     degree: '',
@@ -83,26 +63,7 @@ const ProfilePage = () => {
   });
   
   // Experience data and management
-  const [experienceEntries, setExperienceEntries] = useState([
-    {
-      id: '1',
-      title: 'IT Application Manager',
-      company: 'ICICI Bank',
-      startDate: 'Jul 2022',
-      endDate: 'Present',
-      description: 'Handling and managing vendors with on time delivery.',
-      skills: ['MS/SQL', 'OpenShift', 'Management', 'Java/Confluence', 'Excel']
-    },
-    {
-      id: '2',
-      title: 'Full Stack Developer',
-      company: 'POJO private limited',
-      startDate: 'Jan 2020',
-      endDate: 'Aug 2022',
-      description: 'Developed and maintained web applications using React, Node.js, and MongoDB.',
-      skills: ['React', 'Node.js', 'MongoDB', 'JavaScript', 'Git']
-    }
-  ]);
+  const [experienceEntries, setExperienceEntries] = useState<ExperienceEntry[]>([]);
   
   const [isAddingExperience, setIsAddingExperience] = useState(false);
   
@@ -116,26 +77,13 @@ const ProfilePage = () => {
   });
   
   // State for skills to learn
-  const [skillsToLearn, setSkillsToLearn] = useState(['Advanced JavaScript', 'React Native', 'GraphQL', 'Node.js', 'Cloud Computing']);
+  const [skillsToLearn, setSkillsToLearn] = useState<string[]>([]);
   const [isEditingSkillsToLearn, setIsEditingSkillsToLearn] = useState(false);
   const [skillToLearnSearch, setSkillToLearnSearch] = useState('');
   
   // State for certifications
   const [isAddingCertification, setIsAddingCertification] = useState(false);
-  const [certifications, setCertifications] = useState([
-    {
-      id: '1',
-      name: 'Azure Developer Associate',
-      issuer: 'Microsoft',
-      year: '2021'
-    },
-    {
-      id: '2',
-      name: 'Python Certification Course',
-      issuer: 'Udemy',
-      year: '2019'
-    }
-  ]);
+  const [certifications, setCertifications] = useState<Certification[]>([]);
   
   const [certificationForm, setCertificationForm] = useState({
     name: '',
@@ -144,24 +92,7 @@ const ProfilePage = () => {
   });
   
   // State for projects
-  const [projectEntries, setProjectEntries] = useState([
-    {
-      id: '1',
-      title: 'E-commerce Platform',
-      description: 'Built a full-stack e-commerce platform with React, Node.js, and MongoDB.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux'],
-      link: 'https://github.com/myprofile/ecommerce',
-      image: '/project1.jpg'
-    },
-    {
-      id: '2',
-      title: 'Task Management App',
-      description: 'Developed a task management application with drag-and-drop functionality.',
-      technologies: ['Vue.js', 'Firebase', 'Tailwind CSS'],
-      link: 'https://github.com/myprofile/taskmanager',
-      image: '/project2.jpg'
-    }
-  ]);
+  const [projectEntries, setProjectEntries] = useState<ProjectEntry[]>([]);
   
   const [isAddingProject, setIsAddingProject] = useState(false);
   const [projectForm, setProjectForm] = useState({
@@ -208,59 +139,53 @@ const ProfilePage = () => {
   const [editingPersonalInfo, setEditingPersonalInfo] = useState(false);
   const [personalInfoForm, setPersonalInfoForm] = useState({
     experience: 0,
-    education: 'Bachelor' as 'High School' | 'Associate' | 'Bachelor' | 'Master' | 'PhD' | 'Self-Taught',
-    preferredLearningStyle: 'Mixed' as 'Visual' | 'Auditory' | 'Reading/Writing' | 'Kinesthetic' | 'Mixed',
+    education: 'High School' as 'High School' | 'Associate' | 'Bachelor' | 'Master' | 'PhD' | 'Self-Taught',
+    preferredLearningStyle: 'Visual' as 'Visual' | 'Auditory' | 'Reading/Writing' | 'Kinesthetic' | 'Mixed',
     timeAvailability: 10
   });
+  
+  // Initialize empty profile if none exists
+  useEffect(() => {
+    if (!userProfile) {
+      const emptyProfile = {
+        id: session?.user?.email || 'temp-user',
+        userId: session?.user?.email || 'temp-user',
+        currentSkills: [],
+        desiredSkills: [],
+        experience: 0,
+        education: 'High School' as 'High School' | 'Associate' | 'Bachelor' | 'Master' | 'PhD' | 'Self-Taught',
+        interests: [],
+        preferredLearningStyle: 'Visual' as 'Visual' | 'Auditory' | 'Reading/Writing' | 'Kinesthetic' | 'Mixed',
+        timeAvailability: 5,
+        careerGoals: [],
+        educationEntries: [],
+        experienceEntries: [],
+        projectEntries: [],
+        certifications: []
+      };
+      setUserProfile(emptyProfile);
+    }
+  }, [userProfile, session, setUserProfile]);
   
   // Initialize updated skills, goals, and interests when user profile changes
   useEffect(() => {
     if (userProfile) {
-      setUpdatedCurrentSkills(userProfile.currentSkills || []);
-      setUpdatedDesiredSkills(userProfile.desiredSkills || []);
-      setUpdatedGoals(userProfile.careerGoals || []);
-      setUpdatedInterests(userProfile.interests || []);
+      setUpdatedCurrentSkills(userProfile?.currentSkills || []);
+      setUpdatedDesiredSkills(userProfile?.desiredSkills || []);
+      setUpdatedGoals(userProfile?.careerGoals || []);
+      setUpdatedInterests(userProfile?.interests || []);
       
-      // Only load from userProfile if available and we don't have local changes
-      if (userProfile.educationEntries && !userActionRef.current.education) {
-        setEducationEntries(userProfile.educationEntries);
-      } else {
-        // Fall back to localStorage
-        const savedEducation = localStorage.getItem('educationEntries');
-        if (savedEducation) setEducationEntries(JSON.parse(savedEducation));
-      }
+      setEducationEntries(userProfile?.educationEntries || []);
+      setExperienceEntries(userProfile?.experienceEntries || []);
+      setProjectEntries(userProfile?.projectEntries || []);
+      setCertifications(userProfile?.certifications || []);
       
-      if (userProfile.experienceEntries && !userActionRef.current.experience) {
-        setExperienceEntries(userProfile.experienceEntries);
-      } else {
-        const savedExperience = localStorage.getItem('experienceEntries');
-        if (savedExperience) setExperienceEntries(JSON.parse(savedExperience));
-      }
-      
-      if (userProfile.projectEntries && !userActionRef.current.projects) {
-        setProjectEntries(userProfile.projectEntries);
-      } else {
-        const savedProjects = localStorage.getItem('projectEntries');
-        if (savedProjects) setProjectEntries(JSON.parse(savedProjects));
-      }
-      
-      if (userProfile.certifications && !userActionRef.current.certifications) {
-        setCertifications(userProfile.certifications);
-      } else {
-        const savedCertifications = localStorage.getItem('certifications');
-        if (savedCertifications) setCertifications(JSON.parse(savedCertifications));
-      }
-    }
-  }, [userProfile]);
-  
-  // Initialize personal info form when userProfile changes
-  useEffect(() => {
-    if (userProfile) {
+      // Set the personal info form
       setPersonalInfoForm({
-        experience: userProfile.experience,
-        education: userProfile.education,
-        preferredLearningStyle: userProfile.preferredLearningStyle,
-        timeAvailability: userProfile.timeAvailability
+        experience: userProfile?.experience || 0,
+        education: userProfile?.education || 'High School',
+        preferredLearningStyle: userProfile?.preferredLearningStyle || 'Mixed',
+        timeAvailability: userProfile?.timeAvailability || 10
       });
     }
   }, [userProfile]);
@@ -634,46 +559,50 @@ const ProfilePage = () => {
 
   // Save personal info changes
   const savePersonalInfo = () => {
-    if (userProfile) {
-      userActionRef.current.profileInfo = true;
-      setUserProfile({
-        ...userProfile,
-        ...personalInfoForm
-      });
-      setEditingPersonalInfo(false);
-    }
+    if (!userProfile) return;
+    
+    userActionRef.current.profileInfo = true;
+    setUserProfile({
+      ...userProfile,
+      ...personalInfoForm
+    });
+    setEditingPersonalInfo(false);
   };
 
-  if (!userProfile) {
-    return (
-      <div className="pt-24 px-4 max-w-7xl mx-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Profile Not Complete</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            You haven't completed your profile yet. Complete your profile to get personalized recommendations.
-          </p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="btn-primary"
-          >
-            Complete Profile
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // Initialize userProfile with empty values if it doesn't exist
+  useEffect(() => {
+    if (!userProfile && session?.user?.email) {
+      const emptyProfile = {
+        id: session.user.email,
+        userId: session.user.email,
+        currentSkills: [],
+        desiredSkills: [],
+        interests: [],
+        careerGoals: [],
+        education: 'High School' as 'High School' | 'Associate' | 'Bachelor' | 'Master' | 'PhD' | 'Self-Taught',
+        preferredLearningStyle: 'Visual' as 'Visual' | 'Auditory' | 'Reading/Writing' | 'Kinesthetic' | 'Mixed',
+        timeAvailability: 5,
+        experience: 0,
+        educationEntries: [],
+        experienceEntries: [],
+        projectEntries: [],
+        certifications: []
+      };
+      setUserProfile(emptyProfile);
+    }
+  }, [userProfile, session]);
 
   // Calculate the completion percentage
   const totalFields = 8; // total number of fields in profile
   let completedFields = 0;
-  if (userProfile.currentSkills?.length > 0) completedFields++;
-  if (userProfile.desiredSkills?.length > 0) completedFields++;
-  if (userProfile.interests?.length > 0) completedFields++;
-  if (userProfile.careerGoals?.length > 0) completedFields++;
-  if (userProfile.education) completedFields++;
-  if (userProfile.preferredLearningStyle) completedFields++;
-  if (userProfile.timeAvailability > 0) completedFields++;
-  if (userProfile.experience >= 0) completedFields++;
+  if ((userProfile?.currentSkills?.length ?? 0) > 0) completedFields++;
+  if ((userProfile?.desiredSkills?.length ?? 0) > 0) completedFields++;
+  if ((userProfile?.interests?.length ?? 0) > 0) completedFields++;
+  if ((userProfile?.careerGoals?.length ?? 0) > 0) completedFields++;
+  if (userProfile?.education) completedFields++;
+  if (userProfile?.preferredLearningStyle) completedFields++;
+  if ((userProfile?.timeAvailability ?? 0) > 0) completedFields++;
+  if ((userProfile?.experience ?? 0) >= 0) completedFields++;
   
   const completionPercentage = Math.round((completedFields / totalFields) * 100);
 
@@ -697,7 +626,7 @@ const ProfilePage = () => {
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
                     <span className="text-4xl font-bold text-gray-500 dark:text-gray-400">
-                      {session?.user?.name?.charAt(0) || userProfile.userId.charAt(0) || 'U'}
+                      {session?.user?.name?.charAt(0) || userProfile?.userId?.charAt(0) || 'U'}
                     </span>
                   </div>
                 )}
@@ -707,7 +636,7 @@ const ProfilePage = () => {
                   {session?.user?.name || 'User'}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300">
-                  {userProfile.education} • {userProfile.experience} {userProfile.experience === 1 ? 'year' : 'years'} of experience
+                  {userProfile?.education || 'No education listed'} • {userProfile?.experience || 0} {userProfile?.experience === 1 ? 'year' : 'years'} of experience
                 </p>
               </div>
             </div>
@@ -895,22 +824,22 @@ const ProfilePage = () => {
                   <>
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Experience</h3>
-                      <p className="text-gray-800 dark:text-white">{userProfile.experience} {userProfile.experience === 1 ? 'year' : 'years'}</p>
+                      <p className="text-gray-800 dark:text-white">{userProfile?.experience} {userProfile?.experience === 1 ? 'year' : 'years'}</p>
                     </div>
                     
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Education</h3>
-                      <p className="text-gray-800 dark:text-white">{userProfile.education}</p>
+                      <p className="text-gray-800 dark:text-white">{userProfile?.education}</p>
                     </div>
                     
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Preferred Learning Style</h3>
-                      <p className="text-gray-800 dark:text-white">{userProfile.preferredLearningStyle}</p>
+                      <p className="text-gray-800 dark:text-white">{userProfile?.preferredLearningStyle}</p>
                     </div>
                     
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Time Availability</h3>
-                      <p className="text-gray-800 dark:text-white">{userProfile.timeAvailability} hours/week</p>
+                      <p className="text-gray-800 dark:text-white">{userProfile?.timeAvailability} hours/week</p>
                     </div>
                   </>
                 )}
@@ -937,26 +866,38 @@ const ProfilePage = () => {
                     <div className="space-y-4">
                       <div>
                         <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">Education</h3>
-                        <p className="text-gray-600 dark:text-gray-400 flex justify-between">
-                          <span>B.Tech E.E.</span>
-                          <span className="text-sm">2019-2023</span>
-                        </p>
-                        <p className="text-gray-600 dark:text-gray-400 text-sm">National Institute of Technology, Patna</p>
+                        {educationEntries.length > 0 ? (
+                          <>
+                            <p className="text-gray-600 dark:text-gray-400 flex justify-between">
+                              <span>{educationEntries[0]?.degree}</span>
+                              <span className="text-sm">{educationEntries[0]?.startYear}-{educationEntries[0]?.endYear}</span>
+                            </p>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm">{educationEntries[0]?.institution}</p>
+                          </>
+                        ) : (
+                          <p className="text-gray-500 dark:text-gray-400">No education entries yet</p>
+                        )}
                       </div>
                       
                       <div>
                         <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">Experience</h3>
-                        <p className="text-gray-600 dark:text-gray-400 flex justify-between">
-                          <span>IT Application Manager</span>
-                          <span className="text-sm">Jul 2022 - Present</span>
-                        </p>
-                        <p className="text-gray-600 dark:text-gray-400 text-sm">ICICI Bank</p>
+                        {experienceEntries.length > 0 ? (
+                          <>
+                            <p className="text-gray-600 dark:text-gray-400 flex justify-between">
+                              <span>{experienceEntries[0]?.title}</span>
+                              <span className="text-sm">{experienceEntries[0]?.startDate} - {experienceEntries[0]?.endDate || 'Present'}</span>
+                            </p>
+                            <p className="text-gray-600 dark:text-gray-400 text-sm">{experienceEntries[0]?.company}</p>
+                          </>
+                        ) : (
+                          <p className="text-gray-500 dark:text-gray-400">No experience entries yet</p>
+                        )}
                       </div>
                       
                       <div>
                         <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">Learning Preferences</h3>
-                        <p className="text-gray-600 dark:text-gray-400">Style: {userProfile.preferredLearningStyle}</p>
-                        <p className="text-gray-600 dark:text-gray-400">Time Available: {userProfile.timeAvailability} hours/week</p>
+                        <p className="text-gray-600 dark:text-gray-400">Style: {userProfile?.preferredLearningStyle || 'Not specified'}</p>
+                        <p className="text-gray-600 dark:text-gray-400">Time Available: {userProfile?.timeAvailability || 0} hours/week</p>
                       </div>
                     </div>
                     
@@ -965,7 +906,7 @@ const ProfilePage = () => {
                       <div className="mb-4">
                         <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">Top Skills</h3>
                         <div className="flex flex-wrap gap-1">
-                          {userProfile.currentSkills.slice(0, 5).map((skill) => (
+                          {userProfile?.currentSkills?.slice(0, 5).map((skill) => (
                             <span 
                               key={skill} 
                               className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 px-2 py-0.5 rounded-full text-xs"
@@ -973,37 +914,58 @@ const ProfilePage = () => {
                               {skill}
                             </span>
                           ))}
-                          {userProfile.currentSkills.length > 5 && (
+                          {safeArrayLength(userProfile?.currentSkills) > 5 && (
                             <button 
                               onClick={() => setActiveTab('skills')}
                               className="text-xs text-primary hover:text-primary-dark"
                             >
-                              +{userProfile.currentSkills.length - 5} more
+                              +{safeArrayLength(userProfile?.currentSkills) - 5} more
                             </button>
+                          )}
+                          {safeArrayLength(userProfile?.currentSkills) === 0 && (
+                            <p className="text-gray-500 dark:text-gray-400 text-sm">No skills added yet</p>
                           )}
                         </div>
                       </div>
                       
                       <div className="mb-4">
                         <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">Projects</h3>
-                        <p className="text-gray-600 dark:text-gray-400">Expense Manager, Class XP</p>
-                        <button 
-                          onClick={() => setActiveTab('projects')}
-                          className="text-xs text-primary hover:text-primary-dark"
-                        >
-                          View details
-                        </button>
+                        {projectEntries.length > 0 ? (
+                          <>
+                            <p className="text-gray-600 dark:text-gray-400">
+                              {projectEntries.slice(0, 2).map(project => project.title).join(', ')}
+                              {projectEntries.length > 2 && ` +${projectEntries.length - 2} more`}
+                            </p>
+                            <button 
+                              onClick={() => setActiveTab('projects')}
+                              className="text-xs text-primary hover:text-primary-dark"
+                            >
+                              View details
+                            </button>
+                          </>
+                        ) : (
+                          <p className="text-gray-500 dark:text-gray-400">No projects added yet</p>
+                        )}
                       </div>
                       
                       <div>
                         <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2 border-b border-gray-200 dark:border-gray-700 pb-1">Certifications</h3>
-                        <p className="text-gray-600 dark:text-gray-400">Azure Developer Associate, Python Certification</p>
-                        <button 
-                          onClick={() => setActiveTab('certifications')}
-                          className="text-xs text-primary hover:text-primary-dark"
-                        >
-                          View details
-                        </button>
+                        {certifications.length > 0 ? (
+                          <>
+                            <p className="text-gray-600 dark:text-gray-400">
+                              {certifications.slice(0, 2).map(cert => cert.name).join(', ')}
+                              {certifications.length > 2 && ` +${certifications.length - 2} more`}
+                            </p>
+                            <button 
+                              onClick={() => setActiveTab('certifications')}
+                              className="text-xs text-primary hover:text-primary-dark"
+                            >
+                              View details
+                            </button>
+                          </>
+                        ) : (
+                          <p className="text-gray-500 dark:text-gray-400">No certifications added yet</p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1024,7 +986,7 @@ const ProfilePage = () => {
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Current Skills</h3>
                       <div className="flex flex-wrap gap-2">
-                        {userProfile.currentSkills.slice(0, 8).map((skill) => (
+                        {userProfile?.currentSkills?.slice(0, 8).map((skill) => (
                           <span 
                             key={skill} 
                             className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 px-3 py-1 rounded-full text-sm"
@@ -1032,7 +994,7 @@ const ProfilePage = () => {
                             {skill}
                           </span>
                         ))}
-                        {userProfile.currentSkills.length > 8 && (
+                        {(userProfile?.currentSkills && userProfile.currentSkills.length > 8) && (
                           <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
                             +{userProfile.currentSkills.length - 8} more
                           </span>
@@ -1043,7 +1005,7 @@ const ProfilePage = () => {
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Skills to Learn</h3>
                       <div className="flex flex-wrap gap-2">
-                        {userProfile.desiredSkills.slice(0, 8).map((skill) => (
+                        {userProfile?.desiredSkills?.slice(0, 8).map((skill) => (
                           <span 
                             key={skill} 
                             className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-3 py-1 rounded-full text-sm"
@@ -1051,7 +1013,7 @@ const ProfilePage = () => {
                             {skill}
                           </span>
                         ))}
-                        {userProfile.desiredSkills.length > 8 && (
+                        {(userProfile?.desiredSkills && userProfile.desiredSkills.length > 8) && (
                           <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
                             +{userProfile.desiredSkills.length - 8} more
                           </span>
@@ -1063,9 +1025,9 @@ const ProfilePage = () => {
                 
                 <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                   <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">Career Goals</h2>
-                  {userProfile.careerGoals && userProfile.careerGoals.length > 0 ? (
+                  {userProfile?.careerGoals && userProfile.careerGoals.length > 0 ? (
                     <ul className="space-y-2">
-                      {userProfile.careerGoals.map((goal, index) => (
+                      {userProfile?.careerGoals?.map((goal, index) => (
                         <li key={index} className="flex items-start">
                           <span className="flex-shrink-0 w-5 h-5 rounded-full bg-primary flex items-center justify-center mr-3 mt-0.5">
                             <span className="text-white text-xs">{index + 1}</span>
@@ -1091,7 +1053,7 @@ const ProfilePage = () => {
                   </div>
                   
                   <div className="flex flex-wrap gap-2">
-                    {userProfile.interests.slice(0, 8).map((interest) => (
+                    {userProfile?.interests?.slice(0, 8).map((interest) => (
                       <span 
                         key={interest} 
                         className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-1 rounded-lg text-sm"
@@ -1099,7 +1061,7 @@ const ProfilePage = () => {
                         {interest}
                       </span>
                     ))}
-                    {userProfile.interests.length > 8 && (
+                    {(userProfile?.interests && userProfile.interests.length > 8) && (
                       <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
                         +{userProfile.interests.length - 8} more
                       </span>
@@ -1181,7 +1143,7 @@ const ProfilePage = () => {
                       </div>
                     ) : (
                       <div className="flex flex-wrap gap-2">
-                        {userProfile.currentSkills.map((skill) => (
+                        {userProfile?.currentSkills?.map((skill) => (
                           <span 
                             key={skill} 
                             className="bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 px-3 py-1 rounded-full text-sm"
@@ -1189,7 +1151,7 @@ const ProfilePage = () => {
                             {skill}
                           </span>
                         ))}
-                        {userProfile.currentSkills.length === 0 && (
+                        {(userProfile?.currentSkills && userProfile.currentSkills.length === 0) && (
                           <p className="text-gray-500 dark:text-gray-400 text-sm">No skills added yet.</p>
                         )}
                       </div>
@@ -1263,7 +1225,7 @@ const ProfilePage = () => {
                       </div>
                     ) : (
                       <div className="flex flex-wrap gap-2">
-                        {userProfile.desiredSkills.map((skill) => (
+                        {userProfile?.desiredSkills?.map((skill) => (
                           <span 
                             key={skill} 
                             className="bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-3 py-1 rounded-full text-sm"
@@ -1271,7 +1233,7 @@ const ProfilePage = () => {
                             {skill}
                           </span>
                         ))}
-                        {userProfile.desiredSkills.length === 0 && (
+                        {(userProfile?.desiredSkills && userProfile.desiredSkills.length === 0) && (
                           <p className="text-gray-500 dark:text-gray-400 text-sm">No skills to learn added yet.</p>
                         )}
                       </div>
@@ -1388,7 +1350,7 @@ const ProfilePage = () => {
                 ) : (
                   <>
                     <div className="flex flex-wrap gap-3">
-                      {userProfile.careerGoals.map((goal) => (
+                      {userProfile?.careerGoals?.map((goal) => (
                         <span 
                           key={goal} 
                           className="bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 px-4 py-2 rounded-lg text-sm font-medium"
@@ -1398,7 +1360,7 @@ const ProfilePage = () => {
                       ))}
                     </div>
                     
-                    {userProfile.careerGoals.length === 0 && (
+                    {(userProfile?.careerGoals && userProfile.careerGoals.length === 0) && (
                       <div className="bg-gray-50 dark:bg-gray-700/30 rounded-lg p-6 text-center">
                         <p className="text-gray-500 dark:text-gray-400 mb-4">No career goals specified yet.</p>
                         <button 
@@ -1492,7 +1454,7 @@ const ProfilePage = () => {
                 ) : (
                   <>
                     <div className="flex flex-wrap gap-3">
-                      {userProfile.interests.map((interest) => (
+                      {userProfile?.interests?.map((interest) => (
                         <span 
                           key={interest} 
                           className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-4 py-2 rounded-lg text-sm font-medium"
@@ -1502,7 +1464,7 @@ const ProfilePage = () => {
                       ))}
                     </div>
                     
-                    {userProfile.interests.length === 0 && (
+                    {(userProfile?.interests && userProfile.interests.length === 0) && (
                       <div className="bg-gray-50 dark:bg-gray-700/30 rounded-lg p-6 text-center">
                         <p className="text-gray-500 dark:text-gray-400 mb-4">No interests specified yet.</p>
                         <button 

@@ -38,7 +38,7 @@ const PortfolioProjects: React.FC = () => {
           const mockProjects: PortfolioProject[] = [
             {
               id: '1',
-              userId: userProfile.id,
+              userId: userProfile?.id,
               title: 'Personal Portfolio Website',
               description: 'A responsive portfolio website built with modern web technologies to showcase my projects and skills.',
               technologies: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
@@ -54,7 +54,7 @@ const PortfolioProjects: React.FC = () => {
             },
             {
               id: '2',
-              userId: userProfile.id,
+              userId: userProfile?.id,
               title: 'E-commerce Dashboard',
               description: 'An admin dashboard for e-commerce platforms with sales analytics, inventory management, and order processing.',
               technologies: ['React', 'Redux', 'Material UI', 'Node.js', 'Express', 'MongoDB'],
