@@ -6,7 +6,6 @@ import { useCareerContext } from '@/app/CareerContext';
 export default function AIMentor() {
   const { userProfile } = useCareerContext();
   const [query, setQuery] = useState('');
-  const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState<{question: string, answer: string}[]>([]);
 
@@ -25,7 +24,6 @@ export default function AIMentor() {
       if (data.error) throw new Error(data.error);
       
       const newResponse = data.response;
-      setResponse(newResponse);
       
       // Add to history
       setHistory(prev => [...prev, {
@@ -37,7 +35,11 @@ export default function AIMentor() {
       setQuery('');
     } catch (error) {
       console.error('Error asking mentor:', error);
-      setResponse('Sorry, I had trouble processing your request. Please try again.');
+      // Add error to history
+      setHistory(prev => [...prev, {
+        question: query,
+        answer: 'Sorry, I had trouble processing your request. Please try again.'
+      }]);
     } finally {
       setLoading(false);
     }
@@ -116,7 +118,7 @@ export default function AIMentor() {
             .map(suggestion => (
               <button
                 key={suggestion}
-                onClick={() => setQuery(`What's a good ${suggestion} for me?`)}
+                onClick={() => setQuery(`What&apos;s a good ${suggestion} for me?`)}
                 className="text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-2 py-1 rounded-full text-gray-700 dark:text-gray-300"
               >
                 {suggestion}

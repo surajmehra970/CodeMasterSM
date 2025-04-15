@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useCareerContext } from '@/app/CareerContext';
-import { v4 as uuidv4 } from 'uuid';
 
 const AiTutorChat: React.FC = () => {
   const { userProfile, selectedCareerTrack } = useCareerContext();
@@ -17,7 +16,6 @@ const AiTutorChat: React.FC = () => {
   
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [sessionId, setSessionId] = useState<string>(uuidv4());
   const [topic, setTopic] = useState<string>('General Help');
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -25,7 +23,7 @@ const AiTutorChat: React.FC = () => {
   // Auto-scroll to bottom when new messages appear
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, messages.length]);
   
   // Generate initial greeting based on selected career track
   useEffect(() => {
@@ -40,7 +38,7 @@ const AiTutorChat: React.FC = () => {
       
       setTopic(`${selectedCareerTrack.title} Career Path`);
     }
-  }, [selectedCareerTrack]);
+  }, [selectedCareerTrack, messages]);
   
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();

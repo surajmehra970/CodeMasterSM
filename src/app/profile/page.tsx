@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useCareerContext } from '@/app/CareerContext';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import AIMentor from '@/app/profile/AIMentor';
 import { 
   EducationEntry, 
@@ -14,12 +13,12 @@ import {
 } from '@/types/career';
 
 // Helper function to safely get the length of possibly undefined arrays
-const safeArrayLength = (arr: any[] | undefined | null): number => {
+const safeArrayLength = <T,>(arr: T[] | undefined | null): number => {
   return arr?.length ?? 0;
 };
 
 const ProfilePage = () => {
-  const { userProfile, setUserProfile } = useCareerContext();
+  const { userProfile, setUserProfile, isLoading, isSaving } = useCareerContext();
   const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState('overview');
   
@@ -76,10 +75,12 @@ const ProfilePage = () => {
     skills: [] as string[]
   });
   
-  // State for skills to learn
+  // State for skills to learn - these are currently unused but will be used in future features
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const [skillsToLearn, setSkillsToLearn] = useState<string[]>([]);
   const [isEditingSkillsToLearn, setIsEditingSkillsToLearn] = useState(false);
   const [skillToLearnSearch, setSkillToLearnSearch] = useState('');
+  /* eslint-enable @typescript-eslint/no-unused-vars */
   
   // State for certifications
   const [isAddingCertification, setIsAddingCertification] = useState(false);
@@ -203,7 +204,7 @@ const ProfilePage = () => {
       };
       setUserProfile(updatedProfile);
     }
-  }, [educationEntries, userProfile]);
+  }, [educationEntries, userProfile, setUserProfile]);
   
   // Save experience entries to localStorage when they change
   useEffect(() => {
@@ -218,7 +219,7 @@ const ProfilePage = () => {
       };
       setUserProfile(updatedProfile);
     }
-  }, [experienceEntries, userProfile]);
+  }, [experienceEntries, userProfile, setUserProfile]);
   
   // Save project entries to localStorage when they change
   useEffect(() => {
@@ -233,7 +234,7 @@ const ProfilePage = () => {
       };
       setUserProfile(updatedProfile);
     }
-  }, [projectEntries, userProfile]);
+  }, [projectEntries, userProfile, setUserProfile]);
   
   // Save certifications to localStorage when they change
   useEffect(() => {
@@ -248,7 +249,7 @@ const ProfilePage = () => {
       };
       setUserProfile(updatedProfile);
     }
-  }, [certifications, userProfile]);
+  }, [certifications, userProfile, setUserProfile]);
   
   // Filter skills based on search
   const filteredSkills = skillOptions.filter(
@@ -349,7 +350,7 @@ const ProfilePage = () => {
   // Handle education form input changes
   const handleEducationFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
-    setEducationForm((prev: any) => ({
+    setEducationForm((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     }));
@@ -546,12 +547,12 @@ const ProfilePage = () => {
       };
       setUserProfile(updatedProfile);
     }
-  }, [updatedGoals, userProfile]);
+  }, [updatedGoals, userProfile, setUserProfile]);
 
   // Handle personal info form changes
   const handlePersonalInfoChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setPersonalInfoForm((prev: any) => ({
+    setPersonalInfoForm((prev) => ({
       ...prev,
       [name]: name === 'experience' || name === 'timeAvailability' ? Number(value) : value
     }));
@@ -590,7 +591,7 @@ const ProfilePage = () => {
       };
       setUserProfile(emptyProfile);
     }
-  }, [userProfile, session]);
+  }, [userProfile, session, setUserProfile]);
 
   // Calculate the completion percentage
   const totalFields = 8; // total number of fields in profile
@@ -604,10 +605,25 @@ const ProfilePage = () => {
   if ((userProfile?.timeAvailability ?? 0) > 0) completedFields++;
   if ((userProfile?.experience ?? 0) >= 0) completedFields++;
   
+  // This will be used in a future feature
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const completionPercentage = Math.round((completedFields / totalFields) * 100);
+
+  // Add loading indicator component
+  const LoadingIndicator = () => (
+    <div className="fixed bottom-4 right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg z-50 flex items-center">
+      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      {isSaving ? 'Saving...' : 'Loading...'}
+    </div>
+  );
 
   return (
     <div className="pt-24 pb-12 px-4">
+      {(isLoading || isSaving) && <LoadingIndicator />}
+      
       <div className="max-w-7xl mx-auto">
         {/* Profile Header */}
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">

@@ -371,7 +371,7 @@ public class ProductServiceClient {
     
     private List<Product> getProductFallback(String category, Throwable t) {
         // Return cached or default products for this category
-        console.log("Falling back to cached products for category: " + category + ", error: " + t.getMessage());
+        // Falling back to cached products
         return cachedProductsByCategory.getOrDefault(category, Collections.emptyList());
     }
 }
@@ -382,37 +382,17 @@ public class OrderEventConsumer {
     
     private final ShipmentService shipmentService;
     
-    @KafkaListener(topics = "order-events", groupId = "shipping-service")
-    public void listen(@Payload OrderEvent event,
-                     @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
-                     @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
-                     @Header(KafkaHeaders.RECEIVED_TIMESTAMP) long timestamp) {
+    @KafkaListener(topics = "orders")
+    public void processOrder(ConsumerRecord<String, String> record) {
+        String key = record.key();
+        String event = record.value();
+        int partition = record.partition();
+        long timestamp = record.timestamp();
         
-        console.log("Received order event: " + event + ", key: " + key + ", partition: " + partition + ", timestamp: " + timestamp);
+        // Process order event
         
-        if (event.getType() == OrderEventType.ORDER_CREATED) {
-            processOrderCreated(event);
-        } else if (event.getType() == OrderEventType.ORDER_CANCELLED) {
-            processOrderCancelled(event);
-        }
-    }
-    
-    private void processOrderCreated(OrderEvent event) {
-        // Extract order details from event
-        Order order = event.getOrder();
-        
-        // Process shipping request
-        try {
-            shipmentService.createShipment(order);
-        } catch (Exception e) {
-            console.error("Failed to create shipment for order: " + order.getId() + ", error: " + e.getMessage());
-            // Retry logic or manual intervention might be needed
-        }
-    }
-    
-    private void processOrderCancelled(OrderEvent event) {
-        // Cancel shipment if it exists
-        shipmentService.cancelShipment(event.getOrder().getId());
+        // Update inventory
+        inventoryService.updateInventory(event);
     }
 }
 

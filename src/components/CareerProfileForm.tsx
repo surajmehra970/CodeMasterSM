@@ -279,8 +279,8 @@ const CareerProfileForm: React.FC<{ initialSection?: string | null }> = ({ initi
               >
                 <option value="High School">High School</option>
                 <option value="Associate">Associate Degree</option>
-                <option value="Bachelor">Bachelor's Degree</option>
-                <option value="Master">Master's Degree</option>
+                <option value="Bachelor">Bachelor&apos;s Degree</option>
+                <option value="Master">Master&apos;s Degree</option>
                 <option value="PhD">PhD</option>
                 <option value="Self-Taught">Self-Taught</option>
               </select>
@@ -442,7 +442,7 @@ const CareerProfileForm: React.FC<{ initialSection?: string | null }> = ({ initi
             </button>
           </div>
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            E.g., "Become a full-stack developer", "Get a job at a tech startup"
+            E.g., &quot;Become a full-stack developer&quot;, &quot;Get a job at a tech startup&quot;
           </p>
         </div>
 

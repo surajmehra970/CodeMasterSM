@@ -31,9 +31,9 @@ const SkillAssessment: React.FC = () => {
           const mockAssessments: SkillAssessmentType[] = [
             {
               id: '1',
-              userId: userProfile.id,
+              userId: userProfile?.id ?? '',
               skillId: '101',
-              skillName: selectedCareerTrack.requiredSkills[0],
+              skillName: selectedCareerTrack.requiredSkills[0]!,
               score: 85,
               completedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
               recommendedResources: [
@@ -43,9 +43,9 @@ const SkillAssessment: React.FC = () => {
             },
             {
               id: '2',
-              userId: userProfile.id,
+              userId: userProfile?.id ?? '',
               skillId: '102',
-              skillName: selectedCareerTrack.requiredSkills[1],
+              skillName: selectedCareerTrack.requiredSkills[1]!,
               score: 72,
               completedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000), // 14 days ago
               recommendedResources: [
@@ -105,7 +105,7 @@ const SkillAssessment: React.FC = () => {
   };
   
   const goToNextQuestion = () => {
-    if (currentQuestionIndex < selectedQuiz!.questions.length - 1) {
+    if (selectedQuiz && currentQuestionIndex < selectedQuiz.questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     }
   };
@@ -117,24 +117,27 @@ const SkillAssessment: React.FC = () => {
   };
   
   const submitQuiz = () => {
-    if (!selectedQuiz) return;
+    if (!selectedQuiz || !selectedQuiz.questions) return;
     
     // Calculate score
     let correctAnswers = 0;
+    
     selectedAnswers.forEach((answer, index) => {
-      if (answer === selectedQuiz.questions[index].correctAnswer) {
+      const correctAnswer = selectedQuiz.questions[index]?.correctAnswer;
+      if (correctAnswer !== undefined && answer === correctAnswer) {
         correctAnswers++;
       }
     });
     
-    const score = Math.round((correctAnswers / selectedQuiz.questions.length) * 100);
+    const questionsLength = selectedQuiz.questions.length || 1;
+    const score = Math.round((correctAnswers / questionsLength) * 100);
     setQuizScore(score);
     setIsQuizCompleted(true);
     
     // Add to completed assessments
     const newAssessment: SkillAssessmentType = {
       id: uuidv4(),
-      userId: userProfile?.id || '',
+      userId: userProfile?.id ?? '',
       skillId: selectedQuiz.skillId,
       skillName: selectedQuiz.skillName,
       score,
@@ -232,7 +235,7 @@ const SkillAssessment: React.FC = () => {
                 <div className="mt-6">
                   <h4 className="font-medium text-gray-800 dark:text-white mb-2">Recommended Resources</h4>
                   <ul className="list-disc pl-5 space-y-1 text-gray-600 dark:text-gray-400">
-                    {assessments[0].recommendedResources.map((resource, index) => (
+                    {assessments[0]?.recommendedResources.map((resource, index) => (
                       <li key={index}>{resource}</li>
                     ))}
                   </ul>
@@ -310,11 +313,11 @@ const SkillAssessment: React.FC = () => {
             
             <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg mb-6">
               <p className="text-lg font-medium text-gray-800 dark:text-white mb-6">
-                {selectedQuiz.questions[currentQuestionIndex].question}
+                {selectedQuiz?.questions[currentQuestionIndex]?.question}
               </p>
               
               <div className="space-y-3">
-                {selectedQuiz.questions[currentQuestionIndex].options.map((option: string, index: number) => (
+                {selectedQuiz?.questions[currentQuestionIndex]?.options.map((option: string, index: number) => (
                   <div
                     key={index}
                     onClick={() => handleAnswerSelect(currentQuestionIndex, index)}
@@ -406,7 +409,7 @@ const SkillAssessment: React.FC = () => {
             ) : (
               <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
                 <p className="text-gray-600 dark:text-gray-400">
-                  You haven't completed any assessments yet. Take a quiz to evaluate your skills.
+                  You haven&apos;t completed any assessments yet. Take a quiz to evaluate your skills.
                 </p>
               </div>
             )}

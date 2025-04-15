@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { HfInference } from '@huggingface/inference';
+import { UserProfile } from '@/types/career';
 
 // Set to true to use the real HuggingFace model
 // Set to false to use the simulated responses
@@ -32,19 +33,17 @@ export async function POST(req: NextRequest) {
  * Get response from HuggingFace inference API using lightweight models
  * We use DistilGPT2 which is a smaller, faster version of GPT-2
  */
-async function getHuggingFaceResponse(userProfile: any, query: string): Promise<string> {
+async function getHuggingFaceResponse(userProfile: Partial<UserProfile>, query: string): Promise<string> {
   // Create a new inference instance with API key
   const hf = new HfInference(process.env.HUGGINGFACE_API_KEY || undefined);
   
   // Format context from user profile
   const context = `
-    User skills: ${userProfile.currentSkills?.join(', ') || 'None provided'}
-    Skills to learn: ${userProfile.desiredSkills?.join(', ') || 'None provided'}
-    Career goals: ${userProfile.careerGoals?.join(', ') || 'None provided'}
-    Experience level: ${userProfile.experience || 0} years
-    Learning style: ${userProfile.preferredLearningStyle || 'Mixed'}
-    ${userProfile.focusedCareerTrack ? `Focused career track: ${userProfile.focusedCareerTrack}` : ''}
-    ${userProfile.requiredSkills ? `Required skills for track: ${userProfile.requiredSkills.join(', ')}` : ''}
+    User skills: ${userProfile?.currentSkills?.join(', ') || 'None provided'}
+    Skills to learn: ${userProfile?.desiredSkills?.join(', ') || 'None provided'}
+    Career goals: ${userProfile?.careerGoals?.join(', ') || 'None provided'}
+    Experience level: ${userProfile?.experience || 0} years
+    Learning style: ${userProfile?.preferredLearningStyle || 'Mixed'}
   `;
   
   try {
@@ -89,13 +88,13 @@ async function getHuggingFaceResponse(userProfile: any, query: string): Promise<
  * Simulates a model response based on the user profile and query
  * This is a fallback for when the real model is not available
  */
-function generateMentorResponse(userProfile: any, query: string): string {
+function generateMentorResponse(userProfile: Partial<UserProfile>, query: string): string {
   // Extract key elements from user profile
-  const skills = userProfile.currentSkills || [];
-  const desiredSkills = userProfile.desiredSkills || [];
-  const careerGoals = userProfile.careerGoals || [];
-  const experience = userProfile.experience || 0;
-  const learningStyle = userProfile.preferredLearningStyle || 'Mixed';
+  const skills = userProfile?.currentSkills || [];
+  const desiredSkills = userProfile?.desiredSkills || [];
+  const careerGoals = userProfile?.careerGoals || [];
+  const experience = userProfile?.experience || 0;
+  const learningStyle = userProfile?.preferredLearningStyle || 'Mixed';
   
   // Dictionary of predefined responses based on query keywords
   const responses: Record<string, string> = {
@@ -111,7 +110,7 @@ function generateMentorResponse(userProfile: any, query: string): string {
     
     'career advice': `With ${experience} years of experience and skills in ${skills.slice(0, 3).join(', ')}, you're positioned to pursue roles as a ${experience > 5 ? 'Senior Developer or Team Lead' : experience > 2 ? 'Mid-level Developer' : 'Junior Developer'}. Focus on ${desiredSkills[0]} to accelerate toward your goal of ${careerGoals[0] || 'advancement'}.`,
     
-    'time management': `Based on your ${userProfile.timeAvailability} hours/week availability, I recommend breaking down learning ${desiredSkills[0] || 'new skills'} into ${Math.ceil(userProfile.timeAvailability/3)} sessions of 2-3 hours each. This structured approach works well with your ${learningStyle} learning style.`,
+    'time management': `Based on your ${userProfile?.timeAvailability} hours/week availability, I recommend breaking down learning ${desiredSkills[0] || 'new skills'} into ${Math.ceil((userProfile?.timeAvailability || 10)/3)} sessions of 2-3 hours each. This structured approach works well with your ${learningStyle} learning style.`,
     
     'help': `I'm your AI Career Mentor! I can help with learning paths, course recommendations, project ideas, career advice, and more. Just ask me about topics related to your tech career and I'll provide personalized guidance based on your profile.`
   };

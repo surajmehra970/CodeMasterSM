@@ -89,6 +89,6 @@ export interface Course {
   tags: string[];
   days?: CourseDay[];
   months?: Month[]; // Keep for backward compatibility
-  createdAt?: any;
-  updatedAt?: any;
+  createdAt?: Date;
+  updatedAt?: Date;
 } 

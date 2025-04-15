@@ -49,8 +49,8 @@ export default function RootLayout({
       <body className={`${inter.className} font-sans`}>
         <ThemeProvider defaultTheme="system">
           <CourseProvider>
-            <CareerProvider>
-              <AuthProvider>
+            <AuthProvider>
+              <CareerProvider>
                 <div className="flex flex-col min-h-screen">
                   <Navbar />
                   <main className="flex-grow">{children}</main>
@@ -62,8 +62,8 @@ export default function RootLayout({
                     </div>
                   </footer>
                 </div>
-              </AuthProvider>
-            </CareerProvider>
+              </CareerProvider>
+            </AuthProvider>
           </CourseProvider>
         </ThemeProvider>
       </body>

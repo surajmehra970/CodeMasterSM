@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useCareerContext } from '@/app/CareerContext';
 import { JobListing } from '@/types/career';
 
@@ -13,6 +13,30 @@ const JobAlignmentEngine: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [skillGaps, setSkillGaps] = useState<{ skill: string, frequency: number }[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<string>('');
+  
+  // Calculate skill gaps from job listings
+  const calculateSkillGaps = useCallback((listings: JobListing[]) => {
+    if (!userProfile) return;
+    
+    // Count frequency of skills across all job listings
+    const skillFrequency: Record<string, number> = {};
+    
+    listings.forEach(job => {
+      [...job.requiredSkills, ...job.niceToHaveSkills].forEach(skill => {
+        skillFrequency[skill] = (skillFrequency[skill] || 0) + 1;
+      });
+    });
+    
+    // Filter out skills the user already has
+    const userSkills = new Set([...userProfile?.currentSkills || []]);
+    const missingSkills = Object.entries(skillFrequency)
+      .filter(([skill]) => !userSkills.has(skill))
+      .map(([skill, frequency]) => ({ skill, frequency }))
+      .sort((a, b) => b.frequency - a.frequency)
+      .slice(0, 5); // Top 5 missing skills
+    
+    setSkillGaps(missingSkills);
+  }, [userProfile]);
   
   // Fetch job listings
   useEffect(() => {
@@ -79,12 +103,12 @@ const JobAlignmentEngine: React.FC = () => {
             return {
               id: `job-${i}`,
               title: `${selectedCareerTrack.jobTitles[i % selectedCareerTrack.jobTitles.length]}`,
-              company: companies[i % companies.length],
-              location: locations[i % locations.length],
+              company: companies[i % companies.length] || 'Unknown Company',
+              location: locations[i % locations.length] || 'Remote',
               description: `We are looking for a talented ${selectedCareerTrack.jobTitles[i % selectedCareerTrack.jobTitles.length]} to join our team. You will be responsible for designing, building, and maintaining ${selectedCareerTrack.title.toLowerCase()} solutions. The ideal candidate has experience with ${requiredSkills.join(', ')}.`,
               requiredSkills,
               niceToHaveSkills,
-              salaryRange: salaryRanges[i % salaryRanges.length],
+              salaryRange: salaryRanges[i % salaryRanges.length] || 'Competitive',
               postedDate,
               url: '#'
             };
@@ -104,7 +128,7 @@ const JobAlignmentEngine: React.FC = () => {
     };
     
     fetchJobListings();
-  }, [selectedCareerTrack]);
+  }, [selectedCareerTrack, calculateSkillGaps]);
   
   // Filter job listings based on search term and location
   useEffect(() => {
@@ -126,30 +150,6 @@ const JobAlignmentEngine: React.FC = () => {
     
     setFilteredListings(filtered);
   }, [searchTerm, selectedLocation, jobListings]);
-  
-  // Calculate skill gaps from job listings
-  const calculateSkillGaps = (listings: JobListing[]) => {
-    if (!userProfile) return;
-    
-    // Count frequency of skills across all job listings
-    const skillFrequency: Record<string, number> = {};
-    
-    listings.forEach(job => {
-      [...job.requiredSkills, ...job.niceToHaveSkills].forEach(skill => {
-        skillFrequency[skill] = (skillFrequency[skill] || 0) + 1;
-      });
-    });
-    
-    // Filter out skills the user already has
-    const userSkills = new Set([...userProfile.currentSkills]);
-    const missingSkills = Object.entries(skillFrequency)
-      .filter(([skill]) => !userSkills.has(skill))
-      .map(([skill, frequency]) => ({ skill, frequency }))
-      .sort((a, b) => b.frequency - a.frequency)
-      .slice(0, 5); // Top 5 missing skills
-    
-    setSkillGaps(missingSkills);
-  };
   
   // Extract all unique locations from job listings
   const getUniqueLocations = () => {
@@ -174,7 +174,7 @@ const JobAlignmentEngine: React.FC = () => {
   const calculateSkillsMatch = (job: JobListing) => {
     if (!userProfile) return 0;
     
-    const userSkills = new Set([...userProfile.currentSkills]);
+    const userSkills = new Set([...userProfile?.currentSkills || []]);
     const requiredSkillsMatch = job.requiredSkills.filter(skill => userSkills.has(skill)).length;
     const niceToHaveSkillsMatch = job.niceToHaveSkills.filter(skill => userSkills.has(skill)).length;
     

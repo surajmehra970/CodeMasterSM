@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useCareerContext } from '@/app/CareerContext';
 import { PortfolioProject } from '@/types/career';
 import { v4 as uuidv4 } from 'uuid';
+import Image from 'next/image';
 
 const PortfolioProjects: React.FC = () => {
-  const { userProfile, selectedCareerTrack } = useCareerContext();
+  const { userProfile } = useCareerContext();
   
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [isAddingProject, setIsAddingProject] = useState(false);
@@ -364,7 +365,7 @@ const PortfolioProjects: React.FC = () => {
         projects.length === 0 ? (
           <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg mb-6 text-center">
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              You haven't added any projects to your portfolio yet.
+              You haven&apos;t added any projects to your portfolio yet.
             </p>
             <button
               onClick={() => setIsAddingProject(true)}
@@ -386,9 +387,11 @@ const PortfolioProjects: React.FC = () => {
                       <div key={project.id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                         {project.thumbnailUrl && (
                           <div className="aspect-w-16 aspect-h-9">
-                            <img 
+                            <Image 
                               src={project.thumbnailUrl} 
                               alt={project.title} 
+                              width={400}
+                              height={225}
                               className="object-cover w-full h-48"
                             />
                           </div>
@@ -473,9 +476,11 @@ const PortfolioProjects: React.FC = () => {
                   <div key={project.id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                     {project.thumbnailUrl && (
                       <div className="aspect-w-16 aspect-h-9">
-                        <img 
+                        <Image 
                           src={project.thumbnailUrl} 
                           alt={project.title} 
+                          width={300}
+                          height={170}
                           className="object-cover w-full h-32"
                         />
                       </div>

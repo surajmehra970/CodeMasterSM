@@ -73,6 +73,15 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 
 # Hugging Face API for AI Mentor
 HUGGINGFACE_API_KEY=your-huggingface-api-key
+
+# Firebase Configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-id.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
 4. Set up Google OAuth:
@@ -120,12 +129,17 @@ The application uses local TypeScript files to store course content:
     /login              # Login page
     /resources          # Resources page
     /about              # About page
+    /profile            # User profile pages
+    /CareerContext.tsx  # Context for user profile and career data with Firebase integration
   /components           # Reusable UI components
     /AuthProvider.tsx   # NextAuth context provider
+    /FirebaseErrorAlert.tsx # Error display for Firebase operations
   /data                 # Data files for courses and content
     /courseContent      # Daily content stored as TypeScript files
     /dsaCourse.ts       # Course structure definition
   /services             # Service layer for content retrieval
+    /firebase.ts        # Firebase configuration and initialization
+    /userProfileService.ts # Service for user profile operations with Firebase
   /types                # TypeScript type definitions
   /middleware.ts        # NextAuth middleware for route protection
 ```
@@ -172,6 +186,53 @@ To use the AI Mentor:
 4. Ensure the `USE_REAL_MODEL` constant is set to `true` in `src/app/api/ai-mentor/route.ts`
 
 Note: The AI Mentor will fall back to rule-based responses if the Hugging Face API is unavailable or rate-limited.
+
+## Firebase Integration for User Profiles
+
+The application uses Firebase Firestore to store user profiles and data, providing several benefits:
+
+- **Cross-Device Synchronization**: User progress, settings, and profile data synced across all devices
+- **Persistent Storage**: Data is preserved even if the user clears browser cache or switches devices
+- **Real-time Updates**: Changes to user profiles are saved and synchronized in real-time
+- **Secure Authentication**: User data is linked to their authenticated account
+- **Loading & Saving States**: Visual indicators show when data is being loaded or saved
+- **Error Handling**: Robust error handling for network issues or database errors
+
+### User Profile Data Structure
+
+User profiles in Firebase include:
+- Personal information (education, experience, learning style preferences)
+- Skills (current and desired)
+- Career goals
+- Project history
+- Education history
+- Work experience
+- Certifications
+
+### Setting up Firebase
+
+To use Firebase for user profile storage:
+
+1. Follow the detailed steps in the [Firebase Setup Guide](./firebase-setup.md)
+2. Add your Firebase credentials to the `.env.local` file
+3. Ensure Firebase authentication method matches your NextAuth provider
+
+### Firebase Security Rules
+
+Recommended security rules for the Firestore database:
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /userProfiles/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
+
+These rules ensure users can only access their own profile data.
 
 ## Adding New Content
 

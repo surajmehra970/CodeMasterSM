@@ -22,13 +22,13 @@ const AboutPage = () => {
           <p className="text-gray-700 dark:text-gray-300 mb-6">
             CodeMaster was created with a simple mission: to provide a structured, comprehensive
             learning path for mastering data structures, algorithms, and programming languages.
-            We believe that learning DSA doesn't have to be overwhelming or confusing.
+            We believe that learning DSA doesn&apos;t have to be overwhelming or confusing.
           </p>
           <p className="text-gray-700 dark:text-gray-300 mb-6">
             Our goal is to break down complex concepts into manageable daily tasks,
             helping you build strong foundations and gradually progress towards
-            advanced topics. Whether you're preparing for coding interviews or
-            simply want to become a better programmer, we've got you covered.
+            advanced topics. Whether you&apos;re preparing for coding interviews or
+            simply want to become a better programmer, we&apos;ve got you covered.
           </p>
 
           <h2 className="text-2xl font-bold mt-10 mb-4 relative">
@@ -46,7 +46,7 @@ const AboutPage = () => {
             </li>
             <li className="flex">
               <span className="text-primary mr-2">✓</span>
-              <span><strong>Progress Tracking:</strong> Monitor your progress and stay motivated as you complete each day's materials</span>
+              <span><strong>Progress Tracking:</strong> Monitor your progress and stay motivated as you complete each day&apos;s materials</span>
             </li>
             <li className="flex">
               <span className="text-primary mr-2">✓</span>
@@ -92,7 +92,7 @@ const AboutPage = () => {
               <div>
                 <h3 className="text-xl font-semibold">Solve Problems</h3>
                 <p className="text-gray-700 dark:text-gray-300">
-                  Apply what you've learned by solving the recommended problems.
+                  Apply what you&apos;ve learned by solving the recommended problems.
                   This reinforces concepts and builds problem-solving skills.
                 </p>
               </div>

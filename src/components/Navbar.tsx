@@ -26,11 +26,10 @@ const Navbar = () => {
   };
 
   const handleSignIn = async () => {
-    console.log('Sign In button clicked');
     try {
-      await signIn('google', { callbackUrl: '/' });
+      await signIn('google', { callbackUrl: '/profile' });
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('Failed to sign in:', error);
     }
   };
 

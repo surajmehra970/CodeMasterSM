@@ -1,5 +1,3 @@
-
-
 export interface JobRole {
   title: string;
   count: number;
@@ -375,7 +373,7 @@ export async function fetchJobTrends(): Promise<JobTrend[]> {
     
     return {
       role,
-      currentMonth: trends[trends.length - 1].count,
+      currentMonth: trends[trends.length - 1]?.count ?? 0,
       trends
     };
   });

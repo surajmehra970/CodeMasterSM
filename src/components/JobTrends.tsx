@@ -53,8 +53,8 @@ const JobTrends: React.FC = () => {
         const roles = await fetchTopJobRoles();
         setJobRoles(roles);
         setLoading(prev => ({ ...prev, roles: false }));
-        if (roles.length > 0) {
-          setSelectedRole(roles[0].title);
+        if (roles && roles.length > 0) {
+          setSelectedRole(roles[0]?.title || "");
         }
         
         const trends = await fetchJobTrends();
@@ -249,7 +249,7 @@ const JobTrends: React.FC = () => {
                     </div>
                     
                     <div className="mt-3 text-xs text-gray-500 dark:text-gray-400 flex justify-between">
-                      <span>Top location: {role.locations[0].name} ({role.locations[0].percentage}%)</span>
+                      <span>Top location: {role.locations?.[0]?.name || 'N/A'} ({role.locations?.[0]?.percentage || 0}%)</span>
                       <span>Source: {role.source}</span>
                     </div>
                   </div>
@@ -335,12 +335,17 @@ const JobTrends: React.FC = () => {
                       const role = jobRoles.find(r => r.title === selectedRole);
                       const trend = trendData.find(t => t.role === selectedRole);
                       
-                      if (!role || !trend) return null;
+                      if (!role || !trend || !trend.trends || trend.trends.length === 0) return null;
                       
-                      // Calculate growth from first to last month
-                      const firstMonth = trend.trends[0].count;
-                      const lastMonth = trend.trends[trend.trends.length - 1].count;
-                      const yearGrowth = ((lastMonth - firstMonth) / firstMonth) * 100;
+                      // Safe access to first and last month data with proper null checks
+                      const firstTrend = trend.trends[0];
+                      const lastTrend = trend.trends[trend.trends.length - 1];
+                      
+                      const firstMonth = firstTrend ? firstTrend.count : 0;
+                      const lastMonth = lastTrend ? lastTrend.count : 0;
+                      const growthPercent = firstMonth > 0 
+                        ? Math.round(((lastMonth - firstMonth) / firstMonth) * 100) 
+                        : 0;
                       
                       return (
                         <div className="text-sm text-gray-600 dark:text-gray-300 space-y-2">
@@ -349,19 +354,15 @@ const JobTrends: React.FC = () => {
                           </p>
                           <p>
                             <span className="font-medium">Monthly Growth Rate:</span>{' '}
-                            <span className={role.growthRate > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                              {role.growthRate > 0 ? '+' : ''}{role.growthRate.toFixed(1)}%
-                            </span>
-                          </p>
-                          <p>
-                            <span className="font-medium">Annual Growth:</span>{' '}
-                            <span className={yearGrowth > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                              {yearGrowth > 0 ? '+' : ''}{yearGrowth.toFixed(1)}%
+                            <span className={growthPercent > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
+                              {growthPercent > 0 ? '+' : ''}{growthPercent}%
                             </span>
                           </p>
                           <p>
                             <span className="font-medium">Top Locations:</span>{' '}
-                            {role.locations.slice(0, 3).map(loc => `${loc.name} (${loc.percentage}%)`).join(', ')}
+                            {role.locations && role.locations.length > 0 
+                              ? role.locations.slice(0, 3).map(loc => `${loc.name} (${loc.percentage}%)`).join(', ')
+                              : 'N/A'}
                           </p>
                           <p>
                             <span className="font-medium">Required Experience:</span>{' '}

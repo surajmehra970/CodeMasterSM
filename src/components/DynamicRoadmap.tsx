@@ -125,17 +125,26 @@ const DynamicRoadmap: React.FC = () => {
 
     const updatedRoadmap = { ...userRoadmap };
     const week = updatedRoadmap.weeks[weekIndex];
+    
+    if (!week) return;
+    
     const dayIndex = week.dailyPlans.findIndex(day => day.id === dayId);
     
     if (dayIndex === -1) return;
     
     const day = week.dailyPlans[dayIndex];
+    
+    if (!day) return;
+    
     const taskIndex = day.tasks.findIndex(task => task.id === taskId);
     
     if (taskIndex === -1) return;
     
+    const task = day.tasks[taskIndex];
+    if (!task) return;
+    
     // Toggle task completion status
-    day.tasks[taskIndex].completed = !day.tasks[taskIndex].completed;
+    task.completed = !task.completed;
     
     // Update day completion status based on all tasks
     day.completed = day.tasks.every(task => task.completed);
@@ -165,7 +174,7 @@ const DynamicRoadmap: React.FC = () => {
         <div className="flex flex-col items-center justify-center p-8 space-y-4">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
           <p className="text-gray-600 dark:text-gray-400">
-            We're creating your personalized learning journey...
+            We&apos;re creating your personalized learning journey...
           </p>
         </div>
       </div>
@@ -372,7 +381,7 @@ const DynamicRoadmap: React.FC = () => {
                     <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-lg p-4 mt-6">
                       <h3 className="font-medium text-indigo-700 dark:text-indigo-300 mb-2">Week Project</h3>
                       <p className="text-gray-700 dark:text-gray-300">
-                        Build a project that demonstrates your understanding of this week's concepts.
+                        Build a project that demonstrates your understanding of this week&apos;s concepts.
                       </p>
                       <button
                         className="mt-3 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded-md"

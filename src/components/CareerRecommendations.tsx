@@ -6,7 +6,6 @@ import { CareerTrack } from '@/types/career';
 
 const CareerRecommendations: React.FC = () => {
   const { 
-    userProfile, 
     recommendedCareers, 
     setRecommendedCareers, 
     selectedCareerTrack, 

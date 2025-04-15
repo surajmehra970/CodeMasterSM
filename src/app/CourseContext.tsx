@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Course } from '@/data/dsaCourse';
+import { Course } from '@/types/course';
 
 interface CourseContextType {
   activeCourse: Course | null;
