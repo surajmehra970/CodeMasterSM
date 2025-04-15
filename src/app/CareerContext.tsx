@@ -135,10 +135,10 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   // Load user profile from Firebase when the session changes
   useEffect(() => {
     // Add a listener for Firebase auth state changes
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let unsubscribe = () => {};
     
     if (auth) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       unsubscribe = onAuthStateChanged(auth, (user) => {
         // Auth state changed (user becomes null when signing out)
       });
