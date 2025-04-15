@@ -1,11 +1,14 @@
 import { db } from './firebase';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, Firestore } from 'firebase/firestore';
 import { UserProfile } from '@/types/career';
 
 const COLLECTION_NAME = 'userProfiles';
 
 // Helper to generate a document path that will work consistently
 const getUserDocRef = (userId: string) => {
+  if (!db) {
+    throw new Error('Firestore is not initialized');
+  }
   return doc(db, COLLECTION_NAME, userId);
 };
 
@@ -16,6 +19,11 @@ const getUserDocRef = (userId: string) => {
  */
 export const getUserProfile = async (userId: string): Promise<UserProfile | null> => {
   try {
+    if (!db) {
+      console.error('Firestore is not initialized');
+      return null;
+    }
+    
     const userDocRef = getUserDocRef(userId);
     
     const userDoc = await getDoc(userDocRef);
@@ -38,6 +46,11 @@ export const getUserProfile = async (userId: string): Promise<UserProfile | null
  */
 export const createUserProfile = async (profile: UserProfile): Promise<boolean> => {
   try {
+    if (!db) {
+      console.error('Firestore is not initialized');
+      return false;
+    }
+    
     const userDocRef = getUserDocRef(profile.userId);
     await setDoc(userDocRef, profile);
     return true;
@@ -55,6 +68,11 @@ export const createUserProfile = async (profile: UserProfile): Promise<boolean> 
  */
 export const updateUserProfile = async (userId: string, profileData: Partial<UserProfile>): Promise<boolean> => {
   try {
+    if (!db) {
+      console.error('Firestore is not initialized');
+      return false;
+    }
+    
     const userDocRef = getUserDocRef(userId);
     await updateDoc(userDocRef, profileData);
     return true;
@@ -71,6 +89,11 @@ export const updateUserProfile = async (userId: string, profileData: Partial<Use
  */
 export const saveUserProfile = async (profile: UserProfile): Promise<boolean> => {
   try {
+    if (!db) {
+      console.error('Firestore is not initialized');
+      return false;
+    }
+    
     const userDocRef = getUserDocRef(profile.userId);
     const userDoc = await getDoc(userDocRef);
     
