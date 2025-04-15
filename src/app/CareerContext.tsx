@@ -136,9 +136,13 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // Add a listener for Firebase auth state changes
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      // Auth state changed (user becomes null when signing out)
-    });
+    let unsubscribe = () => {};
+    
+    if (auth) {
+      unsubscribe = onAuthStateChanged(auth, (user) => {
+        // Auth state changed (user becomes null when signing out)
+      });
+    }
 
     const fetchUserProfile = async () => {
       if (!session?.user?.email) return;
@@ -147,9 +151,9 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
       
       try {
         // Check if we need to authenticate with Firebase first
-        const currentUser = auth.currentUser;
+        const currentUser = auth?.currentUser;
         
-        if (!currentUser) {
+        if (!currentUser && auth) {
           await tryFirebaseAuthentication(session.user.email);
         }
         
@@ -171,6 +175,11 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const tryFirebaseAuthentication = async (email: string): Promise<UserCredential | null> => {
       try {
+        if (!auth) {
+          console.warn('Firebase Auth is not initialized');
+          return null;
+        }
+        
         const response = await fetch('/api/auth/firebase-token');
         if (!response.ok) {
           console.error('Failed to get Firebase token:', await response.text());
