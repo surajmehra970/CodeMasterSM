@@ -344,7 +344,7 @@ export function findSectionById(section: Section, id: string): Section | null {
   return foundSection || null;
 }
 
-export function findExampleById(ex: CodeExample, _id: string): CodeExample | null {
+export function findExampleById(ex: CodeExample, _: string): CodeExample | null {
   // CodeExample doesn't have an id property based on the interface
   // Fallback implementation - we ignore the id parameter since it's not used
   return ex;
