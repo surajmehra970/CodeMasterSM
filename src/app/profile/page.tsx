@@ -638,6 +638,7 @@ const ProfilePage = () => {
                     width={128} 
                     height={128} 
                     className="w-full h-full object-cover"
+                    priority={true}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">

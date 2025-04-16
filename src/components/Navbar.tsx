@@ -81,6 +81,7 @@ const Navbar = () => {
                         width={36} 
                         height={36} 
                         className="rounded-full"
+                        priority
                       />
                     ) : (
                       <span className="text-gray-700 dark:text-gray-300 font-medium">
@@ -205,6 +206,7 @@ const Navbar = () => {
                         width={36} 
                         height={36} 
                         className="rounded-full"
+                        priority
                       />
                     ) : (
                       <div className="h-9 w-9 rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center">

@@ -7,7 +7,6 @@ import { useSession } from 'next-auth/react';
 import FirebaseErrorAlert from '@/components/FirebaseErrorAlert';
 import { auth } from '@/services/firebase';
 import { onAuthStateChanged, UserCredential } from 'firebase/auth';
-import { signInWithCustomToken } from 'firebase/auth';
 
 interface CareerContextType {
   userProfile: UserProfile | null;
@@ -83,6 +82,9 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     
     setIsLoading(true);
     try {
+      // Use mock data instead of calling the API that doesn't exist yet
+      // In the future when API is implemented, uncomment the fetch code
+      /*
       const response = await fetch('/api/careers/recommendations', {
         method: 'POST',
         headers: {
@@ -95,11 +97,57 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         const data = await response.json();
         setRecommendedCareers(data.recommendations || []);
       }
+      */
+      
+      // Mock data for development
+      const mockCareers = [
+        {
+          id: '1',
+          title: 'Full Stack Developer',
+          description: 'Build both frontend and backend components of web applications, working with modern frameworks and databases.',
+          demandLevel: 'High' as const,
+          averageSalary: '$100,000 - $140,000',
+          requiredSkills: ['JavaScript', 'React', 'Node.js', 'SQL', 'Git'],
+          recommendedCourses: ['Web Development Bootcamp', 'Modern JavaScript'],
+          timeToAchieve: '9 months',
+          jobTitles: ['Full Stack Developer', 'Web Developer', 'JavaScript Developer']
+        },
+        {
+          id: '2',
+          title: 'Data Scientist',
+          description: 'Analyze complex data to help organizations make better decisions using statistical methods and machine learning.',
+          demandLevel: 'High' as const,
+          averageSalary: '$120,000 - $160,000',
+          requiredSkills: ['Python', 'R', 'SQL', 'Machine Learning', 'Statistics'],
+          recommendedCourses: ['Data Science Foundations', 'Machine Learning Fundamentals'],
+          timeToAchieve: '12 months',
+          jobTitles: ['Data Scientist', 'Data Analyst', 'Machine Learning Engineer']
+        },
+        {
+          id: '3',
+          title: 'DevOps Engineer',
+          description: 'Bridge the gap between development and operations by implementing CI/CD pipelines and infrastructure automation.',
+          demandLevel: 'High' as const,
+          averageSalary: '$110,000 - $150,000',
+          requiredSkills: ['Linux', 'Docker', 'Kubernetes', 'CI/CD', 'Cloud Platforms'],
+          recommendedCourses: ['DevOps Essentials', 'Cloud Infrastructure', 'Container Orchestration'],
+          timeToAchieve: '8 months',
+          jobTitles: ['DevOps Engineer', 'Site Reliability Engineer', 'Cloud Engineer']
+        }
+      ];
+      
+      // Set the mock data after a small delay to simulate API call
+      setTimeout(() => {
+        setRecommendedCareers(mockCareers);
+      }, 500);
     } catch (error) {
       console.error('Failed to fetch career recommendations:', error);
       setError('Failed to fetch career recommendations. Please try again later.');
     } finally {
-      setIsLoading(false);
+      // Use timeout to simulate API delay
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
     }
   };
 
@@ -109,6 +157,9 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
     
     setIsLoading(true);
     try {
+      // Use mock data instead of calling the API that doesn't exist yet
+      // In the future when API is implemented, uncomment the fetch code
+      /*
       const response = await fetch('/api/roadmap/generate', {
         method: 'POST',
         headers: {
@@ -124,11 +175,50 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
         const data = await response.json();
         setUserRoadmap(data.roadmap || null);
       }
+      */
+      
+      // Mock roadmap data for development
+      const mockRoadmap = {
+        id: Date.now().toString(),
+        userId: userProfile.userId,
+        targetCareerTrack: selectedCareerTrack.id,
+        startDate: new Date(),
+        endDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 90), // 90 days from now
+        weeks: [
+          {
+            id: '1',
+            weekNumber: 1,
+            learningObjectives: ['Understand the basics', 'Set up development environment'],
+            dailyPlans: [
+              {
+                id: '1-1',
+                dayNumber: 1,
+                title: 'Introduction to the career path',
+                description: 'Overview of what you will learn and career prospects',
+                estimatedHours: 2,
+                resources: [],
+                tasks: [],
+                completed: false
+              }
+            ],
+            assessments: []
+          }
+        ],
+        lastUpdated: new Date()
+      };
+      
+      // Set the mock data after a small delay to simulate API call
+      setTimeout(() => {
+        setUserRoadmap(mockRoadmap);
+      }, 500);
     } catch (error) {
       console.error('Failed to generate roadmap:', error);
       setError('Failed to generate your roadmap. Please try again later.');
     } finally {
-      setIsLoading(false);
+      // Use timeout to simulate API delay
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
     }
   };
 
@@ -180,22 +270,14 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
           return null;
         }
         
-        const response = await fetch('/api/auth/firebase-token');
-        if (!response.ok) {
-          console.error('Failed to get Firebase token:', await response.text());
-          return null;
-        }
-        
-        const { token } = await response.json();
-        
-        try {
-          return await signInWithCustomToken(auth, token);
-        } catch (tokenError) {
-          console.warn('Token authentication failed, continuing without admin features:', tokenError);
-          return null;
-        }
-      } catch (error) {
-        console.error('Error authenticating with Firebase:', error);
+        // We're only using Firebase for data storage, not authentication
+        // If we need authentication in the future, we'll use Next.js authentication
+        // and not rely on Firebase Admin SDK for token generation
+        console.info('Using Next.js authentication only, Firebase Admin features disabled');
+        return null;
+
+      } catch {
+        console.warn('Error with Firebase setup, continuing without admin features');
         return null;
       }
     };

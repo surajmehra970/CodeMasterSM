@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import type { Session } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -11,9 +12,10 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async session({ session }) {
-      return session;
+    async session({ session /* , token */ }) {
+      return session as Session;
     },
   },
 }; 

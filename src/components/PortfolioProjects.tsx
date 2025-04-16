@@ -45,10 +45,10 @@ const PortfolioProjects: React.FC = () => {
               technologies: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript'],
               repoUrl: 'https://github.com/username/portfolio',
               demoUrl: 'https://portfolio.username.dev',
-              thumbnailUrl: 'https://via.placeholder.com/500x300',
+              thumbnailUrl: 'https://placehold.co/500x300',
               images: [
-                'https://via.placeholder.com/1200x800',
-                'https://via.placeholder.com/1200x800',
+                'https://placehold.co/1200x800',
+                'https://placehold.co/1200x800',
               ],
               completedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago
               featured: true
@@ -61,10 +61,10 @@ const PortfolioProjects: React.FC = () => {
               technologies: ['React', 'Redux', 'Material UI', 'Node.js', 'Express', 'MongoDB'],
               repoUrl: 'https://github.com/username/ecommerce-dashboard',
               demoUrl: 'https://ecommerce-dash.username.dev',
-              thumbnailUrl: 'https://via.placeholder.com/500x300',
+              thumbnailUrl: 'https://placehold.co/500x300',
               images: [
-                'https://via.placeholder.com/1200x800',
-                'https://via.placeholder.com/1200x800',
+                'https://placehold.co/1200x800',
+                'https://placehold.co/1200x800',
               ],
               completedAt: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000), // 60 days ago
               featured: false
@@ -393,6 +393,7 @@ const PortfolioProjects: React.FC = () => {
                               width={400}
                               height={225}
                               className="object-cover w-full h-48"
+                              unoptimized={project.thumbnailUrl.includes('placeholder.com')}
                             />
                           </div>
                         )}
@@ -482,6 +483,7 @@ const PortfolioProjects: React.FC = () => {
                           width={300}
                           height={170}
                           className="object-cover w-full h-32"
+                          unoptimized={project.thumbnailUrl.includes('placeholder.com')}
                         />
                       </div>
                     )}
