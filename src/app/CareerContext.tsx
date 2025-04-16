@@ -270,12 +270,23 @@ export const CareerProvider = ({ children }: { children: ReactNode }) => {
           return null;
         }
         
-        // We're only using Firebase for data storage, not authentication
-        // If we need authentication in the future, we'll use Next.js authentication
-        // and not rely on Firebase Admin SDK for token generation
-        console.info('Using Next.js authentication only, Firebase Admin features disabled');
+        // Check if the session includes Google provider and accessToken
+        if (session?.provider === 'google' && session?.accessToken) {
+          try {
+            // Create a credential with the Google access token
+            const { GoogleAuthProvider, signInWithCredential } = await import('firebase/auth');
+            const credential = GoogleAuthProvider.credential(null, session.accessToken);
+            
+            // Sign in to Firebase with Google credentials
+            console.info('Authenticating with Firebase using Google credentials');
+            return await signInWithCredential(auth, credential);
+          } catch (credentialError) {
+            console.error('Error signing in with Google credential:', credentialError);
+          }
+        }
+        
+        console.info('Using Next.js authentication only, Firebase authentication not established');
         return null;
-
       } catch {
         console.warn('Error with Firebase setup, continuing without admin features');
         return null;
