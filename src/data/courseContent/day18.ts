@@ -1,290 +1,123 @@
 import { Content } from '@/types/course';
 
-const search2DMatrixContent: Content = {
-  introduction: "Searching in a 2D matrix is a common interview problem that extends the concept of binary search to two dimensions. It involves efficiently finding a target value in a matrix with certain ordering properties. The key insight is to exploit the sorted structure of the matrix to reduce the search space, allowing us to achieve better time complexity than a naive linear search. This topic builds upon our knowledge of binary search and demonstrates how to apply search algorithms in multi-dimensional data structures.",
+const linearSortingContent: Content = {
+  introduction: "Linear sorting algorithms achieve O(n) time complexity by not relying on comparisons between elements. Instead, they use the actual values of the elements to determine their position. These algorithms include Counting Sort, Radix Sort, and Bucket Sort, which can outperform comparison-based sorts like Quick Sort and Merge Sort when applicable.",
   
   learningObjectives: [
-    "Understand different types of ordered 2D matrices and their properties",
-    "Apply binary search algorithms in 2D matrices efficiently",
-    "Analyze time and space complexity of 2D search algorithms",
-    "Identify optimal search strategies based on matrix properties"
+    "Understand the principles of non-comparison sorting algorithms",
+    "Implement Counting Sort, Radix Sort, and Bucket Sort",
+    "Analyze the time and space complexity of linear sorting algorithms",
+    "Identify scenarios where linear sorting algorithms are most effective"
   ],
   
   sections: [
     {
-      title: "Types of Ordered 2D Matrices",
-      content: "There are different types of ordered 2D matrices that we commonly encounter in coding problems. Understanding their properties is crucial for selecting the appropriate search algorithm.",
+      title: "Counting Sort",
+      content: "Counting Sort works by counting the occurrences of each element, then reconstructing the sorted array from these counts. It's efficient when the range of input values is not significantly larger than the number of elements.",
       codeExamples: [
         {
           language: "java",
-          code: `// Type 1: Row-wise and column-wise sorted matrix
-/*
-  Example:
-  [
-    [10, 20, 30, 40],
-    [15, 25, 35, 45],
-    [27, 29, 37, 48],
-    [32, 33, 39, 50]
-  ]
-  
-  Properties:
-  - Each row is sorted in ascending order from left to right
-  - Each column is sorted in ascending order from top to bottom
-  - Elements in different rows/columns don't necessarily follow any relationship
-*/
+          code: `public void countingSort(int[] arr) {
+    // Find the maximum value in the array
+    int max = Arrays.stream(arr).max().getAsInt();
+    
+    // Create a count array of size max+1
+    int[] count = new int[max + 1];
+    
+    // Count occurrences of each element
+    for (int num : arr) {
+        count[num]++;
+    }
+    
+    // Reconstruct the sorted array
+    int index = 0;
+    for (int i = 0; i <= max; i++) {
+        while (count[i] > 0) {
+            arr[index++] = i;
+            count[i]--;
+        }
+    }
+}`,
+          explanation: "This implementation counts each value's frequency, then rebuilds the array in sorted order. Time complexity is O(n+k) where k is the range of input values."
+        }
+      ]
+    },
+    {
+      title: "Radix Sort",
+      content: "Radix Sort sorts elements digit by digit, starting from the least significant digit (LSD) or most significant digit (MSD). It uses a stable sort (often Counting Sort) for each digit position.",
+      codeExamples: [
+        {
+          language: "java",
+          code: `public void radixSort(int[] arr) {
+    // Find the maximum number to know the number of digits
+    int max = Arrays.stream(arr).max().getAsInt();
+    
+    // Do counting sort for every digit
+    for (int exp = 1; max / exp > 0; exp *= 10) {
+        countingSortByDigit(arr, exp);
+    }
+}
 
-// Type 2: Sorted matrix (like a sorted 1D array shaped into 2D)
-/*
-  Example:
-  [
-    [1,  3,  5,  7],
-    [10, 11, 16, 20],
-    [23, 30, 34, 60]
-  ]
-  
-  Properties:
-  - The entire matrix can be viewed as a sorted 1D array shaped into 2D
-  - The last element of a row is smaller than the first element of the next row
-  - Every element is greater than the elements before it (in row-major order)
-*/`,
-          explanation: "Understanding the ordering properties of the matrix is crucial for selecting the right search algorithm. Type 1 matrices are row-wise and column-wise sorted, while Type 2 matrices can be viewed as sorted 1D arrays shaped into 2D form. Different search approaches are optimal for these different matrix types."
+private void countingSortByDigit(int[] arr, int exp) {
+    int n = arr.length;
+    int[] output = new int[n];
+    int[] count = new int[10]; // 0-9 digits
+    
+    // Count occurrences of each digit
+    for (int i = 0; i < n; i++) {
+        count[(arr[i] / exp) % 10]++;
+    }
+    
+    // Change count[i] to contain position of digit in output
+    for (int i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+    
+    // Build output array
+    for (int i = n - 1; i >= 0; i--) {
+        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+        count[(arr[i] / exp) % 10]--;
+    }
+    
+    // Copy output array to arr
+    System.arraycopy(output, 0, arr, 0, n);
+}`,
+          explanation: "Radix Sort processes digits from least to most significant. Time complexity is O(d*(n+b)) where d is the number of digits and b is the base (10 for decimal)."
         }
       ]
     },
     {
-      title: "Search in a Sorted Matrix (Type 2)",
-      content: "For a matrix where all elements are sorted as if the entire matrix is a sorted 1D array, we can use a modified binary search that maps 1D indices to 2D coordinates.",
+      title: "Bucket Sort",
+      content: "Bucket Sort distributes elements into a fixed number of buckets, sorts each bucket individually, then concatenates the results. It works well when input is uniformly distributed across a range.",
       codeExamples: [
         {
           language: "java",
-          code: `public class SearchSortedMatrix {
-    public boolean searchMatrix(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return false;
-        }
-        
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        
-        // Treat the matrix as a sorted array and perform binary search
-        int left = 0;
-        int right = rows * cols - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            // Convert 1D index to 2D coordinates
-            int midRow = mid / cols;
-            int midCol = mid % cols;
-            
-            int midValue = matrix[midRow][midCol];
-            
-            if (midValue == target) {
-                return true;
-            } else if (midValue < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        
-        return false;
+          code: `public void bucketSort(float[] arr) {
+    int n = arr.length;
+    
+    // Create empty buckets
+    @SuppressWarnings("unchecked")
+    List<Float>[] buckets = new ArrayList[n];
+    for (int i = 0; i < n; i++) {
+        buckets[i] = new ArrayList<>();
     }
     
-    public static void main(String[] args) {
-        SearchSortedMatrix solution = new SearchSortedMatrix();
-        int[][] matrix = {
-            {1,  3,  5,  7},
-            {10, 11, 16, 20},
-            {23, 30, 34, 60}
-        };
-        
-        System.out.println(solution.searchMatrix(matrix, 3));  // true
-        System.out.println(solution.searchMatrix(matrix, 13)); // false
+    // Add elements to their respective buckets
+    for (float num : arr) {
+        int bucketIndex = (int) (num * n);
+        buckets[bucketIndex].add(num);
+    }
+    
+    // Sort individual buckets and concatenate
+    int index = 0;
+    for (List<Float> bucket : buckets) {
+        Collections.sort(bucket); // Each bucket is sorted using a comparison sort
+        for (float num : bucket) {
+            arr[index++] = num;
+        }
     }
 }`,
-          explanation: "This algorithm treats the 2D matrix as a sorted 1D array and performs a standard binary search. The key insight is mapping between 1D indices and 2D coordinates using division and modulo operations. The time complexity is O(log(m*n)) where m and n are the dimensions of the matrix, and the space complexity is O(1)."
-        }
-      ]
-    },
-    {
-      title: "Search in a Row-wise and Column-wise Sorted Matrix (Type 1)",
-      content: "For a matrix where each row and each column is sorted, we can use a more efficient search method by starting from the top-right (or bottom-left) corner and eliminating one row or column at each step.",
-      codeExamples: [
-        {
-          language: "java",
-          code: `public class SearchRowColSortedMatrix {
-    public boolean searchMatrix(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return false;
-        }
-        
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        
-        // Start from top-right corner
-        int row = 0;
-        int col = cols - 1;
-        
-        while (row < rows && col >= 0) {
-            if (matrix[row][col] == target) {
-                return true;
-            } else if (matrix[row][col] > target) {
-                // Target is smaller, move left
-                col--;
-            } else {
-                // Target is larger, move down
-                row++;
-            }
-        }
-        
-        return false;
-    }
-    
-    public static void main(String[] args) {
-        SearchRowColSortedMatrix solution = new SearchRowColSortedMatrix();
-        int[][] matrix = {
-            {10, 20, 30, 40},
-            {15, 25, 35, 45},
-            {27, 29, 37, 48},
-            {32, 33, 39, 50}
-        };
-        
-        System.out.println(solution.searchMatrix(matrix, 29));  // true
-        System.out.println(solution.searchMatrix(matrix, 26));  // false
-    }
-}`,
-          explanation: "This algorithm leverages the row-wise and column-wise sorted property of the matrix. Starting from the top-right corner, we can eliminate either a row or a column in each step: if the current element is greater than the target, we move left (eliminating a column); if it's smaller, we move down (eliminating a row). The time complexity is O(m + n) where m and n are the dimensions of the matrix, and the space complexity is O(1)."
-        }
-      ]
-    },
-    {
-      title: "Binary Search in Each Row",
-      content: "Another approach for searching in a matrix is to perform binary search on each row. This approach is particularly useful when rows are sorted but there's no specific ordering between rows.",
-      codeExamples: [
-        {
-          language: "java",
-          code: `public class SearchEachRow {
-    public boolean searchMatrix(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return false;
-        }
-        
-        for (int[] row : matrix) {
-            if (binarySearch(row, target)) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    
-    private boolean binarySearch(int[] array, int target) {
-        int left = 0;
-        int right = array.length - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (array[mid] == target) {
-                return true;
-            } else if (array[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        
-        return false;
-    }
-    
-    public static void main(String[] args) {
-        SearchEachRow solution = new SearchEachRow();
-        int[][] matrix = {
-            {1, 3, 5, 7},
-            {10, 11, 16, 20},
-            {23, 30, 34, 60}
-        };
-        
-        System.out.println(solution.searchMatrix(matrix, 3));  // true
-        System.out.println(solution.searchMatrix(matrix, 13)); // false
-    }
-}`,
-          explanation: "This approach performs binary search on each row of the matrix. While it doesn't fully exploit the 2D structure of the matrix, it's simple to implement and effective when only rows are sorted. The time complexity is O(m * log(n)) where m is the number of rows and n is the number of columns, and the space complexity is O(1)."
-        }
-      ]
-    },
-    {
-      title: "Finding Row Range Before Binary Search",
-      content: "When the first element of each row maintains some ordering (e.g., the first element of each row is greater than the last element of the previous row), we can first identify which row might contain the target before performing binary search on that row.",
-      codeExamples: [
-        {
-          language: "java",
-          code: `public class SearchWithRowIdentification {
-    public boolean searchMatrix(int[][] matrix, int target) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return false;
-        }
-        
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        
-        // First identify which row might contain the target
-        int row = 0;
-        while (row < rows && matrix[row][0] <= target) {
-            if (matrix[row][0] == target) {
-                return true;
-            }
-            
-            // Check if target might be in this row
-            if (row < rows - 1 && matrix[row + 1][0] > target) {
-                break;
-            }
-            
-            row++;
-        }
-        
-        // If we've gone beyond the last row, target is not in the matrix
-        if (row >= rows) {
-            return false;
-        }
-        
-        // Now perform binary search on the identified row
-        return binarySearch(matrix[row], target);
-    }
-    
-    private boolean binarySearch(int[] array, int target) {
-        int left = 0;
-        int right = array.length - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (array[mid] == target) {
-                return true;
-            } else if (array[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        
-        return false;
-    }
-    
-    public static void main(String[] args) {
-        SearchWithRowIdentification solution = new SearchWithRowIdentification();
-        int[][] matrix = {
-            {1, 3, 5, 7},
-            {10, 11, 16, 20},
-            {23, 30, 34, 60}
-        };
-        
-        System.out.println(solution.searchMatrix(matrix, 3));  // true
-        System.out.println(solution.searchMatrix(matrix, 13)); // false
-    }
-}`,
-          explanation: "This approach first identifies which row might contain the target by checking the first element of each row, and then performs binary search on the identified row. This is particularly efficient when there's an ordering relationship between rows. The time complexity is O(m + log(n)) where m is the number of rows and n is the number of columns, and the space complexity is O(1)."
+          explanation: "Bucket Sort divides the range into equal-sized buckets, distributes elements, sorts each bucket, then combines the results. Average case complexity is O(n+k) where k is the number of buckets."
         }
       ]
     }
@@ -292,47 +125,113 @@ const search2DMatrixContent: Content = {
   
   homework: [
     {
-      id: "search-2d-hw-1",
-      question: "Search a 2D Matrix II: Write an efficient algorithm that searches for a value target in an m x n integer matrix. This matrix has the following properties: 1) Integers in each row are sorted in ascending order from left to right. 2) Integers in each column are sorted in ascending order from top to bottom.",
-      solution: "```java\npublic boolean searchMatrix(int[][] matrix, int target) {\n    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {\n        return false;\n    }\n    \n    int rows = matrix.length;\n    int cols = matrix[0].length;\n    \n    // Start from top-right corner\n    int row = 0;\n    int col = cols - 1;\n    \n    while (row < rows && col >= 0) {\n        if (matrix[row][col] == target) {\n            return true;\n        } else if (matrix[row][col] > target) {\n            // Target is smaller, move left\n            col--;\n        } else {\n            // Target is larger, move down\n            row++;\n        }\n    }\n    \n    return false;\n}\n```\nThis solution uses the approach of starting from the top-right corner of the matrix and moving either left or down based on the comparison with the target. This is efficient for row-wise and column-wise sorted matrices (Type 1). The time complexity is O(m + n) where m and n are the dimensions of the matrix, and the space complexity is O(1)."
+      id: "ls-hw-1",
+      question: "Implement a variation of Counting Sort that handles negative numbers. Test it on an array containing both positive and negative integers.",
+      solution: "```java\npublic void countingSortWithNegatives(int[] arr) {\n    // Find min and max values\n    int min = Arrays.stream(arr).min().getAsInt();\n    int max = Arrays.stream(arr).max().getAsInt();\n    \n    // Create count array to cover the range\n    int range = max - min + 1;\n    int[] count = new int[range];\n    \n    // Count occurrences, shifting by min to handle negatives\n    for (int num : arr) {\n        count[num - min]++;\n    }\n    \n    // Reconstruct the sorted array\n    int index = 0;\n    for (int i = 0; i < range; i++) {\n        int value = i + min; // Convert back to original value\n        while (count[i] > 0) {\n            arr[index++] = value;\n            count[i]--;\n        }\n    }\n}\n```\nThis implementation handles negative numbers by finding the minimum value and using it as an offset for the counting array."
     },
     {
-      id: "search-2d-hw-2",
-      question: "Kth Smallest Element in a Sorted Matrix: Given an n x n matrix where each row and column is sorted in ascending order, find the kth smallest element in the matrix. Note that it's the kth smallest element in the sorted order, not the kth distinct element.",
-      solution: "```java\nimport java.util.PriorityQueue;\n\npublic int kthSmallest(int[][] matrix, int k) {\n    int n = matrix.length;\n    \n    // Use a min heap to keep track of the smallest elements\n    PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> a[0] - b[0]);\n    \n    // Add the first element of each row to the min heap\n    // Each element in the heap is [value, row, col]\n    for (int i = 0; i < Math.min(n, k); i++) {\n        minHeap.offer(new int[]{matrix[i][0], i, 0});\n    }\n    \n    // Extract the kth smallest element\n    int count = 0;\n    int result = 0;\n    \n    while (!minHeap.isEmpty() && count < k) {\n        int[] current = minHeap.poll();\n        result = current[0]; // value\n        int row = current[1];\n        int col = current[2];\n        \n        count++;\n        \n        // Add the next element from the same row\n        if (col + 1 < n) {\n            minHeap.offer(new int[]{matrix[row][col + 1], row, col + 1});\n        }\n    }\n    \n    return result;\n}\n```\nThis solution uses a min heap to efficiently track the smallest elements in the matrix. We start by adding the first element of each row to the heap, then repeatedly extract the smallest element and add the next element from the same row. The time complexity is O(k * log(min(n, k))), and the space complexity is O(min(n, k)) for the heap."
+      id: "ls-hw-2",
+      question: "Compare the performance of Radix Sort and Quick Sort for sorting integers with varying number of digits. Analyze the results and identify conditions where each algorithm performs better.",
+      solution: "```java\npublic class SortingComparison {\n    // Test both algorithms with varying inputs\n    public void compare(int size, int maxDigits) {\n        int[] arr1 = generateArray(size, maxDigits);\n        int[] arr2 = arr1.clone();\n        \n        // Time Radix Sort\n        long start = System.nanoTime();\n        radixSort(arr1);\n        long radixTime = System.nanoTime() - start;\n        \n        // Time Quick Sort\n        start = System.nanoTime();\n        quickSort(arr2, 0, arr2.length - 1);\n        long quickTime = System.nanoTime() - start;\n        \n        System.out.printf(\"Size: %d, Max Digits: %d\\n\", size, maxDigits);\n        System.out.printf(\"Radix Sort: %.2f ms\\n\", radixTime / 1_000_000.0);\n        System.out.printf(\"Quick Sort: %.2f ms\\n\", quickTime / 1_000_000.0);\n    }\n}\n```\nRadix Sort tends to outperform Quick Sort when the number of digits is small relative to the array size. Quick Sort performs better when the range of values is large or the distribution has many digits."
     }
   ],
   
   quiz: [
     {
-      id: "search-2d-quiz-1",
-      question: "What is the time complexity of searching in a sorted matrix (Type 2) using the binary search approach?",
-      options: ["O(m + n)", "O(m * n)", "O(log(m * n))", "O(m * log n)"],
+      id: "ls-quiz-1",
+      question: "What is the time complexity of Counting Sort?",
+      options: ["O(n log n)", "O(n²)", "O(n + k)", "O(n × k)"],
       correctAnswer: 2,
-      explanation: "The time complexity is O(log(m * n)) because we're treating the m×n matrix as a sorted array of length m*n and performing binary search on it. Since binary search has a logarithmic time complexity, the result is log(m*n)."
+      explanation: "The time complexity of Counting Sort is O(n + k), where n is the number of elements and k is the range of input values (max - min + 1)."
     },
     {
-      id: "search-2d-quiz-2",
-      question: "When searching in a row-wise and column-wise sorted matrix (Type 1), which starting position is NOT optimal?",
-      options: ["Top-right corner", "Bottom-left corner", "Top-left corner", "Bottom-right corner"],
+      id: "ls-quiz-2",
+      question: "Which of the following is a limitation of Counting Sort?",
+      options: ["It can only sort positive integers", "It requires a stable sort as a subroutine", "It performs poorly when the range of values is much larger than the number of elements", "It needs exactly n buckets to work properly"],
       correctAnswer: 2,
-      explanation: "Starting from the top-left corner or bottom-right corner is not optimal because we might need to move in two directions (right or down from top-left, left or up from bottom-right). Starting from top-right or bottom-left allows us to make a decision to move in exactly one direction based on the comparison, eliminating one row or column in each step."
+      explanation: "Counting Sort's performance degrades when the range of values (k) is much larger than the number of elements (n), as the time complexity becomes dominated by k."
     },
     {
-      id: "search-2d-quiz-3",
-      question: "What is the time complexity of searching in a row-wise and column-wise sorted matrix (Type 1) starting from the top-right corner?",
-      options: ["O(log(m * n))", "O(m + n)", "O(m * log n)", "O(m * n)"],
-      correctAnswer: 1,
-      explanation: "The time complexity is O(m + n) because in the worst case, we might need to traverse m rows and n columns before determining if the target exists. Each step eliminates either one row or one column, so we never examine the same element twice."
+      id: "ls-quiz-3",
+      question: "Which sorting algorithm would be most efficient for sorting a large array of integers between 1 and 100?",
+      options: ["Quick Sort", "Merge Sort", "Counting Sort", "Insertion Sort"],
+      correctAnswer: 2,
+      explanation: "Counting Sort would be most efficient for this scenario because the range of values (100) is small and fixed, allowing for O(n) time complexity."
     },
     {
-      id: "search-2d-quiz-4",
-      question: "Which approach would be MOST efficient for searching in a matrix where only rows are sorted, but there's no ordering between rows?",
-      options: ["Single binary search treating matrix as 1D array", "Starting from top-right corner", "Binary search on each row", "Linear search"],
+      id: "ls-quiz-4",
+      question: "What property makes Radix Sort suitable for sorting strings?",
+      options: ["Strings can be compared lexicographically", "Strings have fixed maximum length", "Radix Sort processes elements character by character", "Strings are stored as ASCII values"],
       correctAnswer: 2,
-      explanation: "Binary search on each row would be most efficient because we can leverage the sorted property of each row. Single binary search won't work because the matrix can't be viewed as a sorted 1D array. The top-right corner approach requires both row-wise and column-wise sorting. Linear search would be inefficient compared to binary search."
+      explanation: "Radix Sort processes elements digit by digit (or character by character for strings), making it naturally suitable for sorting strings by comparing characters at each position."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these problems to reinforce your understanding of linear sorting algorithms and their applications.",
+    questions: {
+      easy: [
+        {
+          id: "sort-array-by-parity",
+          title: "Sort Array By Parity",
+          link: "https://leetcode.com/problems/sort-array-by-parity/",
+          description: "Rearrange elements so even integers come first, which can be achieved using counting sort principles."
+        },
+        {
+          id: "height-checker",
+          title: "Height Checker",
+          link: "https://leetcode.com/problems/height-checker/",
+          description: "Count mismatches between original and sorted array, effectively using counting sort."
+        },
+        {
+          id: "relative-sort-array",
+          title: "Relative Sort Array",
+          link: "https://leetcode.com/problems/relative-sort-array/",
+          description: "Sort one array relative to another, which can use counting sort for efficient implementation."
+        },
+        {
+          id: "sort-array-by-increasing-frequency",
+          title: "Sort Array By Increasing Frequency",
+          link: "https://leetcode.com/problems/sort-array-by-increasing-frequency/",
+          description: "Sort elements by frequency, which can be solved using counting techniques."
+        }
+      ],
+      medium: [
+        {
+          id: "maximum-gap",
+          title: "Maximum Gap",
+          link: "https://leetcode.com/problems/maximum-gap/",
+          description: "Find maximum gap between successive elements when sorted, efficiently solvable with bucket sort."
+        },
+        {
+          id: "top-k-frequent-elements",
+          title: "Top K Frequent Elements",
+          link: "https://leetcode.com/problems/top-k-frequent-elements/",
+          description: "Find the k most frequent elements, which can be solved using counting and bucket sort."
+        },
+        {
+          id: "sort-characters-by-frequency",
+          title: "Sort Characters By Frequency",
+          link: "https://leetcode.com/problems/sort-characters-by-frequency/",
+          description: "Sort characters by decreasing frequency, efficiently implemented using counting techniques."
+        }
+      ],
+      hard: [
+        {
+          id: "first-missing-positive",
+          title: "First Missing Positive",
+          link: "https://leetcode.com/problems/first-missing-positive/",
+          description: "Find the smallest missing positive integer, which can be solved using principles from counting sort."
+        },
+        {
+          id: "max-value-of-equation",
+          title: "Max Value of Equation",
+          link: "https://leetcode.com/problems/max-value-of-equation/",
+          description: "Find maximum value of an equation, which can be approached using bucket-based techniques."
+        }
+      ]
+    }
+  }
 };
 
-export default search2DMatrixContent; 
+export default linearSortingContent; 

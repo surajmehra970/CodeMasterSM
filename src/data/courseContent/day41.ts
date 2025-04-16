@@ -348,7 +348,78 @@ public List<String> suggestCorrections(String misspelledWord, Set<String> dictio
       correctAnswer: 1,
       explanation: "Spell checking and correction is a practical application of edit distance. By calculating the edit distance between a potentially misspelled word and dictionary words, a spell checker can suggest corrections that are within a certain distance threshold, effectively identifying words that are likely intended by the user."
     }
-  ]
+  ],
+  practice: {
+    introduction: "Practice the Edit Distance algorithm with these LeetCode problems. They will help reinforce your understanding of dynamic programming for string manipulation and various applications of edit distance concepts.",
+    questions: {
+      easy: [
+        {
+          id: "ed-easy-1",
+          title: "Student Attendance Record I",
+          link: "https://leetcode.com/problems/student-attendance-record-i/",
+          description: "Determine if a student can be awarded based on attendance record, checking for absences and consecutive late days. This problem involves string pattern matching similar to edit distance concepts."
+        },
+        {
+          id: "ed-easy-2",
+          title: "Delete Characters to Make Fancy String",
+          link: "https://leetcode.com/problems/delete-characters-to-make-fancy-string/",
+          description: "Transform a string by removing characters to ensure no three identical consecutive characters exist. This involves string transformation similar to edit operations."
+        },
+        {
+          id: "ed-easy-3",
+          title: "Longest Uncommon Subsequence I",
+          link: "https://leetcode.com/problems/longest-uncommon-subsequence-i/",
+          description: "Find the length of the longest string that is a subsequence of one string but not the other, applying concepts related to subsequence identification."
+        }
+      ],
+      medium: [
+        {
+          id: "ed-medium-1",
+          title: "One Edit Distance",
+          link: "https://leetcode.com/problems/one-edit-distance/",
+          description: "Determine if two strings are exactly one edit operation away from each other, directly applying the edit distance algorithm with a constraint."
+        },
+        {
+          id: "ed-medium-2",
+          title: "Delete Operation for Two Strings",
+          link: "https://leetcode.com/problems/delete-operation-for-two-strings/",
+          description: "Find the minimum number of deletions needed to make two strings equal, which is a variation of the edit distance problem with only deletion operations allowed."
+        },
+        {
+          id: "ed-medium-3",
+          title: "Minimum ASCII Delete Sum for Two Strings",
+          link: "https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/",
+          description: "Calculate the lowest ASCII sum of deleted characters to make two strings equal, combining edit distance with character values."
+        },
+        {
+          id: "ed-medium-4",
+          title: "Longest Common Subsequence",
+          link: "https://leetcode.com/problems/longest-common-subsequence/",
+          description: "Find the length of the longest subsequence common to two strings, which is closely related to edit distance as it forms part of the solution approach."
+        }
+      ],
+      hard: [
+        {
+          id: "ed-hard-1",
+          title: "Edit Distance",
+          link: "https://leetcode.com/problems/edit-distance/",
+          description: "The classic problem of calculating the minimum number of operations required to convert one string to another, implementing the full edit distance algorithm."
+        },
+        {
+          id: "ed-hard-2",
+          title: "Minimum Window Subsequence",
+          link: "https://leetcode.com/problems/minimum-window-subsequence/",
+          description: "Find the minimum contiguous substring of one string that contains all characters of another string as a subsequence, requiring advanced string manipulation concepts."
+        },
+        {
+          id: "ed-hard-3",
+          title: "Regular Expression Matching",
+          link: "https://leetcode.com/problems/regular-expression-matching/",
+          description: "Implement regular expression matching with support for '.' and '*', a complex string matching problem that can be solved using DP approaches similar to edit distance."
+        }
+      ]
+    }
+  }
 };
 
 export default editDistanceContent; 

@@ -424,7 +424,80 @@ public class TaskScheduler {
       correctAnswer: 3,
       explanation: "In a simple array-based queue without circular implementation, after several dequeue operations, the front of the queue shifts toward the end of the array. Even if elements are removed from the front, new elements cannot be added once the rear reaches the end of the array, causing 'queue overflow' despite having empty spaces at the front of the array."
     }
-  ]
+  ],
+  
+  // Added practice section for Queue (FIFO)
+  practice: {
+    introduction: "Practice these LeetCode problems to master queue-based algorithms and operations. These problems demonstrate when and how to effectively use FIFO (First-In-First-Out) data structures.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Implement Stack using Queues",
+          link: "https://leetcode.com/problems/implement-stack-using-queues/",
+          description: "Implement a last-in-first-out (LIFO) stack using only standard queues."
+        },
+        {
+          id: "e2",
+          title: "Number of Recent Calls",
+          link: "https://leetcode.com/problems/number-of-recent-calls/",
+          description: "Implement a counter that counts requests within a certain time frame using a queue."
+        },
+        {
+          id: "e3",
+          title: "First Unique Character in a String",
+          link: "https://leetcode.com/problems/first-unique-character-in-a-string/",
+          description: "Find the first non-repeating character in a string—can be efficiently solved using a queue."
+        },
+        {
+          id: "e4",
+          title: "Moving Average from Data Stream",
+          link: "https://leetcode.com/problems/moving-average-from-data-stream/",
+          description: "Calculate the moving average of a data stream with a sliding window approach using a queue."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Design Circular Queue",
+          link: "https://leetcode.com/problems/design-circular-queue/",
+          description: "Implement a circular queue with basic operations like enQueue, deQueue, Front, Rear, and isEmpty."
+        },
+        {
+          id: "m2",
+          title: "Rotting Oranges",
+          link: "https://leetcode.com/problems/rotting-oranges/",
+          description: "Find the minimum time for all oranges to rot, using BFS with a queue to track the rotting process."
+        },
+        {
+          id: "m3",
+          title: "Design Front Middle Back Queue",
+          link: "https://leetcode.com/problems/design-front-middle-back-queue/",
+          description: "Implement a queue that supports operations on the front, middle, and back elements."
+        },
+        {
+          id: "m4",
+          title: "Task Scheduler",
+          link: "https://leetcode.com/problems/task-scheduler/",
+          description: "Arrange tasks with cooling periods, which can be solved using a queue and priority queue."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Find Median from Data Stream",
+          link: "https://leetcode.com/problems/find-median-from-data-stream/",
+          description: "Design a data structure that supports adding integers and finding the median, which can use queues internally."
+        },
+        {
+          id: "h2",
+          title: "Sliding Window Maximum",
+          link: "https://leetcode.com/problems/sliding-window-maximum/",
+          description: "Find the maximum element in each sliding window, efficiently implementable with a deque (double-ended queue)."
+        }
+      ]
+    }
+  }
 };
 
 export default queueFIFOContent; 

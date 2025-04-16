@@ -490,7 +490,79 @@ private void articulationPointDFS(List<List<Integer>> graph, int u, int[] disc, 
       correctAnswer: 2,
       explanation: "Topological sorting is typically implemented using DFS because it naturally processes vertices in the required order, where a vertex is processed only after all its dependencies are processed."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these LeetCode problems to reinforce your understanding of Depth-First Search and its applications. These problems cover various scenarios where DFS is the optimal approach, from tree and graph traversal to more complex applications like cycle detection and backtracking.",
+    questions: {
+      easy: [
+        {
+          id: "dfs-practice-1",
+          title: "Number of Islands",
+          link: "https://leetcode.com/problems/number-of-islands/",
+          description: "Count the number of islands in a 2D grid. This classic problem demonstrates how DFS can be used to explore connected components in a grid."
+        },
+        {
+          id: "dfs-practice-2",
+          title: "Flood Fill",
+          link: "https://leetcode.com/problems/flood-fill/",
+          description: "Implement the flood fill algorithm to change the color of a connected region. This problem shows how DFS can be used for area filling operations."
+        },
+        {
+          id: "dfs-practice-3",
+          title: "Max Area of Island",
+          link: "https://leetcode.com/problems/max-area-of-island/",
+          description: "Find the maximum area of an island in a grid. This extends the basic island counting problem by tracking the size of each island during DFS."
+        }
+      ],
+      medium: [
+        {
+          id: "dfs-practice-4",
+          title: "Course Schedule",
+          link: "https://leetcode.com/problems/course-schedule/",
+          description: "Determine if you can finish all courses given prerequisites. This problem uses DFS for cycle detection in a directed graph."
+        },
+        {
+          id: "dfs-practice-5",
+          title: "Clone Graph",
+          link: "https://leetcode.com/problems/clone-graph/",
+          description: "Deep copy a graph. DFS can be used to traverse the original graph and create corresponding nodes in the cloned graph."
+        },
+        {
+          id: "dfs-practice-6",
+          title: "Pacific Atlantic Water Flow",
+          link: "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+          description: "Find cells that can flow to both Pacific and Atlantic oceans. This problem requires running DFS from the boundaries of the grid inward."
+        },
+        {
+          id: "dfs-practice-7",
+          title: "All Paths From Source to Target",
+          link: "https://leetcode.com/problems/all-paths-from-source-to-target/",
+          description: "Find all possible paths from node 0 to node n-1 in a directed acyclic graph. DFS with backtracking is ideal for finding all possible paths."
+        }
+      ],
+      hard: [
+        {
+          id: "dfs-practice-8",
+          title: "Critical Connections in a Network",
+          link: "https://leetcode.com/problems/critical-connections-in-a-network/",
+          description: "Find all critical connections (bridges) in a network. This advanced problem uses Tarjan's algorithm, a specialized DFS technique."
+        },
+        {
+          id: "dfs-practice-9",
+          title: "Remove Invalid Parentheses",
+          link: "https://leetcode.com/problems/remove-invalid-parentheses/",
+          description: "Remove the minimum number of parentheses to make a string valid. This problem combines DFS with string manipulation and backtracking."
+        },
+        {
+          id: "dfs-practice-10",
+          title: "Longest Increasing Path in a Matrix",
+          link: "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
+          description: "Find the length of the longest increasing path in a matrix. This problem uses DFS with memoization to avoid redundant calculations."
+        }
+      ]
+    }
+  }
 };
 
 export default dfsContent; 

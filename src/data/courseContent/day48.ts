@@ -615,7 +615,79 @@ public class CacheAwareLoadBalancer {
       correctAnswer: 3,
       explanation: "Implementing cache lock/request coalescing best addresses the 'thundering herd' problem, where many clients simultaneously attempt to regenerate a cached item after it expires. With request coalescing, when the first request finds an expired cache entry, it acquires a lock and regenerates the value while subsequent requests wait for the regeneration rather than attempting their own. This prevents system overload from multiple concurrent regeneration attempts."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help reinforce concepts related to load balancing, caching, and distributed system design. While many system design concepts are difficult to practice on LeetCode directly, these problems incorporate the underlying principles and data structures that are essential for implementing effective caching and load balancing systems.",
+    questions: {
+      easy: [
+        {
+          id: "lb-cache-easy-1",
+          title: "Design HashMap",
+          link: "https://leetcode.com/problems/design-hashmap/",
+          description: "Implement a HashMap without using built-in libraries. This practices the fundamentals of hash table design, which underlies many caching implementations."
+        },
+        {
+          id: "lb-cache-easy-2",
+          title: "Min Stack",
+          link: "https://leetcode.com/problems/min-stack/",
+          description: "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. This helps practice efficient data structure design, a key skill for building caching systems."
+        },
+        {
+          id: "lb-cache-easy-3",
+          title: "Range Sum Query - Immutable",
+          link: "https://leetcode.com/problems/range-sum-query-immutable/",
+          description: "Implement a data structure that efficiently answers range sum queries. This demonstrates the concept of pre-computation caching for performance optimization."
+        }
+      ],
+      medium: [
+        {
+          id: "lb-cache-medium-1",
+          title: "LRU Cache",
+          link: "https://leetcode.com/problems/lru-cache/",
+          description: "Design and implement a data structure for Least Recently Used (LRU) cache. This directly applies caching concepts, eviction policies, and efficient access patterns."
+        },
+        {
+          id: "lb-cache-medium-2",
+          title: "Design Twitter",
+          link: "https://leetcode.com/problems/design-twitter/",
+          description: "Design a simplified version of Twitter where users can post tweets and follow other users. This tests your ability to design a system with multiple components that requires efficient data retrieval."
+        },
+        {
+          id: "lb-cache-medium-3",
+          title: "Time Based Key-Value Store",
+          link: "https://leetcode.com/problems/time-based-key-value-store/",
+          description: "Design a time-based key-value data structure that can store and retrieve a key's value at a certain time. This practices designing distributed cache systems with versioning capabilities."
+        },
+        {
+          id: "lb-cache-medium-4",
+          title: "Find Servers That Handled Most Number of Requests",
+          link: "https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/",
+          description: "Find the busiest servers in a load-balanced environment. This directly applies load balancing algorithms and server selection strategies."
+        }
+      ],
+      hard: [
+        {
+          id: "lb-cache-hard-1",
+          title: "LFU Cache",
+          link: "https://leetcode.com/problems/lfu-cache/",
+          description: "Design and implement a data structure for Least Frequently Used (LFU) cache. This advanced caching problem tests understanding of complex eviction policies and efficient implementation."
+        },
+        {
+          id: "lb-cache-hard-2",
+          title: "Design In-Memory File System",
+          link: "https://leetcode.com/problems/design-in-memory-file-system/",
+          description: "Design an in-memory file system to simulate file operations. This tests your ability to design complex distributed systems with hierarchical structures and efficient access patterns."
+        },
+        {
+          id: "lb-cache-hard-3",
+          title: "All O`one Data Structure",
+          link: "https://leetcode.com/problems/all-oone-data-structure/",
+          description: "Design a data structure to store counts of strings and retrieve maximum/minimum count strings efficiently. This practices designing systems that can efficiently track and report usage statistics, similar to load balancer metrics."
+        }
+      ]
+    }
+  }
 };
 
 export default loadBalancingCachingContent; 

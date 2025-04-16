@@ -391,7 +391,85 @@ Height h is O(log n) for balanced trees but can be O(n) in the worst case.`,
       correctAnswer: 3,
       explanation: "Breadth-First Search (BFS) uses a queue data structure to keep track of nodes to be processed. This ensures that nodes are processed level by level, which is the defining characteristic of BFS."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these LeetCode problems to reinforce the tree algorithms and concepts covered in the mock test. These problems range from easy to hard and cover various tree traversal techniques, binary search tree operations, and advanced tree algorithms that were assessed in the mock test.",
+    questions: {
+      easy: [
+        {
+          id: "tree-mock-practice-1",
+          title: "Binary Tree Inorder Traversal",
+          link: "https://leetcode.com/problems/binary-tree-inorder-traversal/",
+          description: "Implement an inorder traversal of a binary tree. This is a fundamental tree traversal technique that produces sorted output for binary search trees."
+        },
+        {
+          id: "tree-mock-practice-2",
+          title: "Symmetric Tree",
+          link: "https://leetcode.com/problems/symmetric-tree/",
+          description: "Determine if a binary tree is a mirror of itself (symmetric around its center). This problem tests your ability to compare corresponding nodes in different subtrees."
+        },
+        {
+          id: "tree-mock-practice-3",
+          title: "Invert Binary Tree",
+          link: "https://leetcode.com/problems/invert-binary-tree/",
+          description: "Invert a binary tree by swapping each node's left and right children. This reinforces your understanding of tree traversal and node manipulation."
+        },
+        {
+          id: "tree-mock-practice-4",
+          title: "Convert Sorted Array to Binary Search Tree",
+          link: "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
+          description: "Convert a sorted array into a height-balanced binary search tree. This problem helps understand the relationship between sorted sequences and BST structures."
+        }
+      ],
+      medium: [
+        {
+          id: "tree-mock-practice-5",
+          title: "Validate Binary Search Tree",
+          link: "https://leetcode.com/problems/validate-binary-search-tree/",
+          description: "Determine if a binary tree is a valid binary search tree. This directly tests your understanding of BST properties and traversal techniques."
+        },
+        {
+          id: "tree-mock-practice-6",
+          title: "Kth Smallest Element in a BST",
+          link: "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+          description: "Find the kth smallest element in a BST. This problem leverages the ordered property of BSTs and inorder traversal concepts."
+        },
+        {
+          id: "tree-mock-practice-7",
+          title: "Construct Binary Tree from Preorder and Inorder Traversal",
+          link: "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+          description: "Build a binary tree from its preorder and inorder traversal sequences. This challenges your understanding of how different traversals encode tree structure."
+        },
+        {
+          id: "tree-mock-practice-8",
+          title: "Count Complete Tree Nodes",
+          link: "https://leetcode.com/problems/count-complete-tree-nodes/",
+          description: "Count the number of nodes in a complete binary tree efficiently. This problem tests your ability to leverage tree properties for algorithmic optimization."
+        }
+      ],
+      hard: [
+        {
+          id: "tree-mock-practice-9",
+          title: "Serialize and Deserialize Binary Tree",
+          link: "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+          description: "Design an algorithm to serialize and deserialize a binary tree. This advanced problem combines tree traversal with string processing techniques."
+        },
+        {
+          id: "tree-mock-practice-10",
+          title: "Binary Tree Maximum Path Sum",
+          link: "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+          description: "Find the maximum path sum in a binary tree. This challenging problem extends the concepts used in tree diameter calculation to include node values."
+        },
+        {
+          id: "tree-mock-practice-11",
+          title: "Binary Tree Cameras",
+          link: "https://leetcode.com/problems/binary-tree-cameras/",
+          description: "Place cameras in a binary tree to monitor all nodes with the minimum number of cameras. This problem requires a sophisticated bottom-up approach and careful analysis."
+        }
+      ]
+    }
+  }
 };
 
 export default mockTestTreesContent; 

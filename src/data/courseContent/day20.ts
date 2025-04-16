@@ -1,349 +1,306 @@
 import { Content } from '@/types/course';
 
-const mockTestWeek3Content: Content = {
-  introduction: "Welcome to the Week 3 Mock Test! This test is designed to evaluate your understanding of the concepts covered in the third week of our DSA journey, with a focus on sorting algorithms, binary search, and search techniques for 2D matrices. Through this mock test, you will apply the binary search algorithm and its variations to solve complex problems. This assessment will help you identify areas where you excel and aspects that may require additional practice before advancing to more complex data structures.",
+const avlTreeContent: Content = {
+  introduction: "AVL trees are self-balancing binary search trees where the height difference between left and right subtrees (balance factor) of any node is at most 1. This balance guarantee ensures O(log n) operations even in worst cases, addressing the main limitation of regular BSTs which can degenerate into linked lists. AVL trees maintain their balance through rotation operations performed after insertions and deletions.",
   
   learningObjectives: [
-    "Apply merge sort and quick sort techniques to solve complex problems",
-    "Utilize binary search and its variations on different data structures",
-    "Implement efficient search algorithms for 2D matrices",
-    "Analyze and apply binary search on answer to optimization problems",
-    "Practice solving problems under time constraints to improve problem-solving speed"
+    "Understand the concept of balanced trees and balance factors",
+    "Implement AVL tree rotations (single and double)",
+    "Develop insertion and deletion operations that maintain balance",
+    "Compare AVL trees with standard BSTs and other balanced tree structures",
+    "Analyze the time complexity improvements of AVL trees"
   ],
   
   sections: [
     {
-      title: "Problem 1: Merge Sorted Arrays",
-      content: "Given two sorted arrays, merge them into a single sorted array without using any built-in sorting functions.",
+      title: "Balance Factor and Tree Height",
+      content: `The balance factor of a node is defined as the height difference between its left and right subtrees. In AVL trees, this value must be -1, 0, or 1 for every node.
+
+Height of a node = 1 + max(height of left subtree, height of right subtree)
+Balance Factor = height of left subtree - height of right subtree
+
+When the balance factor becomes -2 or 2 after an insertion or deletion, rotations are performed to restore balance.
+
+<div class="my-6 flex justify-center">
+  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800 p-2 w-full max-w-md">
+    <h4 class="text-center font-bold mb-2 text-gray-800 dark:text-gray-200">AVL Tree Balance Factors</h4>
+    <div class="flex justify-center">
+      <img src="/images/avl-balance-factors.svg" alt="AVL Tree Balance Factors" class="w-full h-auto" loading="eager" />
+    </div>
+    <p class="text-sm text-center mt-2 text-gray-600 dark:text-gray-400">Balance factors shown for each node in a balanced AVL tree</p>
+  </div>
+</div>`,
       codeExamples: [
         {
           language: "java",
-          code: `public class MergeSortedArrays {
-    public int[] merge(int[] nums1, int[] nums2) {
-        int m = nums1.length;
-        int n = nums2.length;
-        int[] result = new int[m + n];
-        
-        int i = 0, j = 0, k = 0;
-        
-        // Compare elements from both arrays and merge in sorted order
-        while (i < m && j < n) {
-            if (nums1[i] <= nums2[j]) {
-                result[k++] = nums1[i++];
-            } else {
-                result[k++] = nums2[j++];
-            }
-        }
-        
-        // Copy remaining elements from nums1, if any
-        while (i < m) {
-            result[k++] = nums1[i++];
-        }
-        
-        // Copy remaining elements from nums2, if any
-        while (j < n) {
-            result[k++] = nums2[j++];
-        }
-        
-        return result;
+          code: `// AVL Tree Node
+class Node {
+    int key, height;
+    Node left, right;
+    
+    Node(int key) {
+        this.key = key;
+        this.height = 1; // New node is initially at height 1
+    }
+}
+
+// AVL Tree class
+class AVLTree {
+    Node root;
+    
+    // Get height of a node (null nodes have height 0)
+    int height(Node node) {
+        return (node == null) ? 0 : node.height;
     }
     
-    public static void main(String[] args) {
-        MergeSortedArrays solution = new MergeSortedArrays();
-        int[] nums1 = {1, 3, 5, 7};
-        int[] nums2 = {2, 4, 6, 8, 10};
-        
-        int[] result = solution.merge(nums1, nums2);
-        
-        for (int num : result) {
-            System.out.print(num + " ");
+    // Calculate balance factor of a node
+    int getBalanceFactor(Node node) {
+        return (node == null) ? 0 : height(node.left) - height(node.right);
+    }
+    
+    // Update height of a node based on its children
+    void updateHeight(Node node) {
+        if (node != null) {
+            node.height = 1 + Math.max(height(node.left), height(node.right));
         }
-        // Output: 1 2 3 4 5 6 7 8 10
     }
 }`,
-          explanation: "This solution merges two sorted arrays using a two-pointer approach, similar to the merge step in merge sort. The time complexity is O(n + m) where n and m are the lengths of the input arrays, and the space complexity is O(n + m) for the result array. We compare elements from both arrays and add the smaller one to the result array, then advance the pointer for that array. After one array is exhausted, we add the remaining elements from the other array."
+          explanation: "This implementation defines an AVL tree node with a height attribute and methods to calculate and update node heights and balance factors. The height of a null node is 0, and new nodes start with height 1. The balance factor is the difference between the heights of the left and right subtrees."
         }
       ]
     },
     {
-      title: "Problem 2: Find First and Last Position",
-      content: "Given a sorted array of integers, find the starting and ending position of a given target value. If the target is not found, return [-1, -1].",
+      title: "Rotation Operations",
+      content: "Rotations are tree transformations that rebalance the tree while preserving the BST property. There are four types of rotations: left rotation, right rotation, left-right rotation (double rotation), and right-left rotation (double rotation).",
       codeExamples: [
         {
           language: "java",
-          code: `public class FindFirstAndLastPosition {
-    public int[] searchRange(int[] nums, int target) {
-        int[] result = {-1, -1};
-        
-        if (nums == null || nums.length == 0) {
-            return result;
-        }
-        
-        // Find the first occurrence
-        result[0] = findFirstOccurrence(nums, target);
-        
-        // If target is not found, return [-1, -1]
-        if (result[0] == -1) {
-            return result;
-        }
-        
-        // Find the last occurrence
-        result[1] = findLastOccurrence(nums, target);
-        
-        return result;
-    }
+          code: `// Right rotation (for left-heavy imbalance)
+Node rightRotate(Node y) {
+    Node x = y.left;
+    Node T2 = x.right;
     
-    private int findFirstOccurrence(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
-        int result = -1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (nums[mid] == target) {
-                result = mid;
-                // Continue searching in the left half
-                right = mid - 1;
-            } else if (nums[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        
-        return result;
-    }
+    // Perform rotation
+    x.right = y;
+    y.left = T2;
     
-    private int findLastOccurrence(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
-        int result = -1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (nums[mid] == target) {
-                result = mid;
-                // Continue searching in the right half
-                left = mid + 1;
-            } else if (nums[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        
-        return result;
-    }
+    // Update heights
+    updateHeight(y);
+    updateHeight(x);
     
-    public static void main(String[] args) {
-        FindFirstAndLastPosition solution = new FindFirstAndLastPosition();
-        int[] nums = {5, 7, 7, 8, 8, 8, 10};
-        int target = 8;
-        
-        int[] result = solution.searchRange(nums, target);
-        System.out.println("[" + result[0] + ", " + result[1] + "]");
-        // Output: [3, 5]
-    }
+    // Return new root
+    return x;
+}
+
+// Left rotation (for right-heavy imbalance)
+Node leftRotate(Node x) {
+    Node y = x.right;
+    Node T2 = y.left;
+    
+    // Perform rotation
+    y.left = x;
+    x.right = T2;
+    
+    // Update heights
+    updateHeight(x);
+    updateHeight(y);
+    
+    // Return new root
+    return y;
+}
+
+// Left-Right rotation (for left-right imbalance)
+Node leftRightRotate(Node z) {
+    z.left = leftRotate(z.left);
+    return rightRotate(z);
+}
+
+// Right-Left rotation (for right-left imbalance)
+Node rightLeftRotate(Node z) {
+    z.right = rightRotate(z.right);
+    return leftRotate(z);
 }`,
-          explanation: "This solution uses binary search to find the first and last occurrences of the target value. We implement two separate binary search functions: one that continues searching in the left half when the target is found (to find the first occurrence), and another that continues searching in the right half (to find the last occurrence). The time complexity is O(log n) where n is the length of the array, and the space complexity is O(1)."
+          explanation: "These methods implement the four rotation operations needed to rebalance AVL trees. Single rotations (left or right) handle simple imbalances, while double rotations handle more complex cases. Each rotation preserves the BST property while adjusting the height balance."
         }
       ]
     },
     {
-      title: "Problem 3: Search in Rotated Sorted Array",
-      content: "Given a sorted array that has been rotated at some pivot point, find if a target value is in the array. The array may contain duplicates.",
+      title: "AVL Tree Insertion",
+      content: "Insertion in an AVL tree starts like a regular BST insertion, followed by rebalancing from the insertion point back up to the root.",
       codeExamples: [
         {
           language: "java",
-          code: `public class SearchInRotatedSortedArray {
-    public boolean search(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
-            return false;
-        }
-        
-        int left = 0;
-        int right = nums.length - 1;
-        
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            
-            if (nums[mid] == target) {
-                return true;
-            }
-            
-            // Handle duplicates
-            if (nums[left] == nums[mid] && nums[mid] == nums[right]) {
-                left++;
-                right--;
-                continue;
-            }
-            
-            // Check if the left half is sorted
-            if (nums[left] <= nums[mid]) {
-                // Check if target is in the left half
-                if (nums[left] <= target && target < nums[mid]) {
-                    right = mid - 1;
-                } else {
-                    left = mid + 1;
-                }
-            } 
-            // Right half is sorted
-            else {
-                // Check if target is in the right half
-                if (nums[mid] < target && target <= nums[right]) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
-                }
-            }
-        }
-        
-        return false;
+          code: `// Insert a new key in the AVL tree
+Node insert(Node node, int key) {
+    // 1. Perform standard BST insertion
+    if (node == null) {
+        return new Node(key);
     }
     
-    public static void main(String[] args) {
-        SearchInRotatedSortedArray solution = new SearchInRotatedSortedArray();
-        int[] nums = {4, 5, 6, 7, 0, 1, 2};
-        int target = 0;
-        
-        System.out.println(solution.search(nums, target));
-        // Output: true
+    if (key < node.key) {
+        node.left = insert(node.left, key);
+    } else if (key > node.key) {
+        node.right = insert(node.right, key);
+    } else {
+        // Duplicate keys not allowed
+        return node;
     }
+    
+    // 2. Update height of this ancestor node
+    updateHeight(node);
+    
+    // 3. Get the balance factor to check if this node became unbalanced
+    int balance = getBalanceFactor(node);
+    
+    // 4. If unbalanced, there are 4 cases
+    
+    // Left Left Case
+    if (balance > 1 && key < node.left.key) {
+        return rightRotate(node);
+    }
+    
+    // Right Right Case
+    if (balance < -1 && key > node.right.key) {
+        return leftRotate(node);
+    }
+    
+    // Left Right Case
+    if (balance > 1 && key > node.left.key) {
+        return leftRightRotate(node);
+    }
+    
+    // Right Left Case
+    if (balance < -1 && key < node.right.key) {
+        return rightLeftRotate(node);
+    }
+    
+    // Return the unchanged node pointer
+    return node;
 }`,
-          explanation: "This solution modifies the standard binary search to account for the rotation. In each step, we determine which half of the array is sorted, then check if the target lies within the sorted half. If it does, we search that half; otherwise, we search the other half. We also handle duplicates by incrementing left and decrementing right when left, mid, and right elements are equal. The time complexity is O(log n) in the average case, but could be O(n) in the worst case with many duplicates. The space complexity is O(1)."
+          explanation: "This insert method first performs a standard BST insertion, then rebalances the tree by updating heights and performing rotations as needed. It handles all four imbalance cases: left-left (right rotation), right-right (left rotation), left-right (double rotation), and right-left (double rotation)."
         }
       ]
     },
     {
-      title: "Problem 4: Median of Two Sorted Arrays",
-      content: "Given two sorted arrays, find the median of the two arrays. The overall run time complexity should be O(log(m+n)).",
+      title: "AVL Tree Deletion",
+      content: "Deletion in an AVL tree follows the BST deletion algorithm, with added steps to rebalance the tree afterward.",
       codeExamples: [
         {
           language: "java",
-          code: `public class MedianOfTwoSortedArrays {
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        // Ensure nums1 is the smaller array for simplicity
-        if (nums1.length > nums2.length) {
-            return findMedianSortedArrays(nums2, nums1);
-        }
-        
-        int m = nums1.length;
-        int n = nums2.length;
-        
-        int left = 0;
-        int right = m;
-        
-        while (left <= right) {
-            // Get the partition points
-            int partitionX = (left + right) / 2;
-            int partitionY = (m + n + 1) / 2 - partitionX;
-            
-            // Get the elements around the partition
-            int maxX = (partitionX == 0) ? Integer.MIN_VALUE : nums1[partitionX - 1];
-            int minX = (partitionX == m) ? Integer.MAX_VALUE : nums1[partitionX];
-            
-            int maxY = (partitionY == 0) ? Integer.MIN_VALUE : nums2[partitionY - 1];
-            int minY = (partitionY == n) ? Integer.MAX_VALUE : nums2[partitionY];
-            
-            // Check if we found the correct partition
-            if (maxX <= minY && maxY <= minX) {
-                // If the total length is odd
-                if ((m + n) % 2 != 0) {
-                    return Math.max(maxX, maxY);
-                }
-                // If the total length is even
-                else {
-                    return (Math.max(maxX, maxY) + Math.min(minX, minY)) / 2.0;
-                }
-            }
-            // Adjust the partition
-            else if (maxX > minY) {
-                right = partitionX - 1;
-            } else {
-                left = partitionX + 1;
-            }
-        }
-        
-        throw new IllegalArgumentException("Arrays are not sorted or valid");
+          code: `// Delete a node with given key and return new root
+Node delete(Node root, int key) {
+    // 1. Perform standard BST delete
+    if (root == null) {
+        return root;
     }
     
-    public static void main(String[] args) {
-        MedianOfTwoSortedArrays solution = new MedianOfTwoSortedArrays();
-        int[] nums1 = {1, 3};
-        int[] nums2 = {2};
+    // Navigate to the node to be deleted
+    if (key < root.key) {
+        root.left = delete(root.left, key);
+    } else if (key > root.key) {
+        root.right = delete(root.right, key);
+    } else {
+        // Node with only one child or no child
+        if (root.left == null) {
+            return root.right;
+        } else if (root.right == null) {
+            return root.left;
+        }
         
-        System.out.println(solution.findMedianSortedArrays(nums1, nums2));
-        // Output: 2.0
+        // Node with two children: Get the inorder successor
+        root.key = minValue(root.right);
+        
+        // Delete the inorder successor
+        root.right = delete(root.right, root.key);
     }
+    
+    // If the tree had only one node then return
+    if (root == null) {
+        return root;
+    }
+    
+    // 2. Update height of current node
+    updateHeight(root);
+    
+    // 3. Get the balance factor
+    int balance = getBalanceFactor(root);
+    
+    // 4. Rebalance if needed
+    
+    // Left Left Case
+    if (balance > 1 && getBalanceFactor(root.left) >= 0) {
+        return rightRotate(root);
+    }
+    
+    // Left Right Case
+    if (balance > 1 && getBalanceFactor(root.left) < 0) {
+        return leftRightRotate(root);
+    }
+    
+    // Right Right Case
+    if (balance < -1 && getBalanceFactor(root.right) <= 0) {
+        return leftRotate(root);
+    }
+    
+    // Right Left Case
+    if (balance < -1 && getBalanceFactor(root.right) > 0) {
+        return rightLeftRotate(root);
+    }
+    
+    return root;
+}
+
+// Find the node with minimum value in a BST
+int minValue(Node node) {
+    int minValue = node.key;
+    while (node.left != null) {
+        minValue = node.left.key;
+        node = node.left;
+    }
+    return minValue;
 }`,
-          explanation: "This solution uses binary search to find the correct partition of the two arrays. The key insight is to find a partition such that all elements on the left side are smaller than all elements on the right side. We ensure that nums1 is the smaller array and perform binary search on it. For each partition in nums1, we calculate the corresponding partition in nums2. Then we check if we've found the correct partition (maxX <= minY and maxY <= minX). If not, we adjust the partition. The time complexity is O(log(min(m, n))) and the space complexity is O(1)."
+          explanation: "The delete method handles node removal similarly to a standard BST, including the special case of removing a node with two children. After deletion, it updates heights and rebalances the tree by performing appropriate rotations based on the balance factors."
         }
       ]
     },
     {
-      title: "Problem 5: Koko Eating Bananas",
-      content: "Koko loves to eat bananas. There are N piles of bananas, the i-th pile has piles[i] bananas. The guards have gone and will come back in H hours. Koko can decide her bananas-per-hour eating speed K. Each hour, she chooses some pile of bananas, and eats K bananas from that pile. If the pile has less than K bananas, she eats all of them instead, and won't eat any more bananas during this hour. Koko likes to eat slowly, but still wants to finish eating all the bananas before the guards come back. Return the minimum integer K such that she can eat all the bananas within H hours.",
+      title: "AVL Trees vs. Other Balanced Trees",
+      content: "AVL trees are just one type of self-balancing BST. They compare favorably with standard BSTs but have tradeoffs compared to other balanced tree structures.",
       codeExamples: [
         {
           language: "java",
-          code: `public class KokoEatingBananas {
-    public int minEatingSpeed(int[] piles, int h) {
-        // Define the search space
-        int left = 1;  // Minimum eating speed
-        int right = 0; // Maximum eating speed
-        
-        // Find the maximum pile size
-        for (int pile : piles) {
-            right = Math.max(right, pile);
-        }
-        
-        int result = right; // Start with the maximum possible speed
-        
-        // Binary search on the eating speed
-        while (left <= right) {
-            int mid = left + (right - left) / 2; // Try this eating speed
-            
-            if (canEatAll(piles, h, mid)) {
-                // If Koko can eat all bananas with this speed, try a slower speed
-                result = mid;
-                right = mid - 1;
-            } else {
-                // If Koko can't eat all bananas with this speed, try a faster speed
-                left = mid + 1;
-            }
-        }
-        
-        return result;
-    }
-    
-    // Check if Koko can eat all piles within h hours at a eating speed of k
-    private boolean canEatAll(int[] piles, int h, int k) {
-        int hoursNeeded = 0;
-        
-        for (int pile : piles) {
-            // Ceiling division: (pile + k - 1) / k or (pile - 1) / k + 1
-            hoursNeeded += (pile - 1) / k + 1;
-            
-            if (hoursNeeded > h) {
-                return false;
-            }
-        }
-        
-        return true;
-    }
-    
-    public static void main(String[] args) {
-        KokoEatingBananas solution = new KokoEatingBananas();
-        int[] piles = {3, 6, 7, 11};
-        int h = 8;
-        
-        System.out.println(solution.minEatingSpeed(piles, h));
-        // Output: 4
-    }
-}`,
-          explanation: "This solution uses binary search on the answer. We define a range of possible eating speeds (1 to the maximum pile size) and perform binary search to find the minimum eating speed that allows Koko to eat all bananas within H hours. The 'canEatAll' function calculates the total hours needed to eat all piles with a given eating speed. If Koko can eat all bananas with the current speed, we try a slower speed; otherwise, we try a faster speed. The time complexity is O(n * log(max_pile)) where n is the number of piles and max_pile is the maximum pile size. The space complexity is O(1)."
+          code: `/*
+Comparison of AVL Trees with other data structures:
+
+1. AVL Trees vs. Standard BSTs:
+   - AVL Trees guarantee O(log n) operations even in worst cases
+   - Regular BSTs can degenerate to O(n) operations
+   - AVL Trees require more overhead for balancing
+   - AVL Trees are preferred when search operations are frequent
+
+2. AVL Trees vs. Red-Black Trees:
+   - AVL Trees are more strictly balanced (heights differ by at most 1)
+   - Red-Black Trees allow more imbalance (heights can differ by a factor of 2)
+   - AVL Trees provide faster lookups due to better balance
+   - Red-Black Trees have faster insertions and deletions due to fewer rotations
+   - Red-Black Trees are used in Java's TreeMap and C++'s map implementations
+
+3. AVL Trees vs. B-Trees:
+   - B-Trees are more suited for disk-based storage systems
+   - B-Trees reduce disk I/O by having more keys per node
+   - AVL Trees are typically used for in-memory operations
+   - B-Trees form the basis of many database indexes
+
+4. Time Complexity:
+   - AVL Search: O(log n) worst case
+   - AVL Insert: O(log n) worst case
+   - AVL Delete: O(log n) worst case
+   
+   - Standard BST Search: O(n) worst case, O(log n) average
+   - Standard BST Insert: O(n) worst case, O(log n) average
+   - Standard BST Delete: O(n) worst case, O(log n) average
+*/`,
+          explanation: "This comparison highlights the advantages and disadvantages of AVL trees relative to other data structures. AVL trees excel at providing guaranteed logarithmic search times but require more overhead for maintaining stricter balance compared to structures like Red-Black trees."
         }
       ]
     }
@@ -351,67 +308,114 @@ const mockTestWeek3Content: Content = {
   
   homework: [
     {
-      id: "mock-test-wk3-hw-1",
-      question: "Search a 2D Matrix II: Write a function that efficiently searches for a value in an m x n matrix. This matrix has the following properties: 1) Integers in each row are sorted in ascending from left to right. 2) Integers in each column are sorted in ascending from top to bottom.",
-      solution: "```java\npublic boolean searchMatrix(int[][] matrix, int target) {\n    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {\n        return false;\n    }\n    \n    int rows = matrix.length;\n    int cols = matrix[0].length;\n    \n    // Start from the top-right corner\n    int row = 0;\n    int col = cols - 1;\n    \n    while (row < rows && col >= 0) {\n        if (matrix[row][col] == target) {\n            return true;\n        } else if (matrix[row][col] > target) {\n            // Target is smaller, move left\n            col--;\n        } else {\n            // Target is larger, move down\n            row++;\n        }\n    }\n    \n    return false;\n}\n```\nThis solution uses the property that the matrix is both row-wise and column-wise sorted to efficiently search for the target. Starting from the top-right corner, we compare the current element with the target. If they are equal, we've found the target. If the current element is greater than the target, we move left (all elements to the right are greater). If the current element is less than the target, we move down (all elements above are smaller). This approach ensures that we eliminate either a row or a column in each step. The time complexity is O(m + n) where m and n are the dimensions of the matrix."
+      id: "avl-hw-1",
+      question: "Implement a method in the AVL tree class to find the height of the tree and verify its balance property. The method should return true if the tree is a valid AVL tree (all nodes have a balance factor between -1 and 1) and false otherwise.",
+      solution: "```java\npublic class AVLValidator {\n    static class Node {\n        int key, height;\n        Node left, right;\n        \n        Node(int key) {\n            this.key = key;\n            this.height = 1;\n        }\n    }\n    \n    // Get height of a node\n    private int height(Node node) {\n        return (node == null) ? 0 : node.height;\n    }\n    \n    // Calculate balance factor\n    private int getBalanceFactor(Node node) {\n        return (node == null) ? 0 : height(node.left) - height(node.right);\n    }\n    \n    // Verify if tree is a valid AVL tree\n    public boolean isAVLTree(Node root) {\n        // Empty tree is a valid AVL tree\n        if (root == null) {\n            return true;\n        }\n        \n        // Get balance factor\n        int balance = getBalanceFactor(root);\n        \n        // Check if balance factor is valid (-1, 0, or 1)\n        if (balance < -1 || balance > 1) {\n            return false;\n        }\n        \n        // Check if heights are correct\n        int leftHeight = height(root.left);\n        int rightHeight = height(root.right);\n        int expectedHeight = 1 + Math.max(leftHeight, rightHeight);\n        \n        if (root.height != expectedHeight) {\n            return false;\n        }\n        \n        // Recursively check left and right subtrees\n        return isAVLTree(root.left) && isAVLTree(root.right);\n    }\n}\n```\nThis solution verifies if a tree is a valid AVL tree by recursively checking that:\n1. Each node's balance factor is between -1 and 1\n2. Each node's height is correctly calculated\n3. Both the left and right subtrees are valid AVL trees\n\nTime complexity is O(n) where n is the number of nodes, as we need to visit each node once. Space complexity is O(h) where h is the height of the tree, for the recursion stack."
     },
     {
-      id: "mock-test-wk3-hw-2",
-      question: "Find K Closest Elements: Given a sorted array arr, two integers k and x, find the k closest elements to x in the array. The result should also be sorted in ascending order. If there is a tie, the smaller elements are always preferred.",
-      solution: "```java\npublic List<Integer> findClosestElements(int[] arr, int k, int x) {\n    // Use binary search to find the position where x would be inserted\n    int left = 0;\n    int right = arr.length - k;\n    \n    while (left < right) {\n        int mid = left + (right - left) / 2;\n        \n        // Compare the distance from x to arr[mid] and arr[mid+k]\n        if (x - arr[mid] > arr[mid+k] - x) {\n            // If the element at mid is further from x than the element at mid+k,\n            // we need to move the window to the right\n            left = mid + 1;\n        } else {\n            // Otherwise, we move the window to the left\n            right = mid;\n        }\n    }\n    \n    // Once we find the starting position, we can extract k elements\n    List<Integer> result = new ArrayList<>();\n    for (int i = left; i < left + k; i++) {\n        result.add(arr[i]);\n    }\n    \n    return result;\n}\n```\nThis solution uses binary search to find the left bound of the k closest elements to x. The key insight is that we're looking for a window of k consecutive elements such that the elements just outside this window are further from x than the elements inside. Once we find this window, we extract the k elements from the array. The time complexity is O(log(n-k) + k) where n is the length of the array. The log(n-k) term comes from the binary search to find the left bound, and the k term comes from extracting the k elements."
+      id: "avl-hw-2",
+      question: "Implement a method to convert a sorted array into a balanced AVL tree. The resulting tree should have minimum possible height.",
+      solution: "```java\npublic class SortedArrayToAVL {\n    static class Node {\n        int key, height;\n        Node left, right;\n        \n        Node(int key) {\n            this.key = key;\n            this.height = 1;\n        }\n    }\n    \n    // Update height of a node\n    private void updateHeight(Node node) {\n        if (node != null) {\n            node.height = 1 + Math.max(\n                (node.left != null) ? node.left.height : 0,\n                (node.right != null) ? node.right.height : 0\n            );\n        }\n    }\n    \n    // Convert sorted array to AVL tree\n    public Node sortedArrayToAVL(int[] arr) {\n        return sortedArrayToAVL(arr, 0, arr.length - 1);\n    }\n    \n    private Node sortedArrayToAVL(int[] arr, int start, int end) {\n        // Base case\n        if (start > end) {\n            return null;\n        }\n        \n        // Get the middle element and make it root\n        int mid = start + (end - start) / 2;\n        Node node = new Node(arr[mid]);\n        \n        // Recursively construct left and right subtrees\n        node.left = sortedArrayToAVL(arr, start, mid - 1);\n        node.right = sortedArrayToAVL(arr, mid + 1, end);\n        \n        // Update height\n        updateHeight(node);\n        \n        return node;\n    }\n}\n```\nThis solution converts a sorted array to an AVL tree by recursively selecting the middle element as the root and building balanced left and right subtrees. Since the array is already sorted, this approach naturally creates a balanced tree with minimal height.\n\nTime complexity is O(n) where n is the number of elements in the array, as we process each element exactly once. Space complexity is O(log n) for the recursion stack in a balanced tree."
     }
   ],
   
   quiz: [
     {
-      id: "mock-test-wk3-quiz-1",
-      question: "What is the time complexity of binary search on a sorted array of size n?",
-      options: [
-        "O(n)",
-        "O(log n)",
-        "O(n log n)",
-        "O(1)"
-      ],
+      id: "avl-quiz-1",
+      question: "What is the maximum allowed difference between the heights of left and right subtrees in an AVL tree?",
+      options: ["0", "1", "2", "No limit"],
       correctAnswer: 1,
-      explanation: "The time complexity of binary search on a sorted array is O(log n). In each step, we eliminate half of the remaining elements, resulting in logarithmic time complexity. This is much more efficient than a linear search, which would have O(n) time complexity."
+      explanation: "In an AVL tree, the height difference between left and right subtrees (balance factor) of any node must be at most 1. This means the balance factor can be -1, 0, or 1 for the tree to remain balanced."
     },
     {
-      id: "mock-test-wk3-quiz-2",
-      question: "In a rotated sorted array [4, 5, 6, 7, 0, 1, 2], how would you determine which half of the array is sorted when performing a binary search?",
-      options: [
-        "Compare the first element with the middle element",
-        "Compare the middle element with the last element",
-        "Always assume the left half is sorted",
-        "Compare the left element with the middle element, and then the middle element with the right element"
-      ],
-      correctAnswer: 3,
-      explanation: "To determine which half of a rotated sorted array is sorted, we need to compare the left element with the middle element. If nums[left] <= nums[mid], then the left half is sorted; otherwise, the right half is sorted. This comparison helps us decide which half to search based on whether the target lies within the sorted half."
+      id: "avl-quiz-2",
+      question: "Which rotation is needed to balance an AVL tree after inserting a node into the right subtree of the right child of a node?",
+      options: ["Left rotation", "Right rotation", "Left-Right double rotation", "Right-Left double rotation"],
+      correctAnswer: 0,
+      explanation: "This scenario creates a right-right imbalance (balance factor of -2 with the right subtree's balance factor being negative). A left rotation is needed to rebalance the tree in this case."
     },
     {
-      id: "mock-test-wk3-quiz-3",
-      question: "What approach would be most efficient for finding the median of two sorted arrays?",
-      options: [
-        "Merge the arrays and find the middle element",
-        "Use binary search to find the correct partition",
-        "Use two pointers to traverse both arrays",
-        "Sort the combined array using quicksort"
-      ],
+      id: "avl-quiz-3",
+      question: "What is the worst-case time complexity for insertion in an AVL tree?",
+      options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
       correctAnswer: 1,
-      explanation: "The most efficient approach for finding the median of two sorted arrays is to use binary search to find the correct partition. This achieves O(log(min(m, n))) time complexity, which is more efficient than merging the arrays (O(m+n)) or using two pointers (O(m+n)). The key insight is to find a partition such that all elements on the left side are smaller than all elements on the right side."
+      explanation: "The worst-case time complexity for insertion in an AVL tree is O(log n). This includes O(log n) time to find the insertion position and potentially O(log n) time to rebalance the tree by performing rotations up to the root."
     },
     {
-      id: "mock-test-wk3-quiz-4",
-      question: "Which of the following is NOT a valid approach for searching in a row-wise and column-wise sorted 2D matrix?",
-      options: [
-        "Start from the top-right corner and eliminate rows or columns",
-        "Treat the matrix as a 1D sorted array and perform binary search",
-        "Perform binary search on each row",
-        "Use a recursive divide-and-conquer approach"
-      ],
-      correctAnswer: 1,
-      explanation: "Treating the matrix as a 1D sorted array and performing binary search is NOT a valid approach for a row-wise and column-wise sorted matrix (where each row and column is sorted, but the last element of a row is not necessarily smaller than the first element of the next row). This approach works only for matrices that can be viewed as a sorted 1D array shaped into 2D form. For row-wise and column-wise sorted matrices, starting from the top-right corner or performing binary search on each row are valid approaches."
+      id: "avl-quiz-4",
+      question: "How many rotations might be required after a single insertion in an AVL tree?",
+      options: ["At most 1", "At most 2", "O(log n)", "O(n)"],
+      correctAnswer: 2,
+      explanation: "After a single insertion, up to O(log n) rotations might be required in the worst case, as rebalancing may need to propagate all the way up to the root. However, in practice, the number of rotations is typically much smaller."
+    },
+    {
+      id: "avl-quiz-5",
+      question: "Which of the following is NOT an advantage of AVL trees over standard BSTs?",
+      options: ["Guaranteed O(log n) search time", "Guaranteed O(log n) insertion time", "Simpler implementation with fewer special cases", "Better worst-case performance"],
+      correctAnswer: 2,
+      explanation: "AVL trees do not have simpler implementation compared to standard BSTs. In fact, they are more complex due to the need for tracking heights and performing rotations to maintain balance. The advantage is in performance guarantees, not simplicity."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these problems to reinforce your understanding of AVL trees and balanced binary search trees in general. These exercises focus on tree balancing, rotations, and applications of balanced BSTs.",
+    questions: {
+      easy: [
+        {
+          id: "balanced-binary-tree",
+          title: "Balanced Binary Tree",
+          link: "https://leetcode.com/problems/balanced-binary-tree/",
+          description: "Determine if a binary tree is height-balanced (similar to the AVL balance condition)."
+        },
+        {
+          id: "convert-sorted-array-to-bst",
+          title: "Convert Sorted Array to Binary Search Tree",
+          link: "https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/",
+          description: "Convert a sorted array to a height-balanced binary search tree."
+        },
+        {
+          id: "maximum-depth-of-binary-tree",
+          title: "Maximum Depth of Binary Tree",
+          link: "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+          description: "Find the maximum depth of a binary tree, which is a key operation in AVL trees."
+        }
+      ],
+      medium: [
+        {
+          id: "balance-a-binary-search-tree",
+          title: "Balance a Binary Search Tree",
+          link: "https://leetcode.com/problems/balance-a-binary-search-tree/",
+          description: "Convert an unbalanced BST to a balanced BST, similar to AVL tree balancing."
+        },
+        {
+          id: "construct-binary-search-tree-from-preorder-traversal",
+          title: "Construct Binary Search Tree from Preorder Traversal",
+          link: "https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/",
+          description: "Build a balanced BST from a preorder traversal sequence."
+        },
+        {
+          id: "count-complete-tree-nodes",
+          title: "Count Complete Tree Nodes",
+          link: "https://leetcode.com/problems/count-complete-tree-nodes/",
+          description: "Count nodes in a complete binary tree using properties of balanced trees."
+        }
+      ],
+      hard: [
+        {
+          id: "binary-tree-maximum-path-sum",
+          title: "Binary Tree Maximum Path Sum",
+          link: "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+          description: "Find the maximum path sum in a binary tree, applying tree traversal techniques important in AVL operations."
+        },
+        {
+          id: "serialize-and-deserialize-binary-tree",
+          title: "Serialize and Deserialize Binary Tree",
+          link: "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+          description: "Design an algorithm to serialize and deserialize a binary tree, which can be applied to AVL trees."
+        }
+      ]
+    }
+  }
 };
 
-export default mockTestWeek3Content; 
+export default avlTreeContent; 

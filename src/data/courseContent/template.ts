@@ -78,7 +78,80 @@ public void anotherExample() {
       correctAnswer: 2, // Index of correct option (0-based)
       explanation: "Explanation of why this answer is correct"
     }
-  ]
+  ],
+  
+  // Practice section with LeetCode questions
+  practice: {
+    introduction: "Practice is essential to master this topic. Complete the following LeetCode problems to reinforce your understanding.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Easy Problem 1",
+          link: "https://leetcode.com/problems/problem-slug-1/",
+          description: "Brief description of the problem"
+        },
+        {
+          id: "e2",
+          title: "Easy Problem 2",
+          link: "https://leetcode.com/problems/problem-slug-2/",
+          description: "Brief description of the problem"
+        },
+        {
+          id: "e3",
+          title: "Easy Problem 3",
+          link: "https://leetcode.com/problems/problem-slug-3/",
+          description: "Brief description of the problem"
+        },
+        {
+          id: "e4",
+          title: "Easy Problem 4",
+          link: "https://leetcode.com/problems/problem-slug-4/",
+          description: "Brief description of the problem"
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Medium Problem 1",
+          link: "https://leetcode.com/problems/problem-slug-5/",
+          description: "Brief description of the problem"
+        },
+        {
+          id: "m2",
+          title: "Medium Problem 2",
+          link: "https://leetcode.com/problems/problem-slug-6/",
+          description: "Brief description of the problem"
+        },
+        {
+          id: "m3",
+          title: "Medium Problem 3",
+          link: "https://leetcode.com/problems/problem-slug-7/",
+          description: "Brief description of the problem"
+        },
+        {
+          id: "m4",
+          title: "Medium Problem 4",
+          link: "https://leetcode.com/problems/problem-slug-8/",
+          description: "Brief description of the problem"
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Hard Problem 1",
+          link: "https://leetcode.com/problems/problem-slug-9/",
+          description: "Brief description of the problem"
+        },
+        {
+          id: "h2",
+          title: "Hard Problem 2",
+          link: "https://leetcode.com/problems/problem-slug-10/",
+          description: "Brief description of the problem"
+        }
+      ]
+    }
+  }
 };
 
 export default templateContent; 

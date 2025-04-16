@@ -562,7 +562,79 @@ class TaskScheduler {
       correctAnswer: 1,
       explanation: "In a DFS-based topological sort, a vertex is added to the result ordering (typically by pushing it onto a stack) after all its adjacent vertices (descendants) have been visited and processed. This ensures that all dependencies of a vertex appear later in the final ordering when the stack is popped."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you master topological sorting and its applications in directed acyclic graphs. Each problem requires understanding dependency relationships and applying topological ordering principles to determine valid sequences or detect impossible constraints.",
+    questions: {
+      easy: [
+        {
+          id: "topo-sort-easy-1",
+          title: "Course Schedule",
+          link: "https://leetcode.com/problems/course-schedule/",
+          description: "Determine if it's possible to finish all courses given their prerequisites. This is a direct application of topological sort to check if a valid ordering exists (i.e., if the graph has no cycles)."
+        },
+        {
+          id: "topo-sort-easy-2",
+          title: "Course Schedule II",
+          link: "https://leetcode.com/problems/course-schedule-ii/",
+          description: "Return a valid order to take all courses based on their prerequisites. This requires performing a topological sort and returning the resulting sequence."
+        },
+        {
+          id: "topo-sort-easy-3",
+          title: "Minimum Height Trees",
+          link: "https://leetcode.com/problems/minimum-height-trees/",
+          description: "Find all the trees with minimum height that can be formed by selecting a node as the root. While not a direct application of topological sort, it involves finding the 'center' nodes of a tree through a similar process of removing leaf nodes."
+        }
+      ],
+      medium: [
+        {
+          id: "topo-sort-medium-1",
+          title: "Alien Dictionary",
+          link: "https://leetcode.com/problems/alien-dictionary/",
+          description: "Given a sorted dictionary of an alien language, derive the order of its alphabet. This involves constructing a graph from character order relationships and performing a topological sort."
+        },
+        {
+          id: "topo-sort-medium-2",
+          title: "Sequence Reconstruction",
+          link: "https://leetcode.com/problems/sequence-reconstruction/",
+          description: "Determine if a sequence can be uniquely reconstructed from a set of subsequences. This requires verifying if the topological ordering is unique based on the given constraints."
+        },
+        {
+          id: "topo-sort-medium-3",
+          title: "Sort Items by Groups Respecting Dependencies",
+          link: "https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/",
+          description: "Sort items while respecting both item dependencies and group dependencies. This involves performing two levels of topological sorting."
+        },
+        {
+          id: "topo-sort-medium-4",
+          title: "Parallel Courses",
+          link: "https://leetcode.com/problems/parallel-courses/",
+          description: "Find the minimum number of semesters needed to take all courses, with some courses having prerequisites. This combines topological sort with level-by-level processing."
+        }
+      ],
+      hard: [
+        {
+          id: "topo-sort-hard-1",
+          title: "Largest Color Value in a Directed Graph",
+          link: "https://leetcode.com/problems/largest-color-value-in-a-directed-graph/",
+          description: "Find the largest color value of any valid path in a directed graph where nodes have colors. This requires topological sorting combined with dynamic programming."
+        },
+        {
+          id: "topo-sort-hard-2",
+          title: "Find All Possible Recipes from Given Supplies",
+          link: "https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/",
+          description: "Determine which recipes can be created from available supplies and other recipes. This involves creating a dependency graph and using topological sort to find makeable recipes."
+        },
+        {
+          id: "topo-sort-hard-3",
+          title: "Course Schedule III",
+          link: "https://leetcode.com/problems/course-schedule-iii/",
+          description: "Given a set of courses with durations and deadlines, find the maximum number of courses you can take. While primarily a greedy algorithm problem, it benefits from understanding topological constraints."
+        }
+      ]
+    }
+  }
 };
 
 export default topologicalSortContent; 

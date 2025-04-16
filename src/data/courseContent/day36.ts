@@ -612,7 +612,79 @@ class NetworkRouting {
       correctAnswer: 1,
       explanation: "The SPFA optimization is based on using a queue to only process vertices whose distances have changed in the previous iteration, rather than blindly processing all edges in each iteration. This can significantly reduce the number of relaxation operations, especially in sparse graphs, making SPFA much faster in practice though its worst-case complexity remains O(V * E)."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you reinforce your understanding of the Bellman-Ford algorithm and its applications. Work through these problems to improve your ability to detect negative cycles, find shortest paths in weighted graphs, and apply the algorithm to solve real-world optimization problems.",
+    questions: {
+      easy: [
+        {
+          id: "bellman-ford-easy-1",
+          title: "Network Delay Time",
+          link: "https://leetcode.com/problems/network-delay-time/",
+          description: "Given a network of nodes with travel times between them, find the minimum time it takes for all nodes to receive a signal sent from a given node. This problem requires finding the shortest paths from a source vertex to all other vertices."
+        },
+        {
+          id: "bellman-ford-easy-2",
+          title: "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+          link: "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
+          description: "Find the city with the smallest number of other cities that are reachable through some path with distance at most 'threshold'. This problem involves computing shortest paths between vertices."
+        },
+        {
+          id: "bellman-ford-easy-3",
+          title: "Cheapest Flights Within K Stops",
+          link: "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+          description: "Find the cheapest price from a source city to a destination city with at most K stops. This is a constrained shortest path problem that can be solved using a modified version of Bellman-Ford."
+        }
+      ],
+      medium: [
+        {
+          id: "bellman-ford-medium-1",
+          title: "Path With Minimum Effort",
+          link: "https://leetcode.com/problems/path-with-minimum-effort/",
+          description: "Find a path from top-left to bottom-right of a grid with the minimum 'effort', where effort is defined as the maximum absolute difference in heights between adjacent cells. This problem can be solved by adapting Bellman-Ford to grid graphs."
+        },
+        {
+          id: "bellman-ford-medium-2",
+          title: "Path With Maximum Probability",
+          link: "https://leetcode.com/problems/path-with-maximum-probability/",
+          description: "Find the path with the maximum probability of success from start to end node. This requires finding the 'shortest' path where we maximize probability instead of minimizing distance."
+        },
+        {
+          id: "bellman-ford-medium-3",
+          title: "Optimize Water Distribution in a Village",
+          link: "https://leetcode.com/problems/optimize-water-distribution-in-a-village/",
+          description: "Optimize the cost of providing water to a village by either building wells or laying pipes between houses. This problem can be modeled as a minimum spanning tree with the additional option of building wells."
+        },
+        {
+          id: "bellman-ford-medium-4",
+          title: "Minimum Cost to Reach Destination in Time",
+          link: "https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/",
+          description: "Find the minimum cost to reach a destination from a source within a time constraint. This combines the shortest path problem with an additional time constraint."
+        }
+      ],
+      hard: [
+        {
+          id: "bellman-ford-hard-1",
+          title: "Course Schedule III",
+          link: "https://leetcode.com/problems/course-schedule-iii/",
+          description: "Given an array of courses with duration and deadline, find the maximum number of courses you can take. While typically solved with a greedy approach, understanding the underlying graph structure and constraints is valuable."
+        },
+        {
+          id: "bellman-ford-hard-2",
+          title: "Minimum Cost to Make at Least One Valid Path in a Grid",
+          link: "https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+          description: "Find the minimum cost to change directions in a grid to create a valid path from top-left to bottom-right. This problem combines graph traversal with optimization constraints."
+        },
+        {
+          id: "bellman-ford-hard-3",
+          title: "Alien Dictionary",
+          link: "https://leetcode.com/problems/alien-dictionary/",
+          description: "Given a sorted dictionary of an alien language, derive the order of its alphabet. This problem requires constructing a graph from the given words and finding a topological ordering, with considerations for cycle detection."
+        }
+      ]
+    }
+  }
 };
 
 export default bellmanFordContent; 

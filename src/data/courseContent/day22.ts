@@ -1,433 +1,315 @@
 import { Content } from '@/types/course';
 
-const bfsDfsTreeContent: Content = {
-  introduction: "Trees are hierarchical data structures that naturally lend themselves to traversal algorithms. Breadth-First Search (BFS) and Depth-First Search (DFS) represent two fundamental approaches to exploring tree structures. While we've explored tree traversal techniques previously, this lesson focuses specifically on the application of BFS and DFS to tree problems and how they help us solve different types of challenges efficiently.",
+const bTreeContent: Content = {
+  introduction: "B-Trees are self-balancing search trees designed to work efficiently with disk-based storage systems where reading and writing large blocks of data is more efficient than individual items. Unlike binary trees that have at most two children per node, B-Tree nodes can have multiple keys and children. This structure minimizes disk I/O operations and is widely used in databases, file systems, and other applications where large datasets need to be stored and accessed efficiently.",
   
   learningObjectives: [
-    "Understand the practical applications of BFS and DFS in tree algorithms",
-    "Learn how to choose between BFS and DFS for different tree problems",
-    "Implement BFS and DFS for specific tree-related tasks",
-    "Apply BFS and DFS to solve various tree problems",
-    "Optimize tree traversal algorithms for time and space efficiency"
+    "Understand the structure and properties of B-Trees",
+    "Learn the operations of B-Trees: search, insertion, and deletion",
+    "Analyze the time and space complexity of B-Tree operations",
+    "Compare B-Trees with binary search trees and other balanced tree structures",
+    "Recognize practical applications of B-Trees in database systems and file systems"
   ],
   
   sections: [
     {
-      title: "BFS vs DFS for Trees: When to Use Which",
-      content: "BFS and DFS offer distinct advantages depending on the problem at hand. BFS processes nodes level by level and is ideal for finding the shortest path or the minimum number of steps in unweighted trees. DFS explores all the way down a branch before backtracking and is excellent for exhaustive searches, detecting cycles, or when the solution is likely far from the root.",
+      title: "B-Tree Structure and Properties",
+      content: `A B-Tree of order m has the following properties:
+- Every node has at most m children
+- Every non-leaf node (except root) has at least ⌈m/2⌉ children
+- The root has at least 2 children if it's not a leaf
+- All leaf nodes appear at the same level
+- A non-leaf node with k children contains k-1 keys
+
+These properties ensure that the tree remains balanced, providing guaranteed logarithmic time for operations.
+
+<div class="my-6 flex justify-center">
+  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800 p-2 w-full max-w-3xl">
+    <h4 class="text-center font-bold mb-2 text-gray-800 dark:text-gray-200">B-Tree Structure</h4>
+    <div class="flex justify-center">
+      <img src="/images/b-tree-structure.svg" alt="B-Tree Structure" class="w-full h-auto" loading="eager" />
+    </div>
+    <p class="text-sm text-center mt-2 text-gray-600 dark:text-gray-400">A B-Tree of order 5 with multiple keys per node</p>
+  </div>
+</div>`,
       codeExamples: [
         {
           language: "java",
-          code: `// BFS is ideal for these tree problems:
-// 1. Finding the minimum depth of a binary tree
-// 2. Level order traversal
-// 3. Finding nodes at k distance from root
-// 4. Finding the shortest path between two nodes
-// 5. Checking if a binary tree is complete
-
-// DFS is better for these tree problems:
-// 1. Finding the maximum depth of a binary tree
-// 2. Detecting cycles in a tree
-// 3. Binary tree path sum problems
-// 4. Checking if a binary tree is balanced
-// 5. Finding the diameter of a binary tree
-
-// Example: Choosing between BFS and DFS for finding a value
-public boolean findValueInTree(TreeNode root, int target) {
-    // If we expect the value to be near the root, use BFS
-    if (isLikelyNearRoot(target)) {
-        return findValueBFS(root, target);
-    }
-    // Otherwise, use DFS for a more memory-efficient search
-    else {
-        return findValueDFS(root, target);
+          code: `// B-Tree Node
+class BTreeNode {
+    int[] keys;         // Array of keys
+    int t;              // Minimum degree (defines the range for number of keys)
+    BTreeNode[] children; // Array of child pointers
+    int n;              // Current number of keys
+    boolean leaf;       // Is true when node is leaf, else false
+    
+    // Constructor
+    public BTreeNode(int t, boolean leaf) {
+        this.t = t;
+        this.leaf = leaf;
+        this.keys = new int[2*t - 1]; // A node can have at most 2*t-1 keys
+        this.children = new BTreeNode[2*t];
+        this.n = 0; // Initially, the node has 0 keys
     }
 }
 
-// Helper method to decide search strategy
-private boolean isLikelyNearRoot(int target) {
-    // This is application-specific logic that would determine
-    // if the target value is likely close to the root
-    return target < 100; // Simplified example
+// B-Tree
+class BTree {
+    BTreeNode root;
+    int t; // Minimum degree
+    
+    // Constructor
+    public BTree(int t) {
+        this.root = null;
+        this.t = t;
+    }
 }`,
-          explanation: "This code illustrates how to make a strategic choice between BFS and DFS based on the nature of the problem and the expected location of the solution in the tree."
+          explanation: "This code defines the basic structure of a B-Tree. Each node contains an array of keys and an array of pointers to its children. The parameter 't' represents the minimum degree of the B-Tree, which determines how many keys each node can have (between t-1 and 2t-1, except for the root)."
         }
       ]
     },
     {
-      title: "BFS for Tree Problems",
-      content: "BFS is particularly useful for tree problems where level-by-level processing is important. It uses a queue data structure to keep track of nodes to visit next and processes all nodes at the current depth before moving to the next level. This makes it perfect for finding the shortest path, level order traversal, and finding nodes at a specific depth.",
+      title: "B-Tree Search Operation",
+      content: "Searching in a B-Tree is similar to searching in a binary search tree but extended to handle multiple keys per node. Starting from the root, we find the appropriate child to traverse based on the comparison with keys in the current node.",
       codeExamples: [
         {
           language: "java",
-          code: `// Finding the minimum depth of a binary tree using BFS
-public int minDepthBFS(TreeNode root) {
-    if (root == null) return 0;
-    
-    Queue<TreeNode> queue = new LinkedList<>();
-    Queue<Integer> depths = new LinkedList<>();
-    queue.offer(root);
-    depths.offer(1);
-    
-    while (!queue.isEmpty()) {
-        TreeNode node = queue.poll();
-        int depth = depths.poll();
-        
-        // If we found a leaf node, return its depth
-        if (node.left == null && node.right == null) {
-            return depth;
-        }
-        
-        if (node.left != null) {
-            queue.offer(node.left);
-            depths.offer(depth + 1);
-        }
-        
-        if (node.right != null) {
-            queue.offer(node.right);
-            depths.offer(depth + 1);
-        }
+          code: `// Search a key in B-Tree
+public BTreeNode search(BTreeNode node, int key) {
+    // Find the first key greater than or equal to key
+    int i = 0;
+    while (i < node.n && key > node.keys[i]) {
+        i++;
     }
     
-    return 0; // This should never happen for a valid tree
-}
-
-// Finding nodes at k distance from the root
-public List<Integer> nodesAtDistanceK(TreeNode root, int k) {
-    List<Integer> result = new ArrayList<>();
-    if (root == null) return result;
-    
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.offer(root);
-    int level = 0;
-    
-    while (!queue.isEmpty()) {
-        int size = queue.size();
-        
-        for (int i = 0; i < size; i++) {
-            TreeNode node = queue.poll();
-            
-            // If we're at level k, add values to result
-            if (level == k) {
-                result.add(node.val);
-            }
-            
-            if (node.left != null) queue.offer(node.left);
-            if (node.right != null) queue.offer(node.right);
-        }
-        
-        level++;
-        
-        // If we've passed level k, we can stop
-        if (level > k) break;
+    // If the found key is equal to key, return this node
+    if (i < node.n && key == node.keys[i]) {
+        return node;
     }
     
-    return result;
-}
-
-// Check if a binary tree is complete
-public boolean isCompleteTree(TreeNode root) {
-    if (root == null) return true;
-    
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.offer(root);
-    boolean foundNull = false;
-    
-    while (!queue.isEmpty()) {
-        TreeNode node = queue.poll();
-        
-        // If we find a node after seeing a null, the tree is not complete
-        if (node == null) {
-            foundNull = true;
-        } else {
-            if (foundNull) return false;
-            
-            queue.offer(node.left);
-            queue.offer(node.right);
-        }
+    // If key is not found here and this is a leaf node, return null
+    if (node.leaf) {
+        return null;
     }
     
-    return true;
+    // Go to the appropriate child
+    return search(node.children[i], key);
 }`,
-          explanation: "These examples demonstrate practical BFS applications for tree problems. The minimum depth problem showcases how BFS finds the shortest path to a leaf node. The 'nodes at distance k' problem illustrates level-based processing. The 'complete tree' check uses BFS's level-order nature to verify that there are no gaps in the tree structure."
+          explanation: "This search method starts by finding the first key in the node that is greater than or equal to the target key. If the key is found, it returns the node. Otherwise, if the node is a leaf, the key is not in the tree. If the node is internal, the method recursively searches the appropriate child node based on the comparison result."
         }
       ]
     },
     {
-      title: "DFS for Tree Problems",
-      content: "DFS excels at exploring paths to their full depth before backtracking. In trees, DFS can be implemented using recursion or an explicit stack. It's particularly useful for problems requiring exhaustive path exploration, finding the maximum depth, or checking structural properties like balance.",
+      title: "B-Tree Insertion",
+      content: "Insertion in a B-Tree is more complex than in a binary search tree because we need to maintain the B-Tree properties. If a node becomes full after insertion, it must be split to maintain balance.",
       codeExamples: [
         {
           language: "java",
-          code: `// Finding the maximum depth of a binary tree using DFS
-public int maxDepthDFS(TreeNode root) {
-    if (root == null) return 0;
-    
-    int leftDepth = maxDepthDFS(root.left);
-    int rightDepth = maxDepthDFS(root.right);
-    
-    return Math.max(leftDepth, rightDepth) + 1;
-}
-
-// Path sum problem: check if there's a root-to-leaf path that sums to target
-public boolean hasPathSum(TreeNode root, int targetSum) {
-    if (root == null) return false;
-    
-    // If it's a leaf node, check if the value matches the remaining sum
-    if (root.left == null && root.right == null) {
-        return root.val == targetSum;
+          code: `// Insert a key into the B-Tree
+public void insert(int key) {
+    // If tree is empty
+    if (root == null) {
+        root = new BTreeNode(t, true);
+        root.keys[0] = key;
+        root.n = 1;
+        return;
     }
     
-    // Recursively check left and right subtrees with reduced target
-    return hasPathSum(root.left, targetSum - root.val) || 
-           hasPathSum(root.right, targetSum - root.val);
-}
-
-// Finding all root-to-leaf paths in a binary tree
-public List<List<Integer>> findAllPaths(TreeNode root) {
-    List<List<Integer>> paths = new ArrayList<>();
-    findPathsDFS(root, new ArrayList<>(), paths);
-    return paths;
-}
-
-private void findPathsDFS(TreeNode node, List<Integer> currentPath, 
-                         List<List<Integer>> paths) {
-    if (node == null) return;
-    
-    // Add current node to the path
-    currentPath.add(node.val);
-    
-    // If it's a leaf node, we've found a complete path
-    if (node.left == null && node.right == null) {
-        paths.add(new ArrayList<>(currentPath));
+    // If root is full, then tree grows in height
+    if (root.n == 2*t - 1) {
+        // Create new root
+        BTreeNode s = new BTreeNode(t, false);
+        
+        // Make old root as child of new root
+        s.children[0] = root;
+        
+        // Split the old root and move 1 key to the new root
+        splitChild(s, 0);
+        
+        // New root has two children now. Decide which child will contain new key
+        int i = 0;
+        if (s.keys[0] < key) {
+            i++;
+        }
+        insertNonFull(s.children[i], key);
+        
+        // Change root
+        root = s;
     } else {
-        // Continue DFS on left and right children
-        findPathsDFS(node.left, currentPath, paths);
-        findPathsDFS(node.right, currentPath, paths);
+        // If root is not full, call insertNonFull for root
+        insertNonFull(root, key);
+    }
+}
+
+// Insert a key into a non-full node
+private void insertNonFull(BTreeNode node, int key) {
+    // Initialize index as the rightmost element
+    int i = node.n - 1;
+    
+    // If this is a leaf node
+    if (node.leaf) {
+        // Find the position for new key and move all greater keys one space ahead
+        while (i >= 0 && key < node.keys[i]) {
+            node.keys[i+1] = node.keys[i];
+            i--;
+        }
+        
+        // Insert the new key
+        node.keys[i+1] = key;
+        node.n++;
+    } else {
+        // Find the child which is going to have the new key
+        while (i >= 0 && key < node.keys[i]) {
+            i--;
+        }
+        i++;
+        
+        // Check if the child is full
+        if (node.children[i].n == 2*t - 1) {
+            // If the child is full, split it
+            splitChild(node, i);
+            
+            // After split, the middle key goes up and the node has two children
+            if (key > node.keys[i]) {
+                i++;
+            }
+        }
+        insertNonFull(node.children[i], key);
+    }
+}
+
+// Split the child of node at index i
+private void splitChild(BTreeNode parent, int index) {
+    BTreeNode child = parent.children[index];
+    BTreeNode newChild = new BTreeNode(t, child.leaf);
+    newChild.n = t - 1;
+    
+    // Copy the last (t-1) keys of child to newChild
+    for (int j = 0; j < t-1; j++) {
+        newChild.keys[j] = child.keys[j+t];
     }
     
-    // Backtrack by removing the current node
-    currentPath.remove(currentPath.size() - 1);
-}
-
-// Check if a binary tree is balanced
-public boolean isBalanced(TreeNode root) {
-    return checkHeight(root) != -1;
-}
-
-private int checkHeight(TreeNode node) {
-    if (node == null) return 0;
+    // Copy the last t children of child to newChild
+    if (!child.leaf) {
+        for (int j = 0; j < t; j++) {
+            newChild.children[j] = child.children[j+t];
+        }
+    }
     
-    // Check left subtree height
-    int leftHeight = checkHeight(node.left);
-    if (leftHeight == -1) return -1; // Left subtree is unbalanced
+    // Reduce the number of keys in child
+    child.n = t - 1;
     
-    // Check right subtree height
-    int rightHeight = checkHeight(node.right);
-    if (rightHeight == -1) return -1; // Right subtree is unbalanced
+    // Make room for a new child in parent
+    for (int j = parent.n; j > index; j--) {
+        parent.children[j+1] = parent.children[j];
+    }
     
-    // Check if current node is balanced
-    if (Math.abs(leftHeight - rightHeight) > 1) return -1; // Unbalanced
+    // Link the new child to parent
+    parent.children[index+1] = newChild;
     
-    // Return height of current subtree
-    return Math.max(leftHeight, rightHeight) + 1;
+    // Move a key from child to parent
+    for (int j = parent.n-1; j >= index; j--) {
+        parent.keys[j+1] = parent.keys[j];
+    }
+    parent.keys[index] = child.keys[t-1];
+    parent.n++;
 }`,
-          explanation: "These DFS examples showcase how depth-first search is effectively applied to tree problems. The maximum depth calculation leverages DFS's natural exploration pattern. The path sum and all paths problems demonstrate how DFS can track paths from root to leaf. The balanced tree check shows how DFS can efficiently verify structural properties by processing nodes in post-order."
+          explanation: "The insertion process involves traversing down to a leaf node and inserting the key there. If nodes become full during insertion, they are split, pushing a middle key up to the parent node. This may propagate up to the root, causing the tree to grow in height when the root splits."
         }
       ]
     },
     {
-      title: "Hybrid BFS-DFS Approaches",
-      content: "Some complex tree problems benefit from combining aspects of both BFS and DFS. These hybrid approaches leverage the strengths of each traversal method to solve problems that would be difficult with either approach alone.",
+      title: "B-Tree Time and Space Complexity",
+      content: "B-Trees are designed to minimize disk I/O operations, providing efficient time complexity for search, insert, and delete operations even with large amounts of data.",
       codeExamples: [
         {
           language: "java",
-          code: `// Finding the right side view of a binary tree (rightmost node at each level)
-public List<Integer> rightSideView(TreeNode root) {
-    List<Integer> result = new ArrayList<>();
-    if (root == null) return result;
-    
-    // Use BFS for level traversal
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.offer(root);
-    
-    while (!queue.isEmpty()) {
-        int size = queue.size();
-        
-        for (int i = 0; i < size; i++) {
-            TreeNode node = queue.poll();
-            
-            // If it's the last node in the level, add to result
-            if (i == size - 1) {
-                result.add(node.val);
-            }
-            
-            // Add children to queue
-            if (node.left != null) queue.offer(node.left);
-            if (node.right != null) queue.offer(node.right);
-        }
-    }
-    
-    return result;
-}
+          code: `/*
+Time Complexity of B-Tree Operations:
 
-// Alternative right side view using DFS
-public List<Integer> rightSideViewDFS(TreeNode root) {
-    List<Integer> result = new ArrayList<>();
-    rightViewDFS(root, 0, result);
-    return result;
-}
+1. Search:
+   - O(log_t n), where t is the minimum degree and n is the number of keys
+   - This represents the height of the tree, which is logarithmic to the number of keys
 
-private void rightViewDFS(TreeNode node, int level, List<Integer> result) {
-    if (node == null) return;
-    
-    // If this is the first node we've seen at this level
-    if (level == result.size()) {
-        result.add(node.val);
-    }
-    
-    // Visit right first, then left (reversed DFS order)
-    rightViewDFS(node.right, level + 1, result);
-    rightViewDFS(node.left, level + 1, result);
-}
+2. Insertion:
+   - O(t * log_t n) in the worst case
+   - Finding the insertion position takes O(log_t n)
+   - Splitting a node takes O(t) time
 
-// Finding the vertical order traversal of a binary tree
-public List<List<Integer>> verticalOrder(TreeNode root) {
-    List<List<Integer>> result = new ArrayList<>();
-    if (root == null) return result;
-    
-    // Map to store nodes at each column
-    Map<Integer, List<Integer>> columnMap = new TreeMap<>();
-    
-    // Use BFS with a queue that stores nodes and their column positions
-    Queue<TreeNode> nodeQueue = new LinkedList<>();
-    Queue<Integer> colQueue = new LinkedList<>();
-    
-    nodeQueue.offer(root);
-    colQueue.offer(0);
-    
-    while (!nodeQueue.isEmpty()) {
-        TreeNode node = nodeQueue.poll();
-        int col = colQueue.poll();
-        
-        // Add node to its column list
-        columnMap.putIfAbsent(col, new ArrayList<>());
-        columnMap.get(col).add(node.val);
-        
-        // Process left child (column - 1)
-        if (node.left != null) {
-            nodeQueue.offer(node.left);
-            colQueue.offer(col - 1);
-        }
-        
-        // Process right child (column + 1)
-        if (node.right != null) {
-            nodeQueue.offer(node.right);
-            colQueue.offer(col + 1);
-        }
-    }
-    
-    // Add all column lists to result in order
-    result.addAll(columnMap.values());
-    
-    return result;
-}`,
-          explanation: "These examples show hybrid approaches combining aspects of BFS and DFS. The right side view can be solved with either BFS (level by level) or a modified DFS (right before left). The vertical order traversal uses BFS for level order processing but tracks column positions to organize nodes vertically."
+3. Deletion:
+   - O(t * log_t n) in the worst case
+
+Space Complexity:
+   - O(n) for storing the tree
+   - Each node can have up to 2t-1 keys and 2t children
+
+B-Tree vs. Other Data Structures:
+
+1. B-Tree vs. Binary Search Tree:
+   - BST: O(h) search time, where h can be n in worst case
+   - B-Tree: Guaranteed O(log_t n) search time
+
+2. B-Tree vs. AVL/Red-Black Tree:
+   - Both provide O(log n) operations
+   - B-Tree has fewer I/O operations when data doesn't fit in memory
+   - B-Tree better utilizes block storage
+
+3. B-Tree Applications:
+   - Database indexing
+   - File systems (NTFS, ext4, etc.)
+   - When data is too large to fit in memory
+*/`,
+          explanation: "This analysis details the time and space complexity of B-Tree operations and compares B-Trees with other tree data structures. The logarithmic height of B-Trees ensures efficient operations, and their block-oriented structure reduces the number of disk accesses, making them ideal for external storage systems."
         }
       ]
     },
     {
-      title: "Space-Time Tradeoffs in Tree Traversals",
-      content: "When working with trees, there are important space-time tradeoffs to consider between BFS and DFS. BFS generally requires more space (proportional to the maximum width of the tree) but can find level-based solutions faster. DFS typically uses less memory (proportional to the height of the tree) but may explore unnecessary paths in certain problems.",
+      title: "B-Tree Variants and Applications",
+      content: "B-Trees have several variants optimized for specific use cases, each with slight modifications to the original structure to improve performance or add features.",
       codeExamples: [
         {
           language: "java",
-          code: `// Memory-efficient DFS (O(h) space where h is the height)
-public boolean findTargetDFS(TreeNode root, int target) {
-    if (root == null) return false;
-    
-    // Found the target
-    if (root.val == target) return true;
-    
-    // Try left and right subtrees
-    return findTargetDFS(root.left, target) || findTargetDFS(root.right, target);
-}
+          code: `/*
+Common B-Tree Variants:
 
-// BFS approach (O(w) space where w is the max width)
-public boolean findTargetBFS(TreeNode root, int target) {
-    if (root == null) return false;
-    
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.offer(root);
-    
-    while (!queue.isEmpty()) {
-        TreeNode node = queue.poll();
-        
-        // Found the target
-        if (node.val == target) return true;
-        
-        // Add children to queue
-        if (node.left != null) queue.offer(node.left);
-        if (node.right != null) queue.offer(node.right);
-    }
-    
-    return false;
-}
+1. B+ Tree
+   - All keys exist in leaf nodes
+   - Leaf nodes are linked for sequential access
+   - Internal nodes only contain keys for routing
+   - Commonly used in database indexing and file systems
 
-// Space-optimized iterative DFS (using stack)
-public boolean findTargetDFSIterative(TreeNode root, int target) {
-    if (root == null) return false;
-    
-    Stack<TreeNode> stack = new Stack<>();
-    stack.push(root);
-    
-    while (!stack.isEmpty()) {
-        TreeNode node = stack.pop();
-        
-        if (node.val == target) return true;
-        
-        // Push right first so left is processed first
-        if (node.right != null) stack.push(node.right);
-        if (node.left != null) stack.push(node.left);
-    }
-    
-    return false;
-}
+2. B* Tree
+   - Nodes are kept at least 2/3 full (instead of 1/2)
+   - Delays splitting by redistributing keys between siblings
+   - Reduces splits and improves space utilization
 
-// Morris Traversal for constant space inorder traversal
-public List<Integer> morrisInorderTraversal(TreeNode root) {
-    List<Integer> result = new ArrayList<>();
-    TreeNode current = root;
-    
-    while (current != null) {
-        // If left is null, visit current and move right
-        if (current.left == null) {
-            result.add(current.val);
-            current = current.right;
-        } else {
-            // Find the inorder predecessor
-            TreeNode predecessor = current.left;
-            while (predecessor.right != null && predecessor.right != current) {
-                predecessor = predecessor.right;
-            }
-            
-            // If right is null, go left after creating link
-            if (predecessor.right == null) {
-                predecessor.right = current;
-                current = current.left;
-            } 
-            // Restore the tree and visit current node
-            else {
-                predecessor.right = null;
-                result.add(current.val);
-                current = current.right;
-            }
-        }
-    }
-    
-    return result;
-}`,
-          explanation: "These examples illustrate the space-time tradeoffs between different traversal approaches. The recursive DFS uses O(h) space for the call stack, while BFS uses O(w) space for the queue. The Morris traversal demonstrates an advanced technique to achieve constant space complexity by temporarily modifying the tree structure."
+3. 2-3 Tree
+   - Special case of B-Tree where t = 2
+   - Each node has either 2 or 3 children
+   - Simpler structure for educational purposes
+
+4. 2-3-4 Tree
+   - Special case of B-Tree where t = 2
+   - Each node has 2, 3, or 4 children
+   - Equivalent to Red-Black Trees
+
+Real-world Applications:
+
+1. Database Management Systems
+   - MySQL (InnoDB): B+ Trees for indexing
+   - PostgreSQL: B+ Trees for indexing
+   - Oracle: B+ Trees for indexing
+
+2. File Systems
+   - NTFS: B+ Trees for master file table
+   - ext4: B+ Trees for directory indexing
+   - HFS+: B+ Trees for catalog file
+
+3. Key-Value Stores
+   - LevelDB: Combination of B+ Trees with LSM Trees
+   - BerkeleyDB: B+ Trees as the underlying structure
+*/`,
+          explanation: "This code block outlines popular B-Tree variants and their real-world applications. The most widely used variant is the B+ Tree, which optimizes for range queries and sequential access by storing all keys in leaf nodes and adding pointers between leaves. These structures form the backbone of most modern databases and file systems."
         }
       ]
     }
@@ -435,57 +317,124 @@ public List<Integer> morrisInorderTraversal(TreeNode root) {
   
   homework: [
     {
-      id: "hw-1",
-      question: "Given a binary tree, find the average value of nodes at each level. Return the result as an array where result[i] is the average value of all nodes at level i (0-indexed).",
-      solution: "Use BFS to process the tree level by level. For each level, calculate the sum of all node values and divide by the number of nodes at that level. This approach ensures we process each level completely before moving to the next."
+      id: "btree-hw-1",
+      question: "Implement a method to find the height of a B-Tree, and analyze its time complexity.",
+      solution: "```java\npublic class BTreeHeight {\n    class BTreeNode {\n        int n; // Number of keys\n        boolean leaf; // Is the node a leaf?\n        BTreeNode[] children; // Array of children\n        \n        BTreeNode(int t, boolean leaf) {\n            this.leaf = leaf;\n            this.children = new BTreeNode[2*t];\n            this.n = 0;\n        }\n    }\n    \n    // Calculate height of a B-Tree\n    public int getHeight(BTreeNode root) {\n        // An empty tree has height 0\n        if (root == null) {\n            return 0;\n        }\n        \n        // A leaf node has height 1\n        if (root.leaf) {\n            return 1;\n        }\n        \n        // For non-leaf nodes, get the height of the first child and add 1\n        return getHeight(root.children[0]) + 1;\n    }\n}\n```\nTime Complexity: O(h) where h is the height of the B-Tree. Since we only need to traverse down one path from the root to a leaf, the time complexity is proportional to the height of the tree.\n\nSpace Complexity: O(h) for the recursion stack.\n\nAs B-Trees have a guaranteed height of O(log_t n) where t is the minimum degree and n is the number of keys, the time complexity can also be expressed as O(log n).\n\nThis method works because all leaf nodes in a B-Tree are at the same level, so calculating the height only requires following any path from the root to a leaf."
     },
     {
-      id: "hw-2",
-      question: "Check if a binary tree is a mirror of itself (i.e., symmetric around its center).",
-      solution: "A tree is symmetric if the left subtree is a mirror reflection of the right subtree. Use a recursive DFS approach that compares the left child of the left subtree with the right child of the right subtree, and the right child of the left subtree with the left child of the right subtree."
-    },
-    {
-      id: "hw-3",
-      question: "Given a binary tree, find the largest value in each level. Return the results as a list where result[i] is the largest value at level i.",
-      solution: "Use BFS to traverse the tree level by level. For each level, keep track of the maximum value encountered. After processing each level completely, add the maximum value to the result list."
-    },
-    {
-      id: "hw-4",
-      question: "Find the closest leaf node to a given node in a binary tree. The distance is the number of edges required to go from the start node to the leaf node.",
-      solution: "This requires a two-step approach: 1) Convert the tree to an undirected graph by adding parent pointers, 2) Use BFS starting from the given node to find the closest leaf. Since BFS explores all nodes at a given distance before moving further, the first leaf node encountered will be the closest."
+      id: "btree-hw-2",
+      question: "Design an algorithm to find the kth smallest key in a B-Tree. Analyze the time and space complexity of your solution.",
+      solution: "```java\npublic class BTreeKthSmallest {\n    class BTreeNode {\n        int[] keys;\n        int n;\n        boolean leaf;\n        BTreeNode[] children;\n        \n        BTreeNode(int t, boolean leaf) {\n            this.leaf = leaf;\n            this.keys = new int[2*t - 1];\n            this.children = new BTreeNode[2*t];\n            this.n = 0;\n        }\n    }\n    \n    private int count = 0;\n    private int result = -1;\n    \n    // Find the kth smallest element\n    public int findKthSmallest(BTreeNode root, int k) {\n        count = 0;\n        result = -1;\n        \n        // Perform an in-order traversal\n        inOrderTraversal(root, k);\n        \n        return result;\n    }\n    \n    private void inOrderTraversal(BTreeNode node, int k) {\n        // Return if we've already found the kth element\n        if (result != -1) return;\n        \n        if (node == null) return;\n        \n        // Traverse children and keys in order\n        for (int i = 0; i < node.n; i++) {\n            // Visit left child of current key\n            if (!node.leaf) {\n                inOrderTraversal(node.children[i], k);\n            }\n            \n            // Visit current key\n            count++;\n            if (count == k) {\n                result = node.keys[i];\n                return;\n            }\n            \n            // Last child (rightmost)\n            if (i == node.n - 1 && !node.leaf) {\n                inOrderTraversal(node.children[i + 1], k);\n            }\n        }\n    }\n    \n    // More efficient version for B+ Trees (all keys in leaves)\n    public int findKthSmallestBPlusTree(BTreeNode root, int k) {\n        // Find leftmost leaf\n        BTreeNode current = root;\n        while (!current.leaf) {\n            current = current.children[0];\n        }\n        \n        // Count keys across leaf nodes\n        int count = 0;\n        \n        // Assume leaf nodes are linked in B+ Tree\n        while (current != null) {\n            for (int i = 0; i < current.n; i++) {\n                count++;\n                if (count == k) {\n                    return current.keys[i];\n                }\n            }\n            \n            // Move to next leaf (assuming linked leaves in B+ Tree)\n            current = current.nextLeaf; // In real B+ Tree, leaves would be linked\n        }\n        \n        return -1; // Not found\n    }\n}\n```\nTime Complexity: \n- For a general B-Tree: O(n) in the worst case, where n is the number of keys in the tree. We might need to visit every node to find the kth smallest element.\n- For a B+ Tree with linked leaves: O(h + k), where h is the height of the tree (log n) and k is the parameter. We need O(h) to find the leftmost leaf and potentially O(k) to traverse to the kth element.\n\nSpace Complexity: \n- O(h) for the recursion stack in the general solution.\n- O(1) for the B+ Tree solution since we use iterative traversal.\n\nThe B+ Tree approach is more efficient for finding the kth smallest element because all keys are stored in leaf nodes, which are linked together for sequential access."
     }
   ],
   
   quiz: [
     {
-      id: "quiz-1",
-      question: "Which traversal method would be most efficient for finding the minimum depth of a binary tree?",
-      options: ["Preorder DFS traversal", "Inorder DFS traversal", "Postorder DFS traversal", "BFS traversal"],
+      id: "btree-quiz-1",
+      question: "What is the minimum number of children for a non-root node in a B-Tree of order m?",
+      options: ["1", "2", "⌈m/2⌉", "m-1"],
+      correctAnswer: 2,
+      explanation: "In a B-Tree of order m, a non-root node must have at least ⌈m/2⌉ children. This property ensures that the tree remains balanced and nodes are sufficiently filled, optimizing storage usage."
+    },
+    {
+      id: "btree-quiz-2",
+      question: "Which of the following is NOT a property of B-Trees?",
+      options: [
+        "All leaves are at the same level",
+        "A node with k children contains k-1 keys",
+        "All nodes except leaves must be at least half full",
+        "The root must have at least ⌈m/2⌉ children"
+      ],
       correctAnswer: 3,
-      explanation: "BFS traversal is most efficient for finding the minimum depth because it processes nodes level by level. As soon as the first leaf node is encountered, we've found the minimum depth, without needing to explore deeper paths."
+      explanation: "The root node of a B-Tree is allowed to have fewer children than other nodes. Specifically, the root can have as few as 2 children (unless it's a leaf), while non-root nodes must have at least ⌈m/2⌉ children."
     },
     {
-      id: "quiz-2",
-      question: "What is the space complexity of BFS for a binary tree with n nodes in the worst case?",
-      options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
-      correctAnswer: 2,
-      explanation: "In the worst case (a complete binary tree), the maximum number of nodes at any level is n/2 (the last level). Therefore, the queue in BFS could contain up to n/2 nodes, giving a space complexity of O(n)."
-    },
-    {
-      id: "quiz-3",
-      question: "When is DFS preferred over BFS for tree traversal?",
-      options: ["When finding the shortest path", "When memory usage is a concern", "When processing nodes level by level", "When finding the closest node to the root"],
+      id: "btree-quiz-3",
+      question: "What is the maximum height of a B-Tree with n keys and minimum degree t?",
+      options: ["log_2 n", "log_t n", "n/t", "t*log n"],
       correctAnswer: 1,
-      explanation: "DFS is preferred when memory usage is a concern because its space complexity is O(h) where h is the height of the tree, which is often much smaller than the width of the tree (especially in balanced trees where h ≈ log n)."
+      explanation: "The maximum height of a B-Tree with n keys and minimum degree t is log_t n. This is because each node (except possibly the root) contains at least t-1 keys, so the height is logarithmic with base t relative to the number of keys."
     },
     {
-      id: "quiz-4",
-      question: "Which traversal approach would be most suitable for detecting if a binary tree is balanced?",
-      options: ["BFS", "Iterative preorder DFS", "Recursive postorder DFS", "Morris traversal"],
-      correctAnswer: 2,
-      explanation: "Recursive postorder DFS is most suitable for checking if a tree is balanced because we need to know the heights of the left and right subtrees before we can determine if the current node is balanced. Postorder traversal (left, right, root) provides this information in the correct order."
+      id: "btree-quiz-4",
+      question: "Which variant of B-Tree maintains all data in leaf nodes and uses internal nodes only for indexing?",
+      options: ["B* Tree", "B+ Tree", "2-3 Tree", "Red-Black Tree"],
+      correctAnswer: 1,
+      explanation: "A B+ Tree maintains all actual data (or record pointers) in leaf nodes. Internal nodes only contain keys that direct the search to the appropriate leaf node. This design optimizes for range queries and sequential access by linking leaf nodes together."
+    },
+    {
+      id: "btree-quiz-5",
+      question: "What is the primary advantage of B-Trees over balanced binary search trees like AVL or Red-Black Trees?",
+      options: [
+        "Lower time complexity for searches",
+        "Reduced space complexity",
+        "Fewer pointer manipulations during rebalancing",
+        "Better performance with disk-based storage through reduced I/O operations"
+      ],
+      correctAnswer: 3,
+      explanation: "The primary advantage of B-Trees over balanced binary search trees is their optimization for disk-based storage systems. By allowing many keys per node, B-Trees reduce the number of disk I/O operations needed to find a key, which is crucial for database and file system performance where disk access is much slower than memory access."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "The following problems will help you apply your understanding of B-Trees. While direct B-Tree implementation problems are less common in interview settings, the concepts appear in various tree and database-related problems.",
+    questions: {
+      easy: [
+        {
+          id: "binary-tree-level-order-traversal",
+          title: "Binary Tree Level Order Traversal",
+          link: "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+          description: "Perform level-order traversal on a binary tree, similar to how B-Trees are often traversed for operations."
+        },
+        {
+          id: "search-in-a-binary-search-tree",
+          title: "Search in a Binary Search Tree",
+          link: "https://leetcode.com/problems/search-in-a-binary-search-tree/",
+          description: "Implement a search operation in a BST, which follows the same principle as B-Tree search but with only one key per node."
+        },
+        {
+          id: "count-complete-tree-nodes",
+          title: "Count Complete Tree Nodes",
+          link: "https://leetcode.com/problems/count-complete-tree-nodes/",
+          description: "Count nodes in a complete binary tree efficiently, which requires understanding tree properties similar to those in B-Trees."
+        }
+      ],
+      medium: [
+        {
+          id: "design-a-file-system",
+          title: "Design a File System",
+          link: "https://leetcode.com/problems/design-a-file-system/",
+          description: "Design a file system structure that can efficiently create and get files, similar to how file systems use B-Trees."
+        },
+        {
+          id: "range-sum-query-mutable",
+          title: "Range Sum Query - Mutable",
+          link: "https://leetcode.com/problems/range-sum-query-mutable/",
+          description: "Implement a structure for efficient range sum queries with updates, which could utilize B-Tree-like indexing concepts."
+        },
+        {
+          id: "lru-cache",
+          title: "LRU Cache",
+          link: "https://leetcode.com/problems/lru-cache/",
+          description: "Design and implement a data structure that uses efficient lookup similar to B-Trees in database caching."
+        }
+      ],
+      hard: [
+        {
+          id: "serialize-and-deserialize-n-ary-tree",
+          title: "Serialize and Deserialize N-ary Tree",
+          link: "https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/",
+          description: "Serialize and deserialize an N-ary tree, which has multiple children like B-Tree nodes."
+        },
+        {
+          id: "design-in-memory-file-system",
+          title: "Design In-Memory File System",
+          link: "https://leetcode.com/problems/design-in-memory-file-system/",
+          description: "Design a more complex file system with directories and files, applying concepts from how B-Trees are used in real file systems."
+        }
+      ]
+    }
+  }
 };
 
-export default bfsDfsTreeContent; 
+export default bTreeContent; 

@@ -459,7 +459,78 @@ private int maxIndependentSetHelper(TreeNode node, boolean included,
       correctAnswer: 2,
       explanation: "In the Maximum Independent Set problem, a node and its direct child cannot both be included because independent sets by definition cannot include adjacent vertices. Since a parent and its child are connected by an edge, including both would violate this constraint. This is why the DP solution for trees considers both cases: including a node (which forces all its children to be excluded) or excluding a node."
     }
-  ]
+  ],
+  practice: {
+    introduction: "Practice palindrome-related problems to reinforce your understanding of Manacher's algorithm and other palindrome detection and manipulation techniques. These problems will help you apply the concepts you've learned to various string processing scenarios.",
+    questions: {
+      easy: [
+        {
+          id: "ma-easy-1",
+          title: "Valid Palindrome",
+          link: "https://leetcode.com/problems/valid-palindrome/",
+          description: "Determine if a string is a valid palindrome, considering only alphanumeric characters and ignoring cases. This is a basic palindrome check that can be solved with two pointers."
+        },
+        {
+          id: "ma-easy-2",
+          title: "Palindrome Number",
+          link: "https://leetcode.com/problems/palindrome-number/",
+          description: "Determine whether an integer is a palindrome without converting it to a string, requiring a different approach to palindrome detection."
+        },
+        {
+          id: "ma-easy-3",
+          title: "Remove Palindromic Subsequences",
+          link: "https://leetcode.com/problems/remove-palindromic-subsequences/",
+          description: "Find the minimum number of steps to make a string empty where, in each step, you can remove a palindromic subsequence from the string."
+        }
+      ],
+      medium: [
+        {
+          id: "ma-medium-1",
+          title: "Palindromic Substrings",
+          link: "https://leetcode.com/problems/palindromic-substrings/",
+          description: "Count how many palindromic substrings are in a string. This can be solved efficiently using Manacher's algorithm."
+        },
+        {
+          id: "ma-medium-2",
+          title: "Palindrome Partitioning",
+          link: "https://leetcode.com/problems/palindrome-partitioning/",
+          description: "Partition a string such that every substring is a palindrome, requiring both palindrome detection and backtracking."
+        },
+        {
+          id: "ma-medium-3",
+          title: "Longest Palindromic Substring",
+          link: "https://leetcode.com/problems/longest-palindromic-substring/",
+          description: "Find the longest palindromic substring in a string, which is the canonical problem for applying Manacher's algorithm."
+        },
+        {
+          id: "ma-medium-4",
+          title: "Break a Palindrome",
+          link: "https://leetcode.com/problems/break-a-palindrome/",
+          description: "Replace exactly one character in a palindrome string to make it not a palindrome and lexicographically smallest."
+        }
+      ],
+      hard: [
+        {
+          id: "ma-hard-1",
+          title: "Shortest Palindrome",
+          link: "https://leetcode.com/problems/shortest-palindrome/",
+          description: "Add characters to the beginning of a string to make it a palindrome, requiring an understanding of both palindromes and string manipulation."
+        },
+        {
+          id: "ma-hard-2",
+          title: "Palindrome Pairs",
+          link: "https://leetcode.com/problems/palindrome-pairs/",
+          description: "Find all pairs of distinct indices such that the concatenation of the two strings at those indices is a palindrome."
+        },
+        {
+          id: "ma-hard-3",
+          title: "Longest Palindromic Subsequence",
+          link: "https://leetcode.com/problems/longest-palindromic-subsequence/",
+          description: "Find the longest subsequence which is a palindrome, combining concepts of palindromes with dynamic programming."
+        }
+      ]
+    }
+  }
 };
 
 export default hardDPContent; 

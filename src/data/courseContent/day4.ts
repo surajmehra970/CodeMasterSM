@@ -619,7 +619,80 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
       correctAnswer: 3,
       explanation: "For the opposite-direction pattern, where pointers start from both ends of the array and move towards the middle, the array is often (but not always) sorted. This property allows for efficient navigation of the search space based on the relationship between elements at the two pointers."
     }
-  ]
+  ],
+  
+  // Added practice section for Two Pointers
+  practice: {
+    introduction: "Practice is essential to master the two pointers technique. Complete the following LeetCode problems to reinforce your understanding of this powerful approach.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Valid Palindrome",
+          link: "https://leetcode.com/problems/valid-palindrome/",
+          description: "Determine if a string is a palindrome, considering only alphanumeric characters and ignoring cases."
+        },
+        {
+          id: "e2",
+          title: "Merge Sorted Array",
+          link: "https://leetcode.com/problems/merge-sorted-array/",
+          description: "Merge two sorted arrays into one sorted array using the two pointers technique."
+        },
+        {
+          id: "e3",
+          title: "Remove Duplicates from Sorted Array",
+          link: "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+          description: "Remove duplicates from a sorted array using two pointers to track unique elements."
+        },
+        {
+          id: "e4",
+          title: "Move Zeroes",
+          link: "https://leetcode.com/problems/move-zeroes/",
+          description: "Move all zeroes to the end of the array while maintaining the relative order of non-zero elements."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "3Sum",
+          link: "https://leetcode.com/problems/3sum/",
+          description: "Find all unique triplets in the array that sum to zero using the two pointers technique."
+        },
+        {
+          id: "m2",
+          title: "Container With Most Water",
+          link: "https://leetcode.com/problems/container-with-most-water/",
+          description: "Find two lines that together with the x-axis form a container that holds the most water."
+        },
+        {
+          id: "m3",
+          title: "Sort Colors",
+          link: "https://leetcode.com/problems/sort-colors/",
+          description: "Sort an array with only three different values (Dutch National Flag problem) using the two pointers technique."
+        },
+        {
+          id: "m4",
+          title: "Partition Labels",
+          link: "https://leetcode.com/problems/partition-labels/",
+          description: "Partition a string into as many parts as possible so that each letter appears in at most one part."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Trapping Rain Water",
+          link: "https://leetcode.com/problems/trapping-rain-water/",
+          description: "Compute how much water can be trapped after raining, using a two-pointer approach for optimal space complexity."
+        },
+        {
+          id: "h2",
+          title: "Minimum Window Substring",
+          link: "https://leetcode.com/problems/minimum-window-substring/",
+          description: "Find the minimum window in a string that contains all characters of another string using a sliding window variant of the two pointers technique."
+        }
+      ]
+    }
+  }
 };
 
 export default twoPointersContent; 

@@ -477,4 +477,79 @@ public class PriorityQueueApplications {
   ]
 };
 
+// Add practice section for Priority Queue/Heap
+priorityQueueContent.practice = {
+  introduction: "These practice problems will help you apply the concepts of priority queues and heaps that you've learned in this lesson. They are organized by difficulty, so you can start with the easier ones and work your way up to more challenging problems.",
+  questions: {
+    easy: [
+      {
+        id: "last-stone-weight",
+        title: "Last Stone Weight",
+        link: "https://leetcode.com/problems/last-stone-weight/",
+        description: "Use a max heap to simulate the process of smashing stones together."
+      },
+      {
+        id: "kth-largest-element-in-a-stream",
+        title: "Kth Largest Element in a Stream",
+        link: "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+        description: "Use a min heap of size k to efficiently find the kth largest element in a stream."
+      },
+      {
+        id: "relative-ranks",
+        title: "Relative Ranks",
+        link: "https://leetcode.com/problems/relative-ranks/",
+        description: "Use a priority queue to assign ranks to athletes based on their scores."
+      },
+      {
+        id: "maximum-product-of-two-elements",
+        title: "Maximum Product of Two Elements in an Array",
+        link: "https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/",
+        description: "Use a max heap to find the two largest elements in the array."
+      }
+    ],
+    
+    medium: [
+      {
+        id: "k-closest-points-to-origin",
+        title: "K Closest Points to Origin",
+        link: "https://leetcode.com/problems/k-closest-points-to-origin/",
+        description: "Use a max heap to find the k closest points to the origin in a 2D plane."
+      },
+      {
+        id: "top-k-frequent-elements",
+        title: "Top K Frequent Elements",
+        link: "https://leetcode.com/problems/top-k-frequent-elements/",
+        description: "Find the k most frequent elements in an array using a heap-based approach."
+      },
+      {
+        id: "find-k-pairs-with-smallest-sums",
+        title: "Find K Pairs with Smallest Sums",
+        link: "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/",
+        description: "Use a min heap to efficiently find k pairs with the smallest sums from two arrays."
+      },
+      {
+        id: "task-scheduler",
+        title: "Task Scheduler",
+        link: "https://leetcode.com/problems/task-scheduler/",
+        description: "Use a max heap to schedule tasks with cooldown periods between identical tasks."
+      }
+    ],
+    
+    hard: [
+      {
+        id: "find-median-from-data-stream",
+        title: "Find Median from Data Stream",
+        link: "https://leetcode.com/problems/find-median-from-data-stream/",
+        description: "Use two heaps (one min and one max) to efficiently find the median of a data stream."
+      },
+      {
+        id: "merge-k-sorted-lists",
+        title: "Merge k Sorted Lists",
+        link: "https://leetcode.com/problems/merge-k-sorted-lists/",
+        description: "Use a min heap to efficiently merge k sorted linked lists into one sorted list."
+      }
+    ]
+  }
+};
+
 export default priorityQueueContent; 

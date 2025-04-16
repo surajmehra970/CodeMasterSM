@@ -186,7 +186,80 @@ int sumRegion(int[][] prefixSum, int row1, int col1, int row2, int col2) {
       correctAnswer: 2,
       explanation: "Finding the median of each subarray cannot be efficiently solved with prefix sums because medians don't follow the cumulative property that sums have."
     }
-  ]
+  ],
+  
+  // Added practice section for Prefix Sum
+  practice: {
+    introduction: "Practice is essential to master the prefix sum technique. Complete the following LeetCode problems to reinforce your understanding of this efficient approach for range queries and subarrays.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Range Sum Query - Immutable",
+          link: "https://leetcode.com/problems/range-sum-query-immutable/",
+          description: "Given an integer array, find the sum of elements between indices i and j using prefix sum."
+        },
+        {
+          id: "e2",
+          title: "Find Pivot Index",
+          link: "https://leetcode.com/problems/find-pivot-index/",
+          description: "Find the index where the sum of numbers to the left equals the sum of numbers to the right using prefix sum."
+        },
+        {
+          id: "e3",
+          title: "Running Sum of 1d Array",
+          link: "https://leetcode.com/problems/running-sum-of-1d-array/",
+          description: "Return the running sum of an array, which is the simplest form of a prefix sum."
+        },
+        {
+          id: "e4",
+          title: "Minimum Value to Get Positive Step by Step Sum",
+          link: "https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/",
+          description: "Find the minimum starting value needed to keep the step-by-step sum always greater than or equal to 1."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Subarray Sum Equals K",
+          link: "https://leetcode.com/problems/subarray-sum-equals-k/",
+          description: "Find the number of subarrays with sum equal to k using prefix sum and hash map."
+        },
+        {
+          id: "m2",
+          title: "Continuous Subarray Sum",
+          link: "https://leetcode.com/problems/continuous-subarray-sum/",
+          description: "Determine if there exists a continuous subarray of size at least 2 with a sum divisible by k."
+        },
+        {
+          id: "m3",
+          title: "Product of Array Except Self",
+          link: "https://leetcode.com/problems/product-of-array-except-self/",
+          description: "Calculate the product of all elements except self using a variant of prefix sum (prefix product)."
+        },
+        {
+          id: "m4",
+          title: "Range Sum Query 2D - Immutable",
+          link: "https://leetcode.com/problems/range-sum-query-2d-immutable/",
+          description: "Calculate the sum of elements inside a 2D matrix region using 2D prefix sum."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Maximum Sum of 3 Non-Overlapping Subarrays",
+          link: "https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/",
+          description: "Find three non-overlapping subarrays with maximum sum using prefix sum to efficiently calculate subarray sums."
+        },
+        {
+          id: "h2",
+          title: "Count Subarrays With Fixed Bounds",
+          link: "https://leetcode.com/problems/count-subarrays-with-fixed-bounds/",
+          description: "Count the number of subarrays where the maximum and minimum values are within given bounds."
+        }
+      ]
+    }
+  }
 };
 
 export default prefixSumContent; 

@@ -515,7 +515,79 @@ private void calculateDistancesFromNode(TreeNode node, int distance,
       correctAnswer: 2,
       explanation: "The maximum diameter of a binary tree with height h is 2h, which occurs when the diameter path passes through the root, going from a node at maximum depth in one subtree to a node at maximum depth in the other subtree."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these problems to strengthen your understanding of tree diameter concepts and related tree algorithms. These problems will help you apply the techniques learned in this lesson to various tree-based challenges, improving your ability to analyze and manipulate tree structures.",
+    questions: {
+      easy: [
+        {
+          id: "tree-diameter-practice-1",
+          title: "Maximum Depth of Binary Tree",
+          link: "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+          description: "Find the maximum depth of a binary tree. This problem helps understand the height calculation, which is a component of diameter computation."
+        },
+        {
+          id: "tree-diameter-practice-2",
+          title: "Balanced Binary Tree",
+          link: "https://leetcode.com/problems/balanced-binary-tree/",
+          description: "Determine if a binary tree is height-balanced (the depth of the subtrees of every node never differs by more than 1). This involves calculating and comparing heights similar to diameter computation."
+        },
+        {
+          id: "tree-diameter-practice-3",
+          title: "Path Sum",
+          link: "https://leetcode.com/problems/path-sum/",
+          description: "Determine if the tree has a root-to-leaf path that sums to a given value. This introduces the concept of path traversal in trees."
+        },
+        {
+          id: "tree-diameter-practice-4",
+          title: "Same Tree",
+          link: "https://leetcode.com/problems/same-tree/",
+          description: "Check if two binary trees are identical. This reinforces tree traversal techniques and structural comparison."
+        }
+      ],
+      medium: [
+        {
+          id: "tree-diameter-practice-5",
+          title: "Diameter of Binary Tree",
+          link: "https://leetcode.com/problems/diameter-of-binary-tree/",
+          description: "Calculate the diameter of a binary tree. This is a direct application of the diameter algorithm covered in this lesson."
+        },
+        {
+          id: "tree-diameter-practice-6",
+          title: "Path Sum II",
+          link: "https://leetcode.com/problems/path-sum-ii/",
+          description: "Find all root-to-leaf paths that sum to a target value. This builds on path traversal and requires tracking complete paths."
+        },
+        {
+          id: "tree-diameter-practice-7",
+          title: "Binary Tree Right Side View",
+          link: "https://leetcode.com/problems/binary-tree-right-side-view/",
+          description: "Return the values visible from the right side of a binary tree. This involves level-order traversal and understanding tree structure."
+        },
+        {
+          id: "tree-diameter-practice-8",
+          title: "All Nodes Distance K in Binary Tree",
+          link: "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/",
+          description: "Find all nodes at distance K from a target node. This problem combines tree traversal with distance calculation in trees."
+        }
+      ],
+      hard: [
+        {
+          id: "tree-diameter-practice-9",
+          title: "Binary Tree Maximum Path Sum",
+          link: "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+          description: "Find the maximum path sum in a binary tree. This is closely related to diameter calculation but with node values influencing the path selection."
+        },
+        {
+          id: "tree-diameter-practice-10",
+          title: "Vertical Order Traversal of a Binary Tree",
+          link: "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",
+          description: "Return the vertical order traversal of a binary tree. This advanced traversal problem requires careful tracking of node positions."
+        }
+      ]
+    }
+  }
 };
 
 export default diameterOfTreeContent; 

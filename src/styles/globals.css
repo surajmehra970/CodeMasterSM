@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any custom CSS below this line */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure line-clamp works properly */
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Additional dark mode support */
+.dark .dark\:bg-gray-800 {
+  background-color: rgb(31, 41, 55);
+}
+
+.dark .dark\:bg-gray-900 {
+  background-color: rgb(17, 24, 39);
+}
+
+.dark .dark\:text-white {
+  color: rgb(255, 255, 255);
+}
+
+.dark .dark\:text-gray-300 {
+  color: rgb(209, 213, 219);
+}
+
+.dark .dark\:text-gray-400 {
+  color: rgb(156, 163, 175);
+}
+
+/* Force-apply Tailwind classes that might be purged */
+.force-tailwind-apply {
+  @apply bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded-lg shadow-lg p-6;
+  @apply bg-green-100 text-green-800 bg-yellow-100 text-yellow-800 bg-red-100 text-red-800;
+  @apply text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300;
+  @apply bg-indigo-600 bg-gray-200 dark:bg-gray-700;
+} 

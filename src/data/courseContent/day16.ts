@@ -1,20 +1,25 @@
 import { Content } from '@/types/course';
 
 const quickSortContent: Content = {
-  introduction: "Quick Sort is a highly efficient divide-and-conquer sorting algorithm that is widely used in practice. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.",
+  introduction: "Quick Sort is an efficient, comparison-based sorting algorithm that uses a divide-and-conquer strategy. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. Quick Sort is widely used due to its average-case efficiency and good cache locality, making it often faster in practice than other O(n log n) algorithms like Merge Sort.",
   
   learningObjectives: [
-    "Understand the divide-and-conquer approach of Quick Sort",
+    "Understand the Quick Sort algorithm and its divide-and-conquer approach",
     "Implement Quick Sort with different pivot selection strategies",
     "Analyze the time and space complexity of Quick Sort",
-    "Understand when to use Quick Sort vs. other sorting algorithms",
-    "Apply optimizations to improve Quick Sort efficiency"
+    "Compare Quick Sort with other sorting algorithms",
+    "Apply Quick Sort to solve various algorithmic problems"
   ],
   
   sections: [
     {
-      title: "Quick Sort Fundamentals",
-      content: `Quick Sort is based on the divide-and-conquer strategy. It selects a pivot element, partitions the array around the pivot, and then recursively sorts the sub-arrays. The key to its performance is the partitioning process, which rearranges elements efficiently.
+      title: "Quick Sort Algorithm",
+      content: `Quick Sort works through the following steps:
+1. Choose a pivot element from the array
+2. Partition the array: rearrange elements so that elements less than the pivot are on the left, and elements greater than the pivot are on the right
+3. Recursively apply the above steps to the sub-arrays on the left and right of the pivot
+
+The partitioning process is the key operation in Quick Sort, and the choice of pivot can significantly affect performance.
 
 <div class="my-6 flex justify-center">
   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-800 p-2 w-full max-w-3xl">
@@ -22,7 +27,7 @@ const quickSortContent: Content = {
     <div class="flex justify-center">
       <img src="/images/quick-sort-animation.svg" alt="Quick Sort Animation" class="w-full h-auto" loading="eager" />
     </div>
-    <p class="text-sm text-center mt-2 text-gray-600 dark:text-gray-400">This animation demonstrates the pivot selection and partitioning process of Quick Sort</p>
+    <p class="text-sm text-center mt-2 text-gray-600 dark:text-gray-400">This animation demonstrates how Quick Sort partitions the array around pivot elements recursively</p>
   </div>
 </div>`,
       codeExamples: [
@@ -31,152 +36,183 @@ const quickSortContent: Content = {
           code: `// Basic Quick Sort implementation
 public void quickSort(int[] arr, int low, int high) {
     if (low < high) {
-        // Partition the array and get the pivot position
-        int pivotPos = partition(arr, low, high);
+        // Partition the array and get the pivot index
+        int pivotIndex = partition(arr, low, high);
         
-        // Sort the left subarray
-        quickSort(arr, low, pivotPos - 1);
-        
-        // Sort the right subarray
-        quickSort(arr, pivotPos + 1, high);
+        // Recursively sort the sub-arrays
+        quickSort(arr, low, pivotIndex - 1);  // Sort left sub-array
+        quickSort(arr, pivotIndex + 1, high); // Sort right sub-array
     }
 }
 
-// Partition function using last element as pivot
-public int partition(int[] arr, int low, int high) {
-    int pivot = arr[high]; // Choose the last element as pivot
-    int i = low - 1;       // Index of smaller element
+// Lomuto partition scheme
+private int partition(int[] arr, int low, int high) {
+    // Choose the rightmost element as pivot
+    int pivot = arr[high];
     
+    // Index of smaller element
+    int i = low - 1;
+    
+    // Traverse through all elements
+    // compare each element with pivot
     for (int j = low; j < high; j++) {
         // If current element is smaller than the pivot
-        if (arr[j] <= pivot) {
+        if (arr[j] < pivot) {
+            // Increment index of smaller element
             i++;
             
             // Swap arr[i] and arr[j]
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
-    }
-    
-    // Swap arr[i+1] and arr[high] (the pivot)
-    int temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
-    
-    return i + 1; // Return the pivot position
-}`,
-          explanation: "This implementation selects the last element as the pivot and partitions the array such that elements smaller than the pivot are on the left, and elements greater than the pivot are on the right."
-        }
-      ]
-    },
-    {
-      title: "Pivot Selection Strategies",
-      content: "The choice of pivot can significantly impact Quick Sort's performance. Common strategies include selecting the first element, the last element, a random element, or the median of three elements (first, middle, last). Good pivot selection helps avoid the worst-case performance.",
-      codeExamples: [
-        {
-          language: "java",
-          code: `// Random pivot selection for better average performance
-public int partition(int[] arr, int low, int high) {
-    // Choose a random pivot and swap it with the last element
-    int randomIndex = low + (int) (Math.random() * (high - low + 1));
-    swap(arr, randomIndex, high);
-    
-    int pivot = arr[high];
-    int i = low - 1;
-    
-    for (int j = low; j < high; j++) {
-        if (arr[j] <= pivot) {
-            i++;
             swap(arr, i, j);
         }
     }
     
+    // Swap arr[i+1] and arr[high] (or pivot)
     swap(arr, i + 1, high);
+    
+    // Return the pivot index
     return i + 1;
 }
 
-// Median of three pivot selection
-public int medianOfThree(int[] arr, int low, int high) {
-    int mid = low + (high - low) / 2;
-    
-    // Sort low, mid, high
-    if (arr[mid] < arr[low])
-        swap(arr, mid, low);
-    if (arr[high] < arr[low])
-        swap(arr, high, low);
-    if (arr[high] < arr[mid])
-        swap(arr, high, mid);
-    
-    // Place the median at high-1 position
-    swap(arr, mid, high - 1);
-    return high - 1;
-}
-
+// Swap function
 private void swap(int[] arr, int i, int j) {
     int temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
 }`,
-          explanation: "These implementations show two pivot selection strategies: random pivot and median-of-three. Random pivot selection helps avoid worst-case scenarios on already sorted arrays, while median-of-three is often used in practice for better average performance."
+          explanation: "This implementation uses the Lomuto partition scheme where the last element is chosen as the pivot. The partition function rearranges the array such that all elements less than the pivot are to the left, and all elements greater are to the right. It then returns the position of the pivot element."
+        }
+      ]
+    },
+    {
+      title: "Pivot Selection Strategies",
+      content: "The choice of pivot can significantly impact the performance of Quick Sort. In the worst case, if we consistently choose the smallest or largest element as the pivot, Quick Sort degenerates to O(n²) time complexity. Various pivot selection strategies have been developed to mitigate this risk.",
+      codeExamples: [
+        {
+          language: "java",
+          code: `// Quick Sort with different pivot selection strategies
+
+// 1. First element as pivot
+private int partitionFirst(int[] arr, int low, int high) {
+    int pivot = arr[low]; // First element as pivot
+    int i = low + 1;
+    
+    for (int j = low + 1; j <= high; j++) {
+        if (arr[j] < pivot) {
+            swap(arr, i, j);
+            i++;
+        }
+    }
+    
+    swap(arr, low, i - 1); // Place pivot at its correct position
+    return i - 1;
+}
+
+// 2. Random element as pivot
+private int partitionRandom(int[] arr, int low, int high) {
+    // Generate a random index between low and high
+    int randomIndex = low + (int)(Math.random() * (high - low + 1));
+    
+    // Swap the random element with the high element
+    swap(arr, randomIndex, high);
+    
+    // Then use the Lomuto scheme with the high element as pivot
+    return partition(arr, low, high);
+}
+
+// 3. Median of three as pivot (first, middle, last)
+private int partitionMedianOfThree(int[] arr, int low, int high) {
+    int mid = low + (high - low) / 2;
+    
+    // Sort low, mid, high
+    if (arr[mid] < arr[low]) 
+        swap(arr, low, mid);
+    if (arr[high] < arr[low]) 
+        swap(arr, low, high);
+    if (arr[high] < arr[mid]) 
+        swap(arr, mid, high);
+    
+    // Place pivot (median) at high-1 position
+    swap(arr, mid, high - 1);
+    
+    // Use high-1 as pivot
+    int pivot = arr[high - 1];
+    int i = low;
+    
+    // Partition
+    for (int j = low; j < high - 1; j++) {
+        if (arr[j] <= pivot) {
+            swap(arr, i, j);
+            i++;
+        }
+    }
+    
+    swap(arr, i, high - 1);
+    return i;
+}`,
+          explanation: "This code demonstrates three different pivot selection strategies: first element, random element, and median-of-three. Random pivoting helps avoid the worst-case scenario by making it unlikely to consistently choose bad pivots. The median-of-three approach (choosing the median of the first, middle, and last elements) is a practical compromise that works well for many datasets."
         }
       ]
     },
     {
       title: "Time and Space Complexity Analysis",
-      content: "Quick Sort has an average time complexity of O(n log n), making it very efficient for large data sets. However, its worst-case time complexity is O(n²) when the pivot selection consistently results in highly unbalanced partitioning. The space complexity is O(log n) for the recursive call stack in the average case, and O(n) in the worst case.",
+      content: "Quick Sort's performance varies based on the pivot selection and the nature of the input data. In the best and average cases, it has O(n log n) time complexity, but in the worst case, it can degrade to O(n²). Despite this, Quick Sort is often faster in practice than other O(n log n) algorithms due to its good cache locality and low constant factors.",
       codeExamples: [
         {
           language: "java",
           code: `/*
 Time Complexity:
-- Average case: O(n log n)
-- Best case: O(n log n)
-- Worst case: O(n²) - occurs when the pivot is always the smallest or largest element
+- Best case: O(n log n) - when the pivot divides the array into roughly equal halves
+- Average case: O(n log n) - with random pivot selection
+- Worst case: O(n²) - when the pivot is always the smallest or largest element
 
 Space Complexity:
-- O(log n) - for the recursive call stack in the average case
-- O(n) - in the worst case
+- O(log n) average case for the recursion stack
+- O(n) worst case for the recursion stack
 
 Comparison with other algorithms:
 - Merge Sort: Always O(n log n) time, but requires O(n) extra space
-- Heap Sort: Always O(n log n) time, constant extra space
-- Quick Sort: O(n log n) average time, in-place, but O(n²) worst case
+- Heap Sort: Always O(n log n) time, in-place, but not cache-friendly
+- Insertion Sort: O(n²) time generally, but O(n) for nearly sorted data and efficient for small arrays
+
+Practical considerations:
+- Quick Sort is often faster in practice due to:
+  * Better cache locality than Merge Sort
+  * Fewer comparisons than Heap Sort
+  * In-place partitioning (minimal extra space needed)
+- Many library implementations use a hybrid approach:
+  * Quick Sort for large arrays
+  * Insertion Sort for small sub-arrays (typically below 10-20 elements)
 */`,
-          explanation: "This code comment provides a concise analysis of Quick Sort's time and space complexity, along with a comparison to other common sorting algorithms."
+          explanation: "This analysis highlights the time and space complexity of Quick Sort and compares it with other sorting algorithms. It also discusses the practical considerations that make Quick Sort efficient in real-world scenarios, despite its worst-case time complexity."
         }
       ]
     },
     {
       title: "Quick Sort Optimizations",
-      content: "Several optimizations can improve Quick Sort's performance. These include using insertion sort for small subarrays, implementing tail recursion optimization, and using a three-way partitioning scheme for arrays with many duplicate elements.",
+      content: "There are several ways to optimize Quick Sort for better performance. These include using insertion sort for small subarrays, implementing tail recursion elimination, and improving the handling of arrays with many duplicates through techniques like three-way partitioning.",
       codeExamples: [
         {
           language: "java",
-          code: `// Optimized Quick Sort with Insertion Sort for small arrays
+          code: `// Optimized Quick Sort implementation
+
+// Quick Sort with Insertion Sort for small arrays
 public void optimizedQuickSort(int[] arr, int low, int high) {
-    while (low < high) {
-        // Use insertion sort for small subarrays
-        if (high - low < 10) {
-            insertionSort(arr, low, high);
-            break;
-        } else {
-            int pivotPos = partition(arr, low, high);
-            
-            // Tail recursion optimization
-            // Recursively sort the smaller subarray
-            if (pivotPos - low < high - pivotPos) {
-                optimizedQuickSort(arr, low, pivotPos - 1);
-                low = pivotPos + 1;
-            } else {
-                optimizedQuickSort(arr, pivotPos + 1, high);
-                high = pivotPos - 1;
-            }
-        }
+    // Use insertion sort for small arrays
+    if (high - low < 10) {
+        insertionSort(arr, low, high);
+        return;
+    }
+    
+    if (low < high) {
+        int pivotIndex = partitionRandom(arr, low, high);
+        
+        // Recursive calls
+        optimizedQuickSort(arr, low, pivotIndex - 1);
+        optimizedQuickSort(arr, pivotIndex + 1, high);
     }
 }
 
-// Insertion sort for small subarrays
+// Insertion Sort for small subarrays
 private void insertionSort(int[] arr, int low, int high) {
     for (int i = low + 1; i <= high; i++) {
         int key = arr[i];
@@ -190,29 +226,125 @@ private void insertionSort(int[] arr, int low, int high) {
     }
 }
 
-// Three-way partitioning for arrays with many duplicates
-public void threeWayQuickSort(int[] arr, int low, int high) {
+// Three-way partitioning for arrays with duplicates
+public void quickSortThreeWay(int[] arr, int low, int high) {
     if (high <= low) return;
     
+    // Three-way partition
     int lt = low, gt = high;
     int pivot = arr[low];
     int i = low + 1;
     
     while (i <= gt) {
         if (arr[i] < pivot) {
-            swap(arr, lt++, i++);
+            swap(arr, lt, i);
+            lt++;
+            i++;
         } else if (arr[i] > pivot) {
-            swap(arr, i, gt--);
+            swap(arr, i, gt);
+            gt--;
         } else {
             i++;
         }
     }
     
-    // Now arr[low..lt-1] < pivot = arr[lt..gt] < arr[gt+1..high]
-    threeWayQuickSort(arr, low, lt - 1);
-    threeWayQuickSort(arr, gt + 1, high);
+    // Recursive calls for less than and greater than partitions
+    quickSortThreeWay(arr, low, lt - 1);
+    quickSortThreeWay(arr, gt + 1, high);
+}
+
+// Tail recursion elimination to reduce stack space
+public void quickSortWithTailRecursion(int[] arr, int low, int high) {
+    while (low < high) {
+        int pivotIndex = partition(arr, low, high);
+        
+        // Recursively sort the smaller subarray
+        if (pivotIndex - low < high - pivotIndex) {
+            quickSortWithTailRecursion(arr, low, pivotIndex - 1);
+            low = pivotIndex + 1; // Tail call optimization for the larger subarray
+        } else {
+            quickSortWithTailRecursion(arr, pivotIndex + 1, high);
+            high = pivotIndex - 1; // Tail call optimization for the larger subarray
+        }
+    }
 }`,
-          explanation: "These optimizations include using insertion sort for small subarrays (which is more efficient for small n), implementing tail recursion optimization to reduce stack space, and using three-way partitioning to handle duplicate elements efficiently."
+          explanation: "These optimizations improve Quick Sort's performance. Using insertion sort for small subarrays reduces overhead. Three-way partitioning handles duplicates efficiently by creating three partitions: less than, equal to, and greater than the pivot. Tail recursion elimination reduces stack space by avoiding recursion for the larger subarray."
+        }
+      ]
+    },
+    {
+      title: "Applications of Quick Sort",
+      content: "Quick Sort is widely used in various applications due to its efficiency and practical advantages. It's the sorting algorithm of choice in many standard library implementations, including the Arrays.sort() method in Java for primitive types and the std::sort() function in C++.",
+      codeExamples: [
+        {
+          language: "java",
+          code: `import java.util.Arrays;
+
+public class QuickSortApplications {
+    // Using Java's built-in sort (which uses a variant of Quick Sort for primitives)
+    public void usingJavaSort(int[] arr) {
+        Arrays.sort(arr);
+    }
+    
+    // Quick select algorithm to find the kth smallest element
+    // Based on the partition scheme from Quick Sort
+    public int quickSelect(int[] arr, int low, int high, int k) {
+        // If k is smaller than number of elements in array
+        if (k > 0 && k <= high - low + 1) {
+            // Partition the array around a pivot
+            int pivotIndex = partition(arr, low, high);
+            
+            // If pivot is the answer
+            if (pivotIndex - low == k - 1) {
+                return arr[pivotIndex];
+            }
+            
+            // If pivot is greater than k, recur for left subarray
+            if (pivotIndex - low > k - 1) {
+                return quickSelect(arr, low, pivotIndex - 1, k);
+            }
+            
+            // Else recur for right subarray
+            return quickSelect(arr, pivotIndex + 1, high, k - (pivotIndex - low + 1));
+        }
+        
+        return Integer.MAX_VALUE; // If k is out of bounds
+    }
+    
+    // Standard partition function
+    private int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+    
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    public static void main(String[] args) {
+        QuickSortApplications app = new QuickSortApplications();
+        
+        // Example of Quick Select
+        int[] arr = {10, 7, 8, 9, 1, 5};
+        int k = 3;
+        int kthSmallest = app.quickSelect(arr, 0, arr.length - 1, k);
+        
+        System.out.println("K'th smallest element is: " + kthSmallest);
+    }
+}`,
+          explanation: "This example demonstrates practical applications of Quick Sort. It shows how to use Java's built-in sort method (which uses a dual-pivot Quick Sort variant) and implements the Quick Select algorithm, which uses the partitioning concept from Quick Sort to efficiently find the kth smallest element in an array with an average time complexity of O(n)."
         }
       ]
     }
@@ -220,67 +352,126 @@ public void threeWayQuickSort(int[] arr, int low, int high) {
   
   homework: [
     {
-      id: "qs-hw1",
-      question: "Implement Quick Sort with a median-of-three pivot selection strategy and test its performance on various input arrays including sorted, reverse sorted, and random arrays.",
-      solution: "Implement the median-of-three function as shown in the lesson, then modify the partition function to use this pivot selection strategy."
+      id: "qs-hw-1",
+      question: "Implement a version of Quick Sort that uses both median-of-three pivot selection and switches to insertion sort for small subarrays (less than 10 elements). Analyze how these optimizations affect performance.",
+      solution: "```java\npublic class OptimizedQuickSort {\n    public void sort(int[] arr) {\n        quickSort(arr, 0, arr.length - 1);\n    }\n    \n    private void quickSort(int[] arr, int low, int high) {\n        // Use insertion sort for small subarrays\n        if (high - low < 10) {\n            insertionSort(arr, low, high);\n            return;\n        }\n        \n        if (low < high) {\n            // Use median-of-three pivot selection\n            int pivotIndex = medianOfThree(arr, low, high);\n            \n            // Recursive calls\n            quickSort(arr, low, pivotIndex - 1);\n            quickSort(arr, pivotIndex + 1, high);\n        }\n    }\n    \n    private int medianOfThree(int[] arr, int low, int high) {\n        int mid = low + (high - low) / 2;\n        \n        // Sort low, mid, high\n        if (arr[mid] < arr[low]) swap(arr, low, mid);\n        if (arr[high] < arr[low]) swap(arr, low, high);\n        if (arr[high] < arr[mid]) swap(arr, mid, high);\n        \n        // Place pivot at position high-1\n        swap(arr, mid, high - 1);\n        int pivot = arr[high - 1];\n        \n        // Partition\n        int i = low;\n        for (int j = low; j < high - 1; j++) {\n            if (arr[j] <= pivot) {\n                swap(arr, i, j);\n                i++;\n            }\n        }\n        \n        swap(arr, i, high - 1);\n        return i;\n    }\n    \n    private void insertionSort(int[] arr, int low, int high) {\n        for (int i = low + 1; i <= high; i++) {\n            int key = arr[i];\n            int j = i - 1;\n            \n            while (j >= low && arr[j] > key) {\n                arr[j + 1] = arr[j];\n                j--;\n            }\n            arr[j + 1] = key;\n        }\n    }\n    \n    private void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n}\n```\nThe median-of-three pivot selection reduces the chance of encountering the worst-case O(n²) performance by choosing a better pivot. Switching to insertion sort for small subarrays (less than 10 elements) improves performance because insertion sort has less overhead than quick sort for small arrays and performs well when arrays are nearly sorted, which is often the case for small subarrays. Together, these optimizations typically improve the average performance by reducing the constant factors, though the asymptotic time complexity remains O(n log n)."
     },
     {
-      id: "qs-hw2",
-      question: "Modify the Quick Sort algorithm to handle arrays with many duplicate elements efficiently using three-way partitioning (Dutch National Flag partitioning).",
-      solution: "Use the three-way partitioning approach that divides the array into three parts: elements less than the pivot, elements equal to the pivot, and elements greater than the pivot."
-    },
-    {
-      id: "qs-hw3",
-      question: "Implement a hybrid sorting algorithm that uses Quick Sort for large subarrays and Insertion Sort for small subarrays. Compare its performance with standard Quick Sort.",
-      solution: "Use the optimized implementation shown in the lesson, with a threshold (e.g., 10) for switching to insertion sort for small subarrays."
+      id: "qs-hw-2",
+      question: "Implement Quick Select algorithm to find the kth smallest element in an unsorted array. Compare its efficiency with sorting the entire array and then selecting the kth element.",
+      solution: "```java\npublic class QuickSelectVsSorting {\n    // Quick Select implementation\n    public int quickSelect(int[] arr, int k) {\n        if (k < 1 || k > arr.length) {\n            throw new IllegalArgumentException(\"K is out of bounds\");\n        }\n        return quickSelect(arr, 0, arr.length - 1, k);\n    }\n    \n    private int quickSelect(int[] arr, int low, int high, int k) {\n        if (low == high) return arr[low];\n        \n        // Use random pivot\n        int pivotIndex = randomPartition(arr, low, high);\n        int rank = pivotIndex - low + 1; // Position of pivot\n        \n        if (rank == k) {\n            return arr[pivotIndex];\n        } else if (rank > k) {\n            return quickSelect(arr, low, pivotIndex - 1, k);\n        } else {\n            return quickSelect(arr, pivotIndex + 1, high, k - rank);\n        }\n    }\n    \n    private int randomPartition(int[] arr, int low, int high) {\n        int randomIndex = low + (int)(Math.random() * (high - low + 1));\n        swap(arr, randomIndex, high);\n        return partition(arr, low, high);\n    }\n    \n    private int partition(int[] arr, int low, int high) {\n        int pivot = arr[high];\n        int i = low - 1;\n        \n        for (int j = low; j < high; j++) {\n            if (arr[j] <= pivot) {\n                i++;\n                swap(arr, i, j);\n            }\n        }\n        \n        swap(arr, i + 1, high);\n        return i + 1;\n    }\n    \n    private void swap(int[] arr, int i, int j) {\n        int temp = arr[i];\n        arr[i] = arr[j];\n        arr[j] = temp;\n    }\n    \n    // Approach using sorting\n    public int findKthSmallestUsingSorting(int[] arr, int k) {\n        if (k < 1 || k > arr.length) {\n            throw new IllegalArgumentException(\"K is out of bounds\");\n        }\n        \n        int[] arrCopy = arr.clone(); // Create a copy to not modify original\n        Arrays.sort(arrCopy);\n        return arrCopy[k - 1];\n    }\n    \n    // Performance comparison\n    public void comparePerformance(int size, int k) {\n        int[] arr = new int[size];\n        for (int i = 0; i < size; i++) {\n            arr[i] = (int)(Math.random() * size * 10);\n        }\n        \n        long startTime, endTime;\n        \n        // Measure Quick Select\n        startTime = System.nanoTime();\n        int result1 = quickSelect(arr.clone(), k);\n        endTime = System.nanoTime();\n        System.out.println(\"Quick Select time: \" + (endTime - startTime) / 1000000.0 + \" ms\");\n        \n        // Measure Sorting approach\n        startTime = System.nanoTime();\n        int result2 = findKthSmallestUsingSorting(arr.clone(), k);\n        endTime = System.nanoTime();\n        System.out.println(\"Sorting approach time: \" + (endTime - startTime) / 1000000.0 + \" ms\");\n        \n        System.out.println(\"Results match: \" + (result1 == result2));\n    }\n}\n```\nQuick Select is generally more efficient than sorting the entire array when you only need to find a single element. This is because Quick Select has an average time complexity of O(n), compared to O(n log n) for sorting. The difference becomes more significant for large arrays. However, if you need to find multiple elements or if k is close to n, sorting might be more efficient due to lower constant factors and better cache locality of optimized sorting implementations."
     }
   ],
   
   quiz: [
     {
-      id: "qs-q1",
-      question: "What is the average time complexity of Quick Sort?",
-      options: ["O(n)", "O(n log n)", "O(n²)", "O(log n)"],
-      correctAnswer: 1,
-      explanation: "The average time complexity of Quick Sort is O(n log n), which makes it efficient for large data sets."
-    },
-    {
-      id: "qs-q2",
-      question: "What causes Quick Sort to degrade to its worst-case performance of O(n²)?",
-      options: [
-        "Having too many duplicate elements",
-        "Using random pivot selection",
-        "Consistently selecting the smallest or largest element as the pivot",
-        "Using three-way partitioning"
-      ],
+      id: "qs-quiz-1",
+      question: "What is the worst-case time complexity of Quick Sort?",
+      options: ["O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
       correctAnswer: 2,
-      explanation: "Quick Sort's worst-case occurs when the pivot selection consistently results in highly unbalanced partitioning, such as when the smallest or largest element is always chosen as the pivot in a sorted or reverse-sorted array."
+      explanation: "The worst-case time complexity of Quick Sort is O(n²). This occurs when the partitioning results in highly unbalanced subarrays, such as when the pivot is consistently the smallest or largest element in the subarray."
     },
     {
-      id: "qs-q3",
-      question: "Which optimization is most beneficial for Quick Sort when dealing with arrays that have many duplicate elements?",
-      options: [
-        "Random pivot selection",
-        "Median-of-three pivot selection",
-        "Three-way partitioning",
-        "Using Insertion Sort for small subarrays"
-      ],
-      correctAnswer: 2,
-      explanation: "Three-way partitioning (Dutch National Flag partitioning) is particularly effective for arrays with many duplicate elements as it separates the array into three parts: elements less than, equal to, and greater than the pivot."
+      id: "qs-quiz-2",
+      question: "Which of the following is NOT a common pivot selection strategy in Quick Sort?",
+      options: ["First element", "Last element", "Median of three", "Binary search midpoint"],
+      correctAnswer: 3,
+      explanation: "Binary search midpoint is not a common pivot selection strategy for Quick Sort. The common strategies are first element, last element, random element, and median of three (first, middle, last). Binary search midpoint would only be meaningful in a sorted array, which is not the context for Quick Sort."
     },
     {
-      id: "qs-q4",
-      question: "Compared to Merge Sort, Quick Sort has:",
-      options: [
-        "Better worst-case time complexity",
-        "Better average-case space complexity",
-        "Always better performance on sorted arrays",
-        "Always worse performance on random arrays"
-      ],
+      id: "qs-quiz-3",
+      question: "What is the space complexity of Quick Sort in the average case?",
+      options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
       correctAnswer: 1,
-      explanation: "Quick Sort has better average-case space complexity (O(log n)) compared to Merge Sort (O(n)) because Quick Sort is an in-place sorting algorithm, while Merge Sort requires additional space for merging."
+      explanation: "The average-case space complexity of Quick Sort is O(log n) due to the recursion stack. This is because the recursion depth is O(log n) on average when the partitioning is balanced or near-balanced."
+    },
+    {
+      id: "qs-quiz-4",
+      question: "How does Quick Sort compare to Merge Sort in terms of space usage?",
+      options: ["Quick Sort always uses less space", "Merge Sort always uses less space", "Both use the same amount of space", "It depends on the implementation"],
+      correctAnswer: 0,
+      explanation: "Quick Sort typically uses less space than Merge Sort. Quick Sort has an average space complexity of O(log n) for the recursion stack, while Merge Sort requires O(n) additional space for merging operations. This makes Quick Sort more space-efficient for large arrays."
+    },
+    {
+      id: "qs-quiz-5",
+      question: "Which of the following algorithms is based on the partitioning idea from Quick Sort?",
+      options: ["Heap Sort", "Insertion Sort", "Radix Sort", "Quick Select"],
+      correctAnswer: 3,
+      explanation: "Quick Select is based on the partitioning idea from Quick Sort. It uses the same partitioning process to find the kth smallest element in an array but only recurses into one partition (the one containing the kth element) rather than both."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice is crucial for mastering Quick Sort and its applications. The following LeetCode problems will help you apply your understanding of partitioning and the divide-and-conquer approach used in Quick Sort.",
+    questions: {
+      easy: [
+        {
+          id: "sort-array-by-parity",
+          title: "Sort Array By Parity",
+          link: "https://leetcode.com/problems/sort-array-by-parity/",
+          description: "Rearrange array so even elements come first, which can be done using a partitioning approach similar to Quick Sort."
+        },
+        {
+          id: "move-zeroes",
+          title: "Move Zeroes",
+          link: "https://leetcode.com/problems/move-zeroes/",
+          description: "Move all zeroes to the end while maintaining the relative order of non-zero elements, using partitioning techniques."
+        },
+        {
+          id: "sort-colors",
+          title: "Sort Colors",
+          link: "https://leetcode.com/problems/sort-colors/",
+          description: "Sort an array with only three distinct values, which can be solved using the Dutch national flag algorithm (a form of three-way partitioning)."
+        },
+        {
+          id: "squares-of-a-sorted-array",
+          title: "Squares of a Sorted Array",
+          link: "https://leetcode.com/problems/squares-of-a-sorted-array/",
+          description: "Return an array of squares in sorted order, which can be efficiently implemented using techniques from sorting algorithms."
+        }
+      ],
+      medium: [
+        {
+          id: "kth-largest-element",
+          title: "Kth Largest Element in an Array",
+          link: "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+          description: "Find the kth largest element in an unsorted array, which can be efficiently solved using Quick Select."
+        },
+        {
+          id: "find-k-closest-elements",
+          title: "Find K Closest Elements",
+          link: "https://leetcode.com/problems/find-k-closest-elements/",
+          description: "Find k closest elements to a given value in a sorted array, using partitioning or binary search techniques."
+        },
+        {
+          id: "top-k-frequent-elements",
+          title: "Top K Frequent Elements",
+          link: "https://leetcode.com/problems/top-k-frequent-elements/",
+          description: "Find the k most frequent elements in an array, which can be solved using a variation of Quick Select."
+        },
+        {
+          id: "3sum",
+          title: "3Sum",
+          link: "https://leetcode.com/problems/3sum/",
+          description: "Find all unique triplets that sum to zero, which uses sorting and two-pointer technique (related to partitioning)."
+        }
+      ],
+      hard: [
+        {
+          id: "median-of-two-sorted-arrays",
+          title: "Median of Two Sorted Arrays",
+          link: "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+          description: "Find the median of two sorted arrays, which can be solved using a divide-and-conquer approach similar to partitioning."
+        },
+        {
+          id: "sliding-window-median",
+          title: "Sliding Window Median",
+          link: "https://leetcode.com/problems/sliding-window-median/",
+          description: "Find the median in a sliding window of size k, which requires efficient insertion and removal of elements."
+        }
+      ]
+    }
+  }
 };
 
 export default quickSortContent; 

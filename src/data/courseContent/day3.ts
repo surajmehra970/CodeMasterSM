@@ -159,7 +159,80 @@ void reverse(int[] nums, int start, int end) {
       correctAnswer: 0,
       explanation: "In-place reversal uses only a few variables regardless of the array size, resulting in constant O(1) space complexity."
     }
-  ]
+  ],
+  
+  // Added practice section for Array Basics
+  practice: {
+    introduction: "Practice is essential to master array manipulation. Complete the following LeetCode problems to reinforce your understanding of array operations and techniques.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Two Sum",
+          link: "https://leetcode.com/problems/two-sum/",
+          description: "Given an array of integers and a target, return indices of the two numbers such that they add up to the target."
+        },
+        {
+          id: "e2",
+          title: "Best Time to Buy and Sell Stock",
+          link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+          description: "Find the maximum profit by buying and selling a stock once, given an array of prices."
+        },
+        {
+          id: "e3",
+          title: "Remove Duplicates from Sorted Array",
+          link: "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+          description: "Remove duplicates from a sorted array in-place, returning the number of unique elements."
+        },
+        {
+          id: "e4",
+          title: "Majority Element",
+          link: "https://leetcode.com/problems/majority-element/",
+          description: "Find the majority element (appears more than n/2 times) in an array of size n."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Product of Array Except Self",
+          link: "https://leetcode.com/problems/product-of-array-except-self/",
+          description: "Calculate the product of all elements in the array except the current element without using division."
+        },
+        {
+          id: "m2",
+          title: "Find First and Last Position of Element in Sorted Array",
+          link: "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+          description: "Find the starting and ending positions of a target value in a sorted array."
+        },
+        {
+          id: "m3",
+          title: "Rotate Array",
+          link: "https://leetcode.com/problems/rotate-array/",
+          description: "Rotate an array to the right by k steps."
+        },
+        {
+          id: "m4",
+          title: "Jump Game",
+          link: "https://leetcode.com/problems/jump-game/",
+          description: "Determine if you can reach the last index of an array where each element represents your maximum jump length."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Trapping Rain Water",
+          link: "https://leetcode.com/problems/trapping-rain-water/",
+          description: "Given n non-negative integers representing an elevation map, compute how much water it can trap after raining."
+        },
+        {
+          id: "h2",
+          title: "Maximum Subarray Sum Circular",
+          link: "https://leetcode.com/problems/maximum-sum-circular-subarray/",
+          description: "Find the maximum possible sum of a subarray in a circular array."
+        }
+      ]
+    }
+  }
 };
 
 export default arraysBasicContent; 

@@ -637,7 +637,85 @@ public int lcsSpaceOptimized(String text1, String text2) {
       correctAnswer: 2,
       explanation: "In the Knapsack problem, the state dp[i][w] represents the maximum value that can be obtained using the first i items with a weight limit of w. This state definition enables us to build the solution incrementally."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help reinforce your understanding of Dynamic Programming fundamentals. Start with the easier problems to build confidence, then move on to the more challenging ones. Pay special attention to identifying overlapping subproblems and optimal substructure in each problem, and consider implementing both top-down and bottom-up approaches for deeper understanding.",
+    questions: {
+      easy: [
+        {
+          id: "dp-easy-1",
+          title: "Climbing Stairs",
+          link: "https://leetcode.com/problems/climbing-stairs/",
+          description: "You are climbing a staircase. It takes n steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?"
+        },
+        {
+          id: "dp-easy-2",
+          title: "Min Cost Climbing Stairs",
+          link: "https://leetcode.com/problems/min-cost-climbing-stairs/",
+          description: "You are given an integer array cost where cost[i] is the cost of ith step. Once you pay the cost, you can either climb one or two steps. Find the minimum cost to reach the top of the floor."
+        },
+        {
+          id: "dp-easy-3",
+          title: "Divisor Game",
+          link: "https://leetcode.com/problems/divisor-game/",
+          description: "Alice and Bob take turns playing a game, with Alice starting first. They choose a number between 1 and n-1 that divides n, then subtract it from n. Whoever cannot make a move loses. Determine if Alice wins if both play optimally."
+        },
+        {
+          id: "dp-easy-4",
+          title: "Counting Bits",
+          link: "https://leetcode.com/problems/counting-bits/",
+          description: "Given an integer n, return an array where ans[i] is the number of 1's in the binary representation of i. This can be solved elegantly using DP."
+        }
+      ],
+      medium: [
+        {
+          id: "dp-medium-1",
+          title: "House Robber",
+          link: "https://leetcode.com/problems/house-robber/",
+          description: "A professional robber plans to rob houses along a street. Adjacent houses have a security system that will alert the police if both are robbed. Find the maximum amount of money the robber can rob without alerting the police."
+        },
+        {
+          id: "dp-medium-2",
+          title: "Coin Change",
+          link: "https://leetcode.com/problems/coin-change/",
+          description: "You are given coins of different denominations and a total amount of money. Find the fewest number of coins needed to make up that amount."
+        },
+        {
+          id: "dp-medium-3",
+          title: "Maximum Product Subarray",
+          link: "https://leetcode.com/problems/maximum-product-subarray/",
+          description: "Given an integer array nums, find a contiguous non-empty subarray whose product is the largest, and return the product."
+        },
+        {
+          id: "dp-medium-4",
+          title: "Decode Ways",
+          link: "https://leetcode.com/problems/decode-ways/",
+          description: "A message containing digits can be decoded in multiple ways. Given a string s containing only digits, return the number of ways to decode it."
+        }
+      ],
+      hard: [
+        {
+          id: "dp-hard-1",
+          title: "Regular Expression Matching",
+          link: "https://leetcode.com/problems/regular-expression-matching/",
+          description: "Implement regular expression matching with support for '.' and '*', where '.' matches any single character and '*' matches zero or more of the preceding element."
+        },
+        {
+          id: "dp-hard-2",
+          title: "Wildcard Matching",
+          link: "https://leetcode.com/problems/wildcard-matching/",
+          description: "Implement wildcard pattern matching with support for '?' and '*', where '?' matches any single character and '*' matches any sequence of characters (including the empty sequence)."
+        },
+        {
+          id: "dp-hard-3",
+          title: "Burst Balloons",
+          link: "https://leetcode.com/problems/burst-balloons/",
+          description: "You are given n balloons, each with a number painted on it. You can burst them one by one to collect coins. Find the maximum coins you can collect."
+        }
+      ]
+    }
+  }
 };
 
 export default dpIntroductionContent; 

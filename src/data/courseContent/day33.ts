@@ -551,7 +551,79 @@ static void printDiff(String text1, String text2) {
       correctAnswer: 1,
       explanation: "We can optimize the space complexity of the LCS algorithm to O(min(m, n)) by using just two rows of the DP table instead of the entire table. We keep track of the current row and the previous row, as each cell depends only on the current row to the left and the previous row diagonally up-left and directly above."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you reinforce your understanding of the Longest Common Subsequence and related string matching algorithms. Work through these problems to strengthen your ability to identify optimal substructure in sequence-based problems and implement efficient dynamic programming solutions.",
+    questions: {
+      easy: [
+        {
+          id: "lcs-easy-1",
+          title: "Longest Common Subsequence",
+          link: "https://leetcode.com/problems/longest-common-subsequence/",
+          description: "Given two strings text1 and text2, return the length of their longest common subsequence. This is the core LCS problem we studied in the lesson."
+        },
+        {
+          id: "lcs-easy-2",
+          title: "Is Subsequence",
+          link: "https://leetcode.com/problems/is-subsequence/",
+          description: "Given two strings s and t, determine if s is a subsequence of t. This is a simplification of the LCS problem where you only need to verify if one string is a subsequence of another."
+        },
+        {
+          id: "lcs-easy-3",
+          title: "Delete Operation for Two Strings",
+          link: "https://leetcode.com/problems/delete-operation-for-two-strings/",
+          description: "Find the minimum number of characters you need to delete to make two strings equal. This can be solved by finding the LCS and then calculating the deletions needed."
+        }
+      ],
+      medium: [
+        {
+          id: "lcs-medium-1",
+          title: "Longest Palindromic Subsequence",
+          link: "https://leetcode.com/problems/longest-palindromic-subsequence/",
+          description: "Given a string s, find the longest palindromic subsequence. This can be solved by finding the LCS of the string and its reverse."
+        },
+        {
+          id: "lcs-medium-2",
+          title: "Uncrossed Lines",
+          link: "https://leetcode.com/problems/uncrossed-lines/",
+          description: "You are given two integer arrays. You can draw a line connecting values in each array without crossing lines. The maximum number of such lines is equivalent to finding the LCS."
+        },
+        {
+          id: "lcs-medium-3",
+          title: "Minimum ASCII Delete Sum for Two Strings",
+          link: "https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/",
+          description: "Given two strings, find the lowest ASCII sum of deleted characters to make the two strings equal. This requires a variation of the LCS algorithm."
+        },
+        {
+          id: "lcs-medium-4",
+          title: "Shortest Common Supersequence",
+          link: "https://leetcode.com/problems/shortest-common-supersequence/",
+          description: "Find the shortest string that has both strings as subsequences. You'll need to apply LCS knowledge and reconstruct the supersequence."
+        }
+      ],
+      hard: [
+        {
+          id: "lcs-hard-1",
+          title: "Distinct Subsequences",
+          link: "https://leetcode.com/problems/distinct-subsequences/",
+          description: "Given two strings s and t, count the number of distinct subsequences of s which equals t. This requires a more complex DP approach based on LCS principles."
+        },
+        {
+          id: "lcs-hard-2",
+          title: "Edit Distance",
+          link: "https://leetcode.com/problems/edit-distance/",
+          description: "Given two strings, calculate the minimum number of operations required to convert one string to another. Operations include insertion, deletion, and substitution."
+        },
+        {
+          id: "lcs-hard-3",
+          title: "Regular Expression Matching",
+          link: "https://leetcode.com/problems/regular-expression-matching/",
+          description: "Implement regular expression matching with support for '.' and '*'. While more complex than basic LCS, it uses similar DP concepts for string pattern matching."
+        }
+      ]
+    }
+  }
 };
 
 export default lcsContent; 

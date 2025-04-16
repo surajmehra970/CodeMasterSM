@@ -515,7 +515,78 @@ For production systems comparing very long strings (e.g., DNA sequences, file di
       correctAnswer: 1,
       explanation: "In DP with state compression, a bitmask is typically used to represent the inclusion or exclusion of elements in a subset. Each bit in the mask corresponds to an element, with a 1 indicating the element is included and a 0 indicating it's excluded. This is particularly useful for problems involving subsets, combinations, or states that can be represented as binary choices."
     }
-  ]
+  ],
+  practice: {
+    introduction: "Practice these problems to reinforce your understanding of suffix arrays and their applications in string processing. These problems will help you apply the concepts learned to solve various algorithmic challenges involving pattern matching, substring queries, and string analysis.",
+    questions: {
+      easy: [
+        {
+          id: "sa-easy-1",
+          title: "Implement strStr()",
+          link: "https://leetcode.com/problems/implement-strstr/",
+          description: "Implement a function that finds the index of the first occurrence of a pattern in a string. While this can be solved with various methods, it's good practice for understanding string matching concepts that underlie suffix arrays."
+        },
+        {
+          id: "sa-easy-2",
+          title: "Longest Common Prefix",
+          link: "https://leetcode.com/problems/longest-common-prefix/",
+          description: "Find the longest common prefix among an array of strings. This problem helps understand the concept of common prefixes, which is related to the LCP array computation in suffix arrays."
+        },
+        {
+          id: "sa-easy-3",
+          title: "Repeated Substring Pattern",
+          link: "https://leetcode.com/problems/repeated-substring-pattern/",
+          description: "Determine if a string can be constructed by taking a substring and repeating it multiple times. This problem can be solved using concepts related to string periods and patterns."
+        }
+      ],
+      medium: [
+        {
+          id: "sa-medium-1",
+          title: "Find All Anagrams in a String",
+          link: "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+          description: "Find all the start indices of anagrams of a pattern in a string. This problem can be approached using suffix array concepts for effective string matching."
+        },
+        {
+          id: "sa-medium-2",
+          title: "Longest Repeating Substring",
+          link: "https://leetcode.com/problems/longest-repeating-substring/",
+          description: "Find the longest substring that occurs at least twice in a given string. This is a direct application of suffix arrays and LCP arrays."
+        },
+        {
+          id: "sa-medium-3",
+          title: "Longest Duplicate Substring",
+          link: "https://leetcode.com/problems/longest-duplicate-substring/",
+          description: "Find the longest substring that occurs multiple times in a string. This is an ideal problem for applying suffix array techniques."
+        },
+        {
+          id: "sa-medium-4",
+          title: "Distinct Subsequences II",
+          link: "https://leetcode.com/problems/distinct-subsequences-ii/",
+          description: "Count the number of distinct, non-empty subsequences of a string. This problem requires a good understanding of string patterns and can benefit from suffix array concepts."
+        }
+      ],
+      hard: [
+        {
+          id: "sa-hard-1",
+          title: "Shortest Palindrome",
+          link: "https://leetcode.com/problems/shortest-palindrome/",
+          description: "Find the shortest palindrome that can be formed by adding characters to the beginning of a string. This can be approached using suffix array techniques combined with palindrome concepts."
+        },
+        {
+          id: "sa-hard-2",
+          title: "Substring with Concatenation of All Words",
+          link: "https://leetcode.com/problems/substring-with-concatenation-of-all-words/",
+          description: "Find all starting indices of substrings that are a concatenation of words from a given list. This problem tests advanced string matching capabilities."
+        },
+        {
+          id: "sa-hard-3",
+          title: "Number of Distinct Substrings in a String",
+          link: "https://leetcode.com/problems/number-of-distinct-substrings-in-a-string/",
+          description: "Count the number of distinct substrings of a string. This is a classic application of suffix arrays that leverages the LCP array to efficiently count unique substrings."
+        }
+      ]
+    }
+  }
 };
 
 export default mockTestWeek8Content; 

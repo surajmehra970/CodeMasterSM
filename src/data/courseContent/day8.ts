@@ -256,7 +256,80 @@ public void reverse() {
       correctAnswer: 2,
       explanation: "The fast and slow pointer technique (where one pointer moves twice as fast as the other) is commonly used to find the middle element of a linked list. It can also be used to detect cycles."
     }
-  ]
+  ],
+  
+  // Added practice section for Singly Linked List
+  practice: {
+    introduction: "Practice is essential to master singly linked lists. Complete the following LeetCode problems to reinforce your understanding of linked list operations and algorithms.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Reverse Linked List",
+          link: "https://leetcode.com/problems/reverse-linked-list/",
+          description: "Reverse a singly linked list iteratively and recursively. A fundamental linked list operation."
+        },
+        {
+          id: "e2",
+          title: "Delete Node in a Linked List",
+          link: "https://leetcode.com/problems/delete-node-in-a-linked-list/",
+          description: "Delete a node in a linked list without having access to the head pointer."
+        },
+        {
+          id: "e3",
+          title: "Middle of the Linked List",
+          link: "https://leetcode.com/problems/middle-of-the-linked-list/",
+          description: "Find the middle node of a linked list using the fast and slow pointer technique."
+        },
+        {
+          id: "e4",
+          title: "Linked List Cycle",
+          link: "https://leetcode.com/problems/linked-list-cycle/",
+          description: "Determine if a linked list has a cycle using Floyd's Cycle-Finding Algorithm."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Remove Nth Node From End of List",
+          link: "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+          description: "Remove the nth node from the end of a linked list using a two-pointer approach."
+        },
+        {
+          id: "m2",
+          title: "Reorder List",
+          link: "https://leetcode.com/problems/reorder-list/",
+          description: "Reorder a linked list by interleaving the first half with the reversed second half."
+        },
+        {
+          id: "m3",
+          title: "Odd Even Linked List",
+          link: "https://leetcode.com/problems/odd-even-linked-list/",
+          description: "Group all odd-indexed nodes together followed by even-indexed nodes."
+        },
+        {
+          id: "m4",
+          title: "Sort List",
+          link: "https://leetcode.com/problems/sort-list/",
+          description: "Sort a linked list in O(n log n) time using constant space complexity."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Merge k Sorted Lists",
+          link: "https://leetcode.com/problems/merge-k-sorted-lists/",
+          description: "Merge k sorted linked lists into one sorted linked list using a priority queue or divide and conquer."
+        },
+        {
+          id: "h2",
+          title: "Reverse Nodes in k-Group",
+          link: "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+          description: "Reverse nodes in k-group in a linked list while maintaining the structure of the remaining nodes."
+        }
+      ]
+    }
+  }
 };
 
 export default singlyLinkedListContent; 

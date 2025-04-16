@@ -429,7 +429,79 @@ class LFUCache {
       correctAnswer: 2,
       explanation: "Microsoft technical interviews most value clearly explaining trade-offs and implementing a clean, efficient solution. Microsoft interviewers typically look for candidates who can articulate their thought process, analyze multiple approaches, understand the trade-offs involved, and then implement a solution that balances correctness, performance, and code clarity."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems are commonly encountered in Microsoft technical interviews. They cover a range of topics including data structures, algorithms, and system design that Microsoft particularly values. Work through these problems to prepare for Microsoft's problem-solving focused interview approach.",
+    questions: {
+      easy: [
+        {
+          id: "microsoft-easy-1",
+          title: "Reverse String",
+          link: "https://leetcode.com/problems/reverse-string/",
+          description: "Reverse a string in-place. This tests basic array manipulation and understanding of in-place operations, which Microsoft frequently uses as warm-up questions."
+        },
+        {
+          id: "microsoft-easy-2",
+          title: "Valid Palindrome",
+          link: "https://leetcode.com/problems/valid-palindrome/",
+          description: "Determine if a string is a valid palindrome considering only alphanumeric characters. This tests string manipulation and edge case handling, common in Microsoft interviews."
+        },
+        {
+          id: "microsoft-easy-3",
+          title: "Linked List Cycle",
+          link: "https://leetcode.com/problems/linked-list-cycle/",
+          description: "Detect if a linked list has a cycle. Microsoft frequently tests understanding of the Floyd's Tortoise and Hare algorithm and pointer manipulation."
+        }
+      ],
+      medium: [
+        {
+          id: "microsoft-medium-1",
+          title: "Binary Tree Level Order Traversal",
+          link: "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+          description: "Traverse a binary tree level by level. This tests understanding of tree algorithms and queue-based traversals, which are common in Microsoft interviews."
+        },
+        {
+          id: "microsoft-medium-2",
+          title: "String to Integer (atoi)",
+          link: "https://leetcode.com/problems/string-to-integer-atoi/",
+          description: "Implement the atoi function that converts a string to an integer. Microsoft often uses this to test edge case handling and attention to requirements."
+        },
+        {
+          id: "microsoft-medium-3",
+          title: "Clone Graph",
+          link: "https://leetcode.com/problems/clone-graph/",
+          description: "Clone an undirected graph. This tests deep understanding of graph traversal and object creation, skills Microsoft values in their engineers."
+        },
+        {
+          id: "microsoft-medium-4",
+          title: "Spiral Matrix",
+          link: "https://leetcode.com/problems/spiral-matrix/",
+          description: "Return all elements of a matrix in spiral order. This tests array manipulation and directional logic, frequently appearing in Microsoft's algorithmic interviews."
+        }
+      ],
+      hard: [
+        {
+          id: "microsoft-hard-1",
+          title: "Serialize and Deserialize Binary Tree",
+          link: "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+          description: "Design an algorithm to serialize and deserialize a binary tree. This tests system design skills and understanding of tree structures that Microsoft values."
+        },
+        {
+          id: "microsoft-hard-2",
+          title: "Merge k Sorted Lists",
+          link: "https://leetcode.com/problems/merge-k-sorted-lists/",
+          description: "Merge k sorted linked lists into one sorted list. This tests understanding of priority queues and efficient merging algorithms, common in Microsoft interviews."
+        },
+        {
+          id: "microsoft-hard-3",
+          title: "LRU Cache",
+          link: "https://leetcode.com/problems/lru-cache/",
+          description: "Design and implement a data structure for Least Recently Used (LRU) cache. Microsoft frequently tests candidates on design problems that combine data structures with specific operational requirements."
+        }
+      ]
+    }
+  }
 };
 
 export default microsoftProblemsContent; 

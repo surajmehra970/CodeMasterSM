@@ -563,7 +563,79 @@ Comparing approaches to the all-pairs shortest path problem:
       correctAnswer: 1,
       explanation: "The Bellman-Ford algorithm can detect negative cycles in a weighted directed graph. After running the standard Bellman-Ford algorithm for V-1 iterations (where V is the number of vertices), if an additional iteration produces any further improvements to the shortest path estimates, it indicates the presence of a negative cycle. Dijkstra's algorithm doesn't work with negative weights, while standard DFS and BFS don't consider edge weights at all."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These additional practice problems will further reinforce the graph algorithms covered in Week 7. Each problem requires applying concepts from Bellman-Ford, Floyd-Warshall, or Topological Sort algorithms to solve different graph-related challenges.",
+    questions: {
+      easy: [
+        {
+          id: "mock7-easy-1",
+          title: "Find if Path Exists in Graph",
+          link: "https://leetcode.com/problems/find-if-path-exists-in-graph/",
+          description: "Determine if there is a valid path between two nodes in an undirected graph. This basic connectivity problem helps reinforce graph traversal concepts that underlie all the algorithms we've studied."
+        },
+        {
+          id: "mock7-easy-2",
+          title: "Minimum Cost to Connect All Points",
+          link: "https://leetcode.com/problems/min-cost-to-connect-all-points/",
+          description: "Connect all points with the minimum cost, where the cost is the Manhattan distance. This problem requires finding a minimum spanning tree, which relates to efficient path-finding in graphs."
+        },
+        {
+          id: "mock7-easy-3",
+          title: "Redundant Connection",
+          link: "https://leetcode.com/problems/redundant-connection/",
+          description: "Find an edge that can be removed to make a graph a tree. This involves cycle detection, which is essential for many graph algorithms including topological sort."
+        }
+      ],
+      medium: [
+        {
+          id: "mock7-medium-1",
+          title: "Path with Maximum Probability",
+          link: "https://leetcode.com/problems/path-with-maximum-probability/",
+          description: "Find the path with the highest probability of success between two nodes. This applies shortest path concepts but with probability maximization instead of distance minimization."
+        },
+        {
+          id: "mock7-medium-2",
+          title: "Cheapest Flights Within K Stops",
+          link: "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+          description: "Find the cheapest price to fly from source to destination with at most K stops. This is a variation of Bellman-Ford with a constraint on the number of edges."
+        },
+        {
+          id: "mock7-medium-3",
+          title: "Keys and Rooms",
+          link: "https://leetcode.com/problems/keys-and-rooms/",
+          description: "Determine if all rooms can be visited in a building where each room may contain keys to other rooms. This involves graph traversal with dynamic edge discovery."
+        },
+        {
+          id: "mock7-medium-4",
+          title: "Possible Bipartition",
+          link: "https://leetcode.com/problems/possible-bipartition/",
+          description: "Determine if it's possible to divide people into two groups where no two people in the same group dislike each other. This is a graph coloring problem related to conflict resolution in networks."
+        }
+      ],
+      hard: [
+        {
+          id: "mock7-hard-1",
+          title: "Critical Connections in a Network",
+          link: "https://leetcode.com/problems/critical-connections-in-a-network/",
+          description: "Find all bridges (critical connections) in a network. This requires understanding articulation points in graphs, which is essential for network reliability analysis."
+        },
+        {
+          id: "mock7-hard-2",
+          title: "Reconstruct Itinerary",
+          link: "https://leetcode.com/problems/reconstruct-itinerary/",
+          description: "Reconstruct a valid itinerary from a list of airline tickets. This is an Eulerian path problem that requires finding a path that uses each edge exactly once."
+        },
+        {
+          id: "mock7-hard-3",
+          title: "Word Ladder",
+          link: "https://leetcode.com/problems/word-ladder/",
+          description: "Find the shortest transformation sequence from a start word to an end word, changing one letter at a time. This involves constructing an implicit graph and finding the shortest path."
+        }
+      ]
+    }
+  }
 };
 
 export default mockTestWeek7Content; 

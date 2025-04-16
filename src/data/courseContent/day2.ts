@@ -100,7 +100,78 @@ int rightmostSetBit(int n) {
       correctAnswer: 2,
       explanation: "Left shift (<<) by 1 multiplies a number by 2."
     }
-  ]
+  ],
+  practice: {
+    introduction: "Practice is essential to master bit manipulation. Complete the following LeetCode problems to reinforce your understanding of bitwise operations and techniques.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Number of 1 Bits",
+          link: "https://leetcode.com/problems/number-of-1-bits/",
+          description: "Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight)."
+        },
+        {
+          id: "e2",
+          title: "Single Number",
+          link: "https://leetcode.com/problems/single-number/",
+          description: "Given a non-empty array of integers, every element appears twice except for one. Find that single one using bit manipulation."
+        },
+        {
+          id: "e3",
+          title: "Power of Two",
+          link: "https://leetcode.com/problems/power-of-two/",
+          description: "Determine if a given integer is a power of two using bit manipulation."
+        },
+        {
+          id: "e4",
+          title: "Reverse Bits",
+          link: "https://leetcode.com/problems/reverse-bits/",
+          description: "Reverse bits of a given 32 bits unsigned integer."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Single Number III",
+          link: "https://leetcode.com/problems/single-number-iii/",
+          description: "Given an array where all numbers appear twice except two numbers, find those two numbers using bit manipulation."
+        },
+        {
+          id: "m2",
+          title: "Counting Bits",
+          link: "https://leetcode.com/problems/counting-bits/",
+          description: "Given an integer n, return an array of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i."
+        },
+        {
+          id: "m3",
+          title: "Subsets",
+          link: "https://leetcode.com/problems/subsets/",
+          description: "Generate all possible subsets of a set using bit manipulation."
+        },
+        {
+          id: "m4",
+          title: "Sum of Two Integers",
+          link: "https://leetcode.com/problems/sum-of-two-integers/",
+          description: "Calculate the sum of two integers without using the + and - operators. Use bit manipulation instead."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Maximum XOR of Two Numbers in an Array",
+          link: "https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/",
+          description: "Find the maximum result of ai XOR aj, where 0 ≤ i, j < n. Solve with bit manipulation optimization."
+        },
+        {
+          id: "h2",
+          title: "Minimum Number of Flips to Make a OR b Equal to c",
+          link: "https://leetcode.com/problems/minimum-number-of-flips-to-make-a-or-b-equal-to-c/",
+          description: "Find the minimum number of bit flips required to make a OR b equal to c."
+        }
+      ]
+    }
+  }
 };
 
 export default bitManipulationContent; 

@@ -667,7 +667,79 @@ public class ServiceAuthenticationFilter extends OncePerRequestFilter {
       correctAnswer: 1,
       explanation: "Implementing a dedicated service for sensitive data with strict access controls is the most effective practice for protecting sensitive information in a microservices architecture. This approach centralizes security concerns, minimizes the exposure surface area, enables comprehensive auditing, and allows for fine-grained access controls. It ensures that sensitive data is managed consistently and that each service only accesses the specific data it needs through controlled interfaces."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "While LeetCode doesn't directly test microservices architecture or database design, these problems exercise the core algorithms and data structures used in implementing these systems. Practicing these problems will help you understand the computational challenges that arise when designing distributed applications and databases.",
+    questions: {
+      easy: [
+        {
+          id: "microservices-easy-1",
+          title: "Design HashSet",
+          link: "https://leetcode.com/problems/design-hashset/",
+          description: "Implement a hash set data structure, which illustrates how data can be stored and retrieved efficiently in distributed databases used within microservices."
+        },
+        {
+          id: "microservices-easy-2",
+          title: "Minimum Index Sum of Two Lists",
+          link: "https://leetcode.com/problems/minimum-index-sum-of-two-lists/",
+          description: "Find items with the least index sum from two lists. This simulates reconciliation of data between microservices when determining common priority items."
+        },
+        {
+          id: "microservices-easy-3",
+          title: "Implement Queue using Stacks",
+          link: "https://leetcode.com/problems/implement-queue-using-stacks/",
+          description: "Implement a queue using only stacks. This explores message queue implementations which are central to communication between microservices."
+        }
+      ],
+      medium: [
+        {
+          id: "microservices-medium-1",
+          title: "Design Twitter",
+          link: "https://leetcode.com/problems/design-twitter/",
+          description: "Design a simplified Twitter with follow/unfollow and news feed features. This exercises the design of a distributed system with multiple services interacting through APIs."
+        },
+        {
+          id: "microservices-medium-2",
+          title: "Design Underground System",
+          link: "https://leetcode.com/problems/design-underground-system/",
+          description: "Design a subway system that calculates average travel times. This simulates data collection and aggregation across multiple services in a distributed application."
+        },
+        {
+          id: "microservices-medium-3",
+          title: "Time Based Key-Value Store",
+          link: "https://leetcode.com/problems/time-based-key-value-store/",
+          description: "Design a time-based key-value store. This models versioned data storage which is crucial for handling data evolution in microservices."
+        },
+        {
+          id: "microservices-medium-4",
+          title: "Encode and Decode TinyURL",
+          link: "https://leetcode.com/problems/encode-and-decode-tinyurl/",
+          description: "Design a URL shortener service. This simulates a microservice that provides a specific functionality within a larger system."
+        }
+      ],
+      hard: [
+        {
+          id: "microservices-hard-1",
+          title: "Design In-Memory File System",
+          link: "https://leetcode.com/problems/design-in-memory-file-system/",
+          description: "Design an in-memory file system with directories and files. This exercises complex state management similar to distributed database design."
+        },
+        {
+          id: "microservices-hard-2",
+          title: "Design Log Storage System",
+          link: "https://leetcode.com/problems/design-log-storage-system/",
+          description: "Design a system to store and retrieve logs. This tests understanding of time-series data storage, which is important for monitoring and debugging microservices."
+        },
+        {
+          id: "microservices-hard-3",
+          title: "LFU Cache",
+          link: "https://leetcode.com/problems/lfu-cache/",
+          description: "Design and implement a Least Frequently Used (LFU) cache. This explores caching strategies which are critical for performance optimization in microservices architecture."
+        }
+      ]
+    }
+  }
 };
 
 export default microservicesDatabasesContent; 

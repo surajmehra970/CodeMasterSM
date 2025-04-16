@@ -1,14 +1,14 @@
 import { Content } from '@/types/course';
 
 const knapsackContent: Content = {
-  introduction: "The Knapsack Problem is a fundamental dynamic programming challenge where we need to select items with different weights and values to maximize the total value while staying within a weight constraint. This problem has many real-world applications, from resource allocation to financial investment decisions. Today, we'll explore different types of knapsack problems and develop efficient solutions using dynamic programming techniques.",
+  introduction: "The Knapsack Problem is a fundamental combinatorial optimization problem in computer science and mathematics. It models a scenario where, given a set of items with specific weights and values, you need to determine which items to include in a collection (the 'knapsack') so that the total weight is less than or equal to a given limit and the total value is as large as possible. This problem demonstrates the power of dynamic programming in solving complex optimization challenges.",
   
   learningObjectives: [
-    "Understand the core 0/1 Knapsack problem and its recursive solution",
-    "Develop dynamic programming solutions using both top-down and bottom-up approaches",
-    "Analyze space and time complexity of different knapsack problem implementations",
-    "Extend the knapsack concept to variations like unbounded knapsack and fractional knapsack",
-    "Apply knapsack solutions to real-world optimization problems"
+    "Understand the Knapsack Problem and its variations",
+    "Master the dynamic programming approach to solving the 0/1 Knapsack Problem",
+    "Analyze the time and space complexity of different solutions",
+    "Implement efficient algorithms for the Knapsack Problem",
+    "Apply Knapsack Problem techniques to related optimization problems"
   ],
   
   sections: [
@@ -495,7 +495,79 @@ static int maxTasksProcessed(int[] executionTimes, int[] memoryRequirements, int
       correctAnswer: 1,
       explanation: "We can optimize the space complexity by using a 1D array instead of a 2D array. To avoid overwriting values that are still needed, we process the capacity in reverse order (from capacity down to the weight of the current item). This approach reduces space complexity to O(W) while maintaining correctness."
     }
-  ]
+  ],
+
+  practice: {
+    introduction: "These practice problems will help you reinforce your understanding of the Knapsack Problem and related dynamic programming concepts. Work through these problems to strengthen your ability to recognize and solve optimization problems using the techniques you've learned. For each problem, consider how the Knapsack approach can be adapted to address the specific constraints and objectives.",
+    questions: {
+      easy: [
+        {
+          id: "knapsack-easy-1",
+          title: "Partition Equal Subset Sum",
+          link: "https://leetcode.com/problems/partition-equal-subset-sum/",
+          description: "Given a non-empty array of positive integers, determine if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal. This is a variation of the 0/1 Knapsack Problem."
+        },
+        {
+          id: "knapsack-easy-2",
+          title: "Subset Sum Problem",
+          link: "https://leetcode.com/problems/partition-equal-subset-sum/",
+          description: "Given an array of non-negative integers and a target sum, determine if there exists a subset of the array whose sum equals the target sum. This is a direct application of the 0/1 Knapsack approach."
+        },
+        {
+          id: "knapsack-easy-3",
+          title: "Last Stone Weight II",
+          link: "https://leetcode.com/problems/last-stone-weight-ii/",
+          description: "You are given an array of integers representing the weights of stones. On each turn, you choose any two stones and smash them together. The result is determined by their weights difference. Find the smallest possible weight of the last stone (or 0 if all stones are destroyed)."
+        }
+      ],
+      medium: [
+        {
+          id: "knapsack-medium-1",
+          title: "Target Sum",
+          link: "https://leetcode.com/problems/target-sum/",
+          description: "You are given an integer array nums and an integer target. You want to build an expression out of nums by adding one of the symbols '+' and '-' before each integer, then concatenate all integers. Return the number of different expressions that evaluate to target."
+        },
+        {
+          id: "knapsack-medium-2",
+          title: "Coin Change 2",
+          link: "https://leetcode.com/problems/coin-change-2/",
+          description: "You are given an integer array representing different coin denominations and an integer representing a total amount of money. Return the number of combinations that make up that amount using the given coin denominations."
+        },
+        {
+          id: "knapsack-medium-3",
+          title: "Ones and Zeroes",
+          link: "https://leetcode.com/problems/ones-and-zeroes/",
+          description: "You are given an array of binary strings and two integers m and n. Return the size of the largest subset of strings such that you can have at most m 0's and n 1's in the subset."
+        },
+        {
+          id: "knapsack-medium-4",
+          title: "Profitable Schemes",
+          link: "https://leetcode.com/problems/profitable-schemes/",
+          description: "There are G people in a gang, and a list of various crimes they could commit. For each crime, you get a certain amount of profit and requires a certain number of gang members to participate. Find the number of schemes that can generate at least P profit."
+        }
+      ],
+      hard: [
+        {
+          id: "knapsack-hard-1",
+          title: "Tallest Billboard",
+          link: "https://leetcode.com/problems/tallest-billboard/",
+          description: "You are building a billboard with two supports. The billboard is to be viewed from a specific side, so you need identical supports. Return the maximum height of the billboard installation."
+        },
+        {
+          id: "knapsack-hard-2",
+          title: "Super Washing Machines",
+          link: "https://leetcode.com/problems/super-washing-machines/",
+          description: "You have n washing machines placed in a row, each with some dresses. The goal is to redistribute the dresses such that every washing machine has the same number of dresses. Return the minimum number of moves to make all the washing machines have the same number of dresses."
+        },
+        {
+          id: "knapsack-hard-3",
+          title: "Freedom Trail",
+          link: "https://leetcode.com/problems/freedom-trail/",
+          description: "Given a ring string and a key string, find the minimum number of steps to spell out the key by rotating the ring and selecting characters. This can be approached as a variant of the Knapsack Problem with state transitions."
+        }
+      ]
+    }
+  }
 };
 
 export default knapsackContent; 

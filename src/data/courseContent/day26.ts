@@ -421,7 +421,73 @@ public static Graph createOptimalGraph(int vertices, int edges, boolean isDirect
       correctAnswer: 2,
       explanation: "Kruskal's algorithm processes edges in ascending order of weight and checks for cycles. An edge list is most appropriate as it directly provides all edges, which can be sorted by weight."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these LeetCode problems to reinforce your understanding of graph representations and basic graph operations. These problems will help you apply the concepts learned in this lesson to real-world coding scenarios and understand the importance of choosing the right representation for different graph problems.",
+    questions: {
+      easy: [
+        {
+          id: "graph-rep-practice-1",
+          title: "Find the Town Judge",
+          link: "https://leetcode.com/problems/find-the-town-judge/",
+          description: "In a town, there is a judge trusted by everyone else but trusts nobody. Given trust relationships between people, find the judge. This problem helps practice creating and analyzing directed graphs."
+        },
+        {
+          id: "graph-rep-practice-2",
+          title: "Find Center of Star Graph",
+          link: "https://leetcode.com/problems/find-center-of-star-graph/",
+          description: "Find the center of a star graph where there is one node that is connected to all other nodes. This problem demonstrates how different graph representations affect solution efficiency."
+        },
+        {
+          id: "graph-rep-practice-3",
+          title: "Maximum Number of Edges to Remove",
+          link: "https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/",
+          description: "Practice distinguishing between different types of edges in a graph while maintaining connectivity properties."
+        }
+      ],
+      medium: [
+        {
+          id: "graph-rep-practice-4",
+          title: "Course Schedule",
+          link: "https://leetcode.com/problems/course-schedule/",
+          description: "Determine if it's possible to finish all courses given prerequisites. This problem helps practice representing and traversing a directed graph to detect cycles."
+        },
+        {
+          id: "graph-rep-practice-5",
+          title: "Redundant Connection",
+          link: "https://leetcode.com/problems/redundant-connection/",
+          description: "Find an edge that can be removed to make a graph a tree. This problem requires understanding different ways to track connections in an undirected graph."
+        },
+        {
+          id: "graph-rep-practice-6",
+          title: "Evaluate Division",
+          link: "https://leetcode.com/problems/evaluate-division/",
+          description: "Evaluate equations and return the corresponding values. This problem involves building and querying a weighted directed graph."
+        },
+        {
+          id: "graph-rep-practice-7",
+          title: "Graph Valid Tree",
+          link: "https://leetcode.com/problems/graph-valid-tree/",
+          description: "Determine if an undirected graph is a valid tree. This problem tests your ability to check for cycles and connectivity in a graph."
+        }
+      ],
+      hard: [
+        {
+          id: "graph-rep-practice-8",
+          title: "Reconstruct Itinerary",
+          link: "https://leetcode.com/problems/reconstruct-itinerary/",
+          description: "Given a list of airline tickets, reconstruct the itinerary in order. This problem requires efficient graph traversal through adjacency lists."
+        },
+        {
+          id: "graph-rep-practice-9",
+          title: "Alien Dictionary",
+          link: "https://leetcode.com/problems/alien-dictionary/",
+          description: "Given a sorted dictionary of an alien language, find the order of characters. This problem involves building a directed graph from character ordering constraints."
+        }
+      ]
+    }
+  }
 };
 
 export default graphRepresentationContent; 

@@ -362,7 +362,79 @@ public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
       correctAnswer: 1,
       explanation: "A greedy algorithm selecting jobs with the highest profit/time ratio is NOT typically used to solve the 'Maximum Profit in Job Scheduling' problem. This greedy approach fails because it doesn't account for the constraints of non-overlapping intervals. The optimal solution usually involves dynamic programming, sorting jobs by end time, and finding the latest non-overlapping job for each current job."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you prepare for Amazon technical interviews. The selected questions represent common patterns and problem types that frequently appear in Amazon's interview process. Work through these problems to strengthen your algorithmic skills and problem-solving approach.",
+    questions: {
+      easy: [
+        {
+          id: "amazon-easy-1",
+          title: "Two Sum",
+          link: "https://leetcode.com/problems/two-sum/",
+          description: "Find two numbers in an array that add up to a target value. This problem tests your ability to use hash maps for efficient lookups, a common technique in Amazon interviews."
+        },
+        {
+          id: "amazon-easy-2",
+          title: "Valid Parentheses",
+          link: "https://leetcode.com/problems/valid-parentheses/",
+          description: "Determine if a string of brackets is valid. Amazon frequently tests stack-based problems to assess understanding of this fundamental data structure."
+        },
+        {
+          id: "amazon-easy-3",
+          title: "Merge Two Sorted Lists",
+          link: "https://leetcode.com/problems/merge-two-sorted-lists/",
+          description: "Merge two sorted linked lists into a single sorted list. This tests your ability to handle pointer manipulation and merge operations, common in Amazon interviews."
+        }
+      ],
+      medium: [
+        {
+          id: "amazon-medium-1",
+          title: "Number of Islands",
+          link: "https://leetcode.com/problems/number-of-islands/",
+          description: "Count the number of islands in a 2D grid. This is a classic Amazon interview question that tests graph traversal and connected components concepts."
+        },
+        {
+          id: "amazon-medium-2",
+          title: "LRU Cache",
+          link: "https://leetcode.com/problems/lru-cache/",
+          description: "Design and implement a data structure for Least Recently Used (LRU) cache. This tests system design skills and data structure implementation that Amazon values."
+        },
+        {
+          id: "amazon-medium-3",
+          title: "Trapping Rain Water",
+          link: "https://leetcode.com/problems/trapping-rain-water/",
+          description: "Calculate how much water can be trapped between bars. This problem assesses spatial reasoning and algorithm optimization, key skills for Amazon roles."
+        },
+        {
+          id: "amazon-medium-4",
+          title: "Copy List with Random Pointer",
+          link: "https://leetcode.com/problems/copy-list-with-random-pointer/",
+          description: "Clone a linked list with a random pointer. Amazon often uses this to test understanding of complex data structure operations and memory management."
+        }
+      ],
+      hard: [
+        {
+          id: "amazon-hard-1",
+          title: "Word Ladder",
+          link: "https://leetcode.com/problems/word-ladder/",
+          description: "Find the shortest transformation sequence from start word to end word. This graph problem tests BFS implementation skills and problem modeling."
+        },
+        {
+          id: "amazon-hard-2",
+          title: "Median of Two Sorted Arrays",
+          link: "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+          description: "Find the median of two sorted arrays. This tests binary search techniques and ability to handle complex algorithmic challenges typical in Amazon interviews."
+        },
+        {
+          id: "amazon-hard-3",
+          title: "Design Search Autocomplete System",
+          link: "https://leetcode.com/problems/design-search-autocomplete-system/",
+          description: "Design a search autocomplete system. This combines data structure design with string processing, reflecting Amazon's interest in search-related capabilities."
+        }
+      ]
+    }
+  }
 };
 
 export default amazonProblemsContent; 

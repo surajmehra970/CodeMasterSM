@@ -514,7 +514,79 @@ List<Integer> findGraphCenters(Graph graph) {
       correctAnswer: 2,
       explanation: "Finding a minimum spanning tree (MST) is not a typical application of the Floyd-Warshall algorithm. MSTs are typically found using algorithms like Kruskal's or Prim's. The Floyd-Warshall algorithm is used for finding all-pairs shortest paths, computing transitive closure, and detecting negative cycles in a graph."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you master the Floyd-Warshall algorithm and its applications in finding all-pairs shortest paths. Work through these problems to improve your understanding of graph traversal, path reconstruction, and optimization in different contexts.",
+    questions: {
+      easy: [
+        {
+          id: "floyd-warshall-easy-1",
+          title: "Find the City With the Smallest Number of Neighbors at a Threshold Distance",
+          link: "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
+          description: "Find the city that has the smallest number of cities that are reachable through some path and whose distance is at most the given threshold. This problem is perfect for applying the Floyd-Warshall algorithm."
+        },
+        {
+          id: "floyd-warshall-easy-2",
+          title: "Network Delay Time",
+          link: "https://leetcode.com/problems/network-delay-time/",
+          description: "Calculate the time it takes for all nodes to receive a signal. While Dijkstra's algorithm is commonly used, Floyd-Warshall provides a simpler approach if you need all-pairs shortest paths."
+        },
+        {
+          id: "floyd-warshall-easy-3",
+          title: "Min Cost to Connect All Points",
+          link: "https://leetcode.com/problems/min-cost-to-connect-all-points/",
+          description: "Connect a set of points with the minimum total cost. This problem can be viewed as finding a minimum spanning tree, but understanding the all-pairs shortest paths first can provide insights."
+        }
+      ],
+      medium: [
+        {
+          id: "floyd-warshall-medium-1",
+          title: "Evaluate Division",
+          link: "https://leetcode.com/problems/evaluate-division/",
+          description: "Given equations like a/b=2 and queries like c/d, evaluate the queries. This can be modeled as a graph problem where Floyd-Warshall helps calculate all possible divisions."
+        },
+        {
+          id: "floyd-warshall-medium-2",
+          title: "Course Schedule IV",
+          link: "https://leetcode.com/problems/course-schedule-iv/",
+          description: "Determine if a course is a prerequisite of another. This requires computing transitive closure of the prerequisite graph, which Floyd-Warshall can efficiently solve."
+        },
+        {
+          id: "floyd-warshall-medium-3",
+          title: "Graph Connectivity With Threshold",
+          link: "https://leetcode.com/problems/graph-connectivity-with-threshold/",
+          description: "Determine if two nodes are connected in a graph where edges exist between nodes with a common divisor greater than a threshold. This connectivity problem benefits from all-pairs analysis."
+        },
+        {
+          id: "floyd-warshall-medium-4",
+          title: "Find the Longest Valid Obstacle Course at Each Position",
+          link: "https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position/",
+          description: "Find the longest valid obstacle course at each position in an array. While primarily a dynamic programming problem, understanding the connections between positions is similar to path analysis in graphs."
+        }
+      ],
+      hard: [
+        {
+          id: "floyd-warshall-hard-1",
+          title: "Minimum Cost to Make at Least One Valid Path in a Grid",
+          link: "https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+          description: "Find the minimum cost to change signs in a grid to create a valid path. This combines graph algorithms with a unique cost structure that benefits from all-pairs analysis."
+        },
+        {
+          id: "floyd-warshall-hard-2",
+          title: "Shortest Path to Get All Keys",
+          link: "https://leetcode.com/problems/shortest-path-to-get-all-keys/",
+          description: "Find the shortest path to collect all keys and open all locks in a grid. This state-based path problem requires finding optimal routes between key positions."
+        },
+        {
+          id: "floyd-warshall-hard-3",
+          title: "Minimum Cost to Reach Destination in Time",
+          link: "https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/",
+          description: "Find the minimum cost path from source to destination within a time constraint. While a modified Dijkstra's is common, understanding all-pairs paths can provide insights for optimization."
+        }
+      ]
+    }
+  }
 };
 
 export default floydWarshallContent; 

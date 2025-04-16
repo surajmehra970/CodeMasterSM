@@ -289,7 +289,80 @@ class Deque {
       correctAnswer: 2,
       explanation: "Deletion at a specific position given the node reference is more efficient in a doubly linked list (O(1)) because you can directly access both previous and next nodes. In a singly linked list, you would need to traverse from the head to find the previous node, making it O(n)."
     }
-  ]
+  ],
+  
+  // Added practice section for Doubly Linked List
+  practice: {
+    introduction: "Practice these LeetCode problems to strengthen your understanding of doubly linked lists. While some problems don't explicitly require doubly linked lists, they can be more efficiently solved using them.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Design Linked List",
+          link: "https://leetcode.com/problems/design-linked-list/",
+          description: "Implement a doubly linked list with basic operations like get, addAtHead, addAtTail, addAtIndex, and deleteAtIndex."
+        },
+        {
+          id: "e2",
+          title: "Design Browser History",
+          link: "https://leetcode.com/problems/design-browser-history/",
+          description: "Design a browser history which can navigate back and forward—perfect for implementing with a doubly linked list."
+        },
+        {
+          id: "e3",
+          title: "Palindrome Linked List",
+          link: "https://leetcode.com/problems/palindrome-linked-list/",
+          description: "Check if a linked list is a palindrome. A doubly linked list makes this problem simpler to solve."
+        },
+        {
+          id: "e4",
+          title: "Flatten a Multilevel Doubly Linked List",
+          link: "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/",
+          description: "Flatten a multilevel doubly linked list, where nodes can have child lists."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Design a Text Editor",
+          link: "https://leetcode.com/problems/design-a-text-editor/",
+          description: "Design a text editor with cursor movement and text operations—an excellent application of doubly linked lists."
+        },
+        {
+          id: "m2",
+          title: "LRU Cache",
+          link: "https://leetcode.com/problems/lru-cache/",
+          description: "Implement a Least Recently Used (LRU) cache using a doubly linked list for efficient element removal and reordering."
+        },
+        {
+          id: "m3",
+          title: "All O`one Data Structure",
+          link: "https://leetcode.com/problems/all-oone-data-structure/",
+          description: "Design a data structure to store keys with their values and retrieve min/max values in O(1) time."
+        },
+        {
+          id: "m4",
+          title: "Linked List Components",
+          link: "https://leetcode.com/problems/linked-list-components/",
+          description: "Find the number of connected components in a linked list—easier to navigate using a doubly linked list."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "LFU Cache",
+          link: "https://leetcode.com/problems/lfu-cache/",
+          description: "Implement a Least Frequently Used (LFU) cache. A doubly linked list helps maintain frequency ordering efficiently."
+        },
+        {
+          id: "h2",
+          title: "Design Skiplist",
+          link: "https://leetcode.com/problems/design-skiplist/",
+          description: "Design a Skiplist without using any built-in libraries. Uses multiple layers of doubly linked lists."
+        }
+      ]
+    }
+  }
 };
 
 export default doublyLinkedListContent; 

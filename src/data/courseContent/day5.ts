@@ -460,7 +460,80 @@ public int numSubarrayProductLessThanK(int[] nums, int k) {
       correctAnswer: 2,
       explanation: "The sliding window technique can transform some brute force O(n²) algorithms to O(n) by avoiding redundant calculations. This is one of its main benefits, as it allows for a single pass through the data instead of nested loops."
     }
-  ]
+  ],
+  
+  // Added practice section for Sliding Window
+  practice: {
+    introduction: "Practice is essential to master the sliding window technique. Complete the following LeetCode problems to reinforce your understanding of this powerful approach for array and string problems.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Maximum Subarray",
+          link: "https://leetcode.com/problems/maximum-subarray/",
+          description: "Find the contiguous subarray with the largest sum using a sliding window approach."
+        },
+        {
+          id: "e2",
+          title: "Contains Duplicate II",
+          link: "https://leetcode.com/problems/contains-duplicate-ii/",
+          description: "Determine if an array contains duplicates within k distance using a sliding window."
+        },
+        {
+          id: "e3",
+          title: "Find All Anagrams in a String",
+          link: "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+          description: "Find all start indices of anagrams of pattern p in string s using a fixed-size sliding window."
+        },
+        {
+          id: "e4",
+          title: "Longest Continuous Increasing Subsequence",
+          link: "https://leetcode.com/problems/longest-continuous-increasing-subsequence/",
+          description: "Find the length of the longest continuous increasing subsequence in an array."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Longest Substring Without Repeating Characters",
+          link: "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+          description: "Find the length of the longest substring without repeating characters using a variable-size sliding window."
+        },
+        {
+          id: "m2",
+          title: "Permutation in String",
+          link: "https://leetcode.com/problems/permutation-in-string/",
+          description: "Determine if a string contains a permutation of another string using a fixed-size sliding window."
+        },
+        {
+          id: "m3",
+          title: "Minimum Size Subarray Sum",
+          link: "https://leetcode.com/problems/minimum-size-subarray-sum/",
+          description: "Find the minimal length of a contiguous subarray with a sum greater than or equal to a target value."
+        },
+        {
+          id: "m4",
+          title: "Longest Repeating Character Replacement",
+          link: "https://leetcode.com/problems/longest-repeating-character-replacement/",
+          description: "Find the length of the longest substring containing the same letter after performing at most k character replacements."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Minimum Window Substring",
+          link: "https://leetcode.com/problems/minimum-window-substring/",
+          description: "Find the minimum window in a string that contains all characters of another string using variable-size sliding window."
+        },
+        {
+          id: "h2",
+          title: "Sliding Window Maximum",
+          link: "https://leetcode.com/problems/sliding-window-maximum/",
+          description: "Given an array and a sliding window size, find the maximum value in each possible window."
+        }
+      ]
+    }
+  }
 };
 
 export default slidingWindowContent; 

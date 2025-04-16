@@ -411,7 +411,78 @@ class LRUCache {
       correctAnswer: 1,
       explanation: "Google's technical interviews distinctively emphasize the problem-solving approach and discussions about trade-offs. While solving the problem correctly is important, Google interviewers place significant value on how candidates approach problems, analyze different solutions, and articulate the trade-offs between alternative approaches."
     }
-  ]
+  ],
+  practice: {
+    introduction: "Practice these problems to strengthen your understanding of segment trees and their applications. These problems will help you apply segment trees to solve range query problems efficiently and gain intuition for when and how to use this powerful data structure.",
+    questions: {
+      easy: [
+        {
+          id: "st-easy-1",
+          title: "Range Sum Query - Immutable",
+          link: "https://leetcode.com/problems/range-sum-query-immutable/",
+          description: "Design a data structure that supports range sum queries on a fixed array. While this can be solved using prefix sums, it serves as a good introduction to range queries before implementing segment trees."
+        },
+        {
+          id: "st-easy-2",
+          title: "Range Sum Query - Mutable",
+          link: "https://leetcode.com/problems/range-sum-query-mutable/",
+          description: "Design a data structure that supports range sum queries with mutable elements. This is a direct application of segment trees for efficient range sum queries with updates."
+        },
+        {
+          id: "st-easy-3",
+          title: "Maximum Subarray",
+          link: "https://leetcode.com/problems/maximum-subarray/",
+          description: "Find the contiguous subarray with the largest sum. While there are simpler approaches, this problem can be solved using a segment tree to practice finding range maximum sums."
+        }
+      ],
+      medium: [
+        {
+          id: "st-medium-1",
+          title: "Count of Range Sum",
+          link: "https://leetcode.com/problems/count-of-range-sum/",
+          description: "Count the number of range sums that lie in a given range. This problem can be efficiently solved using segment trees to track range counts."
+        },
+        {
+          id: "st-medium-2",
+          title: "Range Sum Query 2D - Mutable",
+          link: "https://leetcode.com/problems/range-sum-query-2d-mutable/",
+          description: "Design a 2D matrix data structure that supports sum queries over a rectangle and updates to individual elements. This extends the segment tree concept to 2D queries."
+        },
+        {
+          id: "st-medium-3",
+          title: "Falling Squares",
+          link: "https://leetcode.com/problems/falling-squares/",
+          description: "Simulate falling squares and determine the height of the tallest tower at each step. This involves range updates and range maximum queries, which can be efficiently handled with segment trees."
+        },
+        {
+          id: "st-medium-4",
+          title: "My Calendar I",
+          link: "https://leetcode.com/problems/my-calendar-i/",
+          description: "Implement a calendar class that adds events and checks for double bookings. This can be approached using a segment tree to track occupied time slots."
+        }
+      ],
+      hard: [
+        {
+          id: "st-hard-1",
+          title: "Count of Smaller Numbers After Self",
+          link: "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
+          description: "Count for each element in the array how many smaller elements appear after it. This can be efficiently solved using a segment tree or a Binary Indexed Tree (Fenwick Tree)."
+        },
+        {
+          id: "st-hard-2",
+          title: "Reverse Pairs",
+          link: "https://leetcode.com/problems/reverse-pairs/",
+          description: "Count the number of important reverse pairs in an array. This problem requires efficient range counting, which is well-suited for segment trees."
+        },
+        {
+          id: "st-hard-3",
+          title: "Range Module",
+          link: "https://leetcode.com/problems/range-module/",
+          description: "Design a data structure to track ranges and perform operations like add, remove, and query. This is an excellent application of segment trees for range operations with lazy propagation."
+        }
+      ]
+    }
+  }
 };
 
 export default googleProblemsContent; 

@@ -238,4 +238,77 @@ public class Solution {
   ]
 };
 
+// Add practice section with LeetCode problems
+mockTestWeek2Content.practice = {
+  introduction: "The following practice problems will help reinforce the concepts covered in Week 2 of our DSA course. These problems focus on linked lists, stacks, queues, and priority queues. Try to solve them independently before looking at solutions to build your problem-solving skills.",
+  questions: {
+    easy: [
+      {
+        id: "reverse-linked-list",
+        title: "Reverse Linked List",
+        link: "https://leetcode.com/problems/reverse-linked-list/",
+        description: "Reverse a singly linked list to test your understanding of linked list operations."
+      },
+      {
+        id: "valid-parentheses",
+        title: "Valid Parentheses",
+        link: "https://leetcode.com/problems/valid-parentheses/",
+        description: "Determine if the input string has valid parentheses using a stack."
+      },
+      {
+        id: "implement-stack-using-queues",
+        title: "Implement Stack using Queues",
+        link: "https://leetcode.com/problems/implement-stack-using-queues/",
+        description: "Implement a LIFO stack using FIFO queue data structures."
+      },
+      {
+        id: "min-stack",
+        title: "Min Stack",
+        link: "https://leetcode.com/problems/min-stack/",
+        description: "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time."
+      }
+    ],
+    medium: [
+      {
+        id: "lru-cache",
+        title: "LRU Cache",
+        link: "https://leetcode.com/problems/lru-cache/",
+        description: "Design and implement a data structure for Least Recently Used (LRU) cache."
+      },
+      {
+        id: "reorder-list",
+        title: "Reorder List",
+        link: "https://leetcode.com/problems/reorder-list/",
+        description: "Reorder a linked list to test your understanding of linked list operations."
+      },
+      {
+        id: "k-closest-points-to-origin",
+        title: "K Closest Points to Origin",
+        link: "https://leetcode.com/problems/k-closest-points-to-origin/",
+        description: "Find the k closest points to the origin using a priority queue."
+      },
+      {
+        id: "next-greater-element-ii",
+        title: "Next Greater Element II",
+        link: "https://leetcode.com/problems/next-greater-element-ii/",
+        description: "Find the next greater element for each element in a circular array using a stack."
+      }
+    ],
+    hard: [
+      {
+        id: "merge-k-sorted-lists",
+        title: "Merge k Sorted Lists",
+        link: "https://leetcode.com/problems/merge-k-sorted-lists/",
+        description: "Merge k sorted linked lists into one sorted list using a priority queue."
+      },
+      {
+        id: "sliding-window-maximum",
+        title: "Sliding Window Maximum",
+        link: "https://leetcode.com/problems/sliding-window-maximum/",
+        description: "Find the maximum element in each sliding window of size k using a deque."
+      }
+    ]
+  }
+};
+
 export default mockTestWeek2Content; 

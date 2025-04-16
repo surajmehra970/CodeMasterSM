@@ -525,7 +525,79 @@ void main() {
       correctAnswer: 1,
       explanation: "The statement 'The diameter always passes through the root node' is FALSE. The diameter of a tree is the longest path between any two nodes, and this path may or may not pass through the root. A simple example is a chain of 4 nodes where the root is the second node; the diameter is 3, connecting the first and last nodes, and doesn't go through the root."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you reinforce your understanding of dynamic programming on tree structures. Work through these problems methodically, focusing on identifying state transitions and applying post-order traversal techniques. The problems range from basic tree DP concepts to more complex scenarios that require optimizing subproblems on tree structures.",
+    questions: {
+      easy: [
+        {
+          id: "tree-dp-easy-1",
+          title: "Diameter of Binary Tree",
+          link: "https://leetcode.com/problems/diameter-of-binary-tree/",
+          description: "Find the length of the longest path between any two nodes in a binary tree. This path may or may not pass through the root, which is a classic application of tree DP."
+        },
+        {
+          id: "tree-dp-easy-2",
+          title: "Maximum Depth of Binary Tree",
+          link: "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+          description: "Find the maximum depth of a binary tree. While this can be solved with a simple recursion, understanding it as a DP problem helps with more complex tree problems."
+        },
+        {
+          id: "tree-dp-easy-3",
+          title: "Binary Tree Maximum Path Sum",
+          link: "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+          description: "Find the maximum sum of any non-empty path in a binary tree. This requires a post-order traversal and considering paths that don't necessarily pass through the root."
+        }
+      ],
+      medium: [
+        {
+          id: "tree-dp-medium-1",
+          title: "House Robber III",
+          link: "https://leetcode.com/problems/house-robber-iii/",
+          description: "A thief plans to rob houses arranged in a binary tree. The thief cannot rob directly-linked houses. Find the maximum amount the thief can rob, which is a tree version of the Maximum Independent Set problem."
+        },
+        {
+          id: "tree-dp-medium-2",
+          title: "Delete Nodes And Return Forest",
+          link: "https://leetcode.com/problems/delete-nodes-and-return-forest/",
+          description: "Given the root of a binary tree and a list of nodes to delete, return the resulting forest of trees. Apply DP concepts to efficiently process subtrees."
+        },
+        {
+          id: "tree-dp-medium-3",
+          title: "All Possible Full Binary Trees",
+          link: "https://leetcode.com/problems/all-possible-full-binary-trees/",
+          description: "Return a list of all possible full binary trees with n nodes. This involves DP to avoid reconstructing the same subtrees multiple times."
+        },
+        {
+          id: "tree-dp-medium-4",
+          title: "Distribute Coins in Binary Tree",
+          link: "https://leetcode.com/problems/distribute-coins-in-binary-tree/",
+          description: "Redistribute coins in a binary tree so each node has one coin. Calculate the minimum number of moves required, applying tree DP principles."
+        }
+      ],
+      hard: [
+        {
+          id: "tree-dp-hard-1",
+          title: "Sum of Distances in Tree",
+          link: "https://leetcode.com/problems/sum-of-distances-in-tree/",
+          description: "Calculate the sum of distances between all pairs of nodes in an undirected tree. This requires a two-pass algorithm that uses DP on trees with re-rooting techniques."
+        },
+        {
+          id: "tree-dp-hard-2",
+          title: "Minimum Height Trees",
+          link: "https://leetcode.com/problems/minimum-height-trees/",
+          description: "Find all the minimum height trees in a graph, which is equivalent to finding the center(s) of the tree. Apply tree DP concepts to efficiently compute heights."
+        },
+        {
+          id: "tree-dp-hard-3",
+          title: "Tree Diameter",
+          link: "https://leetcode.com/problems/tree-diameter/",
+          description: "Find the diameter of an undirected tree, which is the length of the longest path between any two nodes. This problem tests your understanding of tree traversal and DP on general trees, not just binary trees."
+        }
+      ]
+    }
+  }
 };
 
 export default dpOnTreesContent; 

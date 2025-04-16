@@ -455,7 +455,79 @@ public int maxHeight(Box[] boxes) {
       correctAnswer: 2,
       explanation: "A bitonic sequence is one that increases first and then decreases. For example, [1, 3, 5, 4, 2] is bitonic. To find the longest bitonic subsequence, we typically compute both the longest increasing subsequence ending at each position and the longest decreasing subsequence starting from each position."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you master the Longest Increasing Subsequence algorithm and related subsequence problems. Work through these exercises to build your understanding of dynamic programming techniques for sequence analysis and optimization.",
+    questions: {
+      easy: [
+        {
+          id: "lis-easy-1",
+          title: "Longest Increasing Subsequence",
+          link: "https://leetcode.com/problems/longest-increasing-subsequence/",
+          description: "Find the length of the longest strictly increasing subsequence. This is the core LIS problem we studied, and solving it reinforces the fundamental techniques."
+        },
+        {
+          id: "lis-easy-2",
+          title: "Is Subsequence",
+          link: "https://leetcode.com/problems/is-subsequence/",
+          description: "Determine if one string is a subsequence of another. This is a simplified version of the subsequence problem that helps build intuition for more complex cases."
+        },
+        {
+          id: "lis-easy-3",
+          title: "Maximum Length of Pair Chain",
+          link: "https://leetcode.com/problems/maximum-length-of-pair-chain/",
+          description: "Find the length of the longest chain of pairs that can be formed. This is a variation of LIS where the increasing relationship is defined differently."
+        }
+      ],
+      medium: [
+        {
+          id: "lis-medium-1",
+          title: "Longest Continuous Increasing Subsequence",
+          link: "https://leetcode.com/problems/longest-continuous-increasing-subsequence/",
+          description: "Find the length of the longest continuous increasing subsequence. This is a simplified variant that only considers contiguous elements."
+        },
+        {
+          id: "lis-medium-2",
+          title: "Increasing Triplet Subsequence",
+          link: "https://leetcode.com/problems/increasing-triplet-subsequence/",
+          description: "Determine if there exists a length-3 increasing subsequence. This focuses on a fixed-length version of the LIS problem, allowing for optimization."
+        },
+        {
+          id: "lis-medium-3",
+          title: "Longest Bitonic Subsequence",
+          link: "https://leetcode.com/problems/longest-mountain-in-array/",
+          description: "Find the longest mountain subarray (increasing then decreasing). This is related to the bitonic subsequence concept we discussed."
+        },
+        {
+          id: "lis-medium-4",
+          title: "Number of Longest Increasing Subsequence",
+          link: "https://leetcode.com/problems/number-of-longest-increasing-subsequence/",
+          description: "Count the number of longest increasing subsequences. This extends the basic LIS problem to consider multiple sequences of maximum length."
+        }
+      ],
+      hard: [
+        {
+          id: "lis-hard-1",
+          title: "Russian Doll Envelopes",
+          link: "https://leetcode.com/problems/russian-doll-envelopes/",
+          description: "Find the maximum number of envelopes that can be nested inside each other. This is a 2D variation of the LIS problem requiring a clever sorting approach."
+        },
+        {
+          id: "lis-hard-2",
+          title: "Largest Divisible Subset",
+          link: "https://leetcode.com/problems/largest-divisible-subset/",
+          description: "Find the largest subset where every pair of elements satisfies the divisibility condition. This uses LIS-like dynamic programming with a different relation condition."
+        },
+        {
+          id: "lis-hard-3",
+          title: "Make Array Strictly Increasing",
+          link: "https://leetcode.com/problems/make-array-strictly-increasing/",
+          description: "Find the minimum number of operations to make an array strictly increasing. This combines LIS concepts with state-based dynamic programming."
+        }
+      ]
+    }
+  }
 };
 
 export default lisContent; 

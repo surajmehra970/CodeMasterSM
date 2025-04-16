@@ -236,7 +236,78 @@ Data structure selection should be based on the most common operations in your s
       correctAnswer: 3,
       explanation: "This code has two nested loops, each iterating n times, resulting in n*n = n² operations. Even though the inner operation (the print statement) only executes n times total (when i==j), we still have to perform n² comparisons. The time complexity is dominated by the nested loops, making it O(n²)."
     }
-  ]
+  ],
+  practice: {
+    introduction: "Practice is essential to master time complexity concepts. Complete the following LeetCode problems to reinforce your understanding of algorithm efficiency and complexity analysis.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Contains Duplicate",
+          link: "https://leetcode.com/problems/contains-duplicate/",
+          description: "Given an integer array, determine if any value appears at least twice. Analyze different approaches and their time complexity."
+        },
+        {
+          id: "e2",
+          title: "Maximum Subarray",
+          link: "https://leetcode.com/problems/maximum-subarray/",
+          description: "Find the contiguous subarray with the largest sum. Compare the brute force O(n²) approach with the efficient O(n) solution."
+        },
+        {
+          id: "e3",
+          title: "Missing Number",
+          link: "https://leetcode.com/problems/missing-number/",
+          description: "Find the missing number in an array containing n distinct numbers in range [0, n]. Implement with O(n) time and O(1) space."
+        },
+        {
+          id: "e4",
+          title: "Palindrome Number",
+          link: "https://leetcode.com/problems/palindrome-number/",
+          description: "Determine if a number reads the same forward and backward. Analyze the time complexity of different solution approaches."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "3Sum",
+          link: "https://leetcode.com/problems/3sum/",
+          description: "Find all unique triplets that sum to zero. Compare the naive O(n³) approach with optimized O(n²) solutions."
+        },
+        {
+          id: "m2",
+          title: "Sort Colors",
+          link: "https://leetcode.com/problems/sort-colors/",
+          description: "Sort an array of 0s, 1s, and 2s in-place. Implement both the O(n log n) sorting approach and the O(n) Dutch national flag algorithm."
+        },
+        {
+          id: "m3",
+          title: "Search in Rotated Sorted Array",
+          link: "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+          description: "Search for a target value in a rotated sorted array. Implement with O(log n) time complexity."
+        },
+        {
+          id: "m4",
+          title: "Valid Sudoku",
+          link: "https://leetcode.com/problems/valid-sudoku/",
+          description: "Determine if a 9x9 Sudoku board is valid. Analyze time and space complexity of your approach."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "First Missing Positive",
+          link: "https://leetcode.com/problems/first-missing-positive/",
+          description: "Find the smallest missing positive integer in an unsorted array. Implement in O(n) time and O(1) space."
+        },
+        {
+          id: "h2",
+          title: "Median of Two Sorted Arrays",
+          link: "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+          description: "Find the median of two sorted arrays. The solution should have O(log(m+n)) time complexity."
+        }
+      ]
+    }
+  }
 };
 
 export default timeComplexityContent; 

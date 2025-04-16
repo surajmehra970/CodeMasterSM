@@ -539,7 +539,85 @@ Space Complexity: O(V) for storing the visited status and result`,
       correctAnswer: 3,
       explanation: "With a binary heap implementation, Dijkstra's algorithm takes O(V log V) for heap operations on vertices and O(E log V) for edge relaxation operations. The dominant term is O((V + E) log V), which simplifies to O(E log V) when the graph is connected (E ≥ V-1)."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these LeetCode problems to reinforce the graph concepts covered in the mock test. These problems range from easy to challenging and touch on various graph algorithms and techniques that were assessed in the test.",
+    questions: {
+      easy: [
+        {
+          id: "graph-mock-practice-1",
+          title: "Find if Path Exists in Graph",
+          link: "https://leetcode.com/problems/find-if-path-exists-in-graph/",
+          description: "Determine if there's a valid path between two nodes. This fundamental problem can be solved using either BFS or DFS traversal techniques."
+        },
+        {
+          id: "graph-mock-practice-2",
+          title: "Island Perimeter",
+          link: "https://leetcode.com/problems/island-perimeter/",
+          description: "Calculate the perimeter of an island in a grid. This problem tests your ability to navigate a 2D grid and count edge conditions."
+        },
+        {
+          id: "graph-mock-practice-3",
+          title: "Find Center of Star Graph",
+          link: "https://leetcode.com/problems/find-center-of-star-graph/",
+          description: "Find the center of a star graph. This problem helps understand graph representation and identify special graph structures."
+        },
+        {
+          id: "graph-mock-practice-4",
+          title: "Keys and Rooms",
+          link: "https://leetcode.com/problems/keys-and-rooms/",
+          description: "Determine if all rooms can be visited starting from room 0. This problem applies BFS/DFS to track visitable nodes in a graph."
+        }
+      ],
+      medium: [
+        {
+          id: "graph-mock-practice-5",
+          title: "All Paths from Source to Target",
+          link: "https://leetcode.com/problems/all-paths-from-source-to-target/",
+          description: "Find all possible paths from source to target in a DAG. This problem tests your ability to use DFS with backtracking to enumerate all paths."
+        },
+        {
+          id: "graph-mock-practice-6",
+          title: "Minimum Number of Vertices to Reach All Nodes",
+          link: "https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/",
+          description: "Find the smallest set of vertices that can reach all nodes. This problem tests your understanding of graph structure and in-degree properties."
+        },
+        {
+          id: "graph-mock-practice-7",
+          title: "Shortest Path in Binary Matrix",
+          link: "https://leetcode.com/problems/shortest-path-in-binary-matrix/",
+          description: "Find the shortest path from top-left to bottom-right in a binary matrix. This problem applies BFS to find the shortest path in an unweighted graph."
+        },
+        {
+          id: "graph-mock-practice-8",
+          title: "Evaluate Division",
+          link: "https://leetcode.com/problems/evaluate-division/",
+          description: "Evaluate divisions based on given equation results. This problem requires building a weighted graph and using DFS/BFS to find paths."
+        }
+      ],
+      hard: [
+        {
+          id: "graph-mock-practice-9",
+          title: "Bus Routes",
+          link: "https://leetcode.com/problems/bus-routes/",
+          description: "Find the least number of buses to reach the target. This problem requires building a specialized graph and using BFS to find the shortest path."
+        },
+        {
+          id: "graph-mock-practice-10",
+          title: "Shortest Path Visiting All Nodes",
+          link: "https://leetcode.com/problems/shortest-path-visiting-all-nodes/",
+          description: "Find the shortest path that visits every node in an undirected graph. This problem uses BFS with bit manipulation to track visited nodes."
+        },
+        {
+          id: "graph-mock-practice-11",
+          title: "Minimum Cost to Make at Least One Valid Path in a Grid",
+          link: "https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+          description: "Find the minimum cost to make a valid path in a grid. This advanced problem applies a modified version of Dijkstra's algorithm with 0-1 edge weights."
+        }
+      ]
+    }
+  }
 };
 
 export default mockTestGraphsContent; 

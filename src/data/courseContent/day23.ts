@@ -491,7 +491,79 @@ class LCAPreprocessor {
       correctAnswer: 2,
       explanation: "Preprocessing for LCA queries is most beneficial when you need to find the LCA multiple times in a static tree. The preprocessing has a higher upfront cost but makes each subsequent query much faster, which amortizes well over many queries."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these tree problems to reinforce your understanding of LCA and tree traversal algorithms. These problems range from fundamental tree operations to advanced LCA applications, challenging you to apply the concepts learned in this lesson to real-world coding scenarios.",
+    questions: {
+      easy: [
+        {
+          id: "tree-practice-1",
+          title: "Invert Binary Tree",
+          link: "https://leetcode.com/problems/invert-binary-tree/",
+          description: "Create a mirror reflection of a binary tree by swapping each node's left and right children. This problem helps reinforce basic tree traversal and manipulation techniques."
+        },
+        {
+          id: "tree-practice-2",
+          title: "Binary Tree Inorder Traversal",
+          link: "https://leetcode.com/problems/binary-tree-inorder-traversal/",
+          description: "Implement an inorder traversal of a binary tree. This foundational technique is essential for many tree algorithms and will help you understand tree traversal patterns."
+        },
+        {
+          id: "tree-practice-3",
+          title: "Symmetric Tree",
+          link: "https://leetcode.com/problems/symmetric-tree/",
+          description: "Determine if a binary tree is a mirror of itself (symmetric around its center). This problem tests your ability to compare corresponding nodes in different subtrees."
+        },
+        {
+          id: "tree-practice-4",
+          title: "Maximum Depth of Binary Tree",
+          link: "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+          description: "Find the maximum depth (height) of a binary tree. This is a fundamental tree property calculation that appears in many tree algorithms, including LCA."
+        }
+      ],
+      medium: [
+        {
+          id: "tree-practice-5",
+          title: "Lowest Common Ancestor of a Binary Tree",
+          link: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
+          description: "Find the lowest common ancestor of two nodes in a binary tree. This is the direct application of the LCA algorithm covered in this lesson."
+        },
+        {
+          id: "tree-practice-6",
+          title: "Lowest Common Ancestor of a Binary Search Tree",
+          link: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+          description: "Find the LCA in a binary search tree. This problem lets you apply the optimized LCA algorithm for BSTs discussed in the lesson."
+        },
+        {
+          id: "tree-practice-7",
+          title: "Construct Binary Tree from Preorder and Inorder Traversal",
+          link: "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",
+          description: "Reconstruct a binary tree from its preorder and inorder traversal sequences. This problem tests your understanding of tree traversals and node relationships."
+        },
+        {
+          id: "tree-practice-8",
+          title: "Serialize and Deserialize Binary Tree",
+          link: "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+          description: "Design an algorithm to serialize and deserialize a binary tree. This problem tests your ability to convert between tree structures and string representations."
+        }
+      ],
+      hard: [
+        {
+          id: "tree-practice-9",
+          title: "Binary Tree Maximum Path Sum",
+          link: "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+          description: "Find the maximum path sum in a binary tree. This challenging problem requires combining tree traversal techniques with path calculations, similar to finding the diameter."
+        },
+        {
+          id: "tree-practice-10",
+          title: "Binary Tree Cameras",
+          link: "https://leetcode.com/problems/binary-tree-cameras/",
+          description: "Find the minimum number of cameras needed to monitor all nodes in a binary tree. This problem requires a bottom-up approach and careful analysis of node relationships."
+        }
+      ]
+    }
+  }
 };
 
 export default lowestCommonAncestorContent; 

@@ -546,7 +546,79 @@ public class DatabaseSelectionExamples {
       correctAnswer: 1,
       explanation: "Vector clocks are commonly used to detect and resolve conflicts in eventually consistent systems when network partitions heal. They track the causal relationship between different versions of data by maintaining counters for each node, allowing systems to determine whether updates occurred concurrently or in sequence, and to resolve conflicts appropriately."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These practice problems will help you apply concepts related to the CAP theorem, distributed systems, and consistency models. While LeetCode doesn't directly test distributed systems theory, these problems exercise the underlying principles and algorithms that power distributed databases and systems, giving you hands-on experience with the challenges these systems face.",
+    questions: {
+      easy: [
+        {
+          id: "cap-easy-1",
+          title: "First Unique Character in a String",
+          link: "https://leetcode.com/problems/first-unique-character-in-a-string/",
+          description: "Find the first non-repeating character in a string. This exercises the concept of order preservation in distributed log processing, similar to implementing consistency in event sourcing."
+        },
+        {
+          id: "cap-easy-2",
+          title: "Logger Rate Limiter",
+          link: "https://leetcode.com/problems/logger-rate-limiter/",
+          description: "Design a logger system that receives messages and determines if they should be printed. This simulates rate limiting in distributed systems and tests concepts of time-based consistency."
+        },
+        {
+          id: "cap-easy-3",
+          title: "Design HashMap",
+          link: "https://leetcode.com/problems/design-hashmap/",
+          description: "Implement a HashMap without using built-in libraries. This exercises fundamental concepts of distributed key-value stores that must balance consistency and availability."
+        }
+      ],
+      medium: [
+        {
+          id: "cap-medium-1",
+          title: "Design a Leaderboard",
+          link: "https://leetcode.com/problems/design-a-leaderboard/",
+          description: "Design a leaderboard system that supports efficient score updates and top player queries. This exercises eventual consistency concepts in distributed scoring systems."
+        },
+        {
+          id: "cap-medium-2",
+          title: "LRU Cache",
+          link: "https://leetcode.com/problems/lru-cache/",
+          description: "Implement a Least Recently Used (LRU) cache. This tests understanding of cache consistency strategies that distributed systems must employ."
+        },
+        {
+          id: "cap-medium-3",
+          title: "Random Pick with Weight",
+          link: "https://leetcode.com/problems/random-pick-with-weight/",
+          description: "Implement weighted random selection. This simulates load balancing in distributed systems when nodes have different capacities, testing consistency of distribution."
+        },
+        {
+          id: "cap-medium-4",
+          title: "Design Tic-Tac-Toe",
+          link: "https://leetcode.com/problems/design-tic-tac-toe/",
+          description: "Design a Tic-tac-toe game that can be played by two players. This exercises state management and consistency checks in a simplified distributed game system."
+        }
+      ],
+      hard: [
+        {
+          id: "cap-hard-1",
+          title: "All O`one Data Structure",
+          link: "https://leetcode.com/problems/all-oone-data-structure/",
+          description: "Design a data structure to store frequency counts and retrieve max/min values efficiently. This simulates consistency challenges in distributed counting systems and global state management."
+        },
+        {
+          id: "cap-hard-2",
+          title: "Design Search Autocomplete System",
+          link: "https://leetcode.com/problems/design-search-autocomplete-system/",
+          description: "Design a search autocomplete system. This tests concepts of eventual consistency in distributed search systems with frequent updates."
+        },
+        {
+          id: "cap-hard-3",
+          title: "Snapshot Array",
+          link: "https://leetcode.com/problems/snapshot-array/",
+          description: "Design a data structure that supports array modifications and snapshots. This directly applies to versioning and consistent snapshots in distributed databases, exemplifying consistency models."
+        }
+      ]
+    }
+  }
 };
 
 export default capTheoremContent; 

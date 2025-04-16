@@ -346,7 +346,79 @@ public boolean isBipartite(List<List<Integer>> graph) {
       correctAnswer: 1,
       explanation: "BFS explores all vertices at the current depth level before moving to vertices at the next depth level, while DFS explores as far as possible along each branch before backtracking."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these LeetCode problems to strengthen your understanding of Breadth-First Search and its applications. These problems range from simple BFS traversals to more complex scenarios that require careful application of the BFS algorithm.",
+    questions: {
+      easy: [
+        {
+          id: "bfs-practice-1",
+          title: "Binary Tree Level Order Traversal",
+          link: "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+          description: "Given the root of a binary tree, return the level order traversal of its nodes' values. This problem demonstrates the classic application of BFS for level-by-level traversal."
+        },
+        {
+          id: "bfs-practice-2",
+          title: "Symmetric Tree",
+          link: "https://leetcode.com/problems/symmetric-tree/",
+          description: "Check whether a binary tree is a mirror of itself (symmetric around its center). BFS can be used to compare corresponding nodes at each level."
+        },
+        {
+          id: "bfs-practice-3",
+          title: "Minimum Depth of Binary Tree",
+          link: "https://leetcode.com/problems/minimum-depth-of-binary-tree/",
+          description: "Find the minimum depth of a binary tree. BFS is ideal for this problem as it explores levels in order and can stop at the first leaf node encountered."
+        }
+      ],
+      medium: [
+        {
+          id: "bfs-practice-4",
+          title: "Rotting Oranges",
+          link: "https://leetcode.com/problems/rotting-oranges/",
+          description: "Find the minimum number of minutes required for all oranges to rot. This problem showcases multi-source BFS where multiple rotten oranges serve as starting points."
+        },
+        {
+          id: "bfs-practice-5",
+          title: "01 Matrix",
+          link: "https://leetcode.com/problems/01-matrix/",
+          description: "Calculate the distance of the nearest 0 for each cell in a matrix. This is another multi-source BFS problem where all zeros serve as starting points."
+        },
+        {
+          id: "bfs-practice-6",
+          title: "Walls and Gates",
+          link: "https://leetcode.com/problems/walls-and-gates/",
+          description: "Fill each empty room with the distance to its nearest gate. Similar to the previous problem, this uses multi-source BFS from all gates."
+        },
+        {
+          id: "bfs-practice-7",
+          title: "Word Ladder",
+          link: "https://leetcode.com/problems/word-ladder/",
+          description: "Find the shortest transformation sequence from beginWord to endWord. This problem applies BFS to traverse through valid word transformations."
+        }
+      ],
+      hard: [
+        {
+          id: "bfs-practice-8",
+          title: "Word Ladder II",
+          link: "https://leetcode.com/problems/word-ladder-ii/",
+          description: "Find all shortest transformation sequences from beginWord to endWord. This extends the Word Ladder problem to find all possible shortest paths."
+        },
+        {
+          id: "bfs-practice-9",
+          title: "Sliding Puzzle",
+          link: "https://leetcode.com/problems/sliding-puzzle/",
+          description: "Solve a sliding puzzle by moving tiles. BFS is used to find the minimum number of moves required to reach the solved state."
+        },
+        {
+          id: "bfs-practice-10",
+          title: "Cut Off Trees for Golf Event",
+          link: "https://leetcode.com/problems/cut-off-trees-for-golf-event/",
+          description: "Determine the minimum steps needed to cut all trees in a forest in order of their height. This problem requires multiple BFS traversals with obstacles."
+        }
+      ]
+    }
+  }
 };
 
 export default bfsContent; 

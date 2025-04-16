@@ -463,7 +463,79 @@ This demonstrates that greedy approaches don't work when the locally optimal cho
       correctAnswer: 1,
       explanation: "For a problem with two changing parameters, the naive DP solution would use O(n²) space for a 2D table. However, if the recurrence relation only depends on the current row and the previous row (which is common), we can optimize to use just two rows of the table, giving O(n) space complexity. This is a common optimization in problems like the Longest Common Subsequence."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "These additional practice problems will help you further develop your dynamic programming skills across the various topics covered in Week 6. Each problem requires applying DP principles in different contexts, from sequence analysis to optimization problems. Work through these exercises methodically, focusing on state representation, recurrence relations, and efficient implementations.",
+    questions: {
+      easy: [
+        {
+          id: "mock6-easy-1",
+          title: "Maximum Subarray",
+          link: "https://leetcode.com/problems/maximum-subarray/",
+          description: "Find the contiguous subarray with the largest sum. This is a fundamental DP problem that introduces the concept of local vs. global optima in a sequence."
+        },
+        {
+          id: "mock6-easy-2",
+          title: "Range Sum Query - Immutable",
+          link: "https://leetcode.com/problems/range-sum-query-immutable/",
+          description: "Implement a structure that efficiently handles multiple queries for the sum of elements in a given range. This uses prefix sums, a fundamental technique in DP."
+        },
+        {
+          id: "mock6-easy-3",
+          title: "Counting Bits",
+          link: "https://leetcode.com/problems/counting-bits/",
+          description: "Given an integer n, return an array where ans[i] is the number of 1's in the binary representation of i. This problem can be elegantly solved using DP with bit manipulation."
+        }
+      ],
+      medium: [
+        {
+          id: "mock6-medium-1",
+          title: "Unique Paths",
+          link: "https://leetcode.com/problems/unique-paths/",
+          description: "Calculate the number of unique paths from the top-left to bottom-right of a grid, moving only right or down. This is a classic grid-based DP problem."
+        },
+        {
+          id: "mock6-medium-2",
+          title: "Palindromic Substrings",
+          link: "https://leetcode.com/problems/palindromic-substrings/",
+          description: "Count how many palindromic substrings are in a string. Apply DP techniques to avoid checking the same substrings multiple times."
+        },
+        {
+          id: "mock6-medium-3",
+          title: "Best Time to Buy and Sell Stock with Cooldown",
+          link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",
+          description: "Maximize profit in a stock market with a cooldown constraint. This problem requires careful state representation in your DP approach."
+        },
+        {
+          id: "mock6-medium-4",
+          title: "Partition Equal Subset Sum",
+          link: "https://leetcode.com/problems/partition-equal-subset-sum/",
+          description: "Determine if an array can be partitioned into two subsets with equal sum. This is a variation of the Knapsack problem we studied."
+        }
+      ],
+      hard: [
+        {
+          id: "mock6-hard-1",
+          title: "Word Break II",
+          link: "https://leetcode.com/problems/word-break-ii/",
+          description: "Given a string and a dictionary, find all possible sentences that can be formed. This combines DP with backtracking for an efficient solution."
+        },
+        {
+          id: "mock6-hard-2",
+          title: "Burst Balloons",
+          link: "https://leetcode.com/problems/burst-balloons/",
+          description: "Given n balloons, each with a number on it, find the maximum coins obtained by bursting them one by one. This problem requires a non-intuitive DP approach."
+        },
+        {
+          id: "mock6-hard-3",
+          title: "Best Time to Buy and Sell Stock IV",
+          link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/",
+          description: "Maximize profit with at most k transactions. This advanced stock problem combines DP with careful state design to handle the transaction limit."
+        }
+      ]
+    }
+  }
 };
 
 export default mockTestWeek6Content;

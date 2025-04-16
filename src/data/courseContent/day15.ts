@@ -407,4 +407,77 @@ private int merge(int[] arr, int[] temp, int left, int mid, int right) {
   ]
 };
 
+// Add practice section with LeetCode problems
+mergeSortContent.practice = {
+  introduction: "The following practice problems will help you apply the principles of Merge Sort and divide-and-conquer approaches to solve algorithmic challenges. Try to identify how the divide-and-conquer paradigm can be used to efficiently solve these problems.",
+  questions: {
+    easy: [
+      {
+        id: "merge-sorted-array",
+        title: "Merge Sorted Array",
+        link: "https://leetcode.com/problems/merge-sorted-array/",
+        description: "Merge two sorted arrays, which is similar to the merge step in the Merge Sort algorithm."
+      },
+      {
+        id: "intersection-of-two-arrays",
+        title: "Intersection of Two Arrays",
+        link: "https://leetcode.com/problems/intersection-of-two-arrays/",
+        description: "Find the intersection of two arrays, which can be efficiently solved using sorted arrays."
+      },
+      {
+        id: "majority-element",
+        title: "Majority Element",
+        link: "https://leetcode.com/problems/majority-element/",
+        description: "Find the majority element in an array, which can be solved using divide-and-conquer."
+      },
+      {
+        id: "sort-array-by-parity",
+        title: "Sort Array By Parity",
+        link: "https://leetcode.com/problems/sort-array-by-parity/",
+        description: "Sort an array so that even integers appear before odd integers, which practices partitioning."
+      }
+    ],
+    medium: [
+      {
+        id: "sort-list",
+        title: "Sort List",
+        link: "https://leetcode.com/problems/sort-list/",
+        description: "Sort a linked list using Merge Sort's O(n log n) time complexity."
+      },
+      {
+        id: "count-of-smaller-numbers-after-self",
+        title: "Count of Smaller Numbers After Self",
+        link: "https://leetcode.com/problems/count-of-smaller-numbers-after-self/",
+        description: "Count for each element how many smaller elements appear after it, which can be solved using Merge Sort."
+      },
+      {
+        id: "merge-intervals",
+        title: "Merge Intervals",
+        link: "https://leetcode.com/problems/merge-intervals/",
+        description: "Merge overlapping intervals after sorting them."
+      },
+      {
+        id: "find-all-anagrams-in-a-string",
+        title: "Find All Anagrams in a String",
+        link: "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+        description: "Find all anagrams in a string, which can be solved by sorting and comparing."
+      }
+    ],
+    hard: [
+      {
+        id: "reverse-pairs",
+        title: "Reverse Pairs",
+        link: "https://leetcode.com/problems/reverse-pairs/",
+        description: "Count the number of reverse pairs in an array, which is similar to counting inversions using Merge Sort."
+      },
+      {
+        id: "median-of-two-sorted-arrays",
+        title: "Median of Two Sorted Arrays",
+        link: "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+        description: "Find the median of two sorted arrays, which can be solved using a divide-and-conquer approach."
+      }
+    ]
+  }
+};
+
 export default mergeSortContent; 

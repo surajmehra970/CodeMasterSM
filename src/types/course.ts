@@ -25,12 +25,29 @@ export interface QuizQuestion {
   explanation: string;
 }
 
+export interface PracticeQuestion {
+  id: string;
+  title: string;
+  link: string;
+  description: string;
+}
+
+export interface Practice {
+  introduction: string;
+  questions: {
+    easy: PracticeQuestion[];
+    medium: PracticeQuestion[];
+    hard: PracticeQuestion[];
+  };
+}
+
 export interface Content {
   introduction: string;
   learningObjectives: string[];
   sections: Section[];
   homework?: HomeworkProblem[];
   quiz?: QuizQuestion[];
+  practice?: Practice;
 }
 
 export interface Problem {

@@ -333,7 +333,80 @@ public class InfixToPostfix {
       correctAnswer: 2,
       explanation: "ArrayDeque is the recommended modern alternative to Java's Stack class. It implements the Deque interface which provides stack operations and offers better performance and a more complete and consistent set of methods."
     }
-  ]
+  ],
+  
+  // Added practice section for Stack Basics
+  practice: {
+    introduction: "Practice is essential to master stack operations and algorithms. Complete the following LeetCode problems to strengthen your understanding of when and how to use stacks effectively.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Valid Parentheses",
+          link: "https://leetcode.com/problems/valid-parentheses/",
+          description: "Determine if a string of brackets is valid by using a stack to track opening and closing pairs."
+        },
+        {
+          id: "e2",
+          title: "Remove All Adjacent Duplicates In String",
+          link: "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/",
+          description: "Remove all adjacent duplicate characters from a string using a stack."
+        },
+        {
+          id: "e3",
+          title: "Implement Stack using Queues",
+          link: "https://leetcode.com/problems/implement-stack-using-queues/",
+          description: "Implement a last-in-first-out (LIFO) stack using only two queues."
+        },
+        {
+          id: "e4",
+          title: "Baseball Game",
+          link: "https://leetcode.com/problems/baseball-game/",
+          description: "Calculate the sum of scores after applying stack operations based on specific rules."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Evaluate Reverse Polish Notation",
+          link: "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+          description: "Evaluate the value of an arithmetic expression in Reverse Polish Notation (postfix notation)."
+        },
+        {
+          id: "m2",
+          title: "Min Stack",
+          link: "https://leetcode.com/problems/min-stack/",
+          description: "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time."
+        },
+        {
+          id: "m3",
+          title: "Daily Temperatures",
+          link: "https://leetcode.com/problems/daily-temperatures/",
+          description: "Find how many days you need to wait for a warmer temperature using a stack of indices."
+        },
+        {
+          id: "m4",
+          title: "Decode String",
+          link: "https://leetcode.com/problems/decode-string/",
+          description: "Decode an encoded string with numbers and brackets using a stack."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Basic Calculator",
+          link: "https://leetcode.com/problems/basic-calculator/",
+          description: "Implement a basic calculator to evaluate a simple expression string with +, -, (, and )."
+        },
+        {
+          id: "h2",
+          title: "Largest Rectangle in Histogram",
+          link: "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+          description: "Find the largest rectangle in a histogram using a stack to track heights."
+        }
+      ]
+    }
+  }
 };
 
 export default stackBasicsContent; 

@@ -271,7 +271,80 @@ public class StockSpan {
       correctAnswer: 0,
       explanation: "A monotonic increasing stack is appropriate for the 'Next Smaller Element' problem. We pop elements when the current element is smaller, maintaining an increasing order in the stack. This allows us to efficiently find the next smaller element for each element in the array."
     }
-  ]
+  ],
+  
+  // Added practice section for Monotonic Stack
+  practice: {
+    introduction: "Practice these LeetCode problems to master the monotonic stack pattern. These problems showcase scenarios where maintaining a monotonically increasing or decreasing stack leads to elegant solutions.",
+    questions: {
+      easy: [
+        {
+          id: "e1",
+          title: "Next Greater Element I",
+          link: "https://leetcode.com/problems/next-greater-element-i/",
+          description: "Find the next greater element for each element in an array using a monotonic stack."
+        },
+        {
+          id: "e2",
+          title: "Remove Duplicates from Sorted Array",
+          link: "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+          description: "Remove duplicates in-place from a sorted array, which can be viewed as maintaining a monotonic structure."
+        },
+        {
+          id: "e3",
+          title: "Backspace String Compare",
+          link: "https://leetcode.com/problems/backspace-string-compare/",
+          description: "Compare two strings after applying backspaces, which can be solved using stacks."
+        },
+        {
+          id: "e4",
+          title: "Build an Array With Stack Operations",
+          link: "https://leetcode.com/problems/build-an-array-with-stack-operations/",
+          description: "Generate a sequence of stack operations to build a target array."
+        }
+      ],
+      medium: [
+        {
+          id: "m1",
+          title: "Daily Temperatures",
+          link: "https://leetcode.com/problems/daily-temperatures/",
+          description: "Find the number of days to wait for a warmer temperature using a monotonic stack."
+        },
+        {
+          id: "m2",
+          title: "Next Greater Element II",
+          link: "https://leetcode.com/problems/next-greater-element-ii/",
+          description: "Find the next greater element in a circular array using a monotonic stack."
+        },
+        {
+          id: "m3",
+          title: "Remove K Digits",
+          link: "https://leetcode.com/problems/remove-k-digits/",
+          description: "Remove k digits from a number to get the smallest possible number using a monotonic stack."
+        },
+        {
+          id: "m4",
+          title: "132 Pattern",
+          link: "https://leetcode.com/problems/132-pattern/",
+          description: "Determine if a 132 pattern exists in an array using a monotonic stack to track potential candidates."
+        }
+      ],
+      hard: [
+        {
+          id: "h1",
+          title: "Largest Rectangle in Histogram",
+          link: "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+          description: "Find the largest rectangle in a histogram using a monotonic stack to track heights and positions."
+        },
+        {
+          id: "h2",
+          title: "Trapping Rain Water",
+          link: "https://leetcode.com/problems/trapping-rain-water/",
+          description: "Calculate how much water can be trapped between bars in a histogram using a monotonic stack approach."
+        }
+      ]
+    }
+  }
 };
 
 export default monotonicStackContent; 

@@ -474,7 +474,78 @@ public int uniquePathsOptimized(int m, int n) {
       correctAnswer: 1,
       explanation: "A common space optimization technique in grid DP problems is reducing the 2D DP table to a 1D array that represents the current row or column being processed. This works because each cell typically only depends on adjacent cells that have already been processed, so we only need to keep track of the relevant portion of the table."
     }
-  ]
+  ],
+  practice: {
+    introduction: "Practice string matching algorithms with these LeetCode problems. They will help reinforce your understanding of pattern matching techniques, including KMP, Rabin-Karp, and other string manipulation concepts.",
+    questions: {
+      easy: [
+        {
+          id: "sm-easy-1",
+          title: "Implement strStr()",
+          link: "https://leetcode.com/problems/implement-strstr/",
+          description: "Implement the strStr() function to find the first occurrence of a needle in a haystack. This is a direct application of string matching algorithms like KMP or Rabin-Karp."
+        },
+        {
+          id: "sm-easy-2",
+          title: "Repeated Substring Pattern",
+          link: "https://leetcode.com/problems/repeated-substring-pattern/",
+          description: "Determine if a string can be constructed by taking a substring and repeating it multiple times, applying string pattern recognition techniques."
+        },
+        {
+          id: "sm-easy-3",
+          title: "Long Pressed Name",
+          link: "https://leetcode.com/problems/long-pressed-name/",
+          description: "Check if one string could be created from another by characters being long-pressed, requiring pattern matching with character repetition handling."
+        }
+      ],
+      medium: [
+        {
+          id: "sm-medium-1",
+          title: "Find All Anagrams in a String",
+          link: "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+          description: "Find all start indices of anagrams of pattern p in string s, combining sliding window technique with character frequency matching."
+        },
+        {
+          id: "sm-medium-2",
+          title: "Shortest Palindrome",
+          link: "https://leetcode.com/problems/shortest-palindrome/",
+          description: "Find the shortest palindrome you can form by adding characters only to the beginning of a given string, applying KMP-based techniques."
+        },
+        {
+          id: "sm-medium-3",
+          title: "Rotate String",
+          link: "https://leetcode.com/problems/rotate-string/",
+          description: "Check if a string can be rotated to become another string, which can be solved using pattern matching approaches."
+        },
+        {
+          id: "sm-medium-4",
+          title: "Repeated String Match",
+          link: "https://leetcode.com/problems/repeated-string-match/",
+          description: "Find the minimum number of times you should repeat string A to make string B a substring of it, requiring careful application of string matching."
+        }
+      ],
+      hard: [
+        {
+          id: "sm-hard-1",
+          title: "Minimum Window Substring",
+          link: "https://leetcode.com/problems/minimum-window-substring/",
+          description: "Find the minimum window in a string that contains all characters of another string, combining sliding window with pattern matching."
+        },
+        {
+          id: "sm-hard-2",
+          title: "Distinct Subsequences",
+          link: "https://leetcode.com/problems/distinct-subsequences/",
+          description: "Count the number of distinct subsequences of one string that equal another string, requiring advanced pattern matching techniques."
+        },
+        {
+          id: "sm-hard-3",
+          title: "String Matching in an Array",
+          link: "https://leetcode.com/problems/string-matching-in-an-array/",
+          description: "Find all strings that appear as substrings in other strings of an array, applying various string matching algorithms to multiple strings."
+        }
+      ]
+    }
+  }
 };
 
 export default dpOnGridContent; 

@@ -590,7 +590,73 @@ class GPSNavigator {
       correctAnswer: 1,
       explanation: "The Bellman-Ford algorithm should be used instead of Dijkstra's when a graph may contain negative edge weights. Unlike Dijkstra's, Bellman-Ford can handle negative weights and can detect negative cycles."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "Practice these LeetCode problems to strengthen your understanding of Dijkstra's algorithm and its applications to shortest path problems. These problems range from straightforward shortest path calculations to more complex variations that require careful application of the algorithm.",
+    questions: {
+      easy: [
+        {
+          id: "dijkstra-practice-1",
+          title: "Path With Minimum Effort",
+          link: "https://leetcode.com/problems/path-with-minimum-effort/",
+          description: "Find a path from top-left to bottom-right with the minimum maximum absolute difference in heights. This problem can be solved using Dijkstra's algorithm by defining the edge weight as the absolute height difference."
+        },
+        {
+          id: "dijkstra-practice-2",
+          title: "Network Delay Time",
+          link: "https://leetcode.com/problems/network-delay-time/",
+          description: "Find the time it takes for all nodes to receive a signal starting from a given node. This is a direct application of Dijkstra's algorithm to find the longest shortest path."
+        }
+      ],
+      medium: [
+        {
+          id: "dijkstra-practice-3",
+          title: "Path with Maximum Probability",
+          link: "https://leetcode.com/problems/path-with-maximum-probability/",
+          description: "Find the path with the maximum probability of success. This problem uses Dijkstra's algorithm with a modification to maximize probability instead of minimizing distance."
+        },
+        {
+          id: "dijkstra-practice-4",
+          title: "Cheapest Flights Within K Stops",
+          link: "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+          description: "Find the cheapest price from source to destination with at most K stops. This is a constrained shortest path problem where Dijkstra's algorithm needs to be adapted to track both cost and stops."
+        },
+        {
+          id: "dijkstra-practice-5",
+          title: "Minimum Cost to Reach Destination in Time",
+          link: "https://leetcode.com/problems/minimum-cost-to-reach-destination-in-time/",
+          description: "Find the minimum cost to reach the destination within a given time constraint. This problem combines Dijkstra's algorithm with time-based constraints."
+        },
+        {
+          id: "dijkstra-practice-6",
+          title: "Find the City With the Smallest Number of Neighbors",
+          link: "https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",
+          description: "Find the city with the fewest number of other cities within a threshold distance. This problem requires running Dijkstra's algorithm from each city."
+        }
+      ],
+      hard: [
+        {
+          id: "dijkstra-practice-7",
+          title: "Minimum Cost to Make at Least One Valid Path in a Grid",
+          link: "https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/",
+          description: "Find the minimum cost to change directions in a grid to create a valid path. This problem uses 0-1 BFS, a special case of Dijkstra's algorithm where edge weights are only 0 or 1."
+        },
+        {
+          id: "dijkstra-practice-8",
+          title: "The Maze III",
+          link: "https://leetcode.com/problems/the-maze-iii/",
+          description: "Find the shortest path for a ball to fall into a hole in a maze. This complex problem requires Dijkstra's algorithm with custom state tracking and lexicographical comparison."
+        },
+        {
+          id: "dijkstra-practice-9",
+          title: "Swim in Rising Water",
+          link: "https://leetcode.com/problems/swim-in-rising-water/",
+          description: "Find the minimum time to reach the bottom-right corner of a grid when the water level rises over time. This problem can be solved with Dijkstra's algorithm by considering the maximum elevation along a path."
+        }
+      ]
+    }
+  }
 };
 
 export default dijkstraAlgorithmContent; 

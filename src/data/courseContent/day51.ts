@@ -580,7 +580,79 @@ public class EventSourcingExample {
       correctAnswer: 1,
       explanation: "The API Gateway pattern provides a single entry point for all client requests in a microservices architecture. It handles cross-cutting concerns like authentication, routing, protocol translation, and rate limiting. This simplifies client interaction with the system by hiding the complexity of the microservices topology and providing a unified interface."
     }
-  ]
+  ],
+  
+  practice: {
+    introduction: "While system design patterns aren't directly tested on LeetCode, the following problems help develop the algorithmic and data structure understanding required to implement these patterns effectively. These practice problems relate to various aspects of system design including caching, rate limiting, load balancing, and distributed data management.",
+    questions: {
+      easy: [
+        {
+          id: "sdp-practice-e1",
+          title: "Design HashMap",
+          link: "https://leetcode.com/problems/design-hashmap/",
+          description: "Implement a HashMap without using built-in libraries. This helps understand basic data storage mechanisms underlying many distributed systems."
+        },
+        {
+          id: "sdp-practice-e2",
+          title: "Logger Rate Limiter",
+          link: "https://leetcode.com/problems/logger-rate-limiter/",
+          description: "Design a logger that limits how often messages can be printed. This simulates rate limiting patterns used in API gateways and service protection."
+        },
+        {
+          id: "sdp-practice-e3",
+          title: "Design Parking System",
+          link: "https://leetcode.com/problems/design-parking-system/",
+          description: "Design a parking system to track space availability. This helps understand resource allocation and management in concurrent systems."
+        }
+      ],
+      medium: [
+        {
+          id: "sdp-practice-m1",
+          title: "LRU Cache",
+          link: "https://leetcode.com/problems/lru-cache/",
+          description: "Implement a Least Recently Used (LRU) cache. This is a fundamental caching strategy used in many system designs to improve performance."
+        },
+        {
+          id: "sdp-practice-m2",
+          title: "Design Twitter",
+          link: "https://leetcode.com/problems/design-twitter/",
+          description: "Design a simplified version of Twitter. This exercises event-based architectures and feed generation algorithms."
+        },
+        {
+          id: "sdp-practice-m3",
+          title: "Find Servers That Handled Most Number of Requests",
+          link: "https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/",
+          description: "Simulate load balancing across servers. This helps understand load distribution patterns in distributed systems."
+        },
+        {
+          id: "sdp-practice-m4",
+          title: "Design a Leaderboard",
+          link: "https://leetcode.com/problems/design-a-leaderboard/",
+          description: "Design a leaderboard system that efficiently tracks scores. This explores real-time data aggregation patterns used in analytics systems."
+        }
+      ],
+      hard: [
+        {
+          id: "sdp-practice-h1",
+          title: "Design In-Memory File System",
+          link: "https://leetcode.com/problems/design-in-memory-file-system/",
+          description: "Design an in-memory file system with directories and files. This simulates distributed file systems and hierarchical data management."
+        },
+        {
+          id: "sdp-practice-h2",
+          title: "Design Search Autocomplete System",
+          link: "https://leetcode.com/problems/design-search-autocomplete-system/",
+          description: "Design a search autocomplete system. This explores real-time query processing and ranking systems used in search engines."
+        },
+        {
+          id: "sdp-practice-h3",
+          title: "L-FU Cache",
+          link: "https://leetcode.com/problems/lfu-cache/",
+          description: "Implement a Least Frequently Used (LFU) cache. This advanced caching strategy is used in scenarios where access frequency patterns are important."
+        }
+      ]
+    }
+  }
 };
 
 export default systemDesignPatternsContent; 
