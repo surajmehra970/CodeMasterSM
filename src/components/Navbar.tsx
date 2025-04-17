@@ -53,6 +53,9 @@ const Navbar = () => {
                 <Link href="/career-mapper" className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary px-2 py-1 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:transition-all after:duration-300">
                   Career Mapper
                 </Link>
+                <Link href="/practice" className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary px-2 py-1 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:transition-all after:duration-300">
+                  Practice
+                </Link>
                 <Link href="/resources" className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary px-2 py-1 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary hover:after:w-full after:transition-all after:duration-300">
                   Resources
                 </Link>
@@ -175,6 +178,12 @@ const Navbar = () => {
               className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               Career Mapper
+            </Link>
+            <Link 
+              href="/practice" 
+              className="text-gray-700 dark:text-gray-200 hover:text-primary dark:hover:text-primary block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              Practice
             </Link>
             <Link 
               href="/resources" 

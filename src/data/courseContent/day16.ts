@@ -124,11 +124,11 @@ private int partitionMedianOfThree(int[] arr, int low, int high) {
     int mid = low + (high - low) / 2;
     
     // Sort low, mid, high
-    if (arr[mid] < arr[low]) 
+    if (arr[mid] < arr[low])
         swap(arr, low, mid);
-    if (arr[high] < arr[low]) 
+    if (arr[high] < arr[low])
         swap(arr, low, high);
-    if (arr[high] < arr[mid]) 
+    if (arr[high] < arr[mid])
         swap(arr, mid, high);
     
     // Place pivot (median) at high-1 position
@@ -198,8 +198,8 @@ Practical considerations:
 // Quick Sort with Insertion Sort for small arrays
 public void optimizedQuickSort(int[] arr, int low, int high) {
     // Use insertion sort for small arrays
-    if (high - low < 10) {
-        insertionSort(arr, low, high);
+        if (high - low < 10) {
+            insertionSort(arr, low, high);
         return;
     }
     

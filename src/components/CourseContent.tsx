@@ -514,7 +514,7 @@ export function PracticeSection({ practice }: { practice: { introduction: string
   );
 }
 
-export default function CourseContent({ content, problems = [] }: CourseContentProps) {
+export default function CourseContent({ content }: CourseContentProps) {
   const [activeTab, setActiveTab] = useState<'content' | 'homework' | 'quiz' | 'leetcode'>('content');
   
   const showHomeworkTab = content.homework && content.homework.length > 0;

@@ -278,7 +278,7 @@ A balanced BST provides optimal performance for all operations.
       codeExamples: [
         {
           language: "java",
-          code: `/* 
+          code: `/*
 Applications of Binary Search Trees:
 
 1. Database Indexing: BSTs (and their balanced variants) are used to implement
