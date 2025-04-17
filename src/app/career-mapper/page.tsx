@@ -14,14 +14,14 @@ import { useSearchParams } from 'next/navigation';
 
 const CareerMapperContent: React.FC = () => {
   const searchParams = useSearchParams();
-  const editMode = searchParams.get('edit');
-  const section = searchParams.get('section');
+  const editMode = searchParams?.get('edit') || null;
+  const section = searchParams?.get('section') || null;
   
   const [activeTab, setActiveTab] = useState<string>('recommendations');
 
   useEffect(() => {
     // Set active tab based on query parameter
-    const tabParam = searchParams.get('tab');
+    const tabParam = searchParams?.get('tab');
     if (tabParam && ['recommendations', 'roadmap', 'skills', 'projects', 'jobs', 'mentor', 'trends'].includes(tabParam)) {
       setActiveTab(tabParam);
     }
